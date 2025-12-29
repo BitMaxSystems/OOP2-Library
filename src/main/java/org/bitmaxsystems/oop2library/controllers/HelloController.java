@@ -1,4 +1,4 @@
-package org.bitmaxsystems.oop2library;
+package org.bitmaxsystems.oop2library.controllers;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
