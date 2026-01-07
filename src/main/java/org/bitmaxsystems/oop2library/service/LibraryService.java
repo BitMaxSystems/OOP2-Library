@@ -1,6 +1,6 @@
 package org.bitmaxsystems.oop2library.service;
 
-import org.bitmaxsystems.oop2library.books.model.*;
+import org.bitmaxsystems.oop2library.model.books.*;
 import org.bitmaxsystems.oop2library.repository.GenericDao;
 import org.bitmaxsystems.oop2library.config.HibernateUtil;
 import org.hibernate.Session;

@@ -2,11 +2,11 @@ package org.bitmaxsystems.oop2library.config;
 import java.io.InputStream;
 import java.util.Properties;
 
-import org.bitmaxsystems.oop2library.books.model.Author;
-import org.bitmaxsystems.oop2library.books.model.Book;
-import org.bitmaxsystems.oop2library.books.model.Genre;
-import org.bitmaxsystems.oop2library.books.model.Publisher;
-import org.bitmaxsystems.oop2library.books.model.Inventory;
+import org.bitmaxsystems.oop2library.model.books.Author;
+import org.bitmaxsystems.oop2library.model.books.Book;
+import org.bitmaxsystems.oop2library.model.books.Genre;
+import org.bitmaxsystems.oop2library.model.books.Publisher;
+import org.bitmaxsystems.oop2library.model.books.Inventory;
 
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
