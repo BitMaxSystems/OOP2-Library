@@ -1,0 +1,9 @@
+package org.bitmaxsystems.oop2library;
+
+import javafx.application.Application;
+
+public class Launcher {
+    public static void main(String[] args) {
+        Application.launch(MainApplication.class,args);
+    }
+}
