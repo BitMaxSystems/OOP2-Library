@@ -7,19 +7,19 @@ public enum View {
     private String path;
     private String title;
     private int width;
-    private int length;
+    private int height;
 
-    View (String path, String title, int width, int length)
+    View (String path, String title, int width, int height)
     {
         this.path = "/org/bitmaxsystems/oop2library/"+path;
         this.title = title;
         this.width = width;
-        this.length = length;
+        this.height = height;
 
     }
 
-    public int getLength() {
-        return length;
+    public int getHeight() {
+        return height;
     }
 
     public String getTitle() {

@@ -37,7 +37,7 @@ public class LoginController {
             if (userCredentials.equals(username, password)) {
                 logger.info("{} logged successfully",username);
                 new Alert(Alert.AlertType.INFORMATION, "Hello, " + username).show();
-                UserManager.getInstance().login();
+                UserManager.getInstance().login(userCredentials.getUser());
                 SceneManager.showView(View.MAIN_VIEW);
             } else {
                 logger.error("{} inputted wrong password", username);

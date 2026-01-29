@@ -1,7 +1,9 @@
 package org.bitmaxsystems.oop2library.util;
 
+import org.bitmaxsystems.oop2library.models.users.User;
+
 public class UserManager {
-    private boolean loggedUser = false;
+    private User loggedUser = null;
     private static final UserManager service = new UserManager();
 
     private UserManager() {
@@ -11,17 +13,17 @@ public class UserManager {
         return service;
     }
 
-    public void login()
+    public void login(User user)
     {
-        loggedUser = true;
+        loggedUser = user;
     }
 
     public void logoff()
     {
-        loggedUser = false;
+        loggedUser = null;
     }
 
-    public boolean isLoggedUser()
+    public User getLoggedUser()
     {
         return loggedUser;
     }

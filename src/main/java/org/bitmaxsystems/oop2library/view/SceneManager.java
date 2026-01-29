@@ -19,7 +19,7 @@ public class SceneManager {
     public static void showView(View view) {
         try{
             FXMLLoader loader = new FXMLLoader(SceneManager.class.getResource(view.getPath()));
-            Scene scene = new Scene(loader.load(), view.getWidth(), view.getLength());
+            Scene scene = new Scene(loader.load(), view.getWidth(), view.getHeight());
             primaryStage.setScene(scene);
             primaryStage.setTitle(view.getTitle());
             primaryStage.show();

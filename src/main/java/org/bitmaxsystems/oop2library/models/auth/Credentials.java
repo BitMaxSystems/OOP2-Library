@@ -1,6 +1,8 @@
 package org.bitmaxsystems.oop2library.models.auth;
 
 import jakarta.persistence.*;
+import org.bitmaxsystems.oop2library.models.users.User;
+import org.hibernate.engine.internal.Cascade;
 import org.springframework.security.crypto.bcrypt.BCrypt;
 
 import java.util.UUID;
@@ -10,15 +12,20 @@ import java.util.UUID;
 public class Credentials {
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
+    @Column(name="id")
     private UUID id;
     private String username;
     private String password;
+    @OneToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "user_id")
+    private User user;
 
 
-    public Credentials(String username, String password)
+    public Credentials(String username, String password, User user)
     {
         this.username = username;
         this.password = password;
+        this.user = user;
     }
 
     public Credentials() {
@@ -35,6 +42,10 @@ public class Credentials {
 
     public String getPassword() {
         return password;
+    }
+
+    public User getUser() {
+        return user;
     }
 
     public boolean equals(String username, String password) {
