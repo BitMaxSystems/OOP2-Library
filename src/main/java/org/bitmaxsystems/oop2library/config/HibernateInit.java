@@ -22,11 +22,11 @@ public class HibernateInit {
                 Transaction tx = session.beginTransaction();
                 session.persist(new Credentials("admin", BCrypt.hashpw("admin",BCrypt.gensalt())));
                 tx.commit();
-                logger.info("Added admin");
+                logger.info("Added admin user");
             }
             else
             {
-                logger.info("Records already exist.");
+                logger.info("Admin user already exist.");
             }
         }
     }

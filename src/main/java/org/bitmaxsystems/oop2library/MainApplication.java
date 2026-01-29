@@ -5,18 +5,18 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 import org.bitmaxsystems.oop2library.config.HibernateInit;
+import org.bitmaxsystems.oop2library.util.UserManager;
+import org.bitmaxsystems.oop2library.view.SceneManager;
+import org.bitmaxsystems.oop2library.view.View;
 
 import java.io.IOException;
 
-public class HelloApplication extends Application {
+public class MainApplication extends Application {
     @Override
     public void start(Stage stage) throws IOException {
         HibernateInit.initializeIfEmpty();
-        FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("login-view.fxml"));
-        Scene scene = new Scene(fxmlLoader.load(), 600, 400);
-        stage.setTitle("Login");
-        stage.setScene(scene);
-        stage.show();
+        SceneManager.setPrimaryStage(stage);
+        SceneManager.showView(View.LOGIN);
     }
 
     public static void main(String[] args) {
