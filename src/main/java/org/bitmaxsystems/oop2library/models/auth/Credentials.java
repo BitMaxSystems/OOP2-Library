@@ -1,6 +1,7 @@
-package org.bitmaxsystems.oop2library.models;
+package org.bitmaxsystems.oop2library.models.auth;
 
 import jakarta.persistence.*;
+import org.springframework.security.crypto.bcrypt.BCrypt;
 
 import java.util.UUID;
 
@@ -14,9 +15,8 @@ public class Credentials {
     private String password;
 
 
-    public Credentials(UUID id, String username, String password)
+    public Credentials(String username, String password)
     {
-        this.id = id;
         this.username = username;
         this.password = password;
     }
@@ -38,6 +38,6 @@ public class Credentials {
     }
 
     public boolean equals(String username, String password) {
-        return this.username.equals(username) && this.password.equals(password);
+        return this.username.equals(username) && BCrypt.checkpw(password,this.password);
     }
 }

@@ -1,7 +1,7 @@
 package org.bitmaxsystems.oop2library.service;
 
-import org.bitmaxsystems.oop2library.model.books.*;
-import org.bitmaxsystems.oop2library.repository.GenericDao;
+import org.bitmaxsystems.oop2library.models.books.*;
+import org.bitmaxsystems.oop2library.repository.GenericRepository;
 import org.bitmaxsystems.oop2library.config.HibernateUtil;
 import org.hibernate.Session;
 import org.hibernate.query.Query;
@@ -10,11 +10,11 @@ import java.util.List;
 
 public class LibraryService {
 
-    private final GenericDao<Book> bookDao = new GenericDao<>(Book.class);
-    private final GenericDao<Author> authorDao = new GenericDao<>(Author.class);
-    private final GenericDao<Genre> genreDao = new GenericDao<>(Genre.class);
-    private final GenericDao<Publisher> publisherDao = new GenericDao<>(Publisher.class);
-    private final GenericDao<Inventory> inventoryDao = new GenericDao<>(Inventory.class);
+    private final GenericRepository<Book> bookDao = new GenericRepository<>(Book.class);
+    private final GenericRepository<Author> authorDao = new GenericRepository<>(Author.class);
+    private final GenericRepository<Genre> genreDao = new GenericRepository<>(Genre.class);
+    private final GenericRepository<Publisher> publisherDao = new GenericRepository<>(Publisher.class);
+    private final GenericRepository<Inventory> inventoryDao = new GenericRepository<>(Inventory.class);
 
     public boolean registerBook(String title, String isbn, String authorName, String genreName, String publisherName) {
         if (bookExists(isbn)) {

@@ -1,25 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
-<?import java.util.*?>
-<?import javafx.scene.*?>
+<?import javafx.geometry.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
 
-<?import javafx.geometry.Insets?>
-<AnchorPane xmlns="http://javafx.com/javafx"
-            xmlns:fx="http://javafx.com/fxml"
-            fx:controller="org.bitmaxsystems.oop2library.controllers.LoginController"
-            prefHeight="400.0" prefWidth="600.0">
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.bitmaxsystems.oop2library.controllers.LoginController">
             <padding>
-                <Insets top="10" right="10" bottom="10" left="10"/>
+                <Insets bottom="10" left="10" right="10" top="10" />
             </padding>
-    <Label text="Login"/>
-
-    <HBox spacing="5">
-        <TextField fx:id="usernameField" promptText="Username"/>
-        <PasswordField fx:id="passwordField" promptText="Password"/>
-        <Button text="Login" onAction="#onLogin"/>
-    </HBox>
+    <Label alignment="CENTER" contentDisplay="CENTER" layoutX="255.0" layoutY="87.0" prefHeight="35.0" prefWidth="92.0" text="Login">
+      <font>
+         <Font size="27.0" />
+      </font></Label>
+     <TextField fx:id="usernameField" layoutX="226.0" layoutY="160.0" prefHeight="25.0" prefWidth="149.0" promptText="Username" />
+     <PasswordField fx:id="passwordField" layoutX="226.0" layoutY="200.0" promptText="Password" />
+     <Button layoutX="278.0" layoutY="245.0" onAction="#onLogin" text="Login" />
 
 </AnchorPane>

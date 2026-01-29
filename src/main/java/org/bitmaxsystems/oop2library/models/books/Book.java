@@ -1,4 +1,4 @@
-package org.bitmaxsystems.oop2library.model.books;
+package org.bitmaxsystems.oop2library.models.books;
 
 import jakarta.persistence.*;
 import lombok.*;

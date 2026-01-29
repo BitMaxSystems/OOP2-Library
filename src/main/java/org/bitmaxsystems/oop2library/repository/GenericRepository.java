@@ -6,11 +6,11 @@ import org.hibernate.Transaction;
 import org.hibernate.query.Query;
 import java.util.List;
 
-public class GenericDao<T> {
+public class GenericRepository<T> {
 
     private final Class<T> type;
 
-    public GenericDao(Class<T> type) {
+    public GenericRepository(Class<T> type) {
         this.type = type;
     }
 

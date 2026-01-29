@@ -1,25 +1,24 @@
-package org.bitmaxsystems.oop2library.model.books;
+package org.bitmaxsystems.oop2library.models.books;
 
 import jakarta.persistence.*;
 import lombok.*;
 
 @Entity
-@Table(name = "authors")
+@Table(name = "publishers")
 @Getter
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
 @ToString
-public class Author {
+public class Publisher {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(nullable = false)
     private String name;
 
-    public Author(String name) {
+    public Publisher(String name) {
         this.name = name;
     }
 }
