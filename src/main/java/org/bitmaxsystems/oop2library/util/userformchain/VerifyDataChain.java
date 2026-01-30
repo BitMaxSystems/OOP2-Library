@@ -46,20 +46,17 @@ public class VerifyDataChain implements IUserFormChain {
         }
 //          Check if the age is an integer and if it is in the correct range
 
-        if (!formData.getAge().isBlank())
+        try
         {
-            try
-            {
-                age = Integer.parseInt(formData.getAge().strip());
+            age = Integer.parseInt(formData.getAge().strip());
 
-                if (age<MIN_AGE_ALLOWED || age>MAX_AGE_ALLOWED)
-                {
-                    errorList.add("- Age must be between 13 and 100!");
-                }
+            if (age<MIN_AGE_ALLOWED || age>MAX_AGE_ALLOWED)
+            {
+                errorList.add("- Age must be between 13 and 100!");
             }
-            catch (NumberFormatException e) {
-                errorList.add("- Age must be a numeric value!");
-            }
+        }
+        catch (NumberFormatException e) {
+            errorList.add("- Age must be a numeric value!");
         }
 //      Check if the phone is a valid Bulgarian phone number. If not - Bad.
         matcher = phonePattern.matcher(formData.getPhoneField().strip());
@@ -84,7 +81,6 @@ public class VerifyDataChain implements IUserFormChain {
                 errorList.add("- Loyalty points must be a numeric value!");
             }
         }
-
 
 //      Check if the username is valid.
         matcher = usernamePattern.matcher(formData.getUsernameField().strip());

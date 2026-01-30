@@ -31,9 +31,9 @@ public class UserFormTest {
         IUserFormChain verifyData = new VerifyDataChain();
         UserFormDTO formDTO = new UserFormDTO.Builder("213",
                 "Test",
+                "14",
                 "+359888263282",
                 "test")
-                .setAge("14")
                 .setNewPassword("TestTest!123","TestTest!123")
                 .build();
 
@@ -47,9 +47,9 @@ public class UserFormTest {
         IUserFormChain verifyData = new VerifyDataChain();
         UserFormDTO formDTO =  new UserFormDTO.Builder("Test",
                 "123",
+                "14",
                 "+359888263282",
                 "test")
-                .setAge("14")
                 .setNewPassword("TestTest!123","TestTest!123")
                 .build();
 
@@ -63,9 +63,9 @@ public class UserFormTest {
         IUserFormChain verifyData = new VerifyDataChain();
         UserFormDTO formDTO = new UserFormDTO.Builder("Test",
                 "Test",
+                "das",
                 "+359888263282",
                 "test")
-                .setAge("das")
                 .setNewPassword("TestTest!123","TestTest!123")
                 .build();
 
@@ -78,9 +78,9 @@ public class UserFormTest {
         IUserFormChain verifyData = new VerifyDataChain();
         UserFormDTO formDTO = new UserFormDTO.Builder("Test",
                 "Test",
+                "-2",
                 "+359888263282",
                 "test")
-                .setAge("-2")
                 .setNewPassword("TestTest!123","TestTest!123")
                 .build();
 
@@ -93,9 +93,9 @@ public class UserFormTest {
         IUserFormChain verifyData = new VerifyDataChain();
         UserFormDTO formDTO = new UserFormDTO.Builder("Test",
                 "Test",
+                "14",
                 "+359888263282",
                 "test")
-                .setAge("14")
                 .setLoyaltyPoints("das")
                 .setNewPassword("TestTest!123","TestTest!123")
                 .build();
@@ -109,9 +109,9 @@ public class UserFormTest {
         IUserFormChain verifyData = new VerifyDataChain();
         UserFormDTO formDTO = new UserFormDTO.Builder("Test",
                 "Test",
+                "14",
                 "+359888263282",
                 "test")
-                .setAge("14")
                 .setLoyaltyPoints("-2")
                 .setNewPassword("TestTest!123","TestTest!123")
                 .build();
@@ -125,9 +125,9 @@ public class UserFormTest {
         IUserFormChain verifyData = new VerifyDataChain();
         UserFormDTO formDTO = new UserFormDTO.Builder("Test",
                 "Test",
+                "14",
                 "+35988826asdasd",
                 "test")
-                .setAge("14")
                 .setNewPassword("TestTest!123","TestTest!123")
                 .build();
 
@@ -140,9 +140,9 @@ public class UserFormTest {
         IUserFormChain verifyData = new VerifyDataChain();
         UserFormDTO formDTO = new UserFormDTO.Builder("Test",
                 "Test",
+                "14",
                 "+359888263282",
                 "test no")
-                .setAge("14")
                 .setNewPassword("TestTest!123","TestTest!123")
                 .build();
 
@@ -155,9 +155,9 @@ public class UserFormTest {
         IUserFormChain verifyData = new VerifyDataChain();
         UserFormDTO formDTO = new UserFormDTO.Builder("Test",
                 "Test",
+                "14",
                 "+359888263282",
                 "test")
-                .setAge("14")
                 .setNewPassword("Test","TestTest!123")
                 .build();
 
@@ -170,9 +170,9 @@ public class UserFormTest {
         IUserFormChain verifyData = new VerifyDataChain();
         UserFormDTO formDTO = new UserFormDTO.Builder("Test",
                 "Test",
+                "14",
                 "+359888263282",
                 "test")
-                .setAge("14")
                 .setNewPassword("TestTest!123","TestTest!122")
                 .build();
 
@@ -186,9 +186,9 @@ public class UserFormTest {
         IUserFormChain verifyData = new VerifyDataChain();
         UserFormDTO formDTO = new UserFormDTO.Builder("123",
                 "Test",
+                "-14",
                 "+359888263282",
                 "test no")
-                .setAge("-14")
                 .setNewPassword("TestTest!123","TestTest!122")
                 .build();
 
@@ -202,9 +202,9 @@ public class UserFormTest {
         IUserFormChain verifyData = new VerifyDataChain();
         UserFormDTO formDTO = new UserFormDTO.Builder("Test",
                 "Test",
+                "14",
                 "+359888263282",
                 "test")
-                .setAge("14")
                 .setNewPassword("TestTest!123","TestTest!123")
                 .build();
 
@@ -217,9 +217,9 @@ public class UserFormTest {
         IUserFormChain verifyData = new VerifyDataChain();
         UserFormDTO formDTO = new UserFormDTO.Builder("Test",
                 "Test",
+                "14",
                 "+359888263282",
                 "test")
-                .setAge("14")
                 .setLoyaltyPoints("74")
                 .setNewPassword("TestTest!123","TestTest!123")
                 .build();
@@ -234,9 +234,9 @@ public class UserFormTest {
         IUserFormChain createUserChain = new CreateUserChain();
         UserFormDTO formDTO = new UserFormDTO.Builder("Test",
                 "Test",
+                "14",
                 "+359888263282",
                 "admin")
-                .setAge("14")
                 .setNewPassword("TestTest!123","TestTest!123")
                 .build();
 
@@ -251,9 +251,9 @@ public class UserFormTest {
         IUserFormChain createUserChain = new CreateUserChain();
         UserFormDTO formDTO = new UserFormDTO.Builder("Test",
                 "Test",
+                "14",
                 "+359888263282",
                 "test")
-                .setAge("14")
                 .setNewPassword("TestTest!123","TestTest!123")
                 .build();
 
@@ -278,9 +278,9 @@ public class UserFormTest {
 
         UserFormDTO formDTO = new UserFormDTO.Builder("Test",
                 "Test",
+                "14",
                 "+359888263282",
                 "test1")
-                .setAge("14")
                 .setNewPassword("TestTest!123","TestTest!123")
                 .build();
 

@@ -28,20 +28,15 @@ public class UserFormDTO {
         private String repeatPasswordField;
         private User user = null;
 
-        public Builder(String firstName, String lastName, String phoneField, String usernameField)
+        public Builder(String firstName, String lastName, String age ,String phoneField, String usernameField)
         {
             this.firstName = firstName;
             this.lastName = lastName;
+            this.age = age;
             this.phoneField = phoneField;
             this.usernameField = usernameField;
             this.newPassword = false;
             this.loyaltyPoints = "50";
-        }
-
-        public Builder setAge (String age)
-        {
-            this.age = age;
-            return this;
         }
 
         public Builder setLoyaltyPoints(String loyaltyPoints)

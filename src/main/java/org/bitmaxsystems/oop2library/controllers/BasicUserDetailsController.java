@@ -50,15 +50,7 @@ public class BasicUserDetailsController {
         this.user = user;
         firstNameField.setText(user.getFirstName());
         lastNameField.setText(user.getLastName());
-        if (user.getAge() == 0)
-        {
-            ageField.setPromptText("Age not set");
-        }
-        else
-        {
-            ageField.setText(String.valueOf(user.getAge()));
-        }
-
+        ageField.setText(String.valueOf(user.getAge()));
         phoneField.setText(user.getPhone());
         loyaltyPointsField.setText(String.valueOf(user.getLoyaltyPoints()));
 
@@ -85,10 +77,10 @@ public class BasicUserDetailsController {
 
         UserFormDTO.Builder formDTOBuilder = new UserFormDTO.Builder(firstNameField.getText().strip(),
                 lastNameField.getText().strip(),
+                ageField.getText().strip(),
                 phoneField.getText().strip(),
                 user.getCredentials().getUsername())
                 .setLoyaltyPoints(loyaltyPointsField.getText().strip())
-                .setAge(ageField.getText().strip())
                 .setUser(user);
 
         if (!passwordField.getText().isBlank())

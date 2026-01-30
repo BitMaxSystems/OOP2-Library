@@ -71,9 +71,9 @@ public class UserFormController {
 
         UserFormDTO formData = new UserFormDTO.Builder(firstNameField.getText().strip(),
                 lastNameField.getText().strip(),
+                ageField.getText().strip(),
                 phoneField.getText().strip(),
                 usernameField.getText().strip())
-                .setAge(ageField.getText().strip())
                 .setNewPassword(passwordField.getText().strip(),repeatPasswordField.getText().strip())
                 .build();
 

@@ -41,7 +41,7 @@
          <Font size="18.0" />
       </font>
    </Label>
-   <Label layoutX="240.0" layoutY="208.0" text="Age (Optional)">
+   <Label layoutX="283.0" layoutY="208.0" text="Age">
       <font>
          <Font size="18.0" />
       </font>
