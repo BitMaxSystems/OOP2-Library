@@ -10,7 +10,7 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.bitmaxsystems.oop2library.exceptions.DataValidationException;
 import org.bitmaxsystems.oop2library.exceptions.UserAlreadyExistException;
-import org.bitmaxsystems.oop2library.models.form.UserFormDTO;
+import org.bitmaxsystems.oop2library.models.dto.UserDataDTO;
 import org.bitmaxsystems.oop2library.util.contracts.IUserFormChain;
 import org.bitmaxsystems.oop2library.util.userformchain.CreateUserChain;
 import org.bitmaxsystems.oop2library.util.userformchain.SaveFormChain;
@@ -69,7 +69,7 @@ public class UserFormController {
         verifyData.setNextChain(createUser);
         createUser.setNextChain(saveForm);
 
-        UserFormDTO formData = new UserFormDTO.Builder(firstNameField.getText().strip(),
+        UserDataDTO formData = new UserDataDTO.Builder(firstNameField.getText().strip(),
                 lastNameField.getText().strip(),
                 ageField.getText().strip(),
                 phoneField.getText().strip(),

@@ -1,7 +1,7 @@
 package org.bitmaxsystems.oop2library.util.userformchain;
 
+import org.bitmaxsystems.oop2library.models.dto.UserDataDTO;
 import org.bitmaxsystems.oop2library.models.form.UserForm;
-import org.bitmaxsystems.oop2library.models.form.UserFormDTO;
 import org.bitmaxsystems.oop2library.repository.GenericRepository;
 import org.bitmaxsystems.oop2library.util.contracts.IUserFormChain;
 
@@ -15,7 +15,7 @@ public class SaveFormChain implements IUserFormChain {
     }
 
     @Override
-    public void execute(UserFormDTO formData) throws Exception {
+    public void execute(UserDataDTO formData) throws Exception {
         UserForm form = new UserForm(formData.getUser());
         userFormRepository.save(form);
 

@@ -1,7 +1,7 @@
 package org.bitmaxsystems.oop2library.util.userformchain;
 
 import org.bitmaxsystems.oop2library.exceptions.DataValidationException;
-import org.bitmaxsystems.oop2library.models.form.UserFormDTO;
+import org.bitmaxsystems.oop2library.models.dto.UserDataDTO;
 import org.bitmaxsystems.oop2library.util.contracts.IUserFormChain;
 
 import java.util.ArrayList;
@@ -23,7 +23,7 @@ public class VerifyDataChain implements IUserFormChain {
     }
 
     @Override
-    public void execute(UserFormDTO formData) throws Exception {
+    public void execute(UserDataDTO formData) throws Exception {
         int age,loyaltyPoints;
 
         Pattern namePattern = Pattern.compile("[\\W\\d]");

@@ -9,7 +9,7 @@ import javafx.stage.Stage;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.bitmaxsystems.oop2library.exceptions.DataValidationException;
-import org.bitmaxsystems.oop2library.models.form.UserFormDTO;
+import org.bitmaxsystems.oop2library.models.dto.UserDataDTO;
 import org.bitmaxsystems.oop2library.models.users.User;
 import org.bitmaxsystems.oop2library.models.users.enums.UserRole;
 import org.bitmaxsystems.oop2library.repository.GenericRepository;
@@ -18,8 +18,6 @@ import org.bitmaxsystems.oop2library.util.contracts.IUserFormChain;
 import org.bitmaxsystems.oop2library.util.userformchain.UpdatePasswordChain;
 import org.bitmaxsystems.oop2library.util.userformchain.UpdateUserChain;
 import org.bitmaxsystems.oop2library.util.userformchain.VerifyDataChain;
-
-import java.util.UUID;
 
 public class BasicUserDetailsController {
     @FXML
@@ -75,7 +73,7 @@ public class BasicUserDetailsController {
         verifyUser.setNextChain(updateUser);
         updateUser.setNextChain(updatePassword);
 
-        UserFormDTO.Builder formDTOBuilder = new UserFormDTO.Builder(firstNameField.getText().strip(),
+        UserDataDTO.Builder formDTOBuilder = new UserDataDTO.Builder(firstNameField.getText().strip(),
                 lastNameField.getText().strip(),
                 ageField.getText().strip(),
                 phoneField.getText().strip(),

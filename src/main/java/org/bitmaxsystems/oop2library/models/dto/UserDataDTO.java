@@ -1,8 +1,8 @@
-package org.bitmaxsystems.oop2library.models.form;
+package org.bitmaxsystems.oop2library.models.dto;
 
 import org.bitmaxsystems.oop2library.models.users.User;
 
-public class UserFormDTO {
+public class UserDataDTO {
     private String firstName;
     private String lastName;
     private String age;
@@ -58,9 +58,9 @@ public class UserFormDTO {
             return this;
         }
 
-        public UserFormDTO build()
+        public UserDataDTO build()
         {
-            return new UserFormDTO(firstName,
+            return new UserDataDTO(firstName,
                                     lastName,
                                     age,
                                     phoneField,
@@ -72,7 +72,7 @@ public class UserFormDTO {
                                     user);
         }
     }
-//    public UserFormDTO(String firstName, String lastName, String age, String phoneField, String usernameField, String passwordField, String repeatPasswordField) {
+//    public UserDataDTO(String firstName, String lastName, String age, String phoneField, String usernameField, String passwordField, String repeatPasswordField) {
 //        this.firstName = firstName;
 //        this.lastName = lastName;
 //        this.age = age;
@@ -83,7 +83,7 @@ public class UserFormDTO {
 //        this.repeatPasswordField = repeatPasswordField;
 //    }
 //
-//    public UserFormDTO(String firstName, String lastName, String age, String phoneField, String loyaltyPoints, String usernameField, String passwordField, String repeatPasswordField) {
+//    public UserDataDTO(String firstName, String lastName, String age, String phoneField, String loyaltyPoints, String usernameField, String passwordField, String repeatPasswordField) {
 //        this.firstName = firstName;
 //        this.lastName = lastName;
 //        this.age = age;
@@ -95,7 +95,7 @@ public class UserFormDTO {
 //    }
 
 
-    private UserFormDTO(String firstName, String lastName, String age, String phoneField, String loyaltyPoints, String usernameField, boolean newPassword, String passwordField, String repeatPasswordField, User user) {
+    private UserDataDTO(String firstName, String lastName, String age, String phoneField, String loyaltyPoints, String usernameField, boolean newPassword, String passwordField, String repeatPasswordField, User user) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.age = age;

@@ -3,7 +3,7 @@ package org.bitmaxsystems.oop2library.util.userformchain;
 import org.bitmaxsystems.oop2library.config.HibernateUtil;
 import org.bitmaxsystems.oop2library.exceptions.UserAlreadyExistException;
 import org.bitmaxsystems.oop2library.models.auth.Credentials;
-import org.bitmaxsystems.oop2library.models.form.UserFormDTO;
+import org.bitmaxsystems.oop2library.models.dto.UserDataDTO;
 import org.bitmaxsystems.oop2library.models.users.User;
 import org.bitmaxsystems.oop2library.models.users.enums.UserRole;
 import org.bitmaxsystems.oop2library.repository.GenericRepository;
@@ -25,7 +25,7 @@ public class CreateUserChain implements IUserFormChain {
     }
 
     @Override
-    public void execute(UserFormDTO formData) throws Exception {
+    public void execute(UserDataDTO formData) throws Exception {
         try (Session session = HibernateUtil.getSessionFactory().openSession())
         {
             Query<Long> query = session.createQuery("SELECT COUNT(*) FROM Credentials where username =:username ", Long.class);
@@ -47,7 +47,7 @@ public class CreateUserChain implements IUserFormChain {
         }
     }
 
-    private User createUser (UserFormDTO formData)
+    private User createUser (UserDataDTO formData)
     {
         Integer age;
         User user;

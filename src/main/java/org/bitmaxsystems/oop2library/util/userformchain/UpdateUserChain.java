@@ -1,6 +1,6 @@
 package org.bitmaxsystems.oop2library.util.userformchain;
 
-import org.bitmaxsystems.oop2library.models.form.UserFormDTO;
+import org.bitmaxsystems.oop2library.models.dto.UserDataDTO;
 import org.bitmaxsystems.oop2library.models.users.User;
 import org.bitmaxsystems.oop2library.repository.GenericRepository;
 import org.bitmaxsystems.oop2library.util.contracts.IUserFormChain;
@@ -15,13 +15,13 @@ public class UpdateUserChain implements IUserFormChain {
     }
 
     @Override
-    public void execute(UserFormDTO formData) throws Exception {
+    public void execute(UserDataDTO formData) throws Exception {
         int age, loyaltyPoints;
         User user  = formData.getUser();
 
         user.setFirstName(formData.getFirstName());
         user.setLastName(formData.getLastName());
-
+        user.setPhone(formData.getPhoneField());
         try
         {
             age = Integer.parseInt(formData.getAge());
@@ -29,7 +29,7 @@ public class UpdateUserChain implements IUserFormChain {
         }
         catch (NumberFormatException e)
         {
-            age = 0;
+            throw new NumberFormatException("Error parsing age field");
         }
         user.setAge(age);
         try
