@@ -21,7 +21,7 @@ public class HibernateInit {
 
             if (credentialsList.isEmpty())
             {
-                User user = new User("Admin","Admin",99,"+35988800000001", UserRole.ADMINISTRATOR);
+                User user = new User.Builder("Admin","Admin","+35988800000001", UserRole.ADMINISTRATOR).build();
                 Credentials credentials = new Credentials("admin", BCrypt.hashpw("admin",BCrypt.gensalt()),user);
                 Transaction tx = session.beginTransaction();
                 session.persist(user);

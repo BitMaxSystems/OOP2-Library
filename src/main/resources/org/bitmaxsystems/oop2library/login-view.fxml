@@ -16,17 +16,16 @@
       <font>
          <Font size="27.0" />
       </font></Label>
-     <TextField fx:id="usernameField" layoutX="189.0" layoutY="170.0" prefHeight="25.0" prefWidth="224.0" promptText="Username">
-      <font>
-         <Font size="14.0" />
-      </font></TextField>
-     <PasswordField fx:id="passwordField" layoutX="189.0" layoutY="220.0" prefHeight="30.0" prefWidth="224.0" promptText="Password">
-      <font>
-         <Font size="14.0" />
-      </font></PasswordField>
+     <TextField fx:id="usernameField" layoutX="189.0" layoutY="170.0" prefHeight="25.0" prefWidth="224.0" promptText="Username" />
+     <PasswordField fx:id="passwordField" layoutX="189.0" layoutY="220.0" prefHeight="30.0" prefWidth="224.0" promptText="Password" />
      <Button layoutX="272.0" layoutY="292.0" onAction="#onLogin" text="Login">
       <font>
          <Font size="15.0" />
       </font></Button>
+   <Button layoutX="258.0" layoutY="340.0" onAction="#onNewUserRedirect" text="New User">
+      <font>
+         <Font size="15.0" />
+      </font>
+   </Button>
 
 </AnchorPane>

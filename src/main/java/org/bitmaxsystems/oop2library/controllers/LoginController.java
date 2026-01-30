@@ -45,4 +45,10 @@ public class LoginController {
             }
         }
     }
+
+    @FXML
+    public void onNewUserRedirect()
+    {
+        SceneManager.showView(View.NEW_USER_FORM);
+    }
 }
