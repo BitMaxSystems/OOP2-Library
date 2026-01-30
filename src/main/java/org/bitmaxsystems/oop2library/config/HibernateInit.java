@@ -22,7 +22,7 @@ public class HibernateInit {
 
             if (credentialsList.isEmpty())
             {
-                User user = new User.Builder("Admin","Admin",21,"+35988800000001",UserRole.ADMINISTRATOR)
+                User user = new User.Builder("Admin","Admin",21,"+359888000001",UserRole.ADMINISTRATOR)
                         .setDateOfApproval(new Date())
                         .build();
                 Credentials credentials = new Credentials("admin", BCrypt.hashpw("admin",BCrypt.gensalt()),user);

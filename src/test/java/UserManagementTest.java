@@ -12,6 +12,7 @@ import static org.junit.jupiter.api.Assertions.*;
 public class UserManagementTest {
 
     private  AuthorisationRepository authorisationRepository = new AuthorisationRepository();
+    private UserManager manager = UserManager.getInstance();
 
     @BeforeAll
     static void setup()
@@ -27,7 +28,6 @@ public class UserManagementTest {
     {
         String username = "test";
         String password = "admin";
-        UserManager manager = UserManager.getInstance();
 
         DataValidationException exception =  assertThrowsExactly(DataValidationException.class,
                 () -> manager.login(username,password));
@@ -40,7 +40,6 @@ public class UserManagementTest {
     {
         String username = "admin";
         String password = "test";
-        UserManager manager = UserManager.getInstance();
 
         DataValidationException exception =  assertThrowsExactly(DataValidationException.class,
                 () -> manager.login(username,password));
@@ -53,7 +52,6 @@ public class UserManagementTest {
     {
         String username = "admin";
         String password = "admin";
-        UserManager manager = UserManager.getInstance();
 
         assertDoesNotThrow(() -> manager.login(username,password));
         SecurityException exception = assertThrowsExactly(SecurityException.class,() -> manager.login(username,password));
@@ -65,21 +63,18 @@ public class UserManagementTest {
     {
         String username = "admin";
         String password = "admin";
-        UserManager manager = UserManager.getInstance();
 
        assertDoesNotThrow(() -> manager.login(username,password));
        assertNotNull(manager.getLoggedUser());
 
        User user = authorisationRepository.getUserAuthorisation(username).getUser();
 
-       assertEquals(user.getId(),manager.getLoggedUser().getId());
+        assertEquals(manager.getLoggedUser(), user);
     }
 
     @Test
     void testLogout()
     {
-        UserManager manager = UserManager.getInstance();
-
         assertDoesNotThrow(manager::logoff);
         assertNull(manager.getLoggedUser());
     }

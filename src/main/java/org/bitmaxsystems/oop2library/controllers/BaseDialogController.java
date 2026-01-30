@@ -23,6 +23,7 @@ public class BaseDialogController {
     private Button userDetailsButton;
 
     private static final Logger logger = LogManager.getLogger(BaseDialogController.class);
+    private UserManager manager = UserManager.getInstance();
 
     @FXML
     public void initialize()
@@ -32,8 +33,6 @@ public class BaseDialogController {
 
     private void refreshUserDataButton()
     {
-        UserManager manager = UserManager.getInstance();
-        manager.refreshLoggedUserData();
         User user = manager.getLoggedUser();
         userDetailsButton.setText(user.getFirstName()+" "+user.getLastName());
     }
@@ -42,17 +41,18 @@ public class BaseDialogController {
     public void onUserDetails()
     {
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource(View.BASIC_USER_DETAILS.getPath()));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource(View.USER_DETAILS.getPath()));
             AnchorPane root = loader.load();
 
             UserDetailsController controller = loader.getController();
             controller.setUser(UserManager.getInstance().getLoggedUser());
 
             Stage stage = new Stage();
-            stage.setTitle(View.BASIC_USER_DETAILS.getTitle());
+            stage.setTitle(View.USER_DETAILS.getTitle());
             stage.initModality(Modality.APPLICATION_MODAL);
             stage.setScene(new Scene(root));
             stage.showAndWait();
+            manager.refreshLoggedUserData();
             refreshUserDataButton();
 
         } catch (IOException e) {

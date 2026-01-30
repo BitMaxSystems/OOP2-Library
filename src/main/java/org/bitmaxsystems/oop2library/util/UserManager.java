@@ -14,13 +14,13 @@ public class UserManager {
     private final AuthorisationRepository authorisationRepository = new AuthorisationRepository();
     private GenericRepository<User> userRepository = new GenericRepository<>(User.class);
     private static final Logger logger = LogManager.getLogger(UserManager.class);
-    private static final UserManager service = new UserManager();
+    private static final UserManager manager = new UserManager();
 
     private UserManager() {
     }
 
     public static UserManager getInstance() {
-        return service;
+        return manager;
     }
 
     public void login(String username, String password) throws DataValidationException, SecurityException

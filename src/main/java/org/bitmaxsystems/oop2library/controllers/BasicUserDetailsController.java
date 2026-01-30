@@ -1,7 +1,9 @@
 package org.bitmaxsystems.oop2library.controllers;
 
+import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
+import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
@@ -11,7 +13,6 @@ import org.bitmaxsystems.oop2library.exceptions.DataValidationException;
 import org.bitmaxsystems.oop2library.models.dto.UserDataDTO;
 import org.bitmaxsystems.oop2library.models.users.User;
 import org.bitmaxsystems.oop2library.models.users.enums.UserRole;
-import org.bitmaxsystems.oop2library.repository.GenericRepository;
 import org.bitmaxsystems.oop2library.util.UserManager;
 import org.bitmaxsystems.oop2library.util.contracts.IUserFormChain;
 import org.bitmaxsystems.oop2library.util.userformchain.UpdatePasswordChain;
@@ -20,7 +21,7 @@ import org.bitmaxsystems.oop2library.util.userformchain.VerifyDataChain;
 
 public class BasicUserDetailsController {
     @FXML
-    private Label userRoleLabel;
+    private ChoiceBox<UserRole> userRoleChoiceBox;
     @FXML
     private Label dateOfApprovalLabel;
     @FXML
@@ -33,10 +34,15 @@ public class BasicUserDetailsController {
     private TextField phoneField;
     @FXML
     private TextField loyaltyPointsField;
-
     private static final Logger logger = LogManager.getLogger(BasicUserDetailsController.class);
-
+    private UserManager manager = UserManager.getInstance();
     private User user;
+
+    @FXML
+    private void initialize()
+    {
+        userRoleChoiceBox.setItems(FXCollections.observableArrayList(UserRole.values()));
+    }
 
     public void setUser(User user) {
         this.user = user;
@@ -45,7 +51,7 @@ public class BasicUserDetailsController {
         ageField.setText(String.valueOf(user.getAge()));
         phoneField.setText(user.getPhone());
         loyaltyPointsField.setText(String.valueOf(user.getLoyaltyPoints()));
-        userRoleLabel.setText(user.getRole().toString());
+        userRoleChoiceBox.setValue(user.getRole());
 
         if (user.getDateOfApproval() == null) {
             dateOfApprovalLabel.setText("Awaiting approval");
@@ -55,6 +61,13 @@ public class BasicUserDetailsController {
 
         if (user.getRole() != UserRole.ADMINISTRATOR) {
             loyaltyPointsField.setDisable(true);
+        }
+
+        User currentlyLoggedUser = manager.getLoggedUser();
+
+        if (currentlyLoggedUser.equals(user) || currentlyLoggedUser.getRole() != UserRole.ADMINISTRATOR)
+        {
+            userRoleChoiceBox.setDisable(true);
         }
     }
 
@@ -104,8 +117,21 @@ public class BasicUserDetailsController {
     }
 
     @FXML
+    public void onDelete()
+    {
+        if (manager.getLoggedUser().equals(user))
+        {
+            new Alert(Alert.AlertType.ERROR,"Cannot delete the user, because you are currently logged in with this user!").show();
+        }
+        else
+        {
+            new Alert(Alert.AlertType.WARNING,"Work in progress").show();
+        }
+    }
+
+    @FXML
     public void onClose()
     {
-        ((Stage) userRoleLabel.getScene().getWindow()).close();
+        ((Stage) userRoleChoiceBox.getScene().getWindow()).close();
     }
 }
