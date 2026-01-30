@@ -3,7 +3,7 @@ package org.bitmaxsystems.oop2library.view;
 public enum View {
     MAIN_VIEW("hello-view.fxml","Main window",600,400),
     LOGIN("login-view.fxml","Login",600,400),
-    NEW_USER_FORM("new-user-form-view.fxml","New User Form",600,787);
+    NEW_USER_FORM("user-form-view.fxml","New User Form",600,787);
 
     private String path;
     private String title;

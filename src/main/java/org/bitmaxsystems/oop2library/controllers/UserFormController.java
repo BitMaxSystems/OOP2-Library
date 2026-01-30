@@ -8,7 +8,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.paint.Color;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import org.bitmaxsystems.oop2library.exceptions.FormDataValidationException;
+import org.bitmaxsystems.oop2library.exceptions.DataValidationException;
 import org.bitmaxsystems.oop2library.exceptions.UserAlreadyExistException;
 import org.bitmaxsystems.oop2library.models.form.UserFormDTO;
 import org.bitmaxsystems.oop2library.util.contracts.IUserFormChain;
@@ -18,7 +18,7 @@ import org.bitmaxsystems.oop2library.util.userformchain.VerifyDataChain;
 import org.bitmaxsystems.oop2library.view.SceneManager;
 import org.bitmaxsystems.oop2library.view.View;
 
-public class NewUserFormController {
+public class UserFormController {
     @FXML
     private Label errorLabel;
     @FXML
@@ -36,7 +36,7 @@ public class NewUserFormController {
     @FXML
     private PasswordField repeatPasswordField;
 
-    private static final Logger logger = LogManager.getLogger(NewUserFormController.class);
+    private static final Logger logger = LogManager.getLogger(UserFormController.class);
 
     private void resetErrorLabel()
     {
@@ -86,7 +86,7 @@ public class NewUserFormController {
             logger.info("Form successfully submitted!");
             SceneManager.showView(View.LOGIN);
         }
-        catch (FormDataValidationException e)
+        catch (DataValidationException e)
         {
             logger.error("Invalid data inputted");
             new Alert(Alert.AlertType.ERROR,"Invalid data found").show();

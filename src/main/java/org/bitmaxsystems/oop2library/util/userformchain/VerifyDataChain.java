@@ -1,6 +1,6 @@
 package org.bitmaxsystems.oop2library.util.userformchain;
 
-import org.bitmaxsystems.oop2library.exceptions.FormDataValidationException;
+import org.bitmaxsystems.oop2library.exceptions.DataValidationException;
 import org.bitmaxsystems.oop2library.models.form.UserFormDTO;
 import org.bitmaxsystems.oop2library.util.contracts.IUserFormChain;
 
@@ -106,7 +106,7 @@ public class VerifyDataChain implements IUserFormChain {
                 sb.append(error).append("\n");
             }
 
-            throw new FormDataValidationException(sb.toString());
+            throw new DataValidationException(sb.toString());
         }
 
     }

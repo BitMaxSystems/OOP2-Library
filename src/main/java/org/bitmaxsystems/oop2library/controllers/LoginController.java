@@ -8,6 +8,7 @@ import javafx.scene.control.TextField;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.bitmaxsystems.oop2library.config.HibernateInit;
+import org.bitmaxsystems.oop2library.exceptions.DataValidationException;
 import org.bitmaxsystems.oop2library.models.auth.Credentials;
 import org.bitmaxsystems.oop2library.repository.AuthorisationRepository;
 import org.bitmaxsystems.oop2library.util.UserManager;
@@ -20,7 +21,7 @@ public class LoginController {
     @FXML
     private PasswordField passwordField;
     private static final Logger logger = LogManager.getLogger(LoginController.class);
-    private final AuthorisationRepository authorisationRepository = new AuthorisationRepository();
+
 
     @FXML
     public void onLogin()
@@ -28,21 +29,15 @@ public class LoginController {
         String username = usernameField.getText();
         String password = passwordField.getText();
 
-        Credentials userCredentials = authorisationRepository.getUserAuthorisation(username);
+        try {
+            UserManager.getInstance().login(username,password);
+            new Alert(Alert.AlertType.INFORMATION, "Hello, " + username).show();
+            SceneManager.showView(View.MAIN_VIEW);
 
-        if (userCredentials == null) {
-            logger.error("{} not found in the database", username);
-            new Alert(Alert.AlertType.ERROR, "Invalid credentials").show();
-        } else {
-            if (userCredentials.equals(username, password)) {
-                logger.info("{} logged successfully",username);
-                new Alert(Alert.AlertType.INFORMATION, "Hello, " + username).show();
-                UserManager.getInstance().login(userCredentials.getUser());
-                SceneManager.showView(View.MAIN_VIEW);
-            } else {
-                logger.error("{} inputted wrong password", username);
-                new Alert(Alert.AlertType.ERROR, "Invalid credentials").show();
-            }
+        }
+        catch (DataValidationException e)
+        {
+            new Alert(Alert.AlertType.ERROR, e.getMessage()).show();
         }
     }
 

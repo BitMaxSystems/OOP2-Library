@@ -1,5 +1,5 @@
 import org.bitmaxsystems.oop2library.config.HibernateInit;
-import org.bitmaxsystems.oop2library.exceptions.FormDataValidationException;
+import org.bitmaxsystems.oop2library.exceptions.DataValidationException;
 import org.bitmaxsystems.oop2library.exceptions.UserAlreadyExistException;
 import org.bitmaxsystems.oop2library.models.form.UserForm;
 import org.bitmaxsystems.oop2library.models.form.UserFormDTO;
@@ -37,7 +37,7 @@ public class UserFormTest {
                 "TestTest!123",
                 "TestTest!123");
 
-        FormDataValidationException exception = assertThrowsExactly(FormDataValidationException.class,() -> verifyData.execute(formDTO));
+        DataValidationException exception = assertThrowsExactly(DataValidationException.class,() -> verifyData.execute(formDTO));
         assertEquals("- First name can only be word characters without whitespaces!\n",exception.getMessage());
     }
 
@@ -52,7 +52,7 @@ public class UserFormTest {
                 "TestTest!123",
                 "TestTest!123");
 
-        FormDataValidationException exception = assertThrowsExactly(FormDataValidationException.class,() -> verifyData.execute(formDTO));
+        DataValidationException exception = assertThrowsExactly(DataValidationException.class,() -> verifyData.execute(formDTO));
         assertEquals("- Last name can only be word characters without whitespaces!\n",exception.getMessage());
     }
 
@@ -68,7 +68,7 @@ public class UserFormTest {
                 "TestTest!123",
                 "TestTest!123");
 
-        FormDataValidationException exception = assertThrowsExactly(FormDataValidationException.class,() -> verifyData.execute(formDTO));
+        DataValidationException exception = assertThrowsExactly(DataValidationException.class,() -> verifyData.execute(formDTO));
         assertEquals("- Age must be a numeric value!\n",exception.getMessage());
     }
 
@@ -83,7 +83,7 @@ public class UserFormTest {
                 "TestTest!123",
                 "TestTest!123");
 
-        FormDataValidationException exception = assertThrowsExactly(FormDataValidationException.class,() -> verifyData.execute(formDTO));
+        DataValidationException exception = assertThrowsExactly(DataValidationException.class,() -> verifyData.execute(formDTO));
         assertEquals("- Age must be between 13 and 100!\n",exception.getMessage());
     }
 
@@ -98,7 +98,7 @@ public class UserFormTest {
                 "TestTest!123",
                 "TestTest!123");
 
-        FormDataValidationException exception = assertThrowsExactly(FormDataValidationException.class,() -> verifyData.execute(formDTO));
+        DataValidationException exception = assertThrowsExactly(DataValidationException.class,() -> verifyData.execute(formDTO));
         assertEquals("- Only Bulgarian phone numbers are allowed (Must include +359 at the start)!\n",exception.getMessage());
     }
 
@@ -113,7 +113,7 @@ public class UserFormTest {
                 "TestTest!123",
                 "TestTest!123");
 
-        FormDataValidationException exception = assertThrowsExactly(FormDataValidationException.class,() -> verifyData.execute(formDTO));
+        DataValidationException exception = assertThrowsExactly(DataValidationException.class,() -> verifyData.execute(formDTO));
         assertEquals("- The username cannot include special characters and whitespaces!\n",exception.getMessage());
     }
 
@@ -128,7 +128,7 @@ public class UserFormTest {
                 "Test",
                 "TestTest!123");
 
-        FormDataValidationException exception = assertThrowsExactly(FormDataValidationException.class,() -> verifyData.execute(formDTO));
+        DataValidationException exception = assertThrowsExactly(DataValidationException.class,() -> verifyData.execute(formDTO));
         assertEquals("- The password does not match all the rules!\n",exception.getMessage());
     }
 
@@ -143,7 +143,7 @@ public class UserFormTest {
                 "TestTest!123",
                 "TestTest!122");
 
-        FormDataValidationException exception = assertThrowsExactly(FormDataValidationException.class,() -> verifyData.execute(formDTO));
+        DataValidationException exception = assertThrowsExactly(DataValidationException.class,() -> verifyData.execute(formDTO));
         assertEquals("- The passwords are not the same!\n",exception.getMessage());
     }
 
@@ -159,7 +159,7 @@ public class UserFormTest {
                 "TestTest!123",
                 "TestTest!122");
 
-        FormDataValidationException exception = assertThrowsExactly(FormDataValidationException.class,() -> verifyData.execute(formDTO));
+        DataValidationException exception = assertThrowsExactly(DataValidationException.class,() -> verifyData.execute(formDTO));
         errorList =  Arrays.stream(exception.getMessage().split("\n")).toList();
         assertEquals(4,errorList.size());
     }
