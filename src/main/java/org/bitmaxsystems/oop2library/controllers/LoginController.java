@@ -7,6 +7,7 @@ import javafx.scene.control.TextField;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.bitmaxsystems.oop2library.exceptions.DataValidationException;
+import org.bitmaxsystems.oop2library.models.users.enums.UserRole;
 import org.bitmaxsystems.oop2library.util.UserManager;
 import org.bitmaxsystems.oop2library.view.SceneManager;
 import org.bitmaxsystems.oop2library.view.View;
@@ -26,18 +27,36 @@ public class LoginController {
         String password = passwordField.getText();
 
         try {
-            UserManager.getInstance().login(username,password);
+            UserManager manager = UserManager.getInstance();
+            manager.login(username,password);
             new Alert(Alert.AlertType.INFORMATION, "Hello, " + username).show();
-            SceneManager.showView(View.MAIN_VIEW);
+            UserRole role = manager.getLoggedUser().getRole();
+            if (role == UserRole.READER)
+            {
+                SceneManager.showView(View.BASE_MAIN_VIEW);
+            }
+            else if (role == UserRole.ADMINISTRATOR || role == UserRole.LIBRARIAN)
+            {
+                SceneManager.showView(View.ADMIN_MAIN_VIEW);
+            }
+            else
+            {
+                SceneManager.showView(View.BASE_MAIN_VIEW);
+            }
 
         }
         catch (DataValidationException e)
         {
             new Alert(Alert.AlertType.ERROR, e.getMessage()).show();
+
         } catch (Exception e) {
             logger.error(e);
             new Alert(Alert.AlertType.ERROR,"Unexpected error occurred, try again.").show();
             throw new RuntimeException(e);
+        }
+        finally {
+            usernameField.clear();
+            passwordField.clear();
         }
     }
 

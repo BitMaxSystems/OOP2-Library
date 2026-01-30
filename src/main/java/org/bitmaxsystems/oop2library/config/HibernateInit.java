@@ -9,6 +9,7 @@ import org.hibernate.Session;
 import org.hibernate.Transaction;
 import org.springframework.security.crypto.bcrypt.BCrypt;
 
+import java.util.Date;
 import java.util.List;
 
 public class HibernateInit {
@@ -21,7 +22,9 @@ public class HibernateInit {
 
             if (credentialsList.isEmpty())
             {
-                User user = new User.Builder("Admin","Admin","+35988800000001", UserRole.ADMINISTRATOR).build();
+                User user = new User.Builder("Admin","Admin",21,"+35988800000001",UserRole.ADMINISTRATOR)
+                        .setDateOfApproval(new Date())
+                        .build();
                 Credentials credentials = new Credentials("admin", BCrypt.hashpw("admin",BCrypt.gensalt()),user);
                 Transaction tx = session.beginTransaction();
                 session.persist(user);

@@ -32,7 +32,9 @@ public class BaseDialogController {
 
     private void refreshUserDataButton()
     {
-        User user = UserManager.getInstance().getLoggedUser();
+        UserManager manager = UserManager.getInstance();
+        manager.refreshLoggedUserData();
+        User user = manager.getLoggedUser();
         userDetailsButton.setText(user.getFirstName()+" "+user.getLastName());
     }
 
@@ -43,7 +45,7 @@ public class BaseDialogController {
             FXMLLoader loader = new FXMLLoader(getClass().getResource(View.BASIC_USER_DETAILS.getPath()));
             AnchorPane root = loader.load();
 
-            BasicUserDetailsController controller = loader.getController();
+            UserDetailsController controller = loader.getController();
             controller.setUser(UserManager.getInstance().getLoggedUser());
 
             Stage stage = new Stage();

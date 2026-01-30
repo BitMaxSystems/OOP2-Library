@@ -72,29 +72,6 @@ public class UserDataDTO {
                                     user);
         }
     }
-//    public UserDataDTO(String firstName, String lastName, String age, String phoneField, String usernameField, String passwordField, String repeatPasswordField) {
-//        this.firstName = firstName;
-//        this.lastName = lastName;
-//        this.age = age;
-//        this.phoneField = phoneField;
-//        this.loyaltyPoints = "50";
-//        this.usernameField = usernameField;
-//        this.passwordField = passwordField;
-//        this.repeatPasswordField = repeatPasswordField;
-//    }
-//
-//    public UserDataDTO(String firstName, String lastName, String age, String phoneField, String loyaltyPoints, String usernameField, String passwordField, String repeatPasswordField) {
-//        this.firstName = firstName;
-//        this.lastName = lastName;
-//        this.age = age;
-//        this.phoneField = phoneField;
-//        this.loyaltyPoints = loyaltyPoints;
-//        this.usernameField = usernameField;
-//        this.passwordField = passwordField;
-//        this.repeatPasswordField = repeatPasswordField;
-//    }
-
-
     private UserDataDTO(String firstName, String lastName, String age, String phoneField, String loyaltyPoints, String usernameField, boolean newPassword, String passwordField, String repeatPasswordField, User user) {
         this.firstName = firstName;
         this.lastName = lastName;

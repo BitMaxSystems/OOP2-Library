@@ -52,7 +52,7 @@ public class UserForm {
         if (status == FormStatus.PENDING)
         {
             this.status = FormStatus.APPROVED;
-            user.setRole(UserRole.BASIC_USER);
+            user.setRole(UserRole.READER);
             return true;
         }
         else

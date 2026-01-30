@@ -3,7 +3,6 @@ package org.bitmaxsystems.oop2library.controllers;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Label;
-import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 import org.apache.logging.log4j.LogManager;
@@ -23,6 +22,8 @@ public class BasicUserDetailsController {
     @FXML
     private Label userRoleLabel;
     @FXML
+    private Label dateOfApprovalLabel;
+    @FXML
     private TextField firstNameField;
     @FXML
     private TextField lastNameField;
@@ -33,39 +34,44 @@ public class BasicUserDetailsController {
     @FXML
     private TextField loyaltyPointsField;
 
-    @FXML
-    private PasswordField passwordField;
-    @FXML
-    private PasswordField repeatPasswordField;
-
     private static final Logger logger = LogManager.getLogger(BasicUserDetailsController.class);
-    private GenericRepository<User> userRepository = new GenericRepository<>(User.class);
 
     private User user;
 
-    public void setUser (User user)
-    {
+    public void setUser(User user) {
         this.user = user;
         firstNameField.setText(user.getFirstName());
         lastNameField.setText(user.getLastName());
         ageField.setText(String.valueOf(user.getAge()));
         phoneField.setText(user.getPhone());
         loyaltyPointsField.setText(String.valueOf(user.getLoyaltyPoints()));
-
-        if (user.getRole() != UserRole.ADMINISTRATOR)
-        {
-            loyaltyPointsField.setDisable(true);
-        }
-
         userRoleLabel.setText(user.getRole().toString());
 
+        if (user.getDateOfApproval() == null) {
+            dateOfApprovalLabel.setText("Awaiting approval");
+        } else {
+            dateOfApprovalLabel.setText(String.valueOf(user.getDateOfApproval()));
+        }
+
+        if (user.getRole() != UserRole.ADMINISTRATOR) {
+            loyaltyPointsField.setDisable(true);
+        }
+    }
+
+    protected UserDataDTO.Builder generateDTO()
+    {
+        return new UserDataDTO.Builder(firstNameField.getText().strip(),
+                lastNameField.getText().strip(),
+                ageField.getText().strip(),
+                phoneField.getText().strip(),
+                user.getCredentials().getUsername())
+                .setLoyaltyPoints(loyaltyPointsField.getText().strip())
+                .setUser(user);
     }
 
     @FXML
     public void onUpdate()
     {
-        String password, repeatPassword;
-
         IUserFormChain verifyUser = new VerifyDataChain();
         IUserFormChain updateUser = new UpdateUserChain();
         IUserFormChain updatePassword = new UpdatePasswordChain();
@@ -73,27 +79,12 @@ public class BasicUserDetailsController {
         verifyUser.setNextChain(updateUser);
         updateUser.setNextChain(updatePassword);
 
-        UserDataDTO.Builder formDTOBuilder = new UserDataDTO.Builder(firstNameField.getText().strip(),
-                lastNameField.getText().strip(),
-                ageField.getText().strip(),
-                phoneField.getText().strip(),
-                user.getCredentials().getUsername())
-                .setLoyaltyPoints(loyaltyPointsField.getText().strip())
-                .setUser(user);
-
-        if (!passwordField.getText().isBlank())
-        {
-            password = passwordField.getText().strip();
-            repeatPassword = repeatPasswordField.getText().strip();
-            formDTOBuilder = formDTOBuilder.setNewPassword(password,repeatPassword);
-        }
+        UserDataDTO.Builder formDTOBuilder = generateDTO();
 
         try {
             verifyUser.execute(formDTOBuilder.build());
             new Alert(Alert.AlertType.INFORMATION,"User Data is updated").show();
             logger.info("User data successfully submitted!");
-
-            UserManager.getInstance().setLoggedUser(userRepository.findById(user.getId()));
 
         }
         catch (DataValidationException e)
@@ -110,7 +101,6 @@ public class BasicUserDetailsController {
             logger.error(e);
             new Alert(Alert.AlertType.ERROR,"Unexpected error occurred, try again.").show();
         }
-
     }
 
     @FXML
@@ -118,5 +108,4 @@ public class BasicUserDetailsController {
     {
         ((Stage) userRoleLabel.getScene().getWindow()).close();
     }
-
 }

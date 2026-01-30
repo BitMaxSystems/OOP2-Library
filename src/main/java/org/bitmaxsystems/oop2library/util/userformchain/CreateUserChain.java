@@ -49,7 +49,7 @@ public class CreateUserChain implements IUserFormChain {
 
     private User createUser (UserDataDTO formData)
     {
-        Integer age;
+        int age;
         User user;
         Credentials credentials;
         try
@@ -58,18 +58,14 @@ public class CreateUserChain implements IUserFormChain {
         }
         catch (NumberFormatException _e)
         {
-            age = null;
+            throw new NumberFormatException("Error parsing age field");
         }
 
         User.Builder userBuilder =  new User.Builder(formData.getFirstName().strip(),
                 formData.getLastName().strip(),
+                age,
                 formData.getPhoneField().strip(),
-                UserRole.UNAPPROVED_USER);
-
-        if (age != null)
-        {
-            userBuilder.setAge(age);
-        }
+                UserRole.UNAPPROVED_READER);
 
         user = userBuilder.build();
 

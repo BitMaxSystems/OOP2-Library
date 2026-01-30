@@ -1,8 +1,8 @@
 package org.bitmaxsystems.oop2library.models.users.enums;
 
 public enum UserRole {
-    BASIC_USER("User"),
-    UNAPPROVED_USER("Unapproved user"),
+    READER("Reader"),
+    UNAPPROVED_READER("Unapproved reader"),
     LIBRARIAN("Librarian"),
     ADMINISTRATOR("Administrator");
 
