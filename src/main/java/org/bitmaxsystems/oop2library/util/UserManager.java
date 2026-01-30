@@ -3,7 +3,6 @@ package org.bitmaxsystems.oop2library.util;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.bitmaxsystems.oop2library.exceptions.DataValidationException;
-import org.bitmaxsystems.oop2library.exceptions.UserAlreadyExistException;
 import org.bitmaxsystems.oop2library.models.auth.Credentials;
 import org.bitmaxsystems.oop2library.models.users.User;
 import org.bitmaxsystems.oop2library.repository.AuthorisationRepository;
@@ -42,6 +41,10 @@ public class UserManager {
                 throw new DataValidationException("Invalid credentials");
             }
         }
+    }
+
+    public void setLoggedUser(User loggedUser) {
+        this.loggedUser = loggedUser;
     }
 
     public void logoff()

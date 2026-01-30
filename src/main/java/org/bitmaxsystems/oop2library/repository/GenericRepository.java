@@ -1,14 +1,18 @@
 package org.bitmaxsystems.oop2library.repository;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.bitmaxsystems.oop2library.config.HibernateUtil;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 import org.hibernate.query.Query;
+
 import java.util.List;
 
 public class GenericRepository<T> {
 
     private final Class<T> type;
+    private static final Logger logger = LogManager.getLogger(GenericRepository.class);
 
     public GenericRepository(Class<T> type) {
         this.type = type;
@@ -22,7 +26,7 @@ public class GenericRepository<T> {
             transaction.commit();
         } catch (Exception e) {
             if (transaction != null) transaction.rollback();
-            e.printStackTrace();
+            logger.error(e);
         }
     }
 
@@ -34,14 +38,19 @@ public class GenericRepository<T> {
             transaction.commit();
         } catch (Exception e) {
             if (transaction != null) transaction.rollback();
-            e.printStackTrace();
+            logger.error(e);
         }
     }
 
-    public T findById(Long id) {
+
+    public T findById(Object id) {
         try (Session session = HibernateUtil.getSessionFactory().openSession()) {
             return session.find(type, id);
         }
+        catch (Exception e) {
+            logger.error(e);
+        }
+        return null;
     }
 
     public List<T> findAll() {
@@ -49,6 +58,10 @@ public class GenericRepository<T> {
             Query<T> query = session.createQuery("from " + type.getName(), type);
             return query.list();
         }
+        catch (Exception e) {
+            logger.error(e);
+        }
+        return null;
     }
 
     public void delete(T entity) {
@@ -59,7 +72,7 @@ public class GenericRepository<T> {
             transaction.commit();
         } catch (Exception e) {
             if (transaction != null) transaction.rollback();
-            e.printStackTrace();
+            logger.error(e);
         }
     }
 }

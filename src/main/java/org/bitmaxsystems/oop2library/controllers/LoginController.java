@@ -1,16 +1,12 @@
 package org.bitmaxsystems.oop2library.controllers;
 
 import javafx.fxml.FXML;
-import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import org.bitmaxsystems.oop2library.config.HibernateInit;
 import org.bitmaxsystems.oop2library.exceptions.DataValidationException;
-import org.bitmaxsystems.oop2library.models.auth.Credentials;
-import org.bitmaxsystems.oop2library.repository.AuthorisationRepository;
 import org.bitmaxsystems.oop2library.util.UserManager;
 import org.bitmaxsystems.oop2library.view.SceneManager;
 import org.bitmaxsystems.oop2library.view.View;
@@ -38,6 +34,10 @@ public class LoginController {
         catch (DataValidationException e)
         {
             new Alert(Alert.AlertType.ERROR, e.getMessage()).show();
+        } catch (Exception e) {
+            logger.error(e);
+            new Alert(Alert.AlertType.ERROR,"Unexpected error occurred, try again.").show();
+            throw new RuntimeException(e);
         }
     }
 

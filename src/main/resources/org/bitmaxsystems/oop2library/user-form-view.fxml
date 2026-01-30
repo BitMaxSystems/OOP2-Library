@@ -23,6 +23,9 @@
    <TextField fx:id="lastNameField" layoutX="226.0" layoutY="171.0" />
    <TextField fx:id="ageField" layoutX="225.0" layoutY="235.0" />
    <TextField fx:id="phoneField" layoutX="224.0" layoutY="295.0" />
+   <TextField fx:id="usernameField" layoutX="226.0" layoutY="356.0" />
+   <PasswordField fx:id="passwordField" layoutX="225.0" layoutY="416.0" />
+   <PasswordField fx:id="repeatPasswordField" layoutX="225.0" layoutY="491.0" />
    <Button layoutX="267.0" layoutY="742.0" mnemonicParsing="false" onAction="#onSubmit" text="Submit">
       <font>
          <Font size="15.0" />
@@ -66,9 +69,6 @@
          <Font size="18.0" />
       </font>
    </Label>
-   <PasswordField fx:id="passwordField" layoutX="225.0" layoutY="416.0" />
-   <PasswordField fx:id="repeatPasswordField" layoutX="225.0" layoutY="491.0" />
-   <TextField fx:id="usernameField" layoutX="226.0" layoutY="356.0" />
    <Label layoutX="262.0" layoutY="329.0" text="Username">
       <font>
          <Font size="18.0" />

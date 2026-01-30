@@ -68,6 +68,10 @@ public class User {
             this.role = role;
         }
 
+    public Credentials getCredentials() {
+        return credentials;
+    }
+
     public UUID getId() {
         return id;
     }
@@ -84,6 +88,22 @@ public class User {
         return age;
     }
 
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
+    }
+
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
+    }
+
+    public void setAge(int age) {
+        this.age = age;
+    }
+
+    public void setPhone(String phone) {
+        this.phone = phone;
+    }
+
     public String getPhone() {
         return phone;
     }
@@ -98,6 +118,10 @@ public class User {
 
     public void setRole(UserRole role) {
         this.role = role;
+    }
+
+    public void setLoyaltyPoints(int loyaltyPoints) {
+        this.loyaltyPoints = loyaltyPoints;
     }
 
     public void updateLoyaltyPoints(int loyaltyPoints) {

@@ -29,13 +29,14 @@ public class UserFormTest {
     @Test
     void firstNameExceptionThrown(){
         IUserFormChain verifyData = new VerifyDataChain();
-        UserFormDTO formDTO = new UserFormDTO("213",
+        UserFormDTO formDTO = new UserFormDTO.Builder("213",
                 "Test",
-                "14",
                 "+359888263282",
-                "test",
-                "TestTest!123",
-                "TestTest!123");
+                "test")
+                .setAge("14")
+                .setNewPassword("TestTest!123","TestTest!123")
+                .build();
+
 
         DataValidationException exception = assertThrowsExactly(DataValidationException.class,() -> verifyData.execute(formDTO));
         assertEquals("- First name can only be word characters without whitespaces!\n",exception.getMessage());
@@ -44,13 +45,13 @@ public class UserFormTest {
     @Test
     void lastNameExceptionThrown(){
         IUserFormChain verifyData = new VerifyDataChain();
-        UserFormDTO formDTO = new UserFormDTO("Test",
-                "132",
-                "14",
+        UserFormDTO formDTO =  new UserFormDTO.Builder("Test",
+                "123",
                 "+359888263282",
-                "test",
-                "TestTest!123",
-                "TestTest!123");
+                "test")
+                .setAge("14")
+                .setNewPassword("TestTest!123","TestTest!123")
+                .build();
 
         DataValidationException exception = assertThrowsExactly(DataValidationException.class,() -> verifyData.execute(formDTO));
         assertEquals("- Last name can only be word characters without whitespaces!\n",exception.getMessage());
@@ -60,13 +61,13 @@ public class UserFormTest {
     @Test
     void ageNonNumericExceptionThrown(){
         IUserFormChain verifyData = new VerifyDataChain();
-        UserFormDTO formDTO = new UserFormDTO("Test",
+        UserFormDTO formDTO = new UserFormDTO.Builder("Test",
                 "Test",
-                "das",
                 "+359888263282",
-                "test",
-                "TestTest!123",
-                "TestTest!123");
+                "test")
+                .setAge("das")
+                .setNewPassword("TestTest!123","TestTest!123")
+                .build();
 
         DataValidationException exception = assertThrowsExactly(DataValidationException.class,() -> verifyData.execute(formDTO));
         assertEquals("- Age must be a numeric value!\n",exception.getMessage());
@@ -75,28 +76,60 @@ public class UserFormTest {
     @Test
     void ageOutOfIntervalExceptionThrown(){
         IUserFormChain verifyData = new VerifyDataChain();
-        UserFormDTO formDTO = new UserFormDTO("Test",
+        UserFormDTO formDTO = new UserFormDTO.Builder("Test",
                 "Test",
-                "-2",
                 "+359888263282",
-                "test",
-                "TestTest!123",
-                "TestTest!123");
+                "test")
+                .setAge("-2")
+                .setNewPassword("TestTest!123","TestTest!123")
+                .build();
 
         DataValidationException exception = assertThrowsExactly(DataValidationException.class,() -> verifyData.execute(formDTO));
         assertEquals("- Age must be between 13 and 100!\n",exception.getMessage());
     }
 
     @Test
+    void loyaltyPointsNonNumericExceptionThrown(){
+        IUserFormChain verifyData = new VerifyDataChain();
+        UserFormDTO formDTO = new UserFormDTO.Builder("Test",
+                "Test",
+                "+359888263282",
+                "test")
+                .setAge("14")
+                .setLoyaltyPoints("das")
+                .setNewPassword("TestTest!123","TestTest!123")
+                .build();
+
+        DataValidationException exception = assertThrowsExactly(DataValidationException.class,() -> verifyData.execute(formDTO));
+        assertEquals("- Loyalty points must be a numeric value!\n",exception.getMessage());
+    }
+
+    @Test
+    void loyaltyPointsOutOfIntervalExceptionThrown(){
+        IUserFormChain verifyData = new VerifyDataChain();
+        UserFormDTO formDTO = new UserFormDTO.Builder("Test",
+                "Test",
+                "+359888263282",
+                "test")
+                .setAge("14")
+                .setLoyaltyPoints("-2")
+                .setNewPassword("TestTest!123","TestTest!123")
+                .build();
+
+        DataValidationException exception = assertThrowsExactly(DataValidationException.class,() -> verifyData.execute(formDTO));
+        assertEquals("- Loyalty points must be between 0 and 100!\n",exception.getMessage());
+    }
+
+    @Test
     void phoneExceptionThrown(){
         IUserFormChain verifyData = new VerifyDataChain();
-        UserFormDTO formDTO = new UserFormDTO("Test",
+        UserFormDTO formDTO = new UserFormDTO.Builder("Test",
                 "Test",
-                "14",
-                "+359888asdasd",
-                "test",
-                "TestTest!123",
-                "TestTest!123");
+                "+35988826asdasd",
+                "test")
+                .setAge("14")
+                .setNewPassword("TestTest!123","TestTest!123")
+                .build();
 
         DataValidationException exception = assertThrowsExactly(DataValidationException.class,() -> verifyData.execute(formDTO));
         assertEquals("- Only Bulgarian phone numbers are allowed (Must include +359 at the start)!\n",exception.getMessage());
@@ -105,13 +138,13 @@ public class UserFormTest {
     @Test
     void usernameExceptionThrown(){
         IUserFormChain verifyData = new VerifyDataChain();
-        UserFormDTO formDTO = new UserFormDTO("Test",
+        UserFormDTO formDTO = new UserFormDTO.Builder("Test",
                 "Test",
-                "14",
                 "+359888263282",
-                "test no",
-                "TestTest!123",
-                "TestTest!123");
+                "test no")
+                .setAge("14")
+                .setNewPassword("TestTest!123","TestTest!123")
+                .build();
 
         DataValidationException exception = assertThrowsExactly(DataValidationException.class,() -> verifyData.execute(formDTO));
         assertEquals("- The username cannot include special characters and whitespaces!\n",exception.getMessage());
@@ -120,13 +153,13 @@ public class UserFormTest {
     @Test
     void incorrectPasswordExceptionThrown(){
         IUserFormChain verifyData = new VerifyDataChain();
-        UserFormDTO formDTO = new UserFormDTO("Test",
+        UserFormDTO formDTO = new UserFormDTO.Builder("Test",
                 "Test",
-                "14",
                 "+359888263282",
-                "test",
-                "Test",
-                "TestTest!123");
+                "test")
+                .setAge("14")
+                .setNewPassword("Test","TestTest!123")
+                .build();
 
         DataValidationException exception = assertThrowsExactly(DataValidationException.class,() -> verifyData.execute(formDTO));
         assertEquals("- The password does not match all the rules!\n",exception.getMessage());
@@ -135,13 +168,13 @@ public class UserFormTest {
     @Test
     void passwordsNotMatchingExceptionThrown(){
         IUserFormChain verifyData = new VerifyDataChain();
-        UserFormDTO formDTO = new UserFormDTO("Test",
+        UserFormDTO formDTO = new UserFormDTO.Builder("Test",
                 "Test",
-                "14",
                 "+359888263282",
-                "test",
-                "TestTest!123",
-                "TestTest!122");
+                "test")
+                .setAge("14")
+                .setNewPassword("TestTest!123","TestTest!122")
+                .build();
 
         DataValidationException exception = assertThrowsExactly(DataValidationException.class,() -> verifyData.execute(formDTO));
         assertEquals("- The passwords are not the same!\n",exception.getMessage());
@@ -151,13 +184,13 @@ public class UserFormTest {
     void multipleInvalidFieldsExceptionThrown(){
         List<String> errorList;
         IUserFormChain verifyData = new VerifyDataChain();
-        UserFormDTO formDTO = new UserFormDTO("123",
+        UserFormDTO formDTO = new UserFormDTO.Builder("123",
                 "Test",
-                "-14",
                 "+359888263282",
-                "test no",
-                "TestTest!123",
-                "TestTest!122");
+                "test no")
+                .setAge("-14")
+                .setNewPassword("TestTest!123","TestTest!122")
+                .build();
 
         DataValidationException exception = assertThrowsExactly(DataValidationException.class,() -> verifyData.execute(formDTO));
         errorList =  Arrays.stream(exception.getMessage().split("\n")).toList();
@@ -165,16 +198,31 @@ public class UserFormTest {
     }
 
     @Test
-    void testValidData(){
-        List<String> errorList;
+    void testValidDataWithoutLoyaltyPoints(){
         IUserFormChain verifyData = new VerifyDataChain();
-        UserFormDTO formDTO = new UserFormDTO("Test",
+        UserFormDTO formDTO = new UserFormDTO.Builder("Test",
                 "Test",
-                "14",
                 "+359888263282",
-                "test",
-                "TestTest!123",
-                "TestTest!123");
+                "test")
+                .setAge("14")
+                .setNewPassword("TestTest!123","TestTest!123")
+                .build();
+
+        assertDoesNotThrow(() -> verifyData.execute(formDTO));
+
+    }
+
+    @Test
+    void testValidDataWithLoyaltyPoints(){
+        IUserFormChain verifyData = new VerifyDataChain();
+        UserFormDTO formDTO = new UserFormDTO.Builder("Test",
+                "Test",
+                "+359888263282",
+                "test")
+                .setAge("14")
+                .setLoyaltyPoints("74")
+                .setNewPassword("TestTest!123","TestTest!123")
+                .build();
 
         assertDoesNotThrow(() -> verifyData.execute(formDTO));
 
@@ -184,13 +232,13 @@ public class UserFormTest {
     void UserAlreadyExistsException()
     {
         IUserFormChain createUserChain = new CreateUserChain();
-        UserFormDTO formDTO = new UserFormDTO("Test",
+        UserFormDTO formDTO = new UserFormDTO.Builder("Test",
                 "Test",
-                "14",
                 "+359888263282",
-                "admin",
-                "TestTest!123",
-                "TestTest!123");
+                "admin")
+                .setAge("14")
+                .setNewPassword("TestTest!123","TestTest!123")
+                .build();
 
         UserAlreadyExistException exception = assertThrowsExactly(UserAlreadyExistException.class,() -> createUserChain.execute(formDTO));
         assertEquals("- A user with this username already exists!",exception.getMessage());
@@ -201,13 +249,13 @@ public class UserFormTest {
     {
         int before = userRepository.findAll().size();
         IUserFormChain createUserChain = new CreateUserChain();
-        UserFormDTO formDTO = new UserFormDTO("Test",
+        UserFormDTO formDTO = new UserFormDTO.Builder("Test",
                 "Test",
-                "14",
                 "+359888263282",
-                "test",
-                "TestTest!123",
-                "TestTest!123");
+                "test")
+                .setAge("14")
+                .setNewPassword("TestTest!123","TestTest!123")
+                .build();
 
         assertDoesNotThrow(() -> createUserChain.execute(formDTO));
 
@@ -228,13 +276,13 @@ public class UserFormTest {
         verifyDataChain.setNextChain(createUserChain);
         createUserChain.setNextChain(saveFormChain);
 
-        UserFormDTO formDTO = new UserFormDTO("Test",
+        UserFormDTO formDTO = new UserFormDTO.Builder("Test",
                 "Test",
-                "14",
                 "+359888263282",
-                "test1",
-                "TestTest!123",
-                "TestTest!123");
+                "test1")
+                .setAge("14")
+                .setNewPassword("TestTest!123","TestTest!123")
+                .build();
 
         assertDoesNotThrow(() -> verifyDataChain.execute(formDTO));
 

@@ -69,15 +69,13 @@ public class UserFormController {
         verifyData.setNextChain(createUser);
         createUser.setNextChain(saveForm);
 
-        UserFormDTO formData = new UserFormDTO(
-                firstNameField.getText(),
-                lastNameField.getText(),
-                ageField.getText(),
-                phoneField.getText(),
-                usernameField.getText(),
-                passwordField.getText(),
-                repeatPasswordField.getText()
-        );
+        UserFormDTO formData = new UserFormDTO.Builder(firstNameField.getText().strip(),
+                lastNameField.getText().strip(),
+                phoneField.getText().strip(),
+                usernameField.getText().strip())
+                .setAge(ageField.getText().strip())
+                .setNewPassword(passwordField.getText().strip(),repeatPasswordField.getText().strip())
+                .build();
 
         try{
             verifyData.execute(formData);
@@ -99,6 +97,9 @@ public class UserFormController {
             new Alert(Alert.AlertType.ERROR,"User with this username already exists").show();
             errorLabel.setTextFill(Color.RED);
             errorLabel.setText(e.getMessage());
+        } catch (NumberFormatException e) {
+            logger.error(e);
+            new Alert(Alert.AlertType.ERROR,e.getMessage()).show();
         }
         catch (Exception e) {
             logger.error(e);
