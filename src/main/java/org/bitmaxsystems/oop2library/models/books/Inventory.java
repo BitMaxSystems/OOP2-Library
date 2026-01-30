@@ -2,6 +2,7 @@ package org.bitmaxsystems.oop2library.models.books;
 
 import jakarta.persistence.*;
 import lombok.*;
+import org.bitmaxsystems.oop2library.models.books.enums.BookStatus;
 
 @Entity
 @Table(name = "inventory")

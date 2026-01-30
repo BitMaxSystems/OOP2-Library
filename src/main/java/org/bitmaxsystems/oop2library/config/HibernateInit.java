@@ -3,6 +3,8 @@ package org.bitmaxsystems.oop2library.config;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.bitmaxsystems.oop2library.models.auth.Credentials;
+import org.bitmaxsystems.oop2library.models.users.User;
+import org.bitmaxsystems.oop2library.models.users.enums.UserRole;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 import org.springframework.security.crypto.bcrypt.BCrypt;
@@ -15,12 +17,15 @@ public class HibernateInit {
     {
         try (Session session = HibernateUtil.getSessionFactory().openSession())
         {
-            List<Credentials> credentials = session.createQuery("FROM Credentials",Credentials.class).list();
+            List<Credentials> credentialsList = session.createQuery("FROM Credentials",Credentials.class).list();
 
-            if (credentials.isEmpty())
+            if (credentialsList.isEmpty())
             {
+                User user = new User.Builder("Admin","Admin","+35988800000001", UserRole.ADMINISTRATOR).build();
+                Credentials credentials = new Credentials("admin", BCrypt.hashpw("admin",BCrypt.gensalt()),user);
                 Transaction tx = session.beginTransaction();
-                session.persist(new Credentials("admin", BCrypt.hashpw("admin",BCrypt.gensalt())));
+                session.persist(user);
+                session.persist(credentials);
                 tx.commit();
                 logger.info("Added admin user");
             }

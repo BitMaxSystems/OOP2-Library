@@ -1,4 +1,4 @@
-package org.bitmaxsystems.oop2library.models.books;
+package org.bitmaxsystems.oop2library.models.books.enums;
 
 public enum BookStatus {
     AVAILABLE,

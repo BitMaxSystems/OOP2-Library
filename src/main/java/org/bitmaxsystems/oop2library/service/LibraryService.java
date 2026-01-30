@@ -1,6 +1,7 @@
 package org.bitmaxsystems.oop2library.service;
 
 import org.bitmaxsystems.oop2library.models.books.*;
+import org.bitmaxsystems.oop2library.models.books.enums.BookStatus;
 import org.bitmaxsystems.oop2library.repository.GenericRepository;
 import org.bitmaxsystems.oop2library.config.HibernateUtil;
 import org.hibernate.Session;
