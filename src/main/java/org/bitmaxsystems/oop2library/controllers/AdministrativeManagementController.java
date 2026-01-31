@@ -76,7 +76,7 @@ public class AdministrativeManagementController {
 
         } catch (Exception e) {
             logger.error(e);
-            new Alert(Alert.AlertType.ERROR,"Unexpected error occurred. Try again");
+            new Alert(Alert.AlertType.ERROR,"Unexpected error occurred. Try again").show();
         }
 
     }
@@ -111,7 +111,7 @@ public class AdministrativeManagementController {
 
         } catch (Exception e) {
             logger.error(e);
-            new Alert(Alert.AlertType.ERROR,"Unexpected error occurred. Try again");
+            new Alert(Alert.AlertType.ERROR,"Unexpected error occurred. Try again").show();
         }
     }
 
@@ -129,7 +129,7 @@ public class AdministrativeManagementController {
         }
         catch (Exception e) {
             logger.error(e);
-            new Alert(Alert.AlertType.ERROR,"Unexpected error occurred. Try again");
+            new Alert(Alert.AlertType.ERROR,"Unexpected error occurred. Try again").show();
         }
     }
 }

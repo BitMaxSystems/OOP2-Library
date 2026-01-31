@@ -134,6 +134,10 @@ public class User {
         this.loyaltyPoints = loyaltyPoints;
     }
 
+    public UserForm getForm() {
+        return form;
+    }
+
     public void updateLoyaltyPoints(int loyaltyPoints) {
         this.loyaltyPoints += loyaltyPoints;
     }

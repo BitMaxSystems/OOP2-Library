@@ -5,10 +5,12 @@ public enum View {
     ADMIN_MAIN_VIEW("administrative-base-view.fxml","Library management",860,430),
     ADMINISTRATIVE_MANAGEMENT_VIEW("administrative-management-view.fxml","Administrative management",858,433),
     LOGIN("login-view.fxml","Login",600,400),
-    NEW_USER_FORM("user-form-view.fxml","New User Form",600,787),
+    NEW_USER_FORM("user-form-creation-view.fxml","New User Form",600,787),
     NEW_ADMINISTRATION_USER_FORM("administrative-creation-view.fxml","New Administrative User",600,787),
     BASIC_USER_DETAILS("basic-user-details-view.fxml","User Details",472,573),
-    USER_DETAILS("user-details-view.fxml","User Details",472,665);
+    USER_DETAILS("user-details-view.fxml","User Details",472,665),
+    USER_FORM_DETAILS_VIEW("user-form-details-view.fxml","User Form Details",600,721),
+    USER_FORM_MANAGEMENT_VIEW("user-form-management-view.fxml","User Form Management",1207,414);
 
     private final String path;
     private final String title;

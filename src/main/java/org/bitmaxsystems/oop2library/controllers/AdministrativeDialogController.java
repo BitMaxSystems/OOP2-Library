@@ -1,6 +1,5 @@
 package org.bitmaxsystems.oop2library.controllers;
 
-import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -35,7 +34,7 @@ public class AdministrativeDialogController extends BaseDialogController {
         }
     }
 
-    private void loadManagementDialog(UserRole role)
+    private void loadAdministrativeManagementDialog(UserRole role)
     {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource(View.ADMINISTRATIVE_MANAGEMENT_VIEW.getPath()));
@@ -52,19 +51,43 @@ public class AdministrativeDialogController extends BaseDialogController {
 
         } catch (IOException e) {
             logger.error(e);
-            new Alert(Alert.AlertType.ERROR,"Unexpected error, try again!");
+            new Alert(Alert.AlertType.ERROR,"Unexpected error, try again!").show();
+        }
+    }
+
+    private void loadManagementDialog(View view)
+    {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource(view.getPath()));
+            AnchorPane root = loader.load();
+
+            Stage stage = new Stage();
+            stage.setTitle(view.getTitle());
+            stage.initModality(Modality.APPLICATION_MODAL);
+            stage.setScene(new Scene(root));
+            stage.showAndWait();
+
+        } catch (IOException e) {
+            logger.error(e);
+            new Alert(Alert.AlertType.ERROR,"Unexpected error, try again!").show();
         }
     }
 
     @FXML
     public void onViewAdmin()
     {
-        loadManagementDialog(UserRole.ADMINISTRATOR);
+        loadAdministrativeManagementDialog(UserRole.ADMINISTRATOR);
     }
 
     @FXML
     public void onViewLibrarian()
     {
-        loadManagementDialog(UserRole.LIBRARIAN);
+        loadAdministrativeManagementDialog(UserRole.LIBRARIAN);
+    }
+
+    @FXML
+    public void onViewUserForm()
+    {
+        loadManagementDialog(View.USER_FORM_MANAGEMENT_VIEW);
     }
 }

@@ -17,7 +17,8 @@ public class SaveFormChain implements IUserFormChain {
     @Override
     public void execute(UserDataDTO formData) throws Exception {
         UserForm form = new UserForm(formData.getUser());
-        userFormGenericRepository.save(form);
+        // User is already created but it's detached. This is why we use update (merge).
+        userFormGenericRepository.update(form);
 
         if (nextChain != null)
         {
