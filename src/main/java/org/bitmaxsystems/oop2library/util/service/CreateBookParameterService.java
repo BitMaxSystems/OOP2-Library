@@ -1,4 +1,4 @@
-package org.bitmaxsystems.oop2library.util;
+package org.bitmaxsystems.oop2library.util.service;
 
 import org.bitmaxsystems.oop2library.config.HibernateUtil;
 import org.bitmaxsystems.oop2library.exceptions.DataAlreadyExistException;

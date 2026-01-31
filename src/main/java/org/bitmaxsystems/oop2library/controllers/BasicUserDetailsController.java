@@ -10,7 +10,7 @@ import org.bitmaxsystems.oop2library.exceptions.DataValidationException;
 import org.bitmaxsystems.oop2library.models.dto.UserDataDTO;
 import org.bitmaxsystems.oop2library.models.users.User;
 import org.bitmaxsystems.oop2library.models.users.enums.UserRole;
-import org.bitmaxsystems.oop2library.util.DeleteUserService;
+import org.bitmaxsystems.oop2library.util.service.DeleteUserService;
 import org.bitmaxsystems.oop2library.util.UserManager;
 import org.bitmaxsystems.oop2library.util.contracts.IUserFormChain;
 import org.bitmaxsystems.oop2library.util.userformchain.UpdatePasswordChain;

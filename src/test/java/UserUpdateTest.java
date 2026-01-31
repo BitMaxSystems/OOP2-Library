@@ -21,7 +21,6 @@ public class UserUpdateTest {
     @BeforeAll
     static void setup()
     {
-        HibernateInit.initializeIfEmpty();
         IUserFormChain createUserChain = new CreateUserChain();
         UserDataDTO formDTO = new UserDataDTO.Builder("Test",
                 "Test",

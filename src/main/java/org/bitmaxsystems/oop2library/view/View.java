@@ -8,6 +8,7 @@ public enum View {
     ADMINISTRATIVE_BOOK_REGISTRY_VIEW("administrative-book-registry-view.fxml","Book registry",914,493),
     BOOK_PARAMETER_MANAGEMENT_VIEW("book-parameter-manegement-view.fxml","Parameter management",600,400),
     BOOK_PARAMETER_CREATION_VIEW("book-parameter-creation-view.fxml","Parameter creation",486,277),
+    BOOK_PARAMETER_DETAILS_VIEW("book-parameter-details-view.fxml","Parameter details",486,277),
     LOGIN("login-view.fxml","Login",600,400),
     NEW_USER_FORM("user-form-creation-view.fxml","New User Form",600,787),
     NEW_ADMINISTRATION_USER_FORM("administrative-creation-view.fxml","New Administrative User",600,787),

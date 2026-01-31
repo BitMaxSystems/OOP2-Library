@@ -1,7 +1,6 @@
 package org.bitmaxsystems.oop2library.controllers;
 
 import javafx.fxml.FXML;
-import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -12,7 +11,7 @@ import org.bitmaxsystems.oop2library.exceptions.FormAlreadyApprovedException;
 import org.bitmaxsystems.oop2library.models.form.UserForm;
 import org.bitmaxsystems.oop2library.models.form.enums.FormStatus;
 import org.bitmaxsystems.oop2library.models.users.User;
-import org.bitmaxsystems.oop2library.util.ApproveUserFormService;
+import org.bitmaxsystems.oop2library.util.service.ApproveUserFormService;
 
 public class UserFromDetailsController {
     @FXML
