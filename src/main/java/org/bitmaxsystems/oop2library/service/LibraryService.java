@@ -11,11 +11,11 @@ import java.util.List;
 
 public class LibraryService {
 
-    private final GenericRepository<Book> bookDao = new GenericRepository<>(Book.class);
-    private final GenericRepository<Author> authorDao = new GenericRepository<>(Author.class);
-    private final GenericRepository<Genre> genreDao = new GenericRepository<>(Genre.class);
-    private final GenericRepository<Publisher> publisherDao = new GenericRepository<>(Publisher.class);
-    private final GenericRepository<Inventory> inventoryDao = new GenericRepository<>(Inventory.class);
+    private final GenericRepository<Book> bookGenericRepository = new GenericRepository<>(Book.class);
+    private final GenericRepository<Author> authorGenericRepository = new GenericRepository<>(Author.class);
+    private final GenericRepository<Genre> genreGenericRepository = new GenericRepository<>(Genre.class);
+    private final GenericRepository<Publisher> publisherGenericRepository = new GenericRepository<>(Publisher.class);
+    private final GenericRepository<Inventory> inventoryGenericRepository = new GenericRepository<>(Inventory.class);
 
     public boolean registerBook(String title, String isbn, String authorName, String genreName, String publisherName) {
         if (bookExists(isbn)) {
@@ -28,22 +28,22 @@ public class LibraryService {
         Publisher publisher = getOrCreatePublisher(publisherName);
 
         Book newBook = new Book(isbn, title, author, genre, publisher);
-        bookDao.save(newBook);
+        bookGenericRepository.save(newBook);
 
         Inventory inv = new Inventory(newBook, BookStatus.AVAILABLE);
-        inventoryDao.save(inv);
+        inventoryGenericRepository.save(inv);
 
         System.out.println("✅ Успешно регистрирана книга: " + title);
         return true;
     }
 
     public List<Book> getAllBooks() {
-        return bookDao.findAll();
+        return bookGenericRepository.findAll();
     }
 
     public void deleteBook(Book book) {
 
-        bookDao.delete(book);
+        bookGenericRepository.delete(book);
         System.out.println("Книгата е изтрита: " + book.getTitle());
     }
 
@@ -57,7 +57,7 @@ public class LibraryService {
             if (existing != null) return existing;
         }
         Author newAuthor = new Author(name);
-        authorDao.save(newAuthor);
+        authorGenericRepository.save(newAuthor);
         return newAuthor;
     }
 
@@ -69,7 +69,7 @@ public class LibraryService {
             if (existing != null) return existing;
         }
         Genre newGenre = new Genre(name);
-        genreDao.save(newGenre);
+        genreGenericRepository.save(newGenre);
         return newGenre;
     }
 
@@ -81,7 +81,7 @@ public class LibraryService {
             if (existing != null) return existing;
         }
         Publisher newPublisher = new Publisher(name);
-        publisherDao.save(newPublisher);
+        publisherGenericRepository.save(newPublisher);
         return newPublisher;
     }
 

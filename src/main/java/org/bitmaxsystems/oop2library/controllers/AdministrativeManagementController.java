@@ -44,7 +44,7 @@ public class AdministrativeManagementController {
 
 
     @FXML
-    public void initialize()
+    private void initialize()
     {
         firstNameColumn.setCellValueFactory(new javafx.scene.control.cell.PropertyValueFactory<>("firstName"));
         lastNameColumn.setCellValueFactory(new javafx.scene.control.cell.PropertyValueFactory<>("LastName"));
@@ -107,6 +107,7 @@ public class AdministrativeManagementController {
             stage.initModality(Modality.APPLICATION_MODAL);
             stage.setScene(new Scene(root));
             stage.showAndWait();
+            refreshTable();
 
         } catch (Exception e) {
             logger.error(e);

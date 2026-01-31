@@ -7,7 +7,7 @@ import org.bitmaxsystems.oop2library.util.contracts.IUserFormChain;
 
 public class SaveFormChain implements IUserFormChain {
     private IUserFormChain nextChain;
-    private GenericRepository<UserForm> userFormRepository = new GenericRepository<>(UserForm.class);
+    private GenericRepository<UserForm> userFormGenericRepository = new GenericRepository<>(UserForm.class);
 
     @Override
     public void setNextChain(IUserFormChain nextChain) {
@@ -17,7 +17,7 @@ public class SaveFormChain implements IUserFormChain {
     @Override
     public void execute(UserDataDTO formData) throws Exception {
         UserForm form = new UserForm(formData.getUser());
-        userFormRepository.save(form);
+        userFormGenericRepository.save(form);
 
         if (nextChain != null)
         {

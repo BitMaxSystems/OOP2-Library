@@ -20,12 +20,12 @@
          <Font size="25.0" />
       </font>
    </Label>
-   <Button layoutX="495.0" layoutY="337.0" mnemonicParsing="false" text="View Admins" wrapText="true" onAction="#onViewAdmin">
+   <Button layoutX="495.0" layoutY="337.0" mnemonicParsing="false" text="View Admins" wrapText="true" onAction="#onViewAdmin" fx:id="viewAdminButton">
       <font>
          <Font size="15.0" />
       </font>
    </Button>
-   <Button layoutX="675.0" layoutY="337.0" mnemonicParsing="false" text="View Librarians" wrapText="true">
+   <Button layoutX="675.0" layoutY="337.0" mnemonicParsing="false" text="View Librarians" wrapText="true" onAction="#onViewLibrarian" fx:id="viewLibrarianButton">
       <font>
          <Font size="15.0" />
       </font>

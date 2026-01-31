@@ -2,10 +2,7 @@ package org.bitmaxsystems.oop2library.controllers;
 
 import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
-import javafx.scene.control.Alert;
-import javafx.scene.control.ChoiceBox;
-import javafx.scene.control.Label;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.stage.Stage;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -13,11 +10,14 @@ import org.bitmaxsystems.oop2library.exceptions.DataValidationException;
 import org.bitmaxsystems.oop2library.models.dto.UserDataDTO;
 import org.bitmaxsystems.oop2library.models.users.User;
 import org.bitmaxsystems.oop2library.models.users.enums.UserRole;
+import org.bitmaxsystems.oop2library.util.DeleteUser;
 import org.bitmaxsystems.oop2library.util.UserManager;
 import org.bitmaxsystems.oop2library.util.contracts.IUserFormChain;
 import org.bitmaxsystems.oop2library.util.userformchain.UpdatePasswordChain;
 import org.bitmaxsystems.oop2library.util.userformchain.UpdateUserChain;
 import org.bitmaxsystems.oop2library.util.userformchain.VerifyDataChain;
+
+import java.util.Optional;
 
 public class BasicUserDetailsController {
     @FXML
@@ -59,11 +59,11 @@ public class BasicUserDetailsController {
             dateOfApprovalLabel.setText(String.valueOf(user.getDateOfApproval()));
         }
 
-        if (user.getRole() != UserRole.ADMINISTRATOR) {
+        User currentlyLoggedUser = manager.getLoggedUser();
+
+        if (currentlyLoggedUser.getRole() != UserRole.ADMINISTRATOR) {
             loyaltyPointsField.setDisable(true);
         }
-
-        User currentlyLoggedUser = manager.getLoggedUser();
 
         if (currentlyLoggedUser.equals(user) || currentlyLoggedUser.getRole() != UserRole.ADMINISTRATOR)
         {
@@ -79,6 +79,7 @@ public class BasicUserDetailsController {
                 phoneField.getText().strip(),
                 user.getCredentials().getUsername())
                 .setLoyaltyPoints(loyaltyPointsField.getText().strip())
+                .setRole(userRoleChoiceBox.getValue())
                 .setUser(user);
     }
 
@@ -125,7 +126,30 @@ public class BasicUserDetailsController {
         }
         else
         {
-            new Alert(Alert.AlertType.WARNING,"Work in progress").show();
+            String userFullName = user.getFirstName() + " " + user.getLastName();
+            Optional<ButtonType> alertResult =  new Alert(Alert.AlertType.WARNING,
+                    "Are you sure you want to delete "+userFullName,
+                    ButtonType.YES,
+                    ButtonType.NO)
+                    .showAndWait();
+
+            if (alertResult.isPresent() && alertResult.get() == ButtonType.YES)
+            {
+                DeleteUser deleteUser = new DeleteUser();
+
+                try
+                {
+
+                    deleteUser.deleteUser(user);
+                    new Alert(Alert.AlertType.INFORMATION,userFullName+" successfully deleted!").show();
+                    logger.info("{} successfully deleted!", userFullName);
+                    onClose();
+                } catch (Exception e) {
+                    logger.error(e);
+                    new Alert(Alert.AlertType.ERROR,"Unexpected error occurred, try again.").show();
+                }
+
+            }
         }
     }
 

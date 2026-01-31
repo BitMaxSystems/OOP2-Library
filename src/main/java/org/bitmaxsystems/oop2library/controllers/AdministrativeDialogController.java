@@ -1,9 +1,11 @@
 package org.bitmaxsystems.oop2library.controllers;
 
+import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
+import javafx.scene.control.Button;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
@@ -15,17 +17,32 @@ import org.bitmaxsystems.oop2library.view.View;
 import java.io.IOException;
 
 public class AdministrativeDialogController extends BaseDialogController {
+    @FXML
+    private Button viewAdminButton;
+    @FXML
+    private Button viewLibrarianButton;
     private static final Logger logger = LogManager.getLogger(AdministrativeDialogController.class);
 
-    @FXML
-    public void onViewAdmin()
+
+    @Override
+    protected void initialize()
+    {
+        super.initialize();
+        if (manager.getLoggedUser().getRole() == UserRole.LIBRARIAN)
+        {
+            viewAdminButton.setVisible(false);
+            viewLibrarianButton.setVisible(false);
+        }
+    }
+
+    private void loadManagementDialog(UserRole role)
     {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource(View.ADMINISTRATIVE_MANAGEMENT_VIEW.getPath()));
             AnchorPane root = loader.load();
 
             AdministrativeManagementController controller = loader.getController();
-            controller.setRole(UserRole.ADMINISTRATOR);
+            controller.setRole(role);
 
             Stage stage = new Stage();
             stage.setTitle(View.ADMINISTRATIVE_MANAGEMENT_VIEW.getTitle());
@@ -37,5 +54,17 @@ public class AdministrativeDialogController extends BaseDialogController {
             logger.error(e);
             new Alert(Alert.AlertType.ERROR,"Unexpected error, try again!");
         }
+    }
+
+    @FXML
+    public void onViewAdmin()
+    {
+        loadManagementDialog(UserRole.ADMINISTRATOR);
+    }
+
+    @FXML
+    public void onViewLibrarian()
+    {
+        loadManagementDialog(UserRole.LIBRARIAN);
     }
 }

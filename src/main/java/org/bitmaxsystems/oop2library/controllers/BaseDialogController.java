@@ -23,10 +23,10 @@ public class BaseDialogController {
     private Button userDetailsButton;
 
     private static final Logger logger = LogManager.getLogger(BaseDialogController.class);
-    private UserManager manager = UserManager.getInstance();
+    protected UserManager manager = UserManager.getInstance();
 
     @FXML
-    public void initialize()
+    protected void initialize()
     {
        refreshUserDataButton();
     }
@@ -52,7 +52,6 @@ public class BaseDialogController {
             stage.initModality(Modality.APPLICATION_MODAL);
             stage.setScene(new Scene(root));
             stage.showAndWait();
-            manager.refreshLoggedUserData();
             refreshUserDataButton();
 
         } catch (IOException e) {

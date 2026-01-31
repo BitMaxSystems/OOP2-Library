@@ -17,8 +17,8 @@ import java.util.Date;
 public class CreateUserChain implements IUserFormChain {
 
     private IUserFormChain nextChain;
-    private GenericRepository<Credentials> credentialsRepository = new GenericRepository<>(Credentials.class);
-    private GenericRepository<User> userRepository = new GenericRepository<>(User.class);
+    private GenericRepository<Credentials> credentialsGenericRepository = new GenericRepository<>(Credentials.class);
+    private GenericRepository<User> userGenericRepository = new GenericRepository<>(User.class);
 
 
     @Override
@@ -76,13 +76,13 @@ public class CreateUserChain implements IUserFormChain {
 
         user = userBuilder.build();
 
-        userRepository.save(user);
+        userGenericRepository.save(user);
 
         credentials = new Credentials(formData.getUsernameField().strip(),
                 BCrypt.hashpw(formData.getPasswordField().strip(),BCrypt.gensalt()),
                 user);
 
-        credentialsRepository.save(credentials);
+        credentialsGenericRepository.save(credentials);
 
         return user;
     }

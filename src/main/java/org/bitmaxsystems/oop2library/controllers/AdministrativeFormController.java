@@ -33,8 +33,8 @@ public class AdministrativeFormController extends BaseUserFormController{
         try
         {
             super.onSubmit();
-            new Alert(Alert.AlertType.INFORMATION, "Admin is created!").show();
-            logger.info("Admin successfully created!");
+            new Alert(Alert.AlertType.INFORMATION, role.toString()+" is successfully created!").show();
+            logger.info("{} successfully created!", role.toString());
             ((Stage) headerLabel.getScene().getWindow()).close();
         }
         catch (DataValidationException e) {

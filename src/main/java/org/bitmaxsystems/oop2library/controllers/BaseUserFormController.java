@@ -30,7 +30,6 @@ public class BaseUserFormController {
     @FXML
     private PasswordField repeatPasswordField;
 
-    private static final Logger logger = LogManager.getLogger(BaseUserFormController.class);
 
     private void resetErrorLabel()
     {

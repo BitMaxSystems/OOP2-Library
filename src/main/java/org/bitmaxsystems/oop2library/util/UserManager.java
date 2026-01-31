@@ -12,7 +12,7 @@ import org.bitmaxsystems.oop2library.repository.GenericRepository;
 public class UserManager {
     private User loggedUser = null;
     private final AuthorisationRepository authorisationRepository = new AuthorisationRepository();
-    private GenericRepository<User> userRepository = new GenericRepository<>(User.class);
+    private GenericRepository<User> userGenericRepository = new GenericRepository<>(User.class);
     private static final Logger logger = LogManager.getLogger(UserManager.class);
     private static final UserManager manager = new UserManager();
 
@@ -44,12 +44,6 @@ public class UserManager {
             }
         }
     }
-
-    public void refreshLoggedUserData()
-    {
-        this.loggedUser = userRepository.findById(loggedUser.getId());
-    }
-
     public void logoff()
     {
         loggedUser = null;

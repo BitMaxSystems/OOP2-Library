@@ -7,7 +7,7 @@ import org.bitmaxsystems.oop2library.util.contracts.IUserFormChain;
 
 public class UpdateUserChain implements IUserFormChain {
     private IUserFormChain nextChain;
-    private GenericRepository<User> userRepository = new GenericRepository<>(User.class);
+    private GenericRepository<User> userGenericRepository = new GenericRepository<>(User.class);
 
     @Override
     public void setNextChain(IUserFormChain nextChain) {
@@ -43,7 +43,7 @@ public class UpdateUserChain implements IUserFormChain {
             throw new NumberFormatException("Error parsing loyalty points field");
         }
 
-        userRepository.update(user);
+        userGenericRepository.update(user);
 
         if (nextChain != null)
         {

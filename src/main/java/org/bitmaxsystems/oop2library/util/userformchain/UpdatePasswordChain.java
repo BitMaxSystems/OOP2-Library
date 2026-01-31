@@ -8,7 +8,7 @@ import org.springframework.security.crypto.bcrypt.BCrypt;
 
 public class UpdatePasswordChain implements IUserFormChain {
     private IUserFormChain nextChain;
-    private GenericRepository<Credentials> credentialsRepository = new GenericRepository<>(Credentials.class);
+    private GenericRepository<Credentials> credentialsGenericRepository = new GenericRepository<>(Credentials.class);
 
     @Override
     public void setNextChain(IUserFormChain nextChain) {
@@ -23,7 +23,7 @@ public class UpdatePasswordChain implements IUserFormChain {
 
             credentials.setPassword(BCrypt.hashpw(formData.getPasswordField(),BCrypt.gensalt()));
 
-            credentialsRepository.update(credentials);
+            credentialsGenericRepository.update(credentials);
         }
 
         if (nextChain != null)
