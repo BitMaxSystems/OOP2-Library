@@ -8,13 +8,8 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="787.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.bitmaxsystems.oop2library.controllers.UserFormController">
-   <Button layoutX="14.0" layoutY="14.0" mnemonicParsing="false" onAction="#onLoginRedirect" text="&lt; Login">
-      <font>
-         <Font size="15.0" />
-      </font>
-   </Button>
-   <Label layoutX="191.0" layoutY="26.0" prefHeight="35.0" prefWidth="221.0" text="New Reader Form">
+<AnchorPane prefHeight="787.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.bitmaxsystems.oop2library.controllers.AdministrativeFormController">
+   <Label fx:id="headerLabel" alignment="CENTER" layoutX="191.0" layoutY="26.0" prefHeight="35.0" prefWidth="221.0" text="New User">
       <font>
          <Font size="27.0" />
       </font>

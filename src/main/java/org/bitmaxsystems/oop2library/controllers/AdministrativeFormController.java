@@ -2,37 +2,30 @@ package org.bitmaxsystems.oop2library.controllers;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
+import javafx.scene.control.Label;
+import javafx.stage.Stage;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.bitmaxsystems.oop2library.exceptions.DataValidationException;
 import org.bitmaxsystems.oop2library.exceptions.UserAlreadyExistException;
-import org.bitmaxsystems.oop2library.util.contracts.IUserFormChain;
-import org.bitmaxsystems.oop2library.util.userformchain.CreateUserChain;
-import org.bitmaxsystems.oop2library.util.userformchain.SaveFormChain;
-import org.bitmaxsystems.oop2library.util.userformchain.VerifyDataChain;
-import org.bitmaxsystems.oop2library.view.SceneManager;
-import org.bitmaxsystems.oop2library.view.View;
+import org.bitmaxsystems.oop2library.models.dto.UserDataDTO;
+import org.bitmaxsystems.oop2library.models.users.enums.UserRole;
 
-public class UserFormController extends BaseUserFormController{
-    private static final Logger logger = LogManager.getLogger(UserFormController.class);
-
+public class AdministrativeFormController extends BaseUserFormController{
     @FXML
-    public void onLoginRedirect()
-    {
-        SceneManager.showView(View.LOGIN);
+    private Label headerLabel;
+
+    private static final Logger logger = LogManager.getLogger(AdministrativeFormController.class);
+    private UserRole role;
+
+    public void setRole(UserRole role) {
+        this.role = role;
+        headerLabel.setText("New "+role.toString());
     }
 
     @Override
-    protected IUserFormChain setUpChain() {
-
-        IUserFormChain verifyData = new VerifyDataChain();
-        IUserFormChain createUser = new CreateUserChain();
-        IUserFormChain saveForm = new SaveFormChain();
-
-        verifyData.setNextChain(createUser);
-        createUser.setNextChain(saveForm);
-
-        return verifyData;
+    protected UserDataDTO.Builder generateDTO() {
+        return super.generateDTO().setRole(role);
     }
 
     @Override
@@ -40,9 +33,9 @@ public class UserFormController extends BaseUserFormController{
         try
         {
             super.onSubmit();
-            new Alert(Alert.AlertType.INFORMATION, "Form is submitted!").show();
-            logger.info("Form successfully submitted!");
-            SceneManager.showView(View.LOGIN);
+            new Alert(Alert.AlertType.INFORMATION, role.toString()+" is successfully created!").show();
+            logger.info("{} successfully created!", role.toString());
+            ((Stage) headerLabel.getScene().getWindow()).close();
         }
         catch (DataValidationException e) {
             logger.error("Invalid data inputted");

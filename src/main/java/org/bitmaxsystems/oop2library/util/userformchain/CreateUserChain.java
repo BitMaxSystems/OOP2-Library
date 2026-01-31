@@ -3,7 +3,7 @@ package org.bitmaxsystems.oop2library.util.userformchain;
 import org.bitmaxsystems.oop2library.config.HibernateUtil;
 import org.bitmaxsystems.oop2library.exceptions.UserAlreadyExistException;
 import org.bitmaxsystems.oop2library.models.auth.Credentials;
-import org.bitmaxsystems.oop2library.models.form.UserFormDTO;
+import org.bitmaxsystems.oop2library.models.dto.UserDataDTO;
 import org.bitmaxsystems.oop2library.models.users.User;
 import org.bitmaxsystems.oop2library.models.users.enums.UserRole;
 import org.bitmaxsystems.oop2library.repository.GenericRepository;
@@ -12,11 +12,13 @@ import org.hibernate.Session;
 import org.hibernate.query.Query;
 import org.springframework.security.crypto.bcrypt.BCrypt;
 
+import java.util.Date;
+
 public class CreateUserChain implements IUserFormChain {
 
     private IUserFormChain nextChain;
-    private GenericRepository<Credentials> credentialsRepository = new GenericRepository<>(Credentials.class);
-    private GenericRepository<User> userRepository = new GenericRepository<>(User.class);
+    private GenericRepository<Credentials> credentialsGenericRepository = new GenericRepository<>(Credentials.class);
+    private GenericRepository<User> userGenericRepository = new GenericRepository<>(User.class);
 
 
     @Override
@@ -25,7 +27,7 @@ public class CreateUserChain implements IUserFormChain {
     }
 
     @Override
-    public void execute(UserFormDTO formData) throws Exception {
+    public void execute(UserDataDTO formData) throws Exception {
         try (Session session = HibernateUtil.getSessionFactory().openSession())
         {
             Query<Long> query = session.createQuery("SELECT COUNT(*) FROM Credentials where username =:username ", Long.class);
@@ -47,9 +49,9 @@ public class CreateUserChain implements IUserFormChain {
         }
     }
 
-    private User createUser (UserFormDTO formData)
+    private User createUser (UserDataDTO formData)
     {
-        Integer age;
+        int age;
         User user;
         Credentials credentials;
         try
@@ -58,28 +60,29 @@ public class CreateUserChain implements IUserFormChain {
         }
         catch (NumberFormatException _e)
         {
-            age = null;
+            throw new NumberFormatException("Error parsing age field");
         }
 
         User.Builder userBuilder =  new User.Builder(formData.getFirstName().strip(),
                 formData.getLastName().strip(),
+                age,
                 formData.getPhoneField().strip(),
-                UserRole.UNAPPROVED_USER);
+                formData.getRole());
 
-        if (age != null)
+        if (formData.getRole() != UserRole.UNAPPROVED_READER)
         {
-            userBuilder.setAge(age);
+            userBuilder.setDateOfApproval(new Date());
         }
 
         user = userBuilder.build();
 
-        userRepository.save(user);
+        userGenericRepository.save(user);
 
         credentials = new Credentials(formData.getUsernameField().strip(),
                 BCrypt.hashpw(formData.getPasswordField().strip(),BCrypt.gensalt()),
                 user);
 
-        credentialsRepository.save(credentials);
+        credentialsGenericRepository.save(credentials);
 
         return user;
     }

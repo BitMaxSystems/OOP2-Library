@@ -1,9 +1,9 @@
 import org.bitmaxsystems.oop2library.config.HibernateInit;
-import org.bitmaxsystems.oop2library.exceptions.DataValidationException;
 import org.bitmaxsystems.oop2library.exceptions.UserAlreadyExistException;
+import org.bitmaxsystems.oop2library.models.dto.UserDataDTO;
 import org.bitmaxsystems.oop2library.models.form.UserForm;
-import org.bitmaxsystems.oop2library.models.form.UserFormDTO;
 import org.bitmaxsystems.oop2library.models.users.User;
+import org.bitmaxsystems.oop2library.models.users.enums.UserRole;
 import org.bitmaxsystems.oop2library.repository.GenericRepository;
 import org.bitmaxsystems.oop2library.util.contracts.IUserFormChain;
 import org.bitmaxsystems.oop2library.util.userformchain.CreateUserChain;
@@ -12,185 +12,32 @@ import org.bitmaxsystems.oop2library.util.userformchain.VerifyDataChain;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
-import java.util.Arrays;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 
 public class UserFormTest {
 
-    private GenericRepository<User> userRepository = new GenericRepository<>(User.class);
-    private GenericRepository<UserForm> formRepository = new GenericRepository<>(UserForm.class);
+    private GenericRepository<User> userGenericRepository = new GenericRepository<>(User.class);
+    private GenericRepository<UserForm> userFormGenericRepository = new GenericRepository<>(UserForm.class);
 
     @BeforeAll
     static void setup()
     {HibernateInit.initializeIfEmpty();}
 
-    @Test
-    void firstNameExceptionThrown(){
-        IUserFormChain verifyData = new VerifyDataChain();
-        UserFormDTO formDTO = new UserFormDTO("213",
-                "Test",
-                "14",
-                "+359888263282",
-                "test",
-                "TestTest!123",
-                "TestTest!123");
 
-        DataValidationException exception = assertThrowsExactly(DataValidationException.class,() -> verifyData.execute(formDTO));
-        assertEquals("- First name can only be word characters without whitespaces!\n",exception.getMessage());
-    }
-
-    @Test
-    void lastNameExceptionThrown(){
-        IUserFormChain verifyData = new VerifyDataChain();
-        UserFormDTO formDTO = new UserFormDTO("Test",
-                "132",
-                "14",
-                "+359888263282",
-                "test",
-                "TestTest!123",
-                "TestTest!123");
-
-        DataValidationException exception = assertThrowsExactly(DataValidationException.class,() -> verifyData.execute(formDTO));
-        assertEquals("- Last name can only be word characters without whitespaces!\n",exception.getMessage());
-    }
-
-
-    @Test
-    void ageNonNumericExceptionThrown(){
-        IUserFormChain verifyData = new VerifyDataChain();
-        UserFormDTO formDTO = new UserFormDTO("Test",
-                "Test",
-                "das",
-                "+359888263282",
-                "test",
-                "TestTest!123",
-                "TestTest!123");
-
-        DataValidationException exception = assertThrowsExactly(DataValidationException.class,() -> verifyData.execute(formDTO));
-        assertEquals("- Age must be a numeric value!\n",exception.getMessage());
-    }
-
-    @Test
-    void ageOutOfIntervalExceptionThrown(){
-        IUserFormChain verifyData = new VerifyDataChain();
-        UserFormDTO formDTO = new UserFormDTO("Test",
-                "Test",
-                "-2",
-                "+359888263282",
-                "test",
-                "TestTest!123",
-                "TestTest!123");
-
-        DataValidationException exception = assertThrowsExactly(DataValidationException.class,() -> verifyData.execute(formDTO));
-        assertEquals("- Age must be between 13 and 100!\n",exception.getMessage());
-    }
-
-    @Test
-    void phoneExceptionThrown(){
-        IUserFormChain verifyData = new VerifyDataChain();
-        UserFormDTO formDTO = new UserFormDTO("Test",
-                "Test",
-                "14",
-                "+359888asdasd",
-                "test",
-                "TestTest!123",
-                "TestTest!123");
-
-        DataValidationException exception = assertThrowsExactly(DataValidationException.class,() -> verifyData.execute(formDTO));
-        assertEquals("- Only Bulgarian phone numbers are allowed (Must include +359 at the start)!\n",exception.getMessage());
-    }
-
-    @Test
-    void usernameExceptionThrown(){
-        IUserFormChain verifyData = new VerifyDataChain();
-        UserFormDTO formDTO = new UserFormDTO("Test",
-                "Test",
-                "14",
-                "+359888263282",
-                "test no",
-                "TestTest!123",
-                "TestTest!123");
-
-        DataValidationException exception = assertThrowsExactly(DataValidationException.class,() -> verifyData.execute(formDTO));
-        assertEquals("- The username cannot include special characters and whitespaces!\n",exception.getMessage());
-    }
-
-    @Test
-    void incorrectPasswordExceptionThrown(){
-        IUserFormChain verifyData = new VerifyDataChain();
-        UserFormDTO formDTO = new UserFormDTO("Test",
-                "Test",
-                "14",
-                "+359888263282",
-                "test",
-                "Test",
-                "TestTest!123");
-
-        DataValidationException exception = assertThrowsExactly(DataValidationException.class,() -> verifyData.execute(formDTO));
-        assertEquals("- The password does not match all the rules!\n",exception.getMessage());
-    }
-
-    @Test
-    void passwordsNotMatchingExceptionThrown(){
-        IUserFormChain verifyData = new VerifyDataChain();
-        UserFormDTO formDTO = new UserFormDTO("Test",
-                "Test",
-                "14",
-                "+359888263282",
-                "test",
-                "TestTest!123",
-                "TestTest!122");
-
-        DataValidationException exception = assertThrowsExactly(DataValidationException.class,() -> verifyData.execute(formDTO));
-        assertEquals("- The passwords are not the same!\n",exception.getMessage());
-    }
-
-    @Test
-    void multipleInvalidFieldsExceptionThrown(){
-        List<String> errorList;
-        IUserFormChain verifyData = new VerifyDataChain();
-        UserFormDTO formDTO = new UserFormDTO("123",
-                "Test",
-                "-14",
-                "+359888263282",
-                "test no",
-                "TestTest!123",
-                "TestTest!122");
-
-        DataValidationException exception = assertThrowsExactly(DataValidationException.class,() -> verifyData.execute(formDTO));
-        errorList =  Arrays.stream(exception.getMessage().split("\n")).toList();
-        assertEquals(4,errorList.size());
-    }
-
-    @Test
-    void testValidData(){
-        List<String> errorList;
-        IUserFormChain verifyData = new VerifyDataChain();
-        UserFormDTO formDTO = new UserFormDTO("Test",
-                "Test",
-                "14",
-                "+359888263282",
-                "test",
-                "TestTest!123",
-                "TestTest!123");
-
-        assertDoesNotThrow(() -> verifyData.execute(formDTO));
-
-    }
 
     @Test
     void UserAlreadyExistsException()
     {
         IUserFormChain createUserChain = new CreateUserChain();
-        UserFormDTO formDTO = new UserFormDTO("Test",
+        UserDataDTO formDTO = new UserDataDTO.Builder("Test",
                 "Test",
                 "14",
                 "+359888263282",
-                "admin",
-                "TestTest!123",
-                "TestTest!123");
+                "admin")
+                .setNewPassword("TestTest!123","TestTest!123")
+                .build();
 
         UserAlreadyExistException exception = assertThrowsExactly(UserAlreadyExistException.class,() -> createUserChain.execute(formDTO));
         assertEquals("- A user with this username already exists!",exception.getMessage());
@@ -199,28 +46,100 @@ public class UserFormTest {
     @Test
     void testCreateUser()
     {
-        int before = userRepository.findAll().size();
+        int before = userGenericRepository.findAll().size();
         IUserFormChain createUserChain = new CreateUserChain();
-        UserFormDTO formDTO = new UserFormDTO("Test",
+        UserDataDTO formDTO = new UserDataDTO.Builder("Test",
                 "Test",
                 "14",
                 "+359888263282",
-                "test",
-                "TestTest!123",
-                "TestTest!123");
+                "test")
+                .setNewPassword("TestTest!123","TestTest!123")
+                .build();
 
         assertDoesNotThrow(() -> createUserChain.execute(formDTO));
 
-        int after = userRepository.findAll().size();
+        List<User> afterUsers = userGenericRepository.findAll();
 
+        int after = afterUsers.size();
         assertTrue(after>before);
+
+
+        User newUser = afterUsers.stream()
+                .filter(u -> u.getLastName().equals("Test") &&  u.getFirstName().equals("Test"))
+                .findFirst()
+                .orElse(null);
+
+        assertNotNull(newUser);
+        assertEquals(UserRole.UNAPPROVED_READER,newUser.getRole());
+    }
+
+    @Test
+    void testCreateAdministrator()
+    {
+        int before = userGenericRepository.findAll().size();
+        IUserFormChain createUserChain = new CreateUserChain();
+        UserDataDTO formDTO = new UserDataDTO.Builder("Test1",
+                "Test1",
+                "14",
+                "+359888263282",
+                "test1")
+                .setNewPassword("TestTest!123","TestTest!123")
+                .setRole(UserRole.ADMINISTRATOR)
+                .build();
+
+        assertDoesNotThrow(() -> createUserChain.execute(formDTO));
+
+        List<User> afterUsers = userGenericRepository.findAll();
+
+        int after = afterUsers.size();
+        assertTrue(after>before);
+
+
+        User newUser = afterUsers.stream()
+                .filter(u -> u.getLastName().equals("Test1") &&  u.getFirstName().equals("Test1"))
+                .findFirst()
+                .orElse(null);
+
+        assertNotNull(newUser);
+        assertEquals(UserRole.ADMINISTRATOR,newUser.getRole());
+    }
+
+    @Test
+    void testCreateLibrarian()
+    {
+        int before = userGenericRepository.findAll().size();
+        IUserFormChain createUserChain = new CreateUserChain();
+        UserDataDTO formDTO = new UserDataDTO.Builder("Test2",
+                "Test2",
+                "14",
+                "+359888263282",
+                "test2")
+                .setNewPassword("TestTest!123","TestTest!123")
+                .setRole(UserRole.LIBRARIAN)
+                .build();
+
+        assertDoesNotThrow(() -> createUserChain.execute(formDTO));
+
+        List<User> afterUsers = userGenericRepository.findAll();
+
+        int after = afterUsers.size();
+        assertTrue(after>before);
+
+
+        User newUser = afterUsers.stream()
+                .filter(u -> u.getLastName().equals("Test2") &&  u.getFirstName().equals("Test2"))
+                .findFirst()
+                .orElse(null);
+
+        assertNotNull(newUser);
+        assertEquals(UserRole.LIBRARIAN,newUser.getRole());
     }
 
     @Test
     void testNewForm()
     {
-        int beforeUser = userRepository.findAll().size();
-        int beforeForm = formRepository.findAll().size();
+        int beforeUser = userGenericRepository.findAll().size();
+        int beforeForm = userFormGenericRepository.findAll().size();
         IUserFormChain verifyDataChain = new VerifyDataChain();
         IUserFormChain createUserChain = new CreateUserChain();
         IUserFormChain saveFormChain = new SaveFormChain();
@@ -228,18 +147,18 @@ public class UserFormTest {
         verifyDataChain.setNextChain(createUserChain);
         createUserChain.setNextChain(saveFormChain);
 
-        UserFormDTO formDTO = new UserFormDTO("Test",
+        UserDataDTO formDTO = new UserDataDTO.Builder("Test",
                 "Test",
                 "14",
                 "+359888263282",
-                "test1",
-                "TestTest!123",
-                "TestTest!123");
+                "test3")
+                .setNewPassword("TestTest!123","TestTest!123")
+                .build();
 
         assertDoesNotThrow(() -> verifyDataChain.execute(formDTO));
 
-        int afterUser = userRepository.findAll().size();
-        int afterForm = formRepository.findAll().size();
+        int afterUser = userGenericRepository.findAll().size();
+        int afterForm = userFormGenericRepository.findAll().size();
 
         assertTrue(afterUser>beforeUser);
         assertTrue(afterForm>beforeForm);
