@@ -83,7 +83,7 @@ public class BasicUserDetailsController {
     }
 
     @FXML
-    public void onUpdate()
+    protected void onUpdate()
     {
         IUserFormChain verifyUser = new VerifyDataChain();
         IUserFormChain updateUser = new UpdateUserChain();

@@ -12,6 +12,8 @@ import org.hibernate.Session;
 import org.hibernate.query.Query;
 import org.springframework.security.crypto.bcrypt.BCrypt;
 
+import java.util.Date;
+
 public class CreateUserChain implements IUserFormChain {
 
     private IUserFormChain nextChain;
@@ -65,7 +67,12 @@ public class CreateUserChain implements IUserFormChain {
                 formData.getLastName().strip(),
                 age,
                 formData.getPhoneField().strip(),
-                UserRole.UNAPPROVED_READER);
+                formData.getRole());
+
+        if (formData.getRole() != UserRole.UNAPPROVED_READER)
+        {
+            userBuilder.setDateOfApproval(new Date());
+        }
 
         user = userBuilder.build();
 

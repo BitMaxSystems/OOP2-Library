@@ -63,6 +63,7 @@
          <Font size="15.0" />
       </font>
    </TextField>
+   <ChoiceBox fx:id="userRoleChoiceBox" layoutX="188.0" layoutY="316.0" prefHeight="25.0" prefWidth="197.0" />
    <Button layoutX="124.0" layoutY="470.0" mnemonicParsing="false" onAction="#onUpdate" text="Update">
       <font>
          <Font size="15.0" />
@@ -93,5 +94,4 @@
          <Font size="15.0" />
       </font>
    </Button>
-   <ChoiceBox fx:id="userRoleChoiceBox" layoutX="188.0" layoutY="316.0" prefHeight="25.0" prefWidth="197.0" />
 </AnchorPane>

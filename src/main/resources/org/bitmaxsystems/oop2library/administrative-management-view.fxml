@@ -18,7 +18,7 @@
          <TableColumn fx:id="userRoleColumn" prefWidth="132.0" text="Role" />
       </columns>
     </TableView>
-    <Button layoutX="412.0" layoutY="333.0" mnemonicParsing="false" text="Create Admin">
+    <Button layoutX="412.0" layoutY="333.0" mnemonicParsing="false" text="Create Admin" onAction="#onCreate">
         <font>
           <Font size="15.0" />
         </font>

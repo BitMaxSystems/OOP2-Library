@@ -22,6 +22,7 @@ public class UpdateUserChain implements IUserFormChain {
         user.setFirstName(formData.getFirstName());
         user.setLastName(formData.getLastName());
         user.setPhone(formData.getPhoneField());
+        user.setRole(formData.getRole());
         try
         {
             age = Integer.parseInt(formData.getAge());

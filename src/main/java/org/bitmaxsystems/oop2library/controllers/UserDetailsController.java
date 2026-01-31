@@ -26,7 +26,7 @@ public class UserDetailsController extends BasicUserDetailsController{
     }
 
     @Override
-    public void onUpdate() {
+    protected void onUpdate() {
         super.onUpdate();
         passwordField.clear();
         repeatPasswordField.clear();

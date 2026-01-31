@@ -6,6 +6,7 @@ public enum View {
     ADMINISTRATIVE_MANAGEMENT_VIEW("administrative-management-view.fxml","Administrative management",858,433),
     LOGIN("login-view.fxml","Login",600,400),
     NEW_USER_FORM("user-form-view.fxml","New User Form",600,787),
+    NEW_ADMINISTRATION_USER_FORM("administrative-creation-view.fxml","New Administrative User",600,787),
     BASIC_USER_DETAILS("basic-user-details-view.fxml","User Details",472,573),
     USER_DETAILS("user-details-view.fxml","User Details",472,665);
 

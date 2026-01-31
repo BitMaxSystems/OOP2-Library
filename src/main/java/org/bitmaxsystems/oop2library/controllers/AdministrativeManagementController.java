@@ -57,6 +57,30 @@ public class AdministrativeManagementController {
         tableView.setOnMouseClicked(this::onTableClick);
     }
 
+    @FXML
+    public void onCreate()
+    {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource(View.NEW_ADMINISTRATION_USER_FORM.getPath()));
+            AnchorPane root = loader.load();
+
+            AdministrativeFormController controller = loader.getController();
+            controller.setRole(role);
+
+            Stage stage = new Stage();
+            stage.setTitle(View.NEW_ADMINISTRATION_USER_FORM.getTitle());
+            stage.initModality(Modality.APPLICATION_MODAL);
+            stage.setScene(new Scene(root));
+            stage.showAndWait();
+            refreshTable();
+
+        } catch (Exception e) {
+            logger.error(e);
+            new Alert(Alert.AlertType.ERROR,"Unexpected error occurred. Try again");
+        }
+
+    }
+
     private void onTableClick(MouseEvent event)
     {
         if (event.getClickCount() == 2)
