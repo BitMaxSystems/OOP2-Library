@@ -12,31 +12,31 @@
          <Font size="15.0" />
       </font>
    </Button>
-   <TableView layoutX="34.0" layoutY="70.0" prefHeight="200.0" prefWidth="847.0">
+   <TableView fx:id="tableView" layoutX="34.0" layoutY="70.0" prefHeight="200.0" prefWidth="847.0">
       <columns>
-         <TableColumn prefWidth="147.0" text="ISBN" />
-         <TableColumn prefWidth="198.0" text="Name" />
-         <TableColumn prefWidth="184.0" text="Author" />
-         <TableColumn prefWidth="150.0" text="Genre" />
-         <TableColumn prefWidth="167.0" text="Publisher" />
+         <TableColumn fx:id="isbnColumn" prefWidth="147.0" text="ISBN" />
+         <TableColumn fx:id="titleColumn" prefWidth="198.0" text="Title" />
+         <TableColumn fx:id="authorColumn" prefWidth="184.0" text="Author" />
+         <TableColumn fx:id="genreColumn" prefWidth="150.0" text="Genre" />
+         <TableColumn fx:id="publisherColumn" prefWidth="167.0" text="Publisher" />
       </columns>
    </TableView>
-   <Button alignment="CENTER" layoutX="88.0" layoutY="332.0" mnemonicParsing="false" prefHeight="84.0" prefWidth="125.0" text="Create book registry" textAlignment="CENTER" wrapText="true">
+   <Button alignment="CENTER" layoutX="88.0" layoutY="332.0" mnemonicParsing="false" onAction="#onCreate" prefHeight="84.0" prefWidth="125.0" text="Create book registry" textAlignment="CENTER" wrapText="true">
       <font>
          <Font size="15.0" />
       </font>
    </Button>
-   <Button alignment="CENTER" layoutX="500.0" layoutY="332.0" mnemonicParsing="false" prefHeight="84.0" prefWidth="125.0" text="View Registered Genres" textAlignment="CENTER" wrapText="true" onAction="#onViewGenre">
+   <Button alignment="CENTER" layoutX="500.0" layoutY="332.0" mnemonicParsing="false" onAction="#onViewGenre" prefHeight="84.0" prefWidth="125.0" text="View Registered Genres" textAlignment="CENTER" wrapText="true">
       <font>
          <Font size="15.0" />
       </font>
    </Button>
-   <Button alignment="CENTER" layoutX="277.0" layoutY="332.0" mnemonicParsing="false" prefHeight="84.0" prefWidth="125.0" text="View Registered Authors" textAlignment="CENTER" wrapText="true" onAction="#onViewAuthors">
+   <Button alignment="CENTER" layoutX="277.0" layoutY="332.0" mnemonicParsing="false" onAction="#onViewAuthors" prefHeight="84.0" prefWidth="125.0" text="View Registered Authors" textAlignment="CENTER" wrapText="true">
       <font>
          <Font size="15.0" />
       </font>
    </Button>
-   <Button layoutX="714.0" layoutY="332.0" mnemonicParsing="false" prefHeight="84.0" prefWidth="125.0" text="View Registered Publishers" textAlignment="CENTER" wrapText="true" onAction="#onViewPublishers">
+   <Button layoutX="714.0" layoutY="332.0" mnemonicParsing="false" onAction="#onViewPublishers" prefHeight="84.0" prefWidth="125.0" text="View Registered Publishers" textAlignment="CENTER" wrapText="true">
       <font>
          <Font size="15.0" />
       </font>

@@ -25,6 +25,11 @@ public class Author extends BookParameter {
     }
 
     @Override
+    public String toString() {
+        return name;
+    }
+
+    @Override
     public int getId() {
         return id;
     }

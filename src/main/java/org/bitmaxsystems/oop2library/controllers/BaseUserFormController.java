@@ -5,12 +5,10 @@ import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.paint.Color;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
 import org.bitmaxsystems.oop2library.models.dto.UserDataDTO;
 import org.bitmaxsystems.oop2library.util.contracts.IUserFormChain;
 import org.bitmaxsystems.oop2library.util.userformchain.CreateUserChain;
-import org.bitmaxsystems.oop2library.util.userformchain.VerifyDataChain;
+import org.bitmaxsystems.oop2library.util.userformchain.VerifyUserDataChain;
 
 public class BaseUserFormController {
     @FXML
@@ -65,7 +63,7 @@ public class BaseUserFormController {
 
     protected IUserFormChain setUpChain()
     {
-        IUserFormChain verifyData = new VerifyDataChain();
+        IUserFormChain verifyData = new VerifyUserDataChain();
         IUserFormChain createUser = new CreateUserChain();
 
         verifyData.setNextChain(createUser);

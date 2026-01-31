@@ -9,7 +9,7 @@ import org.bitmaxsystems.oop2library.util.service.ApproveUserFormService;
 import org.bitmaxsystems.oop2library.util.contracts.IUserFormChain;
 import org.bitmaxsystems.oop2library.util.userformchain.CreateUserChain;
 import org.bitmaxsystems.oop2library.util.userformchain.SaveFormChain;
-import org.bitmaxsystems.oop2library.util.userformchain.VerifyDataChain;
+import org.bitmaxsystems.oop2library.util.userformchain.VerifyUserDataChain;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
@@ -141,7 +141,7 @@ public class UserFormTest {
     {
         int beforeUser = userGenericRepository.findAll().size();
         int beforeForm = userFormGenericRepository.findAll().size();
-        IUserFormChain verifyDataChain = new VerifyDataChain();
+        IUserFormChain verifyDataChain = new VerifyUserDataChain();
         IUserFormChain createUserChain = new CreateUserChain();
         IUserFormChain saveFormChain = new SaveFormChain();
 
@@ -167,7 +167,7 @@ public class UserFormTest {
 
     UserForm generateIndependentForm()
     {
-        IUserFormChain verifyDataChain = new VerifyDataChain();
+        IUserFormChain verifyDataChain = new VerifyUserDataChain();
         IUserFormChain createUserChain = new CreateUserChain();
         IUserFormChain saveFormChain = new SaveFormChain();
 

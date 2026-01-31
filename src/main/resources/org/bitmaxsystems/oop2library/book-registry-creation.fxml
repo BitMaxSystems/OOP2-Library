@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ChoiceBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="535.0"
+            prefWidth="467.0" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1"
+   fx:controller="org.bitmaxsystems.oop2library.controllers.BookRegistryCreationControl">
+   <Label layoutX="88.0" layoutY="38.0" text="ISBN">
+      <font>
+         <Font size="15.0"/>
+      </font>
+   </Label>
+   <Label layoutX="90.0" layoutY="77.0" text="Title">
+      <font>
+         <Font size="15.0"/>
+      </font>
+   </Label>
+   <Label layoutX="82.0" layoutY="119.0" text="Author">
+      <font>
+         <Font size="15.0"/>
+      </font>
+   </Label>
+   <Label layoutX="86.0" layoutY="165.0" text="Genre">
+      <font>
+         <Font size="15.0"/>
+      </font>
+   </Label>
+   <Label layoutX="76.0" layoutY="212.0" text="Publisher">
+      <font>
+         <Font size="15.0"/>
+      </font>
+   </Label>
+   <TextField fx:id="isbnField" layoutX="198.0" layoutY="36.0"/>
+   <TextField fx:id="titleField" layoutX="198.0" layoutY="75.0"/>
+   <ChoiceBox fx:id="authorChoiceBox" layoutX="198.0" layoutY="117.0" prefWidth="150.0"/>
+   <ChoiceBox fx:id="publisherChoiceBox" layoutX="198.0" layoutY="210.0" prefWidth="150.0"/>
+   <ChoiceBox fx:id="genreChoiceBox" layoutX="198.0" layoutY="163.0" prefWidth="150.0"/>
+   <Label fx:id="errorLabel" alignment="TOP_CENTER" layoutX="73.0" layoutY="256.0" prefHeight="154.0" prefWidth="321.0"
+          wrapText="true"
+          text="- ISBN is 13 digits in format: xxxx-x-xx-xxxxxx-x. Example: 1234-5-67-891234-5.">
+      <font>
+         <Font size="15.0"/>
+      </font>
+   </Label>
+   <Button layoutX="202.0" layoutY="436.0" mnemonicParsing="false" text="Create" onAction="#onCreate">
+      <font>
+         <Font size="15.0"/>
+      </font>
+   </Button>
+   <Button layoutX="206.0" layoutY="480.0" mnemonicParsing="false" text="Close" onAction="#onClose">
+      <font>
+         <Font size="15.0"/>
+      </font>
+   </Button>
+</AnchorPane>

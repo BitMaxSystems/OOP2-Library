@@ -9,7 +9,7 @@ import org.bitmaxsystems.oop2library.exceptions.DataAlreadyExistException;
 import org.bitmaxsystems.oop2library.util.contracts.IUserFormChain;
 import org.bitmaxsystems.oop2library.util.userformchain.CreateUserChain;
 import org.bitmaxsystems.oop2library.util.userformchain.SaveFormChain;
-import org.bitmaxsystems.oop2library.util.userformchain.VerifyDataChain;
+import org.bitmaxsystems.oop2library.util.userformchain.VerifyUserDataChain;
 import org.bitmaxsystems.oop2library.view.SceneManager;
 import org.bitmaxsystems.oop2library.view.View;
 
@@ -25,7 +25,7 @@ public class UserFormController extends BaseUserFormController{
     @Override
     protected IUserFormChain setUpChain() {
 
-        IUserFormChain verifyData = new VerifyDataChain();
+        IUserFormChain verifyData = new VerifyUserDataChain();
         IUserFormChain createUser = new CreateUserChain();
         IUserFormChain saveForm = new SaveFormChain();
 

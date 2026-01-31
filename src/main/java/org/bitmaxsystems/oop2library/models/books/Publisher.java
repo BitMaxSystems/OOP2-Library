@@ -20,7 +20,10 @@ public class Publisher extends BookParameter{
     public void setName(String name) {
         this.name = name;
     }
-
+    @Override
+    public String toString() {
+        return name;
+    }
     @Override
     public int getId() {
         return id;

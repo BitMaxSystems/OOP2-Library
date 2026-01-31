@@ -15,7 +15,7 @@ import org.bitmaxsystems.oop2library.util.UserManager;
 import org.bitmaxsystems.oop2library.util.contracts.IUserFormChain;
 import org.bitmaxsystems.oop2library.util.userformchain.UpdatePasswordChain;
 import org.bitmaxsystems.oop2library.util.userformchain.UpdateUserChain;
-import org.bitmaxsystems.oop2library.util.userformchain.VerifyDataChain;
+import org.bitmaxsystems.oop2library.util.userformchain.VerifyUserDataChain;
 
 import java.util.Optional;
 
@@ -86,7 +86,7 @@ public class BasicUserDetailsController {
     @FXML
     protected void onUpdate()
     {
-        IUserFormChain verifyUser = new VerifyDataChain();
+        IUserFormChain verifyUser = new VerifyUserDataChain();
         IUserFormChain updateUser = new UpdateUserChain();
         IUserFormChain updatePassword = new UpdatePasswordChain();
 
