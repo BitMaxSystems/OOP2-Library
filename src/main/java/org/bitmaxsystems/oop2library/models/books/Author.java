@@ -5,7 +5,7 @@ import jakarta.persistence.*;
 @Entity
 @Table(name = "authors")
 
-public class Author {
+public class Author extends BookParameter {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -20,10 +20,12 @@ public class Author {
         this.name = name;
     }
 
+    @Override
     public int getId() {
         return id;
     }
 
+    @Override
     public String getName() {
         return name;
     }

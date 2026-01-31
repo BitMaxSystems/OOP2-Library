@@ -1,9 +1,13 @@
 package org.bitmaxsystems.oop2library.view;
 
 public enum View {
-    BASE_MAIN_VIEW("base-dialog-view.fxml","Library",600,400),
-    ADMIN_MAIN_VIEW("administrative-base-view.fxml","Library management",860,430),
+    BASE_HOME_VIEW("base-home-view.fxml","Library",600,400),
+    ADMINISTRATIVE_HOME_VIEW("administrative-home-view.fxml","Library management",860,430),
     ADMINISTRATIVE_MANAGEMENT_VIEW("administrative-management-view.fxml","Administrative management",858,433),
+    ADMINISTRATIVE_INVENTORY_VIEW("administrative-inventory-view.fxml","Inventory",914,493),
+    ADMINISTRATIVE_BOOK_REGISTRY_VIEW("administrative-book-registry-view.fxml","Book registry",914,493),
+    BOOK_PARAMETER_MANAGEMENT_VIEW("book-parameter-manegement-view.fxml","Parameter management",600,400),
+    BOOK_PARAMETER_CREATION_VIEW("book-parameter-creation-view.fxml","Parameter creation",486,277),
     LOGIN("login-view.fxml","Login",600,400),
     NEW_USER_FORM("user-form-creation-view.fxml","New User Form",600,787),
     NEW_ADMINISTRATION_USER_FORM("administrative-creation-view.fxml","New Administrative User",600,787),

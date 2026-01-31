@@ -1,6 +1,5 @@
-import javafx.fxml.FXML;
 import org.bitmaxsystems.oop2library.config.HibernateInit;
-import org.bitmaxsystems.oop2library.exceptions.UserAlreadyExistException;
+import org.bitmaxsystems.oop2library.exceptions.DataAlreadyExistException;
 import org.bitmaxsystems.oop2library.models.dto.UserDataDTO;
 import org.bitmaxsystems.oop2library.models.form.UserForm;
 import org.bitmaxsystems.oop2library.models.users.User;
@@ -41,7 +40,7 @@ public class UserFormTest {
                 .setNewPassword("TestTest!123","TestTest!123")
                 .build();
 
-        UserAlreadyExistException exception = assertThrowsExactly(UserAlreadyExistException.class,() -> createUserChain.execute(formDTO));
+        DataAlreadyExistException exception = assertThrowsExactly(DataAlreadyExistException.class,() -> createUserChain.execute(formDTO));
         assertEquals("- A user with this username already exists!",exception.getMessage());
     }
 

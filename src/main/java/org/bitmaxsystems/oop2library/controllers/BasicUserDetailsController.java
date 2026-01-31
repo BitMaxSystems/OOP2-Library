@@ -10,7 +10,7 @@ import org.bitmaxsystems.oop2library.exceptions.DataValidationException;
 import org.bitmaxsystems.oop2library.models.dto.UserDataDTO;
 import org.bitmaxsystems.oop2library.models.users.User;
 import org.bitmaxsystems.oop2library.models.users.enums.UserRole;
-import org.bitmaxsystems.oop2library.util.DeleteUser;
+import org.bitmaxsystems.oop2library.util.DeleteUserService;
 import org.bitmaxsystems.oop2library.util.UserManager;
 import org.bitmaxsystems.oop2library.util.contracts.IUserFormChain;
 import org.bitmaxsystems.oop2library.util.userformchain.UpdatePasswordChain;
@@ -135,12 +135,12 @@ public class BasicUserDetailsController {
 
             if (alertResult.isPresent() && alertResult.get() == ButtonType.YES)
             {
-                DeleteUser deleteUser = new DeleteUser();
+                DeleteUserService deleteUserService = new DeleteUserService();
 
                 try
                 {
 
-                    deleteUser.deleteUser(user);
+                    deleteUserService.deleteUser(user);
                     new Alert(Alert.AlertType.INFORMATION,userFullName+" successfully deleted!").show();
                     logger.info("{} successfully deleted!", userFullName);
                     onClose();

@@ -1,7 +1,7 @@
 package org.bitmaxsystems.oop2library.util.userformchain;
 
 import org.bitmaxsystems.oop2library.config.HibernateUtil;
-import org.bitmaxsystems.oop2library.exceptions.UserAlreadyExistException;
+import org.bitmaxsystems.oop2library.exceptions.DataAlreadyExistException;
 import org.bitmaxsystems.oop2library.models.auth.Credentials;
 import org.bitmaxsystems.oop2library.models.dto.UserDataDTO;
 import org.bitmaxsystems.oop2library.models.users.User;
@@ -36,7 +36,7 @@ public class CreateUserChain implements IUserFormChain {
 
             if (count>0)
             {
-                throw new UserAlreadyExistException("- A user with this username already exists!");
+                throw new DataAlreadyExistException("- A user with this username already exists!");
             }
             else {
                 formData.setUser(createUser(formData));

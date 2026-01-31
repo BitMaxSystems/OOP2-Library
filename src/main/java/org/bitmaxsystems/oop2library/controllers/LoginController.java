@@ -33,15 +33,15 @@ public class LoginController {
             UserRole role = manager.getLoggedUser().getRole();
             if (role == UserRole.READER)
             {
-                SceneManager.showView(View.BASE_MAIN_VIEW);
+                SceneManager.showView(View.BASE_HOME_VIEW);
             }
             else if (role == UserRole.ADMINISTRATOR || role == UserRole.LIBRARIAN)
             {
-                SceneManager.showView(View.ADMIN_MAIN_VIEW);
+                SceneManager.showView(View.ADMINISTRATIVE_HOME_VIEW);
             }
             else
             {
-                SceneManager.showView(View.BASE_MAIN_VIEW);
+                SceneManager.showView(View.BASE_HOME_VIEW);
             }
 
         }
