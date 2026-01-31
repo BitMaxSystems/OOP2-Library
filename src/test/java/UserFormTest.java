@@ -1,3 +1,4 @@
+import javafx.fxml.FXML;
 import org.bitmaxsystems.oop2library.config.HibernateInit;
 import org.bitmaxsystems.oop2library.exceptions.UserAlreadyExistException;
 import org.bitmaxsystems.oop2library.models.dto.UserDataDTO;
@@ -5,6 +6,7 @@ import org.bitmaxsystems.oop2library.models.form.UserForm;
 import org.bitmaxsystems.oop2library.models.users.User;
 import org.bitmaxsystems.oop2library.models.users.enums.UserRole;
 import org.bitmaxsystems.oop2library.repository.GenericRepository;
+import org.bitmaxsystems.oop2library.util.ApproveUserFormService;
 import org.bitmaxsystems.oop2library.util.contracts.IUserFormChain;
 import org.bitmaxsystems.oop2library.util.userformchain.CreateUserChain;
 import org.bitmaxsystems.oop2library.util.userformchain.SaveFormChain;
@@ -127,7 +129,7 @@ public class UserFormTest {
 
 
         User newUser = afterUsers.stream()
-                .filter(u -> u.getLastName().equals("Test2") &&  u.getFirstName().equals("Test2"))
+                .filter(u -> u.getFirstName().equals("Test2") &&  u.getLastName().equals("Test2"))
                 .findFirst()
                 .orElse(null);
 
@@ -162,5 +164,50 @@ public class UserFormTest {
 
         assertTrue(afterUser>beforeUser);
         assertTrue(afterForm>beforeForm);
+    }
+
+    UserForm generateIndependentForm()
+    {
+        IUserFormChain verifyDataChain = new VerifyDataChain();
+        IUserFormChain createUserChain = new CreateUserChain();
+        IUserFormChain saveFormChain = new SaveFormChain();
+
+        verifyDataChain.setNextChain(createUserChain);
+        createUserChain.setNextChain(saveFormChain);
+
+        UserDataDTO formDTO = new UserDataDTO.Builder("Form",
+                "Test",
+                "14",
+                "+359888263282",
+                "formTest")
+                .setNewPassword("TestTest!123","TestTest!123")
+                .build();
+
+        assertDoesNotThrow(() -> verifyDataChain.execute(formDTO));
+
+        User newUser = userGenericRepository.findAll().stream()
+                .filter(u -> u.getFirstName().equals("Form") &&  u.getLastName().equals("Test"))
+                .findFirst()
+                .orElse(null);
+
+        assertNotNull(newUser);
+
+        return newUser.getForm();
+    }
+
+    @Test
+    void testUserApproval()
+    {
+        UserForm form = generateIndependentForm();
+
+        assertNotNull(form);
+
+        ApproveUserFormService approveUserFormService = new ApproveUserFormService();
+
+        assertDoesNotThrow(() -> approveUserFormService.approveUser(form));
+
+        User approvedUser = form.getUser();
+
+        assertEquals(UserRole.READER,approvedUser.getRole());
     }
 }

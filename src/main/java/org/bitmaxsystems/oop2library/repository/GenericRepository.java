@@ -30,6 +30,7 @@ public class GenericRepository<T> {
         }
     }
 
+
     public void update(T entity) {
         Transaction transaction = null;
         try (Session session = HibernateUtil.getSessionFactory().openSession()) {

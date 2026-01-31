@@ -17,7 +17,7 @@ public class UserForm {
     private Date dateOfCreation;
     @Enumerated
     private FormStatus status;
-    @OneToOne(fetch = FetchType.EAGER)
+    @OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     @JoinColumn(name = "user_id")
     private User user;
 
@@ -52,7 +52,7 @@ public class UserForm {
         if (status == FormStatus.PENDING)
         {
             this.status = FormStatus.APPROVED;
-            user.setRole(UserRole.READER);
+            user.approve();
             return true;
         }
         else

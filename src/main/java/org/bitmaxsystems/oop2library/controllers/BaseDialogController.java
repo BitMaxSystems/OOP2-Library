@@ -56,7 +56,7 @@ public class BaseDialogController {
 
         } catch (IOException e) {
             logger.error(e);
-            new Alert(Alert.AlertType.ERROR,"Unexpected error, try again!");
+            new Alert(Alert.AlertType.ERROR,"Unexpected error, try again!").show();
         }
     }
 
