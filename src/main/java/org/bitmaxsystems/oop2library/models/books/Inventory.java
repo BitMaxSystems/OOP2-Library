@@ -1,31 +1,31 @@
 package org.bitmaxsystems.oop2library.models.books;
 
 import jakarta.persistence.*;
-import lombok.*;
-import org.bitmaxsystems.oop2library.models.books.enums.BookStatus;
 
 @Entity
 @Table(name = "inventory")
-@Getter
-@Setter
-@NoArgsConstructor
-@AllArgsConstructor
-@ToString
 public class Inventory {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private int id;
 
     @ManyToOne(optional = false)
-    @ToString.Exclude
     private Book book;
 
-    @Enumerated(EnumType.STRING)
-    private BookStatus status;
 
-    public Inventory(Book book, BookStatus status) {
+    protected Inventory () {}
+
+    public Inventory(Book book) {
         this.book = book;
-        this.status = status;
     }
+
+    public int getId() {
+        return id;
+    }
+
+    public Book getBook() {
+        return book;
+    }
+
 }
