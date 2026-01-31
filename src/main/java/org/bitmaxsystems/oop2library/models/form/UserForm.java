@@ -21,7 +21,7 @@ public class UserForm {
     @JoinColumn(name = "user_id")
     private User user;
 
-    public UserForm() {
+    protected UserForm() {
     }
 
     public UserForm(User user)

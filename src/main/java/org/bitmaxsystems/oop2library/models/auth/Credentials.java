@@ -27,7 +27,7 @@ public class Credentials {
         this.user = user;
     }
 
-    public Credentials() {
+    protected Credentials() {
 
     }
 

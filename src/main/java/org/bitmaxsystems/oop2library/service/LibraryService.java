@@ -1,9 +1,8 @@
 package org.bitmaxsystems.oop2library.service;
 
-import org.bitmaxsystems.oop2library.models.books.*;
-import org.bitmaxsystems.oop2library.models.books.enums.BookStatus;
-import org.bitmaxsystems.oop2library.repository.GenericRepository;
 import org.bitmaxsystems.oop2library.config.HibernateUtil;
+import org.bitmaxsystems.oop2library.models.books.*;
+import org.bitmaxsystems.oop2library.repository.GenericRepository;
 import org.hibernate.Session;
 import org.hibernate.query.Query;
 
@@ -30,7 +29,7 @@ public class LibraryService {
         Book newBook = new Book(isbn, title, author, genre, publisher);
         bookGenericRepository.save(newBook);
 
-        Inventory inv = new Inventory(newBook, BookStatus.AVAILABLE);
+        Inventory inv = new Inventory(newBook);
         inventoryGenericRepository.save(inv);
 
         System.out.println("✅ Успешно регистрирана книга: " + title);
