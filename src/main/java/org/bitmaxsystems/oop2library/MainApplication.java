@@ -7,6 +7,7 @@ import javafx.stage.Stage;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.bitmaxsystems.oop2library.config.HibernateInit;
+import org.bitmaxsystems.oop2library.service.LoanService;
 import org.bitmaxsystems.oop2library.util.UserManager;
 import org.bitmaxsystems.oop2library.view.SceneManager;
 import org.bitmaxsystems.oop2library.view.View;
@@ -21,6 +22,7 @@ public class MainApplication extends Application {
         try
         {
             HibernateInit.initializeIfEmpty();
+            new LoanService().markOverdueLoans();
             SceneManager.setPrimaryStage(stage);
             SceneManager.showView(View.LOGIN);
         } catch (Exception e) {

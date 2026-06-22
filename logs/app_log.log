@@ -1,0 +1,94 @@
+[2026-06-22 04:20:42] [INFO ] [core] - HHH000001: Hibernate ORM core version 7.2.0.Final
+[2026-06-22 04:20:42] [WARN ] [pooling] - HHH10001002: Using built-in connection pool (not intended for production use)
+[2026-06-22 04:20:43] [WARN ] [deprecation] - HHH90000025: H2Dialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+[2026-06-22 04:20:43] [INFO ] [pooling] - HHH10001005: Database info:
+	Database JDBC URL [jdbc:h2:mem:testDB]
+	Database driver: H2 JDBC Driver
+	Database dialect: H2Dialect
+	Database version: 2.4.240
+	Default catalog/schema: TESTDB/PUBLIC
+	Autocommit mode: false
+	Isolation level: READ_COMMITTED
+	JDBC fetch size: 100
+	Pool: DriverManagerConnectionProvider
+	Minimum pool size: 1
+	Maximum pool size: 20
+[2026-06-22 04:20:43] [WARN ] [deprecation] - HHH90000033: Encountered use of deprecated annotation [interface jakarta.persistence.Temporal] at org.bitmaxsystems.oop2library.models.loans.Loan.borrowedDate.
+[2026-06-22 04:20:43] [WARN ] [deprecation] - HHH90000033: Encountered use of deprecated annotation [interface jakarta.persistence.Temporal] at org.bitmaxsystems.oop2library.models.loans.Loan.dueDate.
+[2026-06-22 04:20:43] [WARN ] [deprecation] - HHH90000033: Encountered use of deprecated annotation [interface jakarta.persistence.Temporal] at org.bitmaxsystems.oop2library.models.loans.Loan.returnedDate.
+[2026-06-22 04:20:43] [WARN ] [deprecation] - HHH90000033: Encountered use of deprecated annotation [interface jakarta.persistence.Temporal] at org.bitmaxsystems.oop2library.models.reservations.Reservation.reservationDate.
+[2026-06-22 04:20:43] [INFO ] [core] - HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+[2026-06-22 04:20:43] [INFO ] [HibernateInit] - Added admin user
+[2026-06-22 04:20:44] [INFO ] [LoanService] - Loan created for user Loan on inventory item 1
+[2026-06-22 04:20:44] [INFO ] [LoanService] - Loan created for user Loan on inventory item 1
+[2026-06-22 04:20:44] [INFO ] [LoanService] - Loan created for user Loan on inventory item 4
+[2026-06-22 04:20:44] [INFO ] [LoanService] - Loan returned for user Loan on inventory item 4
+[2026-06-22 04:20:44] [INFO ] [LoanService] - Loan created for user Loan on inventory item 5
+[2026-06-22 04:20:44] [INFO ] [HibernateInit] - Admin user already exist.
+[2026-06-22 04:20:44] [INFO ] [HibernateInit] - Admin user already exist.
+[2026-06-22 04:20:44] [INFO ] [UserManager] - admin logged successfully
+[2026-06-22 04:20:44] [INFO ] [UserManager] - admin logged successfully
+[2026-06-22 04:20:44] [ERROR] [UserManager] - admin inputted wrong password
+[2026-06-22 04:20:44] [ERROR] [UserManager] - test inputted wrong password
+[2026-06-22 04:20:44] [INFO ] [HibernateInit] - Admin user already exist.
+[2026-06-22 04:20:44] [INFO ] [HibernateInit] - Admin user already exist.
+[2026-06-22 04:23:29] [INFO ] [core] - HHH000001: Hibernate ORM core version 7.2.0.Final
+[2026-06-22 04:23:29] [WARN ] [pooling] - HHH10001002: Using built-in connection pool (not intended for production use)
+[2026-06-22 04:23:29] [WARN ] [jdbc] - HHH100046: Could not obtain connection to query JDBC database metadata
+java.lang.IllegalStateException: Cannot get a connection as the driver manager is not properly initialized
+	at org.hibernate.engine.jdbc.connections.internal.DriverManagerConnectionProvider.getConnection(DriverManagerConnectionProvider.java:281)
+	at org.hibernate.engine.jdbc.env.internal.JdbcEnvironmentInitiator$ConnectionProviderJdbcConnectionAccess.obtainConnection(JdbcEnvironmentInitiator.java:508)
+	at org.hibernate.resource.transaction.backend.jdbc.internal.JdbcIsolationDelegate.delegateWork(JdbcIsolationDelegate.java:48)
+	at org.hibernate.engine.jdbc.env.internal.JdbcEnvironmentInitiator.getJdbcEnvironmentUsingJdbcMetadata(JdbcEnvironmentInitiator.java:366)
+	at org.hibernate.engine.jdbc.env.internal.JdbcEnvironmentInitiator.getJdbcEnvironment(JdbcEnvironmentInitiator.java:143)
+	at org.hibernate.engine.jdbc.env.internal.JdbcEnvironmentInitiator.initiateService(JdbcEnvironmentInitiator.java:120)
+	at org.hibernate.engine.jdbc.env.internal.JdbcEnvironmentInitiator.initiateService(JdbcEnvironmentInitiator.java:80)
+	at org.hibernate.boot.registry.internal.StandardServiceRegistryImpl.initiateService(StandardServiceRegistryImpl.java:133)
+	at org.hibernate.service.internal.AbstractServiceRegistryImpl.createService(AbstractServiceRegistryImpl.java:260)
+	at org.hibernate.service.internal.AbstractServiceRegistryImpl.initializeService(AbstractServiceRegistryImpl.java:235)
+	at org.hibernate.service.internal.AbstractServiceRegistryImpl.getService(AbstractServiceRegistryImpl.java:212)
+	at org.hibernate.service.ServiceRegistry.requireService(ServiceRegistry.java:66)
+	at org.hibernate.engine.jdbc.internal.JdbcServicesImpl.configure(JdbcServicesImpl.java:50)
+	at org.hibernate.boot.registry.internal.StandardServiceRegistryImpl.configureService(StandardServiceRegistryImpl.java:139)
+	at org.hibernate.service.internal.AbstractServiceRegistryImpl.initializeService(AbstractServiceRegistryImpl.java:244)
+	at org.hibernate.service.internal.AbstractServiceRegistryImpl.getService(AbstractServiceRegistryImpl.java:212)
+	at org.hibernate.engine.jdbc.connections.internal.BasicConnectionCreator.convertSqlException(BasicConnectionCreator.java:131)
+	at org.hibernate.engine.jdbc.connections.internal.DriverConnectionCreator.makeConnection(DriverConnectionCreator.java:41)
+	at org.hibernate.engine.jdbc.connections.internal.BasicConnectionCreator.createConnection(BasicConnectionCreator.java:59)
+	at org.hibernate.engine.jdbc.connections.internal.DriverManagerConnectionProvider.buildPool(DriverManagerConnectionProvider.java:124)
+	at org.hibernate.engine.jdbc.connections.internal.DriverManagerConnectionProvider.configure(DriverManagerConnectionProvider.java:86)
+	at org.hibernate.boot.registry.internal.StandardServiceRegistryImpl.configureService(StandardServiceRegistryImpl.java:139)
+	at org.hibernate.service.internal.AbstractServiceRegistryImpl.initializeService(AbstractServiceRegistryImpl.java:244)
+	at org.hibernate.service.internal.AbstractServiceRegistryImpl.getService(AbstractServiceRegistryImpl.java:212)
+	at org.hibernate.service.ServiceRegistry.requireService(ServiceRegistry.java:66)
+	at org.hibernate.engine.jdbc.env.internal.JdbcEnvironmentInitiator.buildJdbcConnectionAccess(JdbcEnvironmentInitiator.java:487)
+	at org.hibernate.engine.jdbc.env.internal.JdbcEnvironmentInitiator.getJdbcEnvironmentUsingJdbcMetadata(JdbcEnvironmentInitiator.java:353)
+	at org.hibernate.engine.jdbc.env.internal.JdbcEnvironmentInitiator.getJdbcEnvironment(JdbcEnvironmentInitiator.java:143)
+	at org.hibernate.engine.jdbc.env.internal.JdbcEnvironmentInitiator.initiateService(JdbcEnvironmentInitiator.java:120)
+	at org.hibernate.engine.jdbc.env.internal.JdbcEnvironmentInitiator.initiateService(JdbcEnvironmentInitiator.java:80)
+	at org.hibernate.boot.registry.internal.StandardServiceRegistryImpl.initiateService(StandardServiceRegistryImpl.java:133)
+	at org.hibernate.service.internal.AbstractServiceRegistryImpl.createService(AbstractServiceRegistryImpl.java:260)
+	at org.hibernate.service.internal.AbstractServiceRegistryImpl.initializeService(AbstractServiceRegistryImpl.java:235)
+	at org.hibernate.service.internal.AbstractServiceRegistryImpl.getService(AbstractServiceRegistryImpl.java:212)
+	at org.hibernate.boot.model.relational.Database.<init>(Database.java:44)
+	at org.hibernate.boot.internal.InFlightMetadataCollectorImpl.getDatabase(InFlightMetadataCollectorImpl.java:251)
+	at org.hibernate.boot.internal.InFlightMetadataCollectorImpl.<init>(InFlightMetadataCollectorImpl.java:203)
+	at org.hibernate.boot.model.process.spi.MetadataBuildingProcess.complete(MetadataBuildingProcess.java:170)
+	at org.hibernate.boot.model.process.spi.MetadataBuildingProcess.build(MetadataBuildingProcess.java:131)
+	at org.hibernate.boot.internal.MetadataBuilderImpl.build(MetadataBuilderImpl.java:428)
+	at org.hibernate.boot.internal.MetadataBuilderImpl.build(MetadataBuilderImpl.java:101)
+	at org.hibernate.cfg.Configuration.buildSessionFactory(Configuration.java:1080)
+	at org.hibernate.cfg.Configuration.buildSessionFactory(Configuration.java:1134)
+	at org.bitmaxsystems.oop2library.config.HibernateUtil.buildSessionFactory(HibernateUtil.java:38)
+	at org.bitmaxsystems.oop2library.config.HibernateUtil.<clinit>(HibernateUtil.java:20)
+	at org.bitmaxsystems.oop2library.config.HibernateInit.initializeIfEmpty(HibernateInit.java:19)
+	at org.bitmaxsystems.oop2library.MainApplication.start(MainApplication.java:24)
+	at javafx.graphics@21.0.11/com.sun.javafx.application.LauncherImpl.lambda$launchApplication1$9(LauncherImpl.java:839)
+	at javafx.graphics@21.0.11/com.sun.javafx.application.PlatformImpl.lambda$runAndWait$12(PlatformImpl.java:483)
+	at javafx.graphics@21.0.11/com.sun.javafx.application.PlatformImpl.lambda$runLater$10(PlatformImpl.java:456)
+	at java.base/java.security.AccessController.doPrivileged(AccessController.java:138)
+	at javafx.graphics@21.0.11/com.sun.javafx.application.PlatformImpl.lambda$runLater$11(PlatformImpl.java:455)
+	at javafx.graphics@21.0.11/com.sun.glass.ui.InvokeLaterDispatcher$Future.run(InvokeLaterDispatcher.java:95)
+	at javafx.graphics@21.0.11/com.sun.glass.ui.gtk.GtkApplication._runLoop(Native Method)
+	at javafx.graphics@21.0.11/com.sun.glass.ui.gtk.GtkApplication.lambda$runLoop$10(GtkApplication.java:265)
+	at java.base/java.lang.Thread.run(Thread.java:1516)

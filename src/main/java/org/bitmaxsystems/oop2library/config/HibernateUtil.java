@@ -8,6 +8,8 @@ import org.bitmaxsystems.oop2library.models.books.Publisher;
 import org.bitmaxsystems.oop2library.models.books.Inventory;
 
 import org.bitmaxsystems.oop2library.models.form.UserForm;
+import org.bitmaxsystems.oop2library.models.loans.Loan;
+import org.bitmaxsystems.oop2library.models.reservations.Reservation;
 import org.bitmaxsystems.oop2library.models.users.User;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
@@ -29,7 +31,9 @@ public class HibernateUtil {
                     .addAnnotatedClass(Inventory.class)
                     .addAnnotatedClass(Credentials.class)
                     .addAnnotatedClass(User.class)
-                    .addAnnotatedClass(UserForm.class);
+                    .addAnnotatedClass(UserForm.class)
+                    .addAnnotatedClass(Loan.class)
+                    .addAnnotatedClass(Reservation.class);
 
             return configuration.buildSessionFactory();
         } catch (Exception e) {

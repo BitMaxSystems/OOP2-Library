@@ -10,7 +10,13 @@ public enum View {
     BASIC_USER_DETAILS("basic-user-details-view.fxml","User Details",472,573),
     USER_DETAILS("user-details-view.fxml","User Details",472,665),
     USER_FORM_DETAILS_VIEW("user-form-details-view.fxml","User Form Details",600,721),
-    USER_FORM_MANAGEMENT_VIEW("user-form-management-view.fxml","User Form Management",1207,414);
+    USER_FORM_MANAGEMENT_VIEW("user-form-management-view.fxml","User Form Management",1207,414),
+    LOAN_MANAGEMENT("loan-management-view.fxml", "Loan Management", 1000, 500),
+    BORROW_BOOK("borrow-book-view.fxml", "Borrow Book", 600, 420),
+    RETURN_BOOK("return-book-view.fxml", "Return Book", 600, 420),
+    READER_MAIN("reader-main-view.fxml", "Library", 860, 500),
+    MY_LOANS("my-loans-view.fxml", "My Loans", 860, 500),
+    RESERVATIONS("reservations-view.fxml", "My Reservations", 700, 450);
 
     private final String path;
     private final String title;
