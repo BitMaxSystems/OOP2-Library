@@ -4,6 +4,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
+import javafx.scene.control.Button;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.input.MouseEvent;
@@ -37,6 +38,8 @@ public class AdministrativeManagementController {
     private TableColumn<User, Date> dateOfApprovalColumn;
     @FXML
     private TableColumn<User,UserRole> userRoleColumn;
+    @FXML
+    private Button createButton;
     private UserRepository userRepository = new UserRepository();
     private UserRole role;
 
@@ -118,6 +121,7 @@ public class AdministrativeManagementController {
     public void setRole(UserRole role)
     {
         this.role = role;
+        createButton.setText("Create "+role.toString());
         refreshTable();
     }
 

@@ -11,16 +11,17 @@ import javafx.stage.Stage;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.bitmaxsystems.oop2library.models.users.enums.UserRole;
+import org.bitmaxsystems.oop2library.view.SceneManager;
 import org.bitmaxsystems.oop2library.view.View;
 
 import java.io.IOException;
 
-public class AdministrativeDialogController extends BaseDialogController {
+public class AdministrativeHomeController extends BaseHomeController {
     @FXML
     private Button viewAdminButton;
     @FXML
     private Button viewLibrarianButton;
-    private static final Logger logger = LogManager.getLogger(AdministrativeDialogController.class);
+    private static final Logger logger = LogManager.getLogger(AdministrativeHomeController.class);
 
 
     @Override
@@ -89,5 +90,11 @@ public class AdministrativeDialogController extends BaseDialogController {
     public void onViewUserForm()
     {
         loadManagementDialog(View.USER_FORM_MANAGEMENT_VIEW);
+    }
+
+    @FXML
+    public void onViewInventory()
+    {
+        SceneManager.showView(View.ADMINISTRATIVE_INVENTORY_VIEW);
     }
 }

@@ -1,24 +1,36 @@
 package org.bitmaxsystems.oop2library.models.books;
 
 import jakarta.persistence.*;
-import lombok.*;
 
 @Entity
 @Table(name = "publishers")
-@Getter
-@Setter
-@NoArgsConstructor
-@AllArgsConstructor
-@ToString
-public class Publisher {
+public class Publisher extends BookParameter{
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private int id;
 
     private String name;
 
+    protected Publisher() {}
     public Publisher(String name) {
         this.name = name;
     }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+    @Override
+    public String toString() {
+        return name;
+    }
+    @Override
+    public int getId() {
+        return id;
+    }
+    @Override
+    public String getName() {
+        return name;
+    }
+
 }

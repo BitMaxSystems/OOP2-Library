@@ -9,7 +9,7 @@ import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-public class VerifyDataChain implements IUserFormChain {
+public class VerifyUserDataChain implements IUserFormChain {
     private final int MIN_AGE_ALLOWED = 13;
     private final int MAX_AGE_ALLOWED = 100;
     private final int MIN_POINTS_ALLOWED = 0;

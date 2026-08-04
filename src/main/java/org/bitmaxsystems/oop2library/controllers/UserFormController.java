@@ -5,11 +5,11 @@ import javafx.scene.control.Alert;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.bitmaxsystems.oop2library.exceptions.DataValidationException;
-import org.bitmaxsystems.oop2library.exceptions.UserAlreadyExistException;
+import org.bitmaxsystems.oop2library.exceptions.DataAlreadyExistException;
 import org.bitmaxsystems.oop2library.util.contracts.IUserFormChain;
 import org.bitmaxsystems.oop2library.util.userformchain.CreateUserChain;
 import org.bitmaxsystems.oop2library.util.userformchain.SaveFormChain;
-import org.bitmaxsystems.oop2library.util.userformchain.VerifyDataChain;
+import org.bitmaxsystems.oop2library.util.userformchain.VerifyUserDataChain;
 import org.bitmaxsystems.oop2library.view.SceneManager;
 import org.bitmaxsystems.oop2library.view.View;
 
@@ -25,7 +25,7 @@ public class UserFormController extends BaseUserFormController{
     @Override
     protected IUserFormChain setUpChain() {
 
-        IUserFormChain verifyData = new VerifyDataChain();
+        IUserFormChain verifyData = new VerifyUserDataChain();
         IUserFormChain createUser = new CreateUserChain();
         IUserFormChain saveForm = new SaveFormChain();
 
@@ -49,7 +49,7 @@ public class UserFormController extends BaseUserFormController{
             new Alert(Alert.AlertType.ERROR, "Invalid data found").show();
             super.setErrors(e.getMessage());
 
-        } catch (UserAlreadyExistException e) {
+        } catch (DataAlreadyExistException e) {
             logger.error("User with this username already exists");
             new Alert(Alert.AlertType.ERROR, "User with this username already exists").show();
             super.setErrors(e.getMessage());

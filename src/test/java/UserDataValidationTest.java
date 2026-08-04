@@ -1,9 +1,7 @@
-import org.bitmaxsystems.oop2library.config.HibernateInit;
 import org.bitmaxsystems.oop2library.exceptions.DataValidationException;
 import org.bitmaxsystems.oop2library.models.dto.UserDataDTO;
 import org.bitmaxsystems.oop2library.util.contracts.IUserFormChain;
-import org.bitmaxsystems.oop2library.util.userformchain.VerifyDataChain;
-import org.junit.jupiter.api.BeforeAll;
+import org.bitmaxsystems.oop2library.util.userformchain.VerifyUserDataChain;
 import org.junit.jupiter.api.Test;
 
 import java.util.Arrays;
@@ -14,15 +12,10 @@ import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 
 public class UserDataValidationTest {
 
-    @BeforeAll
-    static void setup()
-    {
-        HibernateInit.initializeIfEmpty();
-    }
 
     @Test
     void firstNameExceptionThrown(){
-        IUserFormChain verifyData = new VerifyDataChain();
+        IUserFormChain verifyData = new VerifyUserDataChain();
         UserDataDTO formDTO = new UserDataDTO.Builder("213",
                 "Test",
                 "14",
@@ -38,7 +31,7 @@ public class UserDataValidationTest {
 
     @Test
     void lastNameExceptionThrown(){
-        IUserFormChain verifyData = new VerifyDataChain();
+        IUserFormChain verifyData = new VerifyUserDataChain();
         UserDataDTO formDTO =  new UserDataDTO.Builder("Test",
                 "123",
                 "14",
@@ -54,7 +47,7 @@ public class UserDataValidationTest {
 
     @Test
     void ageNonNumericExceptionThrown(){
-        IUserFormChain verifyData = new VerifyDataChain();
+        IUserFormChain verifyData = new VerifyUserDataChain();
         UserDataDTO formDTO = new UserDataDTO.Builder("Test",
                 "Test",
                 "das",
@@ -69,7 +62,7 @@ public class UserDataValidationTest {
 
     @Test
     void ageOutOfIntervalExceptionThrown(){
-        IUserFormChain verifyData = new VerifyDataChain();
+        IUserFormChain verifyData = new VerifyUserDataChain();
         UserDataDTO formDTO = new UserDataDTO.Builder("Test",
                 "Test",
                 "-2",
@@ -84,7 +77,7 @@ public class UserDataValidationTest {
 
     @Test
     void loyaltyPointsNonNumericExceptionThrown(){
-        IUserFormChain verifyData = new VerifyDataChain();
+        IUserFormChain verifyData = new VerifyUserDataChain();
         UserDataDTO formDTO = new UserDataDTO.Builder("Test",
                 "Test",
                 "14",
@@ -100,7 +93,7 @@ public class UserDataValidationTest {
 
     @Test
     void loyaltyPointsOutOfIntervalExceptionThrown(){
-        IUserFormChain verifyData = new VerifyDataChain();
+        IUserFormChain verifyData = new VerifyUserDataChain();
         UserDataDTO formDTO = new UserDataDTO.Builder("Test",
                 "Test",
                 "14",
@@ -116,7 +109,7 @@ public class UserDataValidationTest {
 
     @Test
     void phoneExceptionThrown(){
-        IUserFormChain verifyData = new VerifyDataChain();
+        IUserFormChain verifyData = new VerifyUserDataChain();
         UserDataDTO formDTO = new UserDataDTO.Builder("Test",
                 "Test",
                 "14",
@@ -131,7 +124,7 @@ public class UserDataValidationTest {
 
     @Test
     void usernameExceptionThrown(){
-        IUserFormChain verifyData = new VerifyDataChain();
+        IUserFormChain verifyData = new VerifyUserDataChain();
         UserDataDTO formDTO = new UserDataDTO.Builder("Test",
                 "Test",
                 "14",
@@ -146,7 +139,7 @@ public class UserDataValidationTest {
 
     @Test
     void incorrectPasswordExceptionThrown(){
-        IUserFormChain verifyData = new VerifyDataChain();
+        IUserFormChain verifyData = new VerifyUserDataChain();
         UserDataDTO formDTO = new UserDataDTO.Builder("Test",
                 "Test",
                 "14",
@@ -161,7 +154,7 @@ public class UserDataValidationTest {
 
     @Test
     void passwordsNotMatchingExceptionThrown(){
-        IUserFormChain verifyData = new VerifyDataChain();
+        IUserFormChain verifyData = new VerifyUserDataChain();
         UserDataDTO formDTO = new UserDataDTO.Builder("Test",
                 "Test",
                 "14",
@@ -177,7 +170,7 @@ public class UserDataValidationTest {
     @Test
     void multipleInvalidFieldsExceptionThrown(){
         List<String> errorList;
-        IUserFormChain verifyData = new VerifyDataChain();
+        IUserFormChain verifyData = new VerifyUserDataChain();
         UserDataDTO formDTO = new UserDataDTO.Builder("123",
                 "Test",
                 "-14",
@@ -193,7 +186,7 @@ public class UserDataValidationTest {
 
     @Test
     void testValidDataWithoutLoyaltyPoints(){
-        IUserFormChain verifyData = new VerifyDataChain();
+        IUserFormChain verifyData = new VerifyUserDataChain();
         UserDataDTO formDTO = new UserDataDTO.Builder("Test",
                 "Test",
                 "14",
@@ -208,7 +201,7 @@ public class UserDataValidationTest {
 
     @Test
     void testValidDataWithLoyaltyPoints(){
-        IUserFormChain verifyData = new VerifyDataChain();
+        IUserFormChain verifyData = new VerifyUserDataChain();
         UserDataDTO formDTO = new UserDataDTO.Builder("Test",
                 "Test",
                 "14",

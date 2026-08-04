@@ -17,12 +17,12 @@ import org.bitmaxsystems.oop2library.view.View;
 
 import java.io.IOException;
 
-public class BaseDialogController {
+public class BaseHomeController {
 
     @FXML
     private Button userDetailsButton;
 
-    private static final Logger logger = LogManager.getLogger(BaseDialogController.class);
+    private static final Logger logger = LogManager.getLogger(BaseHomeController.class);
     protected UserManager manager = UserManager.getInstance();
 
     @FXML

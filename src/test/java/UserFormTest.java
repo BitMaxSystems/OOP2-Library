@@ -1,16 +1,15 @@
-import javafx.fxml.FXML;
 import org.bitmaxsystems.oop2library.config.HibernateInit;
-import org.bitmaxsystems.oop2library.exceptions.UserAlreadyExistException;
+import org.bitmaxsystems.oop2library.exceptions.DataAlreadyExistException;
 import org.bitmaxsystems.oop2library.models.dto.UserDataDTO;
 import org.bitmaxsystems.oop2library.models.form.UserForm;
 import org.bitmaxsystems.oop2library.models.users.User;
 import org.bitmaxsystems.oop2library.models.users.enums.UserRole;
 import org.bitmaxsystems.oop2library.repository.GenericRepository;
-import org.bitmaxsystems.oop2library.util.ApproveUserFormService;
+import org.bitmaxsystems.oop2library.util.service.ApproveUserFormService;
 import org.bitmaxsystems.oop2library.util.contracts.IUserFormChain;
 import org.bitmaxsystems.oop2library.util.userformchain.CreateUserChain;
 import org.bitmaxsystems.oop2library.util.userformchain.SaveFormChain;
-import org.bitmaxsystems.oop2library.util.userformchain.VerifyDataChain;
+import org.bitmaxsystems.oop2library.util.userformchain.VerifyUserDataChain;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
@@ -41,7 +40,7 @@ public class UserFormTest {
                 .setNewPassword("TestTest!123","TestTest!123")
                 .build();
 
-        UserAlreadyExistException exception = assertThrowsExactly(UserAlreadyExistException.class,() -> createUserChain.execute(formDTO));
+        DataAlreadyExistException exception = assertThrowsExactly(DataAlreadyExistException.class,() -> createUserChain.execute(formDTO));
         assertEquals("- A user with this username already exists!",exception.getMessage());
     }
 
@@ -142,7 +141,7 @@ public class UserFormTest {
     {
         int beforeUser = userGenericRepository.findAll().size();
         int beforeForm = userFormGenericRepository.findAll().size();
-        IUserFormChain verifyDataChain = new VerifyDataChain();
+        IUserFormChain verifyDataChain = new VerifyUserDataChain();
         IUserFormChain createUserChain = new CreateUserChain();
         IUserFormChain saveFormChain = new SaveFormChain();
 
@@ -168,7 +167,7 @@ public class UserFormTest {
 
     UserForm generateIndependentForm()
     {
-        IUserFormChain verifyDataChain = new VerifyDataChain();
+        IUserFormChain verifyDataChain = new VerifyUserDataChain();
         IUserFormChain createUserChain = new CreateUserChain();
         IUserFormChain saveFormChain = new SaveFormChain();
 

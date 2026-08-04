@@ -61,7 +61,7 @@ public class User {
             return new User(this.firstName,this.lastName,this.age,this.phone,this.dateOfApproval,this.role);
         }
     }
-        public User() {
+        protected User() {
         }
 
         private User (String firstName, String lastName, int age, String phone, Date dateOfApproval ,UserRole role)
