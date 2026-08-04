@@ -37,7 +37,7 @@
    <ChoiceBox fx:id="authorChoiceBox" layoutX="218.0" layoutY="166.0" prefWidth="150.0" />
    <ChoiceBox fx:id="publisherChoiceBox" layoutX="218.0" layoutY="259.0" prefWidth="150.0" />
    <ChoiceBox fx:id="genreChoiceBox" layoutX="218.0" layoutY="212.0" prefWidth="150.0" />
-   <Button layoutX="202.0" layoutY="436.0" mnemonicParsing="false" onAction="#onUpdate" text="Update">
+   <Button layoutX="139.0" layoutY="435.0" mnemonicParsing="false" onAction="#onUpdate" text="Update">
       <font>
          <Font size="15.0" />
       </font>
@@ -62,4 +62,9 @@
          <Font size="15.0" />
       </font>
    </Label>
+   <Button layoutX="263.0" layoutY="435.0" mnemonicParsing="false" onAction="#onDelete" text="Delete">
+      <font>
+         <Font size="15.0" />
+      </font>
+   </Button>
 </AnchorPane>
