@@ -8,6 +8,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
@@ -17,6 +18,7 @@ import org.bitmaxsystems.oop2library.models.books.Author;
 import org.bitmaxsystems.oop2library.models.books.Book;
 import org.bitmaxsystems.oop2library.models.books.Publisher;
 import org.bitmaxsystems.oop2library.models.dto.BookParameterTypeDTO;
+import org.bitmaxsystems.oop2library.models.users.User;
 import org.bitmaxsystems.oop2library.repository.GenericRepository;
 import org.bitmaxsystems.oop2library.util.factory.AuthorFactory;
 import org.bitmaxsystems.oop2library.util.factory.GenreFactory;
@@ -55,7 +57,7 @@ public class AdministrativeBookRegistryController {
         genreColumn.setCellValueFactory(new javafx.scene.control.cell.PropertyValueFactory<>("genre"));
         publisherColumn.setCellValueFactory(new javafx.scene.control.cell.PropertyValueFactory<>("publisher"));
 
-       // tableView.setOnMouseClicked(this::onDoubleClick);
+        tableView.setOnMouseClicked(this::onTableClick);
         refreshTable();
     }
 
@@ -95,6 +97,40 @@ public class AdministrativeBookRegistryController {
         } catch (IOException e) {
             logger.error(e);
             new Alert(Alert.AlertType.ERROR,"Unexpected error, try again!").show();
+        }
+    }
+
+    private void onTableClick(MouseEvent event)
+    {
+        if (event.getClickCount() == 2)
+        {
+            Book selectedBook = tableView.getSelectionModel().getSelectedItem();
+            if (selectedBook != null)
+            {
+                loadBookDetails(selectedBook);
+            }
+        }
+    }
+
+    private void loadBookDetails(Book book)
+    {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource(View.BOOK_REGISTRY_MANAGEMENT_VIEW.getPath()));
+            AnchorPane root = loader.load();
+
+            BookRegistryManagementController controller = loader.getController();
+            controller.setBook(book);
+
+            Stage stage = new Stage();
+            stage.setTitle(View.BOOK_REGISTRY_MANAGEMENT_VIEW.getTitle());
+            stage.initModality(Modality.APPLICATION_MODAL);
+            stage.setScene(new Scene(root));
+            stage.showAndWait();
+            refreshTable();
+
+        } catch (Exception e) {
+            logger.error(e);
+            new Alert(Alert.AlertType.ERROR,"Unexpected error occurred. Try again").show();
         }
     }
 

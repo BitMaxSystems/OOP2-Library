@@ -10,7 +10,7 @@
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="535.0"
             prefWidth="467.0" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1"
-   fx:controller="org.bitmaxsystems.oop2library.controllers.BookRegistryCreationControl">
+   fx:controller="org.bitmaxsystems.oop2library.controllers.BookRegistryCreationController">
    <Label layoutX="88.0" layoutY="38.0" text="ISBN">
       <font>
          <Font size="15.0"/>

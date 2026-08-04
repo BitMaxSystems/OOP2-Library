@@ -10,31 +10,32 @@ public class CreateBookChain implements IBookFormChain {
     private IBookFormChain nextChain;
     private GenericRepository<Book> bookGenericRepository = new GenericRepository<>(Book.class);
 
-    public void setNextChain(IBookFormChain nextChain) {
-        this.nextChain = nextChain;
+    @Override
+    public void setNextChain(IBookFormChain chain) {
+        this.nextChain = chain;
     }
 
     @Override
-    public void execute(BookDataDTO formData) throws Exception {
-        Book existingBook = bookGenericRepository.findById(formData.getIsbn());
+    public void execute(BookDataDTO bookDataDTO) throws Exception {
+        Book existingBook = bookGenericRepository.findById(bookDataDTO.getIsbn());
 
         if (existingBook != null)
         {
-            throw new DataAlreadyExistException("- Book with ISBN: "+formData.getIsbn()+" already exists!");
+            throw new DataAlreadyExistException("- Book with ISBN: "+bookDataDTO.getIsbn()+" already exists!");
         }
         else
         {
-            Book newBook = new Book(formData.getIsbn(),
-                    formData.getTitle(),
-                    formData.getAuthor(),
-                    formData.getGenre(),
-                    formData.getPublisher());
+            Book newBook = new Book(bookDataDTO.getIsbn(),
+                    bookDataDTO.getTitle(),
+                    bookDataDTO.getAuthor(),
+                    bookDataDTO.getGenre(),
+                    bookDataDTO.getPublisher());
 
             bookGenericRepository.save(newBook);
 
             if (nextChain != null)
             {
-                nextChain.execute(formData);
+                nextChain.execute(bookDataDTO);
             }
         }
     }
