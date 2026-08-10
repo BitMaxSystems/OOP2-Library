@@ -4,7 +4,7 @@ import org.bitmaxsystems.oop2library.exceptions.FormAlreadyApprovedException;
 import org.bitmaxsystems.oop2library.models.form.UserForm;
 import org.bitmaxsystems.oop2library.repository.GenericRepository;
 
-public class ApproveUserFormService {
+public class UserFormService {
     private GenericRepository<UserForm> userFormGenericRepository = new GenericRepository<>(UserForm.class);
 
     public void approveUser(UserForm form) throws FormAlreadyApprovedException

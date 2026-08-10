@@ -7,8 +7,10 @@ import org.bitmaxsystems.oop2library.models.dto.UserDataDTO;
 import org.bitmaxsystems.oop2library.models.users.User;
 import org.bitmaxsystems.oop2library.models.users.enums.UserRole;
 import org.bitmaxsystems.oop2library.repository.GenericRepository;
+import org.bitmaxsystems.oop2library.repository.UserRepository;
 import org.bitmaxsystems.oop2library.util.contracts.IUserFormChain;
 import org.hibernate.Session;
+import org.hibernate.Transaction;
 import org.hibernate.query.Query;
 import org.springframework.security.crypto.bcrypt.BCrypt;
 
@@ -17,8 +19,7 @@ import java.util.Date;
 public class CreateUserChain implements IUserFormChain {
 
     private IUserFormChain nextChain;
-    private GenericRepository<Credentials> credentialsGenericRepository = new GenericRepository<>(Credentials.class);
-    private GenericRepository<User> userGenericRepository = new GenericRepository<>(User.class);
+    private UserRepository userRepository = UserRepository.getInstance();
 
 
     @Override
@@ -28,11 +29,8 @@ public class CreateUserChain implements IUserFormChain {
 
     @Override
     public void execute(UserDataDTO formData) throws Exception {
-        try (Session session = HibernateUtil.getSessionFactory().openSession())
-        {
-            Query<Long> query = session.createQuery("SELECT COUNT(*) FROM Credentials where username =:username ", Long.class);
-            query.setParameter("username",formData.getUsernameField());
-            int count = Math.toIntExact(query.getSingleResult());
+
+            int count = userRepository.countExistingUsersByUsername(formData.getUsernameField());
 
             if (count>0)
             {
@@ -45,7 +43,7 @@ public class CreateUserChain implements IUserFormChain {
                 {
                     nextChain.execute(formData);
                 }
-            }
+
         }
     }
 
@@ -75,14 +73,19 @@ public class CreateUserChain implements IUserFormChain {
         }
 
         user = userBuilder.build();
-
-        userGenericRepository.save(user);
-
         credentials = new Credentials(formData.getUsernameField().strip(),
-                BCrypt.hashpw(formData.getPasswordField().strip(),BCrypt.gensalt()),
+                BCrypt.hashpw(formData.getPasswordField().strip(), BCrypt.gensalt()),
                 user);
 
-        credentialsGenericRepository.save(credentials);
+        userRepository.createUserInDatabase(user,credentials);
+//        Transaction transaction = null;
+//        try (Session session = HibernateUtil.getSessionFactory().openSession()) {
+//            userGenericRepository.save(user);
+//
+//
+//
+//            credentialsGenericRepository.save(credentials);
+//        }
 
         return user;
     }

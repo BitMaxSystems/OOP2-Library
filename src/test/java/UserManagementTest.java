@@ -11,7 +11,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 public class UserManagementTest {
 
-    private  AuthorisationRepository authorisationRepository = new AuthorisationRepository();
+    private  AuthorisationRepository authorisationRepository =  AuthorisationRepository.getInstance();
     private UserManager manager = UserManager.getInstance();
 
     @BeforeAll

@@ -4,7 +4,7 @@ import jakarta.persistence.*;
 
 @Entity
 @Table(name = "genres")
-public class Genre extends BookParameter{
+public class Genre implements IBookParameter {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

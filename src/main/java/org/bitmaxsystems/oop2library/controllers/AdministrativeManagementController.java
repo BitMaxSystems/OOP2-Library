@@ -40,7 +40,7 @@ public class AdministrativeManagementController {
     private TableColumn<User,UserRole> userRoleColumn;
     @FXML
     private Button createButton;
-    private UserRepository userRepository = new UserRepository();
+    private UserRepository userRepository = UserRepository.getInstance();
     private UserRole role;
 
     private static final Logger logger = LogManager.getLogger(AdministrativeManagementController.class);

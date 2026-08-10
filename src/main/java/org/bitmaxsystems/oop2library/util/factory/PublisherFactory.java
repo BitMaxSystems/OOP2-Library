@@ -1,6 +1,6 @@
 package org.bitmaxsystems.oop2library.util.factory;
 
-import org.bitmaxsystems.oop2library.models.books.BookParameter;
+import org.bitmaxsystems.oop2library.models.books.IBookParameter;
 import org.bitmaxsystems.oop2library.models.books.Publisher;
 import org.bitmaxsystems.oop2library.util.factory.contract.BookParameterAbstractFactory;
 
@@ -19,7 +19,7 @@ public class PublisherFactory implements BookParameterAbstractFactory {
     }
 
     @Override
-    public BookParameter createParameter() {
+    public IBookParameter createParameter() {
         return new Publisher(parameter);
     }
 }

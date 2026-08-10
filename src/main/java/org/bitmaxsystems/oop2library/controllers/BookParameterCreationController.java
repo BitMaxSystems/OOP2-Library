@@ -9,7 +9,7 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.bitmaxsystems.oop2library.exceptions.DataAlreadyExistException;
 import org.bitmaxsystems.oop2library.models.dto.BookParameterTypeDTO;
-import org.bitmaxsystems.oop2library.util.service.CreateBookParameterService;
+import org.bitmaxsystems.oop2library.util.service.BookParameterService;
 
 
 public class BookParameterCreationController<T> {
@@ -29,10 +29,10 @@ public class BookParameterCreationController<T> {
     @FXML
     public void onCreate()
     {
-        CreateBookParameterService createBookParameterService = new CreateBookParameterService();
+        BookParameterService bookParameterService = new BookParameterService();
         bookParameterTypeDTO.getFactory().setParameter(parameterField.getText());
         try {
-            createBookParameterService.create(bookParameterTypeDTO);
+            bookParameterService.create(bookParameterTypeDTO);
             logger.info("{} parameter successfully created", bookParameterTypeDTO.gettClass().getSimpleName());
             new Alert(Alert.AlertType.INFORMATION
                     ,bookParameterTypeDTO.gettClass().getSimpleName()+" parameter successfully created").show();

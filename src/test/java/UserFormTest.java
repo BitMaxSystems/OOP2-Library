@@ -5,7 +5,7 @@ import org.bitmaxsystems.oop2library.models.form.UserForm;
 import org.bitmaxsystems.oop2library.models.users.User;
 import org.bitmaxsystems.oop2library.models.users.enums.UserRole;
 import org.bitmaxsystems.oop2library.repository.GenericRepository;
-import org.bitmaxsystems.oop2library.util.service.ApproveUserFormService;
+import org.bitmaxsystems.oop2library.util.service.UserFormService;
 import org.bitmaxsystems.oop2library.util.contracts.IUserFormChain;
 import org.bitmaxsystems.oop2library.util.userformchain.CreateUserChain;
 import org.bitmaxsystems.oop2library.util.userformchain.SaveFormChain;
@@ -201,9 +201,9 @@ public class UserFormTest {
 
         assertNotNull(form);
 
-        ApproveUserFormService approveUserFormService = new ApproveUserFormService();
+        UserFormService userFormService = new UserFormService();
 
-        assertDoesNotThrow(() -> approveUserFormService.approveUser(form));
+        assertDoesNotThrow(() -> userFormService.approveUser(form));
 
         User approvedUser = form.getUser();
 

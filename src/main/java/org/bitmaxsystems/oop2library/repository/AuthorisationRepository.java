@@ -6,6 +6,20 @@ import org.hibernate.Session;
 
 public class AuthorisationRepository {
 
+    private static AuthorisationRepository repository = null;
+
+    private AuthorisationRepository() {}
+
+    public static AuthorisationRepository getInstance()
+    {
+        if (repository == null)
+        {
+            repository = new AuthorisationRepository();
+        }
+        return repository;
+    }
+
+
     public Credentials getUserAuthorisation(String username)
     {
         try (Session session = HibernateUtil.getSessionFactory().openSession())
