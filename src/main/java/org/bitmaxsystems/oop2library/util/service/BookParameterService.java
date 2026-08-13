@@ -5,6 +5,7 @@ import org.bitmaxsystems.oop2library.exceptions.DataAlreadyExistException;
 import org.bitmaxsystems.oop2library.models.books.IBookParameter;
 import org.bitmaxsystems.oop2library.models.dto.BookParameterTypeDTO;
 import org.bitmaxsystems.oop2library.repository.BookParameterRepository;
+import org.hibernate.exception.ConstraintViolationException;
 
 public class BookParameterService {
 
@@ -33,21 +34,10 @@ public class BookParameterService {
     public <T> void delete(BookParameterTypeDTO<T> bookParameterTypeDTO) throws DataAlreadyExistException
     {
 
-//            int count;
             IBookParameter parameter = bookParameterTypeDTO.getParameter();
-//            count = repository.checkIfBooksWithParametersExist(bookParameterTypeDTO.gettClass().getSimpleName(),parameter);
-//
-//            if (count>0)
-//            {
-//                throw new DataAlreadyExistException("Books with this "+bookParameterTypeDTO.gettClass().getSimpleName()+" exist!");
-//            }
-//            else
-//            {
-//                repository.deleteParameter(parameter);
-//            }
             try {
                 repository.deleteParameter(parameter);
-            } catch (Exception e) {
+            } catch (ConstraintViolationException e) {
                 throw new ChildRecordExistException("Books with this "+bookParameterTypeDTO.gettClass().getSimpleName()+" exist!");
             }
 

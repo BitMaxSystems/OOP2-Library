@@ -78,14 +78,7 @@ public class CreateUserChain implements IUserFormChain {
                 user);
 
         userRepository.createUserInDatabase(user,credentials);
-//        Transaction transaction = null;
-//        try (Session session = HibernateUtil.getSessionFactory().openSession()) {
-//            userGenericRepository.save(user);
-//
-//
-//
-//            credentialsGenericRepository.save(credentials);
-//        }
+
 
         return user;
     }

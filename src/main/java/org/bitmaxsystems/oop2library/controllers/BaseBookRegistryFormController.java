@@ -15,8 +15,7 @@ import org.bitmaxsystems.oop2library.repository.GenericRepository;
 public class BaseBookRegistryFormController {
     @FXML
     protected Label errorLabel;
-//    @FXML
-//    private TextField isbnField;
+
     @FXML
     protected TextField titleField;
     @FXML
