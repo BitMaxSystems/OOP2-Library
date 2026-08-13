@@ -1,0 +1,247 @@
+[2026-08-04 11:09:47] [INFO ] [core] - HHH000001: Hibernate ORM core version 7.2.0.Final
+[2026-08-04 11:09:48] [WARN ] [pooling] - HHH10001002: Using built-in connection pool (not intended for production use)
+[2026-08-04 11:09:48] [WARN ] [deprecation] - HHH90000025: H2Dialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+[2026-08-04 11:09:48] [INFO ] [pooling] - HHH10001005: Database info:
+	Database JDBC URL [jdbc:h2:mem:testDB]
+	Database driver: H2 JDBC Driver
+	Database dialect: H2Dialect
+	Database version: 2.4.240
+	Default catalog/schema: TESTDB/PUBLIC
+	Autocommit mode: false
+	Isolation level: READ_COMMITTED
+	JDBC fetch size: 100
+	Pool: DriverManagerConnectionProvider
+	Minimum pool size: 1
+	Maximum pool size: 20
+[2026-08-04 11:09:49] [INFO ] [core] - HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+[2026-08-04 11:09:50] [INFO ] [HibernateInit] - Added admin user
+[2026-08-04 11:09:50] [INFO ] [HibernateInit] - Admin user already exist.
+[2026-08-04 11:09:50] [INFO ] [UserManager] - admin logged successfully
+[2026-08-04 11:09:50] [INFO ] [UserManager] - admin logged successfully
+[2026-08-04 11:09:50] [ERROR] [UserManager] - admin inputted wrong password
+[2026-08-04 11:09:50] [ERROR] [UserManager] - test inputted wrong password
+[2026-08-04 11:14:54] [INFO ] [core] - HHH000001: Hibernate ORM core version 7.2.0.Final
+[2026-08-04 11:14:54] [WARN ] [pooling] - HHH10001002: Using built-in connection pool (not intended for production use)
+[2026-08-04 11:14:54] [WARN ] [jdbc] - HHH100046: Could not obtain connection to query JDBC database metadata
+java.lang.IllegalStateException: Cannot get a connection as the driver manager is not properly initialized
+	at org.hibernate.engine.jdbc.connections.internal.DriverManagerConnectionProvider.getConnection(DriverManagerConnectionProvider.java:281)
+	at org.hibernate.engine.jdbc.env.internal.JdbcEnvironmentInitiator$ConnectionProviderJdbcConnectionAccess.obtainConnection(JdbcEnvironmentInitiator.java:508)
+	at org.hibernate.resource.transaction.backend.jdbc.internal.JdbcIsolationDelegate.delegateWork(JdbcIsolationDelegate.java:48)
+	at org.hibernate.engine.jdbc.env.internal.JdbcEnvironmentInitiator.getJdbcEnvironmentUsingJdbcMetadata(JdbcEnvironmentInitiator.java:366)
+	at org.hibernate.engine.jdbc.env.internal.JdbcEnvironmentInitiator.getJdbcEnvironment(JdbcEnvironmentInitiator.java:143)
+	at org.hibernate.engine.jdbc.env.internal.JdbcEnvironmentInitiator.initiateService(JdbcEnvironmentInitiator.java:120)
+	at org.hibernate.engine.jdbc.env.internal.JdbcEnvironmentInitiator.initiateService(JdbcEnvironmentInitiator.java:80)
+	at org.hibernate.boot.registry.internal.StandardServiceRegistryImpl.initiateService(StandardServiceRegistryImpl.java:133)
+	at org.hibernate.service.internal.AbstractServiceRegistryImpl.createService(AbstractServiceRegistryImpl.java:260)
+	at org.hibernate.service.internal.AbstractServiceRegistryImpl.initializeService(AbstractServiceRegistryImpl.java:235)
+	at org.hibernate.service.internal.AbstractServiceRegistryImpl.getService(AbstractServiceRegistryImpl.java:212)
+	at org.hibernate.service.ServiceRegistry.requireService(ServiceRegistry.java:66)
+	at org.hibernate.engine.jdbc.internal.JdbcServicesImpl.configure(JdbcServicesImpl.java:50)
+	at org.hibernate.boot.registry.internal.StandardServiceRegistryImpl.configureService(StandardServiceRegistryImpl.java:139)
+	at org.hibernate.service.internal.AbstractServiceRegistryImpl.initializeService(AbstractServiceRegistryImpl.java:244)
+	at org.hibernate.service.internal.AbstractServiceRegistryImpl.getService(AbstractServiceRegistryImpl.java:212)
+	at org.hibernate.engine.jdbc.connections.internal.BasicConnectionCreator.convertSqlException(BasicConnectionCreator.java:131)
+	at org.hibernate.engine.jdbc.connections.internal.DriverConnectionCreator.makeConnection(DriverConnectionCreator.java:41)
+	at org.hibernate.engine.jdbc.connections.internal.BasicConnectionCreator.createConnection(BasicConnectionCreator.java:59)
+	at org.hibernate.engine.jdbc.connections.internal.DriverManagerConnectionProvider.buildPool(DriverManagerConnectionProvider.java:124)
+	at org.hibernate.engine.jdbc.connections.internal.DriverManagerConnectionProvider.configure(DriverManagerConnectionProvider.java:86)
+	at org.hibernate.boot.registry.internal.StandardServiceRegistryImpl.configureService(StandardServiceRegistryImpl.java:139)
+	at org.hibernate.service.internal.AbstractServiceRegistryImpl.initializeService(AbstractServiceRegistryImpl.java:244)
+	at org.hibernate.service.internal.AbstractServiceRegistryImpl.getService(AbstractServiceRegistryImpl.java:212)
+	at org.hibernate.service.ServiceRegistry.requireService(ServiceRegistry.java:66)
+	at org.hibernate.engine.jdbc.env.internal.JdbcEnvironmentInitiator.buildJdbcConnectionAccess(JdbcEnvironmentInitiator.java:487)
+	at org.hibernate.engine.jdbc.env.internal.JdbcEnvironmentInitiator.getJdbcEnvironmentUsingJdbcMetadata(JdbcEnvironmentInitiator.java:353)
+	at org.hibernate.engine.jdbc.env.internal.JdbcEnvironmentInitiator.getJdbcEnvironment(JdbcEnvironmentInitiator.java:143)
+	at org.hibernate.engine.jdbc.env.internal.JdbcEnvironmentInitiator.initiateService(JdbcEnvironmentInitiator.java:120)
+	at org.hibernate.engine.jdbc.env.internal.JdbcEnvironmentInitiator.initiateService(JdbcEnvironmentInitiator.java:80)
+	at org.hibernate.boot.registry.internal.StandardServiceRegistryImpl.initiateService(StandardServiceRegistryImpl.java:133)
+	at org.hibernate.service.internal.AbstractServiceRegistryImpl.createService(AbstractServiceRegistryImpl.java:260)
+	at org.hibernate.service.internal.AbstractServiceRegistryImpl.initializeService(AbstractServiceRegistryImpl.java:235)
+	at org.hibernate.service.internal.AbstractServiceRegistryImpl.getService(AbstractServiceRegistryImpl.java:212)
+	at org.hibernate.boot.model.relational.Database.<init>(Database.java:44)
+	at org.hibernate.boot.internal.InFlightMetadataCollectorImpl.getDatabase(InFlightMetadataCollectorImpl.java:251)
+	at org.hibernate.boot.internal.InFlightMetadataCollectorImpl.<init>(InFlightMetadataCollectorImpl.java:203)
+	at org.hibernate.boot.model.process.spi.MetadataBuildingProcess.complete(MetadataBuildingProcess.java:170)
+	at org.hibernate.boot.model.process.spi.MetadataBuildingProcess.build(MetadataBuildingProcess.java:131)
+	at org.hibernate.boot.internal.MetadataBuilderImpl.build(MetadataBuilderImpl.java:428)
+	at org.hibernate.boot.internal.MetadataBuilderImpl.build(MetadataBuilderImpl.java:101)
+	at org.hibernate.cfg.Configuration.buildSessionFactory(Configuration.java:1080)
+	at org.hibernate.cfg.Configuration.buildSessionFactory(Configuration.java:1134)
+	at org.bitmaxsystems.oop2library.config.HibernateUtil.buildSessionFactory(HibernateUtil.java:34)
+	at org.bitmaxsystems.oop2library.config.HibernateUtil.<clinit>(HibernateUtil.java:18)
+	at org.bitmaxsystems.oop2library.config.HibernateInit.initializeIfEmpty(HibernateInit.java:19)
+	at org.bitmaxsystems.oop2library.MainApplication.start(MainApplication.java:23)
+	at javafx.graphics@25.0.2/com.sun.javafx.application.LauncherImpl.lambda$launchApplication1$4(LauncherImpl.java:845)
+	at javafx.graphics@25.0.2/com.sun.javafx.application.PlatformImpl.lambda$runAndWait$0(PlatformImpl.java:449)
+	at javafx.graphics@25.0.2/com.sun.javafx.application.PlatformImpl.lambda$runLater$0(PlatformImpl.java:424)
+	at javafx.graphics@25.0.2/com.sun.glass.ui.InvokeLaterDispatcher$Future.run(InvokeLaterDispatcher.java:95)
+	at javafx.graphics@25.0.2/com.sun.glass.ui.win.WinApplication._runLoop(Native Method)
+	at javafx.graphics@25.0.2/com.sun.glass.ui.win.WinApplication.lambda$runLoop$0(WinApplication.java:173)
+	at java.base/java.lang.Thread.run(Thread.java:1516)
+[2026-08-07 10:25:53] [INFO ] [core] - HHH000001: Hibernate ORM core version 7.2.0.Final
+[2026-08-07 10:25:54] [WARN ] [pooling] - HHH10001002: Using built-in connection pool (not intended for production use)
+[2026-08-07 10:25:54] [WARN ] [jdbc] - HHH100046: Could not obtain connection to query JDBC database metadata
+java.lang.IllegalStateException: Cannot get a connection as the driver manager is not properly initialized
+	at org.hibernate.engine.jdbc.connections.internal.DriverManagerConnectionProvider.getConnection(DriverManagerConnectionProvider.java:281)
+	at org.hibernate.engine.jdbc.env.internal.JdbcEnvironmentInitiator$ConnectionProviderJdbcConnectionAccess.obtainConnection(JdbcEnvironmentInitiator.java:508)
+	at org.hibernate.resource.transaction.backend.jdbc.internal.JdbcIsolationDelegate.delegateWork(JdbcIsolationDelegate.java:48)
+	at org.hibernate.engine.jdbc.env.internal.JdbcEnvironmentInitiator.getJdbcEnvironmentUsingJdbcMetadata(JdbcEnvironmentInitiator.java:366)
+	at org.hibernate.engine.jdbc.env.internal.JdbcEnvironmentInitiator.getJdbcEnvironment(JdbcEnvironmentInitiator.java:143)
+	at org.hibernate.engine.jdbc.env.internal.JdbcEnvironmentInitiator.initiateService(JdbcEnvironmentInitiator.java:120)
+	at org.hibernate.engine.jdbc.env.internal.JdbcEnvironmentInitiator.initiateService(JdbcEnvironmentInitiator.java:80)
+	at org.hibernate.boot.registry.internal.StandardServiceRegistryImpl.initiateService(StandardServiceRegistryImpl.java:133)
+	at org.hibernate.service.internal.AbstractServiceRegistryImpl.createService(AbstractServiceRegistryImpl.java:260)
+	at org.hibernate.service.internal.AbstractServiceRegistryImpl.initializeService(AbstractServiceRegistryImpl.java:235)
+	at org.hibernate.service.internal.AbstractServiceRegistryImpl.getService(AbstractServiceRegistryImpl.java:212)
+	at org.hibernate.service.ServiceRegistry.requireService(ServiceRegistry.java:66)
+	at org.hibernate.engine.jdbc.internal.JdbcServicesImpl.configure(JdbcServicesImpl.java:50)
+	at org.hibernate.boot.registry.internal.StandardServiceRegistryImpl.configureService(StandardServiceRegistryImpl.java:139)
+	at org.hibernate.service.internal.AbstractServiceRegistryImpl.initializeService(AbstractServiceRegistryImpl.java:244)
+	at org.hibernate.service.internal.AbstractServiceRegistryImpl.getService(AbstractServiceRegistryImpl.java:212)
+	at org.hibernate.engine.jdbc.connections.internal.BasicConnectionCreator.convertSqlException(BasicConnectionCreator.java:131)
+	at org.hibernate.engine.jdbc.connections.internal.DriverConnectionCreator.makeConnection(DriverConnectionCreator.java:41)
+	at org.hibernate.engine.jdbc.connections.internal.BasicConnectionCreator.createConnection(BasicConnectionCreator.java:59)
+	at org.hibernate.engine.jdbc.connections.internal.DriverManagerConnectionProvider.buildPool(DriverManagerConnectionProvider.java:124)
+	at org.hibernate.engine.jdbc.connections.internal.DriverManagerConnectionProvider.configure(DriverManagerConnectionProvider.java:86)
+	at org.hibernate.boot.registry.internal.StandardServiceRegistryImpl.configureService(StandardServiceRegistryImpl.java:139)
+	at org.hibernate.service.internal.AbstractServiceRegistryImpl.initializeService(AbstractServiceRegistryImpl.java:244)
+	at org.hibernate.service.internal.AbstractServiceRegistryImpl.getService(AbstractServiceRegistryImpl.java:212)
+	at org.hibernate.service.ServiceRegistry.requireService(ServiceRegistry.java:66)
+	at org.hibernate.engine.jdbc.env.internal.JdbcEnvironmentInitiator.buildJdbcConnectionAccess(JdbcEnvironmentInitiator.java:487)
+	at org.hibernate.engine.jdbc.env.internal.JdbcEnvironmentInitiator.getJdbcEnvironmentUsingJdbcMetadata(JdbcEnvironmentInitiator.java:353)
+	at org.hibernate.engine.jdbc.env.internal.JdbcEnvironmentInitiator.getJdbcEnvironment(JdbcEnvironmentInitiator.java:143)
+	at org.hibernate.engine.jdbc.env.internal.JdbcEnvironmentInitiator.initiateService(JdbcEnvironmentInitiator.java:120)
+	at org.hibernate.engine.jdbc.env.internal.JdbcEnvironmentInitiator.initiateService(JdbcEnvironmentInitiator.java:80)
+	at org.hibernate.boot.registry.internal.StandardServiceRegistryImpl.initiateService(StandardServiceRegistryImpl.java:133)
+	at org.hibernate.service.internal.AbstractServiceRegistryImpl.createService(AbstractServiceRegistryImpl.java:260)
+	at org.hibernate.service.internal.AbstractServiceRegistryImpl.initializeService(AbstractServiceRegistryImpl.java:235)
+	at org.hibernate.service.internal.AbstractServiceRegistryImpl.getService(AbstractServiceRegistryImpl.java:212)
+	at org.hibernate.boot.model.relational.Database.<init>(Database.java:44)
+	at org.hibernate.boot.internal.InFlightMetadataCollectorImpl.getDatabase(InFlightMetadataCollectorImpl.java:251)
+	at org.hibernate.boot.internal.InFlightMetadataCollectorImpl.<init>(InFlightMetadataCollectorImpl.java:203)
+	at org.hibernate.boot.model.process.spi.MetadataBuildingProcess.complete(MetadataBuildingProcess.java:170)
+	at org.hibernate.boot.model.process.spi.MetadataBuildingProcess.build(MetadataBuildingProcess.java:131)
+	at org.hibernate.boot.internal.MetadataBuilderImpl.build(MetadataBuilderImpl.java:428)
+	at org.hibernate.boot.internal.MetadataBuilderImpl.build(MetadataBuilderImpl.java:101)
+	at org.hibernate.cfg.Configuration.buildSessionFactory(Configuration.java:1080)
+	at org.hibernate.cfg.Configuration.buildSessionFactory(Configuration.java:1134)
+	at org.bitmaxsystems.oop2library.config.HibernateUtil.buildSessionFactory(HibernateUtil.java:34)
+	at org.bitmaxsystems.oop2library.config.HibernateUtil.<clinit>(HibernateUtil.java:18)
+	at org.bitmaxsystems.oop2library.config.HibernateInit.initializeIfEmpty(HibernateInit.java:19)
+	at org.bitmaxsystems.oop2library.MainApplication.start(MainApplication.java:23)
+	at com.sun.javafx.application.LauncherImpl.lambda$launchApplication1$4(LauncherImpl.java:845)
+	at com.sun.javafx.application.PlatformImpl.lambda$runAndWait$0(PlatformImpl.java:449)
+	at com.sun.javafx.application.PlatformImpl.lambda$runLater$0(PlatformImpl.java:424)
+	at com.sun.glass.ui.InvokeLaterDispatcher$Future.run(InvokeLaterDispatcher.java:95)
+	at com.sun.glass.ui.win.WinApplication._runLoop(Native Method)
+	at com.sun.glass.ui.win.WinApplication.lambda$runLoop$0(WinApplication.java:173)
+	at java.base/java.lang.Thread.run(Thread.java:1474)
+[2026-08-07 10:33:57] [INFO ] [core] - HHH000001: Hibernate ORM core version 7.2.0.Final
+[2026-08-07 10:33:57] [WARN ] [pooling] - HHH10001002: Using built-in connection pool (not intended for production use)
+[2026-08-07 10:33:58] [INFO ] [pooling] - HHH10001005: Database info:
+	Database JDBC URL [jdbc:mysql://localhost:3306/oop_library]
+	Database driver: MySQL Connector/J
+	Database dialect: MySQLDialect
+	Database version: 8.0.46
+	Default catalog/schema: oop_library/undefined
+	Autocommit mode: false
+	Isolation level: REPEATABLE_READ
+	JDBC fetch size: none
+	Pool: DriverManagerConnectionProvider
+	Minimum pool size: 1
+	Maximum pool size: 20
+[2026-08-07 10:33:59] [INFO ] [core] - HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+[2026-08-07 10:33:59] [INFO ] [HibernateInit] - Added admin user
+[2026-08-07 10:34:55] [INFO ] [UserManager] - admin logged successfully
+[2026-08-07 10:35:00] [INFO ] [BaseHomeController] - User logged out
+[2026-08-07 10:35:05] [INFO ] [UserManager] - admin logged successfully
+[2026-08-12 17:21:15] [INFO ] [core] - HHH000001: Hibernate ORM core version 7.2.0.Final
+[2026-08-12 17:21:15] [WARN ] [pooling] - HHH10001002: Using built-in connection pool (not intended for production use)
+[2026-08-12 17:21:15] [INFO ] [pooling] - HHH10001005: Database info:
+	Database JDBC URL [jdbc:mysql://localhost:3306/oop_library]
+	Database driver: MySQL Connector/J
+	Database dialect: MySQLDialect
+	Database version: 8.0.46
+	Default catalog/schema: oop_library/undefined
+	Autocommit mode: false
+	Isolation level: REPEATABLE_READ
+	JDBC fetch size: none
+	Pool: DriverManagerConnectionProvider
+	Minimum pool size: 1
+	Maximum pool size: 20
+[2026-08-12 17:21:16] [INFO ] [core] - HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+[2026-08-12 17:21:17] [INFO ] [HibernateInit] - Admin user already exist.
+[2026-08-12 17:21:43] [INFO ] [UserManager] - admin logged successfully
+[2026-08-12 17:23:05] [ERROR] [BookRegistryCreationController] - Invalid data inputted
+[2026-08-12 17:23:18] [INFO ] [BookParameterCreationController] - Author parameter successfully created
+[2026-08-12 17:23:27] [INFO ] [BookParameterCreationController] - Genre parameter successfully created
+[2026-08-12 17:23:36] [INFO ] [BookParameterCreationController] - Publisher parameter successfully created
+[2026-08-12 17:23:58] [ERROR] [BookRegistryCreationController] - Invalid data inputted
+[2026-08-12 17:25:05] [INFO ] [BookRegistryCreationController] - Book is created!
+[2026-08-12 17:25:38] [ERROR] [BookRegistryCreationController] - Book with this ISBN already exists
+[2026-08-12 18:11:32] [INFO ] [core] - HHH000001: Hibernate ORM core version 7.2.0.Final
+[2026-08-12 18:11:32] [WARN ] [pooling] - HHH10001002: Using built-in connection pool (not intended for production use)
+[2026-08-12 18:11:32] [INFO ] [pooling] - HHH10001005: Database info:
+	Database JDBC URL [jdbc:mysql://localhost:3306/oop_library]
+	Database driver: MySQL Connector/J
+	Database dialect: MySQLDialect
+	Database version: 8.0.46
+	Default catalog/schema: oop_library/undefined
+	Autocommit mode: false
+	Isolation level: REPEATABLE_READ
+	JDBC fetch size: none
+	Pool: DriverManagerConnectionProvider
+	Minimum pool size: 1
+	Maximum pool size: 20
+[2026-08-12 18:11:33] [INFO ] [core] - HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+[2026-08-12 18:11:34] [INFO ] [HibernateInit] - Admin user already exist.
+[2026-08-12 18:11:40] [INFO ] [UserManager] - admin logged successfully
+[2026-08-13 10:32:28] [INFO ] [core] - HHH000001: Hibernate ORM core version 7.2.0.Final
+[2026-08-13 10:32:29] [WARN ] [pooling] - HHH10001002: Using built-in connection pool (not intended for production use)
+[2026-08-13 10:32:29] [INFO ] [pooling] - HHH10001005: Database info:
+	Database JDBC URL [jdbc:mysql://localhost:3306/oop_library]
+	Database driver: MySQL Connector/J
+	Database dialect: MySQLDialect
+	Database version: 8.0.46
+	Default catalog/schema: oop_library/undefined
+	Autocommit mode: false
+	Isolation level: REPEATABLE_READ
+	JDBC fetch size: none
+	Pool: DriverManagerConnectionProvider
+	Minimum pool size: 1
+	Maximum pool size: 20
+[2026-08-13 10:32:30] [INFO ] [core] - HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+[2026-08-13 10:32:30] [INFO ] [HibernateInit] - Admin user already exist.
+[2026-08-13 10:32:36] [INFO ] [UserManager] - admin logged successfully
+[2026-08-13 10:32:57] [INFO ] [BaseHomeController] - User logged out
+[2026-08-13 10:33:59] [ERROR] [UserFormController] - Invalid data inputted
+[2026-08-13 10:34:29] [ERROR] [UserFormController] - Invalid data inputted
+[2026-08-13 10:35:19] [INFO ] [UserFormController] - Form successfully submitted!
+[2026-08-13 10:35:26] [INFO ] [UserManager] - admin logged successfully
+[2026-08-13 10:35:42] [INFO ] [UserFromDetailsController] - Nikolay Georgiev successfully approved
+[2026-08-13 10:35:51] [INFO ] [BaseHomeController] - User logged out
+[2026-08-13 10:36:03] [INFO ] [UserManager] - nikirich logged successfully
+[2026-08-13 10:36:14] [INFO ] [BaseHomeController] - User logged out
+[2026-08-13 10:36:18] [INFO ] [UserManager] - admin logged successfully
+[2026-08-13 10:37:47] [INFO ] [AdministrativeFormController] - Librarian successfully created!
+[2026-08-13 10:38:01] [INFO ] [BaseHomeController] - User logged out
+[2026-08-13 10:38:12] [INFO ] [UserManager] - lib logged successfully
+[2026-08-13 10:41:53] [INFO ] [core] - HHH000001: Hibernate ORM core version 7.2.0.Final
+[2026-08-13 10:41:53] [WARN ] [pooling] - HHH10001002: Using built-in connection pool (not intended for production use)
+[2026-08-13 10:41:54] [INFO ] [pooling] - HHH10001005: Database info:
+	Database JDBC URL [jdbc:mysql://localhost:3306/oop_library]
+	Database driver: MySQL Connector/J
+	Database dialect: MySQLDialect
+	Database version: 8.0.46
+	Default catalog/schema: oop_library/undefined
+	Autocommit mode: false
+	Isolation level: REPEATABLE_READ
+	JDBC fetch size: none
+	Pool: DriverManagerConnectionProvider
+	Minimum pool size: 1
+	Maximum pool size: 20
+[2026-08-13 10:41:55] [INFO ] [core] - HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+[2026-08-13 10:41:55] [INFO ] [HibernateInit] - Admin user already exist.
+[2026-08-13 10:42:00] [INFO ] [UserManager] - admin logged successfully
+[2026-08-13 10:42:15] [INFO ] [BaseHomeController] - User logged out
+[2026-08-13 10:42:23] [INFO ] [UserManager] - lib logged successfully

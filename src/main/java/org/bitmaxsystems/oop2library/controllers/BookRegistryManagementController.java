@@ -13,7 +13,7 @@ import org.bitmaxsystems.oop2library.models.dto.BookDataDTO;
 import org.bitmaxsystems.oop2library.util.bookformchain.UpdateBookChain;
 import org.bitmaxsystems.oop2library.util.bookformchain.VerifyBookDataChain;
 import org.bitmaxsystems.oop2library.util.contracts.IBookFormChain;
-import org.bitmaxsystems.oop2library.util.service.DeleteBookService;
+import org.bitmaxsystems.oop2library.util.service.bookService.DeleteBookService;
 
 
 import java.util.Optional;
@@ -86,8 +86,18 @@ public class BookRegistryManagementController extends BaseBookRegistryFormContro
             DeleteBookService deleteBookService = new DeleteBookService();
 
             try {
-                deleteBookService.deleteBook(book);
+                boolean deleted = deleteBookService.deleteBook(book);
+
+                if (!deleted) {
+                    new Alert(Alert.AlertType.WARNING, "Cannot delete " + bookTitle + "because inventory copies still exist.")
+                            .show();
+
+                    logger.warn("Could not delete {} because inventory copies still exist.", bookTitle);
+                    return;
+                }
+
                 new Alert(Alert.AlertType.INFORMATION, bookTitle + " successfully deleted!").show();
+
                 logger.info("{} successfully deleted!", bookTitle);
                 onClose();
             } catch (Exception e) {

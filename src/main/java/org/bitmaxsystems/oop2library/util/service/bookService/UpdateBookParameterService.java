@@ -1,4 +1,4 @@
-package org.bitmaxsystems.oop2library.util.service;
+package org.bitmaxsystems.oop2library.util.service.bookService;
 
 import org.bitmaxsystems.oop2library.config.HibernateUtil;
 import org.bitmaxsystems.oop2library.models.books.BookParameter;

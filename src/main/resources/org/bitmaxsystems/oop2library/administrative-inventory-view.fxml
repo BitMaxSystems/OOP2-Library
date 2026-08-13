@@ -14,19 +14,51 @@
          <Font size="15.0"/>
       </font>
    </Button>
-   <TableView layoutX="34.0" layoutY="70.0" prefHeight="200.0" prefWidth="847.0">
+   <TableView fx:id="tableView"
+              layoutX="34.0"
+              layoutY="70.0"
+              prefHeight="200.0"
+              prefWidth="847.0">
       <columns>
-         <TableColumn prefWidth="88.0" text="Inventory ID"/>
-         <TableColumn prefWidth="105.0" text="BookStatus"/>
-         <TableColumn prefWidth="123.0" text="ISBN"/>
-         <TableColumn prefWidth="178.0" text="Name"/>
-         <TableColumn prefWidth="137.0" text="Author"/>
-         <TableColumn prefWidth="109.0" text="Genre"/>
-         <TableColumn prefWidth="106.0" text="Publisher"/>
+         <TableColumn fx:id="inventoryIdColumn"
+                      prefWidth="88.0"
+                      text="Inventory ID"/>
+
+         <TableColumn fx:id="statusColumn"
+                      prefWidth="105.0"
+                      text="Book Status"/>
+
+         <TableColumn fx:id="isbnColumn"
+                      prefWidth="123.0"
+                      text="ISBN"/>
+
+         <TableColumn fx:id="titleColumn"
+                      prefWidth="178.0"
+                      text="Name"/>
+
+         <TableColumn fx:id="authorColumn"
+                      prefWidth="137.0"
+                      text="Author"/>
+
+         <TableColumn fx:id="genreColumn"
+                      prefWidth="109.0"
+                      text="Genre"/>
+
+         <TableColumn fx:id="publisherColumn"
+                      prefWidth="106.0"
+                      text="Publisher"/>
+
+         <TableColumn fx:id="archiveColumn"
+                      prefWidth="90.0"
+                      text="Archive"/>
+
+         <TableColumn fx:id="deleteColumn"
+                      prefWidth="90.0"
+                      text="Delete"/>
       </columns>
    </TableView>
    <Button alignment="CENTER" layoutX="190.0" layoutY="332.0" mnemonicParsing="false" prefHeight="84.0"
-           prefWidth="125.0" text="Add book copy to Inventory" textAlignment="CENTER" wrapText="true">
+           prefWidth="125.0" text="Add book copy to Inventory" textAlignment="CENTER" wrapText="true" onAction="#onAddCopies">
       <font>
          <Font size="15.0"/>
       </font>

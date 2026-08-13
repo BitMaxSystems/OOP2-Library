@@ -10,9 +10,8 @@ import org.apache.logging.log4j.Logger;
 import org.bitmaxsystems.oop2library.exceptions.DataAlreadyExistException;
 import org.bitmaxsystems.oop2library.models.books.BookParameter;
 import org.bitmaxsystems.oop2library.models.dto.BookParameterTypeDTO;
-import org.bitmaxsystems.oop2library.util.service.DeleteBookParameterService;
-import org.bitmaxsystems.oop2library.util.service.DeleteUserService;
-import org.bitmaxsystems.oop2library.util.service.UpdateBookParameterService;
+import org.bitmaxsystems.oop2library.util.service.bookService.DeleteBookParameterService;
+import org.bitmaxsystems.oop2library.util.service.bookService.UpdateBookParameterService;
 
 
 public class BookParameterDetailsController<T> {

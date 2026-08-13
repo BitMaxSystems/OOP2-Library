@@ -8,7 +8,7 @@ import org.bitmaxsystems.oop2library.util.factory.AuthorFactory;
 import org.bitmaxsystems.oop2library.util.factory.GenreFactory;
 import org.bitmaxsystems.oop2library.util.factory.PublisherFactory;
 import org.bitmaxsystems.oop2library.util.factory.contract.BookParameterAbstractFactory;
-import org.bitmaxsystems.oop2library.util.service.CreateBookParameterService;
+import org.bitmaxsystems.oop2library.util.service.bookService.CreateBookParameterService;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
