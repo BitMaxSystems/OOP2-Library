@@ -3,9 +3,11 @@ package org.bitmaxsystems.oop2library.util.service.bookService;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.bitmaxsystems.oop2library.config.HibernateUtil;
+import org.bitmaxsystems.oop2library.exceptions.ChildRecordExistException;
 import org.bitmaxsystems.oop2library.models.books.Book;
 import org.bitmaxsystems.oop2library.models.books.Inventory;
 import org.bitmaxsystems.oop2library.repository.GenericRepository;
+import org.bitmaxsystems.oop2library.repository.InventoryRepository;
 import org.hibernate.Session;
 import org.hibernate.query.Query;
 
@@ -17,33 +19,23 @@ public class DeleteBookService {
     private final GenericRepository<Book> bookGenericRepository =
             new GenericRepository<>(Book.class);
 
-    public boolean deleteBook(Book book) {
-        if (book == null) {
-            return false;
-        }
+    private final InventoryRepository inventoryRepository = InventoryRepository.getInstance();
 
-        try (Session session =
-                     HibernateUtil.getSessionFactory().openSession()) {
+    public void deleteBook(Book book) {
 
-            Query<Long> query = session.createQuery(
-                    "SELECT COUNT(i) FROM Inventory i WHERE i.book = :book",
-                    Long.class
-            );
-
-            query.setParameter("book", book);
-
-            long inventoryCopies = query.getSingleResult();
+        try {
+            long inventoryCopies = inventoryRepository.checkNumberOfBooksInInventory(book);
 
             if (inventoryCopies > 0) {
-                return false;
+                throw new ChildRecordExistException(inventoryCopies+" copies of the book "+book.getTitle()+" still exist in the inventory");
             }
 
             bookGenericRepository.delete(book);
-            return true;
 
         } catch (Exception e) {
             logger.error("Failed to delete book", e);
-            return false;
+
+            throw e;
         }
     }
 }

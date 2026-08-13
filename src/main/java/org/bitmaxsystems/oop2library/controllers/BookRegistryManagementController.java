@@ -87,15 +87,7 @@ public class BookRegistryManagementController extends BaseBookRegistryFormContro
             DeleteBookService deleteBookService = new DeleteBookService();
 
             try {
-                boolean deleted = deleteBookService.deleteBook(book);
-
-                if (!deleted) {
-                    new Alert(Alert.AlertType.WARNING, "Cannot delete " + bookTitle + "because inventory copies still exist.")
-                            .show();
-
-                    logger.warn("Could not delete {} because inventory copies still exist.", bookTitle);
-                    return;
-                }
+                deleteBookService.deleteBook(book);
 
                 new Alert(Alert.AlertType.INFORMATION, bookTitle + " successfully deleted!").show();
 
