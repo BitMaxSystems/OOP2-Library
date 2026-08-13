@@ -30,6 +30,26 @@ public class GenericRepository<T> {
         }
     }
 
+    public void saveAll(List<T> entities) {
+        Transaction transaction = null;
+
+        try (Session session = HibernateUtil.getSessionFactory().openSession()) {
+            transaction = session.beginTransaction();
+
+            for (T entity : entities) {
+                session.persist(entity);
+            }
+
+            transaction.commit();
+        } catch (Exception e) {
+            if (transaction != null) {
+                transaction.rollback();
+            }
+
+            logger.error(e);
+        }
+    }
+
 
     public void update(T entity) {
         Transaction transaction = null;

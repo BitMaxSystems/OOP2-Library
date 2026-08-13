@@ -13,11 +13,16 @@ public class Inventory {
     @ManyToOne(optional = false)
     private Book book;
 
+    @Enumerated(EnumType.STRING)
+    @Column(nullable = false)
+    private BookStatus status;
 
-    protected Inventory () {}
+    protected Inventory() {
+    }
 
     public Inventory(Book book) {
         this.book = book;
+        this.status = BookStatus.AVAILABLE;
     }
 
     public int getId() {
@@ -28,4 +33,11 @@ public class Inventory {
         return book;
     }
 
+    public BookStatus getStatus() {
+        return status;
+    }
+
+    public void setStatus(BookStatus status) {
+        this.status = status;
+    }
 }
