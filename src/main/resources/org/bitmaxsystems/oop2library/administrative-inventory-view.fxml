@@ -28,6 +28,10 @@
                       prefWidth="105.0"
                       text="Book Status"/>
 
+         <TableColumn fx:id="archivedColumn"
+                      prefWidth="80.0"
+                      text="Archived" />
+
          <TableColumn fx:id="isbnColumn"
                       prefWidth="123.0"
                       text="ISBN"/>

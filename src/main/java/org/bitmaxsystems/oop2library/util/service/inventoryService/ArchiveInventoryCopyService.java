@@ -1,8 +1,8 @@
 package org.bitmaxsystems.oop2library.util.service.inventoryService;
 
-import org.bitmaxsystems.oop2library.models.books.BookStatus;
 import org.bitmaxsystems.oop2library.models.books.Inventory;
 import org.bitmaxsystems.oop2library.repository.GenericRepository;
+import org.bitmaxsystems.oop2library.util.bookstatus.AvailableBookStatus;
 
 public class ArchiveInventoryCopyService {
 
@@ -14,7 +14,17 @@ public class ArchiveInventoryCopyService {
             throw new IllegalArgumentException("Inventory copy cannot be null.");
         }
 
-        inventory.setStatus(BookStatus.ARCHIVED);
+        if (!(inventory.getStatus() instanceof AvailableBookStatus)) {
+            throw new IllegalStateException("Only available books can be archived.");
+        }
+
+        if (inventory.isArchived()) {
+            throw new IllegalStateException(
+                    "Book is already archived."
+            );
+        }
+
+        inventory.setArchived(true);
         inventoryRepository.update(inventory);
     }
 }

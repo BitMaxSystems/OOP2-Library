@@ -1,6 +1,9 @@
 package org.bitmaxsystems.oop2library.models.books;
 
 import jakarta.persistence.*;
+import org.bitmaxsystems.oop2library.config.BookStatusConverter;
+import org.bitmaxsystems.oop2library.util.bookstatus.AvailableBookStatus;
+import org.bitmaxsystems.oop2library.util.bookstatus.IBookStatus;
 
 @Entity
 @Table(name = "inventory")
@@ -13,16 +16,20 @@ public class Inventory {
     @ManyToOne(optional = false)
     private Book book;
 
-    @Enumerated(EnumType.STRING)
+    @Convert(converter = BookStatusConverter.class)
     @Column(nullable = false)
-    private BookStatus status;
+    private IBookStatus status;
+
+    @Column(nullable = false)
+    private boolean archived;
 
     protected Inventory() {
     }
 
     public Inventory(Book book) {
         this.book = book;
-        this.status = BookStatus.AVAILABLE;
+        this.status = new AvailableBookStatus();
+        this.archived = false;
     }
 
     public int getId() {
@@ -33,11 +40,19 @@ public class Inventory {
         return book;
     }
 
-    public BookStatus getStatus() {
+    public IBookStatus getStatus() {
         return status;
     }
 
-    public void setStatus(BookStatus status) {
+    public void setStatus(IBookStatus status) {
         this.status = status;
+    }
+
+    public boolean isArchived() {
+        return archived;
+    }
+
+    public void setArchived(boolean archived) {
+        this.archived = archived;
     }
 }

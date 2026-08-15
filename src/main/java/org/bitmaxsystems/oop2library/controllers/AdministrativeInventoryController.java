@@ -1,14 +1,11 @@
 package org.bitmaxsystems.oop2library.controllers;
 
+import javafx.beans.property.SimpleBooleanProperty;
+import javafx.beans.property.SimpleStringProperty;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
-import javafx.scene.control.Alert;
-import javafx.scene.control.Button;
-import javafx.scene.control.ButtonType;
-import javafx.scene.control.TableCell;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
+import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Modality;
@@ -16,8 +13,8 @@ import javafx.stage.Stage;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.bitmaxsystems.oop2library.models.books.Inventory;
-import org.bitmaxsystems.oop2library.models.books.BookStatus;
 import org.bitmaxsystems.oop2library.repository.GenericRepository;
+import org.bitmaxsystems.oop2library.util.bookstatus.AvailableBookStatus;
 import org.bitmaxsystems.oop2library.util.service.inventoryService.ArchiveInventoryCopyService;
 import org.bitmaxsystems.oop2library.util.service.inventoryService.DeleteInventoryCopyService;
 import org.bitmaxsystems.oop2library.view.SceneManager;
@@ -35,6 +32,9 @@ public class AdministrativeInventoryController {
 
     @FXML
     private TableColumn<Inventory, String> statusColumn;
+
+    @FXML
+    private TableColumn<Inventory, Boolean> archivedColumn;
 
     @FXML
     private TableColumn<Inventory, String> isbnColumn;
@@ -76,37 +76,64 @@ public class AdministrativeInventoryController {
         );
 
         statusColumn.setCellValueFactory(cellData ->
-                new javafx.beans.property.SimpleStringProperty(
+                new SimpleStringProperty(
                         cellData.getValue().getStatus().toString()
                 )
         );
 
+        archivedColumn.setCellValueFactory( cellData ->
+                new SimpleBooleanProperty(
+                        cellData.getValue().isArchived()
+                )
+        );
+
+        archivedColumn.setCellFactory(column -> new TableCell<>() {
+            private final CheckBox checkBox = new CheckBox();
+
+            {
+                checkBox.setDisable(true);
+            }
+
+            @Override
+            protected void updateItem(Boolean archived, boolean empty) {
+                super.updateItem(archived, empty);
+
+                if (empty || archived == null) {
+                    setGraphic(null);
+                    return;
+                }
+
+                checkBox.setSelected(archived);
+                setGraphic(checkBox);
+            }
+        });
+
         isbnColumn.setCellValueFactory(cellData ->
-                new javafx.beans.property.SimpleStringProperty(
+                new SimpleStringProperty(
                         cellData.getValue().getBook().getIsbn()
                 )
         );
 
         titleColumn.setCellValueFactory(cellData ->
-                new javafx.beans.property.SimpleStringProperty(
+                new SimpleStringProperty(
                         cellData.getValue().getBook().getTitle()
                 )
         );
 
         authorColumn.setCellValueFactory(cellData ->
-                new javafx.beans.property.SimpleStringProperty(
+                new SimpleStringProperty(
                         cellData.getValue().getBook().getAuthor().toString()
                 )
         );
 
         genreColumn.setCellValueFactory(cellData ->
-                new javafx.beans.property.SimpleStringProperty(
+                new SimpleStringProperty(
                         cellData.getValue().getBook().getGenre().toString()
                 )
         );
 
         publisherColumn.setCellValueFactory(cellData ->
-                new javafx.beans.property.SimpleStringProperty(
+                new SimpleStringProperty(
                         cellData.getValue().getBook().getPublisher().toString()
                 )
         );
@@ -121,9 +148,16 @@ public class AdministrativeInventoryController {
                             .getItems()
                             .get(getIndex());
 
-                    archiveInventoryCopyService.archive(inventory);
+                    try {
+                        archiveInventoryCopyService.archive(inventory);
+                        refreshTable();
+                    } catch (IllegalStateException e) {
+                        new Alert(
+                                Alert.AlertType.WARNING,
+                                e.getMessage()
+                        ).show();
+                    }
 
-                    refreshTable();
                 });
             }
 
@@ -141,7 +175,7 @@ public class AdministrativeInventoryController {
                         .get(getIndex());
 
                 archiveButton.setDisable(
-                        inventory.getStatus() == BookStatus.ARCHIVED
+                        inventory.isArchived() || !(inventory.getStatus() instanceof AvailableBookStatus)
                 );
 
                 setGraphic(archiveButton);
