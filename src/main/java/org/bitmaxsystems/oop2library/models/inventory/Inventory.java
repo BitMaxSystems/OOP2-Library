@@ -1,9 +1,10 @@
-package org.bitmaxsystems.oop2library.models.books;
+package org.bitmaxsystems.oop2library.models.inventory;
 
 import jakarta.persistence.*;
 import org.bitmaxsystems.oop2library.config.BookStatusConverter;
-import org.bitmaxsystems.oop2library.util.bookstatus.AvailableBookStatus;
-import org.bitmaxsystems.oop2library.util.bookstatus.IBookStatus;
+import org.bitmaxsystems.oop2library.models.books.Book;
+import org.bitmaxsystems.oop2library.models.inventory.states.AvailableInventoryState;
+import org.bitmaxsystems.oop2library.models.inventory.states.IInventoryState;
 
 @Entity
 @Table(name = "inventory")
@@ -18,7 +19,7 @@ public class Inventory {
 
     @Convert(converter = BookStatusConverter.class)
     @Column(nullable = false)
-    private IBookStatus status;
+    private IInventoryState status;
 
     @Column(nullable = false)
     private boolean archived;
@@ -28,8 +29,14 @@ public class Inventory {
 
     public Inventory(Book book) {
         this.book = book;
-        this.status = new AvailableBookStatus();
+        this.status = new AvailableInventoryState(this);
         this.archived = false;
+    }
+
+    @PostLoad
+    private void postLoad()
+    {
+        this.status.setInventory(this);
     }
 
     public int getId() {
@@ -40,12 +47,27 @@ public class Inventory {
         return book;
     }
 
-    public IBookStatus getStatus() {
+    public IInventoryState getStatus() {
         return status;
     }
 
-    public void setStatus(IBookStatus status) {
+    public void setStatus(IInventoryState status) {
         this.status = status;
+    }
+
+    public void lendInside()
+    {
+        status.lendInside();
+    }
+
+    public void lendOutside()
+    {
+        status.lendOutside();
+    }
+
+    public void returnBook()
+    {
+        status.returnBook();
     }
 
     public boolean isArchived() {

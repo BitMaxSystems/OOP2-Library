@@ -1,6 +1,6 @@
 package org.bitmaxsystems.oop2library.util.service.inventoryService;
 
-import org.bitmaxsystems.oop2library.models.books.Inventory;
+import org.bitmaxsystems.oop2library.models.inventory.Inventory;
 import org.bitmaxsystems.oop2library.repository.GenericRepository;
 
 public class InventoryStatusService {
@@ -9,25 +9,19 @@ public class InventoryStatusService {
             new GenericRepository<>(Inventory.class);
 
     public void lendInside(Inventory inventory) {
-        inventory.setStatus(
-                inventory.getStatus().lendInside(inventory)
-        );
+        inventory.lendInside();
 
         inventoryRepository.update(inventory);
     }
 
     public void lendOutside(Inventory inventory) {
-        inventory.setStatus(
-                inventory.getStatus().lendOutside(inventory)
-        );
+        inventory.lendOutside();
 
         inventoryRepository.update(inventory);
     }
 
     public void returnBook(Inventory inventory) {
-        inventory.setStatus(
-                inventory.getStatus().returnBook(inventory)
-        );
+        inventory.returnBook();
 
         inventoryRepository.update(inventory);
     }

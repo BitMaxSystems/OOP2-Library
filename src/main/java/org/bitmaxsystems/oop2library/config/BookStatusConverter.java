@@ -2,36 +2,27 @@ package org.bitmaxsystems.oop2library.config;
 
 import jakarta.persistence.AttributeConverter;
 import jakarta.persistence.Converter;
-import org.bitmaxsystems.oop2library.util.bookstatus.IBookStatus;
-import org.bitmaxsystems.oop2library.util.bookstatus.AvailableBookStatus;
-import org.bitmaxsystems.oop2library.util.bookstatus.LentInsideBookStatus;
-import org.bitmaxsystems.oop2library.util.bookstatus.LentOutsideBookStatus;
+import org.bitmaxsystems.oop2library.models.inventory.states.*;
 
 
 @Converter
-public class BookStatusConverter implements AttributeConverter<IBookStatus, String> {
+public class BookStatusConverter implements AttributeConverter<IInventoryState, InventoryStateEnum> {
 
     @Override
-    public String convertToDatabaseColumn(IBookStatus status) {
-        if (status == null) {
-            return null;
-        }
-
-        return status.getStatus();
+    public InventoryStateEnum convertToDatabaseColumn(IInventoryState status) {
+        return status.getStatusEnum();
     }
 
     @Override
-    public IBookStatus convertToEntityAttribute(String value) {
+    public IInventoryState convertToEntityAttribute(InventoryStateEnum value) {
         if (value == null) {
-            return null;
+            throw new IllegalArgumentException("Value cannot be null");
         }
 
         return switch (value) {
-            case "AVAILABLE" -> new AvailableBookStatus();
-            case "LENT_INSIDE" -> new LentInsideBookStatus();
-            case "LENT_OUTSIDE" -> new LentOutsideBookStatus();
-
-            default -> throw new IllegalArgumentException("Unknown book status: " + value);
+            case AVAILABLE -> new AvailableInventoryState();
+            case LENT_INSIDE -> new LentInsideInventoryState();
+            case LENT_OUTSIDE -> new LentOutsideInventoryState();
         };
     }
 }

@@ -2,14 +2,10 @@ package org.bitmaxsystems.oop2library.util.service.bookService;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import org.bitmaxsystems.oop2library.config.HibernateUtil;
 import org.bitmaxsystems.oop2library.exceptions.ChildRecordExistException;
 import org.bitmaxsystems.oop2library.models.books.Book;
-import org.bitmaxsystems.oop2library.models.books.Inventory;
 import org.bitmaxsystems.oop2library.repository.GenericRepository;
 import org.bitmaxsystems.oop2library.repository.InventoryRepository;
-import org.hibernate.Session;
-import org.hibernate.query.Query;
 
 public class DeleteBookService {
 

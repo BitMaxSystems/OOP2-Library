@@ -12,9 +12,9 @@ import javafx.stage.Modality;
 import javafx.stage.Stage;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import org.bitmaxsystems.oop2library.models.books.Inventory;
+import org.bitmaxsystems.oop2library.models.inventory.Inventory;
 import org.bitmaxsystems.oop2library.repository.GenericRepository;
-import org.bitmaxsystems.oop2library.util.bookstatus.AvailableBookStatus;
+import org.bitmaxsystems.oop2library.models.inventory.states.AvailableInventoryState;
 import org.bitmaxsystems.oop2library.util.service.inventoryService.ArchiveInventoryCopyService;
 import org.bitmaxsystems.oop2library.util.service.inventoryService.DeleteInventoryCopyService;
 import org.bitmaxsystems.oop2library.view.SceneManager;
@@ -77,7 +77,7 @@ public class AdministrativeInventoryController {
 
         statusColumn.setCellValueFactory(cellData ->
                 new SimpleStringProperty(
-                        cellData.getValue().getStatus().toString()
+                        cellData.getValue().getStatus().getStatusEnum().toString()
                 )
         );
 
@@ -175,7 +175,7 @@ public class AdministrativeInventoryController {
                         .get(getIndex());
 
                 archiveButton.setDisable(
-                        inventory.isArchived() || !(inventory.getStatus() instanceof AvailableBookStatus)
+                        inventory.isArchived() || !(inventory.getStatus() instanceof AvailableInventoryState)
                 );
 
                 setGraphic(archiveButton);

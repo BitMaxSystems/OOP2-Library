@@ -1,7 +1,7 @@
 package org.bitmaxsystems.oop2library.util.service.inventoryService;
 
 import org.bitmaxsystems.oop2library.models.books.Book;
-import org.bitmaxsystems.oop2library.models.books.Inventory;
+import org.bitmaxsystems.oop2library.models.inventory.Inventory;
 import org.bitmaxsystems.oop2library.repository.GenericRepository;
 
 import java.util.ArrayList;

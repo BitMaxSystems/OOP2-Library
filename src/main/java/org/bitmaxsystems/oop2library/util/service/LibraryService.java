@@ -2,6 +2,7 @@ package org.bitmaxsystems.oop2library.util.service;
 
 import org.bitmaxsystems.oop2library.config.HibernateUtil;
 import org.bitmaxsystems.oop2library.models.books.*;
+import org.bitmaxsystems.oop2library.models.inventory.Inventory;
 import org.bitmaxsystems.oop2library.repository.GenericRepository;
 import org.hibernate.Session;
 import org.hibernate.query.Query;
