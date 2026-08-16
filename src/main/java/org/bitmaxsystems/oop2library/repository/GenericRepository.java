@@ -26,6 +26,26 @@ public class GenericRepository<T> {
             transaction.commit();
         } catch (Exception e) {
             if (transaction != null) transaction.rollback();
+            throw e;
+        }
+    }
+
+    public void saveAll(List<T> entities) {
+        Transaction transaction = null;
+
+        try (Session session = HibernateUtil.getSessionFactory().openSession()) {
+            transaction = session.beginTransaction();
+
+            for (T entity : entities) {
+                session.persist(entity);
+            }
+
+            transaction.commit();
+        } catch (Exception e) {
+            if (transaction != null) {
+                transaction.rollback();
+            }
+
             logger.error(e);
         }
     }
@@ -39,7 +59,8 @@ public class GenericRepository<T> {
             transaction.commit();
         } catch (Exception e) {
             if (transaction != null) transaction.rollback();
-            logger.error(e);
+
+            throw e;
         }
     }
 
@@ -48,10 +69,6 @@ public class GenericRepository<T> {
         try (Session session = HibernateUtil.getSessionFactory().openSession()) {
             return session.find(type, id);
         }
-        catch (Exception e) {
-            logger.error(e);
-        }
-        return null;
     }
 
     public List<T> findAll() {
@@ -59,10 +76,6 @@ public class GenericRepository<T> {
             Query<T> query = session.createQuery("from " + type.getName(), type);
             return query.list();
         }
-        catch (Exception e) {
-            logger.error(e);
-        }
-        return null;
     }
 
     public void delete(T entity) {
@@ -73,7 +86,7 @@ public class GenericRepository<T> {
             transaction.commit();
         } catch (Exception e) {
             if (transaction != null) transaction.rollback();
-            logger.error(e);
+            throw e;
         }
     }
 }

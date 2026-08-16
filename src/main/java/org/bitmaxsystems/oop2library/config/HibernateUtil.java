@@ -5,7 +5,7 @@ import org.bitmaxsystems.oop2library.models.books.Author;
 import org.bitmaxsystems.oop2library.models.books.Book;
 import org.bitmaxsystems.oop2library.models.books.Genre;
 import org.bitmaxsystems.oop2library.models.books.Publisher;
-import org.bitmaxsystems.oop2library.models.books.Inventory;
+import org.bitmaxsystems.oop2library.models.inventory.Inventory;
 
 import org.bitmaxsystems.oop2library.models.form.UserForm;
 import org.bitmaxsystems.oop2library.models.users.User;

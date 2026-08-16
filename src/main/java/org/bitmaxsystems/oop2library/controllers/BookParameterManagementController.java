@@ -14,7 +14,7 @@ import javafx.stage.Modality;
 import javafx.stage.Stage;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import org.bitmaxsystems.oop2library.models.books.BookParameter;
+import org.bitmaxsystems.oop2library.models.books.IBookParameter;
 import org.bitmaxsystems.oop2library.models.dto.BookParameterTypeDTO;
 import org.bitmaxsystems.oop2library.repository.GenericRepository;
 import org.bitmaxsystems.oop2library.view.View;
@@ -47,7 +47,7 @@ public class BookParameterManagementController<T> {
     {
         if (event.getClickCount() == 2)
         {
-            BookParameter parameter = (BookParameter) tableView.getSelectionModel().getSelectedItem();
+            IBookParameter parameter = (IBookParameter) tableView.getSelectionModel().getSelectedItem();
             bookParameterTypeDTO.setParameter(parameter);
             loadBookParameterDetailsView();
         }

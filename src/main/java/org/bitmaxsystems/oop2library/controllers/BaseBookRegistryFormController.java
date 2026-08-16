@@ -15,8 +15,7 @@ import org.bitmaxsystems.oop2library.repository.GenericRepository;
 public class BaseBookRegistryFormController {
     @FXML
     protected Label errorLabel;
-//    @FXML
-//    private TextField isbnField;
+
     @FXML
     protected TextField titleField;
     @FXML
@@ -31,7 +30,7 @@ public class BaseBookRegistryFormController {
 
     protected void resetErrorLabel() {
         String string =
-                "- ISBN is 13 digits in format: xxx-x-xx-xxxxxx-x. Example: 1234-5-67-891234-5.";
+                "- ISBN is 13 digits in format: xxx-x-xx-xxxxxx-x. Example: 123-4-56-789123-4.";
         errorLabel.setTextFill(Color.BLACK);
         errorLabel.setText(string);
     }

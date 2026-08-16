@@ -11,7 +11,7 @@ import org.bitmaxsystems.oop2library.exceptions.FormAlreadyApprovedException;
 import org.bitmaxsystems.oop2library.models.form.UserForm;
 import org.bitmaxsystems.oop2library.models.form.enums.FormStatus;
 import org.bitmaxsystems.oop2library.models.users.User;
-import org.bitmaxsystems.oop2library.util.service.ApproveUserFormService;
+import org.bitmaxsystems.oop2library.util.service.UserFormService;
 
 public class UserFromDetailsController {
     @FXML
@@ -76,10 +76,10 @@ public class UserFromDetailsController {
     @FXML
     public void onApprove()
     {
-        ApproveUserFormService approveUserFormService = new ApproveUserFormService();
+        UserFormService userFormService = new UserFormService();
 
         try {
-            approveUserFormService.approveUser(form);
+            userFormService.approveUser(form);
             User user = form.getUser();
             resetControls();
             logger.info("{} {} successfully approved", user.getFirstName(), user.getLastName());

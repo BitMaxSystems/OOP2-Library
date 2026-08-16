@@ -8,7 +8,7 @@ import org.bitmaxsystems.oop2library.util.factory.AuthorFactory;
 import org.bitmaxsystems.oop2library.util.factory.GenreFactory;
 import org.bitmaxsystems.oop2library.util.factory.PublisherFactory;
 import org.bitmaxsystems.oop2library.util.factory.contract.BookParameterAbstractFactory;
-import org.bitmaxsystems.oop2library.util.service.CreateBookParameterService;
+import org.bitmaxsystems.oop2library.util.service.BookParameterService;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -18,7 +18,7 @@ public class BookParameterTest {
     private <T> void testBookParameterCreation(Class<T> type, String value, BookParameterAbstractFactory factory) {
         GenericRepository<T> genericRepository = new GenericRepository<>(type);
         int before = genericRepository.findAll().size();
-        CreateBookParameterService bookParameterService = new CreateBookParameterService();
+        BookParameterService bookParameterService = new BookParameterService();
         factory.setParameter(value);
         BookParameterTypeDTO<T> bookParameterTypeDTO = new BookParameterTypeDTO<>(type, factory);
 
@@ -40,7 +40,7 @@ public class BookParameterTest {
     }
 
     @Test
-    void testPublisher() {
+    void testPublisherCreate() {
         testBookParameterCreation(Publisher.class, "Publisher1", new PublisherFactory());
     }
 
@@ -49,7 +49,7 @@ public class BookParameterTest {
     {
         testBookParameterCreation(Genre.class, "Horror", new GenreFactory());
 
-        CreateBookParameterService bookParameterService = new CreateBookParameterService();
+        BookParameterService bookParameterService = new BookParameterService();
         BookParameterAbstractFactory factory = new GenreFactory();
         factory.setParameter("Horror");
         BookParameterTypeDTO<Genre> bookParameterTypeDTO = new BookParameterTypeDTO<>(Genre.class, factory);
@@ -61,7 +61,7 @@ public class BookParameterTest {
     {
         testBookParameterCreation(Author.class, "Jane Doe", new AuthorFactory());
 
-        CreateBookParameterService bookParameterService = new CreateBookParameterService();
+        BookParameterService bookParameterService = new BookParameterService();
         BookParameterAbstractFactory factory = new AuthorFactory();
         factory.setParameter("Jane Doe");
         BookParameterTypeDTO<Author> bookParameterTypeDTO = new BookParameterTypeDTO<>(Author.class, factory);
@@ -73,7 +73,7 @@ public class BookParameterTest {
     {
         testBookParameterCreation(Publisher.class, "Publisher2", new PublisherFactory());
 
-        CreateBookParameterService bookParameterService = new CreateBookParameterService();
+        BookParameterService bookParameterService = new BookParameterService();
         BookParameterAbstractFactory factory = new PublisherFactory();
         factory.setParameter("Publisher2");
         BookParameterTypeDTO<Publisher> bookParameterTypeDTO = new BookParameterTypeDTO<>(Publisher.class, factory);

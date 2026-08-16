@@ -1,10 +1,10 @@
 package org.bitmaxsystems.oop2library.util.factory.contract;
 
-import org.bitmaxsystems.oop2library.models.books.BookParameter;
+import org.bitmaxsystems.oop2library.models.books.IBookParameter;
 
 public interface BookParameterAbstractFactory {
 
-    BookParameter createParameter();
+    IBookParameter createParameter();
     void setParameter(String parameter);
     String getParameter();
 }

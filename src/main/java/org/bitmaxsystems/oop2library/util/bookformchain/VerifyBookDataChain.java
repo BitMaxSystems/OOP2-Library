@@ -20,7 +20,7 @@ public class VerifyBookDataChain implements IBookFormChain {
 
     @Override
     public void execute(BookDataDTO bookDataDTO) throws Exception {
-        Pattern pattern = Pattern.compile("\\d{3}-\\d-\\d{2}-\\d{6}-\\d");
+        Pattern pattern = Pattern.compile("^\\d{3}-\\d-\\d{2}-\\d{6}-\\d$");
         Matcher matcher = pattern.matcher(bookDataDTO.getIsbn());
 
         if (!matcher.find())

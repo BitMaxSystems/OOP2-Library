@@ -11,8 +11,7 @@ import org.bitmaxsystems.oop2library.repository.GenericRepository;
 
 public class UserManager {
     private User loggedUser = null;
-    private final AuthorisationRepository authorisationRepository = new AuthorisationRepository();
-    private GenericRepository<User> userGenericRepository = new GenericRepository<>(User.class);
+    private final AuthorisationRepository authorisationRepository = AuthorisationRepository.getInstance();
     private static final Logger logger = LogManager.getLogger(UserManager.class);
     private static final UserManager manager = new UserManager();
 

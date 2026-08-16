@@ -7,12 +7,11 @@ import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.bitmaxsystems.oop2library.exceptions.ChildRecordExistException;
 import org.bitmaxsystems.oop2library.exceptions.DataAlreadyExistException;
-import org.bitmaxsystems.oop2library.models.books.BookParameter;
+import org.bitmaxsystems.oop2library.models.books.IBookParameter;
 import org.bitmaxsystems.oop2library.models.dto.BookParameterTypeDTO;
-import org.bitmaxsystems.oop2library.util.service.DeleteBookParameterService;
-import org.bitmaxsystems.oop2library.util.service.DeleteUserService;
-import org.bitmaxsystems.oop2library.util.service.UpdateBookParameterService;
+import org.bitmaxsystems.oop2library.util.service.BookParameterService;
 
 
 public class BookParameterDetailsController<T> {
@@ -33,11 +32,11 @@ public class BookParameterDetailsController<T> {
     @FXML
     public void onUpdate()
     {
-        UpdateBookParameterService updateBookParameterService = new UpdateBookParameterService();
-        BookParameter parameter = bookParameterTypeDTO.getParameter();
+        BookParameterService bookParameterService = new BookParameterService();
+        IBookParameter parameter = bookParameterTypeDTO.getParameter();
         parameter.setName(parameterField.getText());
         try {
-            updateBookParameterService.update(parameter);
+            bookParameterService.update(parameter);
             logger.info("{} successfully updated!",bookParameterTypeDTO.gettClass().getSimpleName());
             new Alert(Alert.AlertType.INFORMATION,
                     bookParameterTypeDTO.gettClass().getSimpleName()+" successfully updated!").show();
@@ -50,15 +49,15 @@ public class BookParameterDetailsController<T> {
     @FXML
     public void onDelete()
     {
-        DeleteBookParameterService deleteBookParameterService = new DeleteBookParameterService();
+        BookParameterService bookParameterService = new BookParameterService();
 
         try {
-            deleteBookParameterService.delete(bookParameterTypeDTO);
+            bookParameterService.delete(bookParameterTypeDTO);
             logger.info("{} successfully deleted!",bookParameterTypeDTO.gettClass().getSimpleName());
             new Alert(Alert.AlertType.INFORMATION,
                     bookParameterTypeDTO.gettClass().getSimpleName()+" successfully deleted!").show();
         }
-        catch (DataAlreadyExistException e)
+        catch (ChildRecordExistException e)
         {
             logger.error(e);
             new Alert(Alert.AlertType.ERROR, e.getMessage()).show();

@@ -6,6 +6,7 @@ public enum View {
     ADMINISTRATIVE_MANAGEMENT_VIEW("administrative-management-view.fxml","Administrative management",858,433),
     ADMINISTRATIVE_INVENTORY_VIEW("administrative-inventory-view.fxml","Inventory",914,493),
     ADMINISTRATIVE_BOOK_REGISTRY_VIEW("administrative-book-registry-view.fxml","Book registry",914,493),
+    INVENTORY_COPY_CREATION_VIEW("inventory-copy-creation-view.fxml", "Add Inventory copies", 430, 260),
     BOOK_PARAMETER_MANAGEMENT_VIEW("book-parameter-manegement-view.fxml","Parameter management",600,400),
     BOOK_PARAMETER_CREATION_VIEW("book-parameter-creation-view.fxml","Parameter creation",486,277),
     BOOK_PARAMETER_DETAILS_VIEW("book-parameter-details-view.fxml","Parameter details",486,277),

@@ -1,11 +1,11 @@
 package org.bitmaxsystems.oop2library.models.dto;
 
-import org.bitmaxsystems.oop2library.models.books.BookParameter;
+import org.bitmaxsystems.oop2library.models.books.IBookParameter;
 import org.bitmaxsystems.oop2library.util.factory.contract.BookParameterAbstractFactory;
 
 public class BookParameterTypeDTO<T> {
     private Class<T> tClass;
-    private BookParameter parameter;
+    private IBookParameter parameter;
     private BookParameterAbstractFactory factory;
 
     public BookParameterTypeDTO(Class<T> tClass, BookParameterAbstractFactory factory) {
@@ -13,11 +13,11 @@ public class BookParameterTypeDTO<T> {
         this.factory = factory;
     }
 
-    public BookParameter getParameter() {
+    public IBookParameter getParameter() {
         return parameter;
     }
 
-    public void setParameter(BookParameter parameter) {
+    public void setParameter(IBookParameter parameter) {
         this.parameter = parameter;
     }
 

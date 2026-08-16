@@ -77,7 +77,7 @@ public class UserFormManagementController {
         dateOfApprovalColumn.setCellValueFactory(
                 userForm -> new SimpleObjectProperty<>(userForm.getValue().getUser().getDateOfApproval()));
         userRoleColumn.setCellValueFactory(
-                userForm -> new SimpleObjectProperty<>(userForm.getValue().getUser().getRole()));;
+                userForm -> new SimpleObjectProperty<>(userForm.getValue().getUser().getRole()));
 
         userColumn
                 .getColumns()

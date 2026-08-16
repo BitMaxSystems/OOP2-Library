@@ -7,13 +7,14 @@ import javafx.scene.control.Label;
 import javafx.scene.paint.Color;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.bitmaxsystems.oop2library.exceptions.ChildRecordExistException;
 import org.bitmaxsystems.oop2library.exceptions.DataValidationException;
 import org.bitmaxsystems.oop2library.models.books.Book;
 import org.bitmaxsystems.oop2library.models.dto.BookDataDTO;
 import org.bitmaxsystems.oop2library.util.bookformchain.UpdateBookChain;
 import org.bitmaxsystems.oop2library.util.bookformchain.VerifyBookDataChain;
 import org.bitmaxsystems.oop2library.util.contracts.IBookFormChain;
-import org.bitmaxsystems.oop2library.util.service.DeleteBookService;
+import org.bitmaxsystems.oop2library.util.service.bookService.DeleteBookService;
 
 
 import java.util.Optional;
@@ -87,10 +88,16 @@ public class BookRegistryManagementController extends BaseBookRegistryFormContro
 
             try {
                 deleteBookService.deleteBook(book);
+
                 new Alert(Alert.AlertType.INFORMATION, bookTitle + " successfully deleted!").show();
+
                 logger.info("{} successfully deleted!", bookTitle);
                 onClose();
-            } catch (Exception e) {
+            } catch (ChildRecordExistException e) {
+                logger.error(e);
+                new Alert(Alert.AlertType.ERROR,e.getMessage()).show();
+            }
+            catch (Exception e) {
                 logger.error(e);
                 new Alert(Alert.AlertType.ERROR, "Unexpected error occurred, try again.").show();
             }
