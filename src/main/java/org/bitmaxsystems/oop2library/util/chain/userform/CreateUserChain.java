@@ -1,17 +1,12 @@
-package org.bitmaxsystems.oop2library.util.userformchain;
+package org.bitmaxsystems.oop2library.util.chain.userform;
 
-import org.bitmaxsystems.oop2library.config.HibernateUtil;
 import org.bitmaxsystems.oop2library.exceptions.DataAlreadyExistException;
 import org.bitmaxsystems.oop2library.models.auth.Credentials;
 import org.bitmaxsystems.oop2library.models.dto.UserDataDTO;
 import org.bitmaxsystems.oop2library.models.users.User;
 import org.bitmaxsystems.oop2library.models.users.enums.UserRole;
-import org.bitmaxsystems.oop2library.repository.GenericRepository;
 import org.bitmaxsystems.oop2library.repository.UserRepository;
-import org.bitmaxsystems.oop2library.util.contracts.IUserFormChain;
-import org.hibernate.Session;
-import org.hibernate.Transaction;
-import org.hibernate.query.Query;
+import org.bitmaxsystems.oop2library.util.chain.userform.contract.IUserFormChain;
 import org.springframework.security.crypto.bcrypt.BCrypt;
 
 import java.util.Date;

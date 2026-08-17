@@ -1,4 +1,4 @@
-package org.bitmaxsystems.oop2library.util.contracts;
+package org.bitmaxsystems.oop2library.util.chain.book.contract;
 
 import org.bitmaxsystems.oop2library.models.dto.BookDataDTO;
 

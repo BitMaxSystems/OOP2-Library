@@ -1,9 +1,9 @@
-package org.bitmaxsystems.oop2library.util.bookformchain;
+package org.bitmaxsystems.oop2library.util.chain.book;
 
 import org.bitmaxsystems.oop2library.models.books.Book;
 import org.bitmaxsystems.oop2library.models.dto.BookDataDTO;
 import org.bitmaxsystems.oop2library.repository.GenericRepository;
-import org.bitmaxsystems.oop2library.util.contracts.IBookFormChain;
+import org.bitmaxsystems.oop2library.util.chain.book.contract.IBookFormChain;
 
 public class UpdateBookChain implements IBookFormChain {
     private IBookFormChain nextChain;

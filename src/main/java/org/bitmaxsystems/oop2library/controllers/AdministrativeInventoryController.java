@@ -15,8 +15,8 @@ import org.apache.logging.log4j.Logger;
 import org.bitmaxsystems.oop2library.models.inventory.Inventory;
 import org.bitmaxsystems.oop2library.repository.GenericRepository;
 import org.bitmaxsystems.oop2library.models.inventory.states.AvailableInventoryState;
-import org.bitmaxsystems.oop2library.util.service.inventoryService.ArchiveInventoryCopyService;
-import org.bitmaxsystems.oop2library.util.service.inventoryService.DeleteInventoryCopyService;
+import org.bitmaxsystems.oop2library.services.inventoryService.ArchiveInventoryCopyService;
+import org.bitmaxsystems.oop2library.services.inventoryService.DeleteInventoryCopyService;
 import org.bitmaxsystems.oop2library.view.SceneManager;
 import org.bitmaxsystems.oop2library.view.View;
 

@@ -8,10 +8,9 @@ import javafx.stage.Stage;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.bitmaxsystems.oop2library.exceptions.ChildRecordExistException;
-import org.bitmaxsystems.oop2library.exceptions.DataAlreadyExistException;
 import org.bitmaxsystems.oop2library.models.books.IBookParameter;
 import org.bitmaxsystems.oop2library.models.dto.BookParameterTypeDTO;
-import org.bitmaxsystems.oop2library.util.service.BookParameterService;
+import org.bitmaxsystems.oop2library.services.BookParameterService;
 
 
 public class BookParameterDetailsController<T> {

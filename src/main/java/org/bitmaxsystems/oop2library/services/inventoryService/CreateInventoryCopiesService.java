@@ -1,4 +1,4 @@
-package org.bitmaxsystems.oop2library.util.service.inventoryService;
+package org.bitmaxsystems.oop2library.services.inventoryService;
 
 import org.bitmaxsystems.oop2library.models.books.Book;
 import org.bitmaxsystems.oop2library.models.inventory.Inventory;

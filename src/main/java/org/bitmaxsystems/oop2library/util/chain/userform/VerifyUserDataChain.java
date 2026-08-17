@@ -1,8 +1,8 @@
-package org.bitmaxsystems.oop2library.util.userformchain;
+package org.bitmaxsystems.oop2library.util.chain.userform;
 
 import org.bitmaxsystems.oop2library.exceptions.DataValidationException;
 import org.bitmaxsystems.oop2library.models.dto.UserDataDTO;
-import org.bitmaxsystems.oop2library.util.contracts.IUserFormChain;
+import org.bitmaxsystems.oop2library.util.chain.userform.contract.IUserFormChain;
 
 import java.util.ArrayList;
 import java.util.List;

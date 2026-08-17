@@ -1,9 +1,9 @@
-package org.bitmaxsystems.oop2library.util.userformchain;
+package org.bitmaxsystems.oop2library.util.chain.userform;
 
 import org.bitmaxsystems.oop2library.models.dto.UserDataDTO;
 import org.bitmaxsystems.oop2library.models.users.User;
 import org.bitmaxsystems.oop2library.repository.GenericRepository;
-import org.bitmaxsystems.oop2library.util.contracts.IUserFormChain;
+import org.bitmaxsystems.oop2library.util.chain.userform.contract.IUserFormChain;
 
 public class UpdateUserChain implements IUserFormChain {
     private IUserFormChain nextChain;

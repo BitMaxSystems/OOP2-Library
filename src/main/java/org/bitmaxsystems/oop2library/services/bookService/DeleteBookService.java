@@ -1,4 +1,4 @@
-package org.bitmaxsystems.oop2library.util.service.bookService;
+package org.bitmaxsystems.oop2library.services.bookService;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;

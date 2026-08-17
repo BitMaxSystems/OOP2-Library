@@ -1,8 +1,8 @@
-package org.bitmaxsystems.oop2library.util.bookformchain;
+package org.bitmaxsystems.oop2library.util.chain.book;
 
 import org.bitmaxsystems.oop2library.exceptions.DataValidationException;
 import org.bitmaxsystems.oop2library.models.dto.BookDataDTO;
-import org.bitmaxsystems.oop2library.util.contracts.IBookFormChain;
+import org.bitmaxsystems.oop2library.util.chain.book.contract.IBookFormChain;
 
 import java.util.ArrayList;
 import java.util.List;

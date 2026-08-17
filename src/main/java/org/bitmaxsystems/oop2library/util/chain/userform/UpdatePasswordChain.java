@@ -1,9 +1,9 @@
-package org.bitmaxsystems.oop2library.util.userformchain;
+package org.bitmaxsystems.oop2library.util.chain.userform;
 
 import org.bitmaxsystems.oop2library.models.auth.Credentials;
 import org.bitmaxsystems.oop2library.models.dto.UserDataDTO;
 import org.bitmaxsystems.oop2library.repository.GenericRepository;
-import org.bitmaxsystems.oop2library.util.contracts.IUserFormChain;
+import org.bitmaxsystems.oop2library.util.chain.userform.contract.IUserFormChain;
 import org.springframework.security.crypto.bcrypt.BCrypt;
 
 public class UpdatePasswordChain implements IUserFormChain {

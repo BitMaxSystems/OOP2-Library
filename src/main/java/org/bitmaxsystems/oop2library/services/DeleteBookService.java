@@ -1,7 +1,5 @@
-package org.bitmaxsystems.oop2library.util.service;
+package org.bitmaxsystems.oop2library.services;
 
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
 import org.bitmaxsystems.oop2library.exceptions.ChildRecordExistException;
 import org.bitmaxsystems.oop2library.models.books.Book;
 import org.bitmaxsystems.oop2library.repository.GenericRepository;

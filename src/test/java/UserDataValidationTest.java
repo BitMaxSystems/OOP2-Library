@@ -1,7 +1,7 @@
 import org.bitmaxsystems.oop2library.exceptions.DataValidationException;
 import org.bitmaxsystems.oop2library.models.dto.UserDataDTO;
-import org.bitmaxsystems.oop2library.util.contracts.IUserFormChain;
-import org.bitmaxsystems.oop2library.util.userformchain.VerifyUserDataChain;
+import org.bitmaxsystems.oop2library.util.chain.userform.contract.IUserFormChain;
+import org.bitmaxsystems.oop2library.util.chain.userform.VerifyUserDataChain;
 import org.junit.jupiter.api.Test;
 
 import java.util.Arrays;

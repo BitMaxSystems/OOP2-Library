@@ -8,7 +8,7 @@ import javafx.stage.Stage;
 import javafx.util.StringConverter;
 import org.bitmaxsystems.oop2library.models.books.Book;
 import org.bitmaxsystems.oop2library.repository.GenericRepository;
-import org.bitmaxsystems.oop2library.util.service.inventoryService.CreateInventoryCopiesService;
+import org.bitmaxsystems.oop2library.services.inventoryService.CreateInventoryCopiesService;
 
 public class InventoryCopyCreationController {
 
