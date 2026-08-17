@@ -139,6 +139,15 @@ public class User {
     }
 
     public void updateLoyaltyPoints(int loyaltyPoints) {
+
+        if (loyaltyPoints > 100-this.loyaltyPoints)
+        {
+            loyaltyPoints = 100-this.loyaltyPoints;
+        }
+        else if (loyaltyPoints < -this.loyaltyPoints)
+        {
+            loyaltyPoints = -this.loyaltyPoints;
+        }
         this.loyaltyPoints += loyaltyPoints;
     }
 
@@ -157,5 +166,10 @@ public class User {
     {
         this.role = UserRole.READER;
         this.dateOfApproval = LocalDate.now();
+    }
+
+    @Override
+    public String toString() {
+        return this.firstName + " " + this.lastName + " - " + this.loyaltyPoints+"/100";
     }
 }

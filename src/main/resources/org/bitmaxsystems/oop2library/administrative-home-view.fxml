@@ -34,7 +34,12 @@
          <Font size="15.0" />
       </font>
    </Button>
-   <Button layoutX="499.0" layoutY="70.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="296.0" text="View Inventory" onAction="#onViewInventory">
+   <Button layoutX="499.0" layoutY="70.0" mnemonicParsing="false" onAction="#onViewInventory" prefHeight="25.0" prefWidth="296.0" text="View Inventory">
+      <font>
+         <Font size="15.0" />
+      </font>
+   </Button>
+   <Button layoutX="499.0" layoutY="122.0" mnemonicParsing="false" onAction="#onViewReaderLending" prefHeight="25.0" prefWidth="296.0" text="View Reader Lending">
       <font>
          <Font size="15.0" />
       </font>
