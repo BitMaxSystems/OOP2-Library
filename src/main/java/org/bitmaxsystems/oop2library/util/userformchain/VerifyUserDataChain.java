@@ -15,7 +15,6 @@ public class VerifyUserDataChain implements IUserFormChain {
     private final int MIN_POINTS_ALLOWED = 0;
     private final int MAX_POINTS_ALLOWED = 100;
     private IUserFormChain nextChain;
-    private List<String> errorList = new ArrayList<>();
 
     @Override
     public void setNextChain(IUserFormChain nextChain) {
@@ -24,6 +23,8 @@ public class VerifyUserDataChain implements IUserFormChain {
 
     @Override
     public void execute(UserDataDTO formData) throws Exception {
+        List<String> errorList = new ArrayList<>();
+
         int age,loyaltyPoints;
 
         Pattern namePattern = Pattern.compile("[\\W\\d]");
