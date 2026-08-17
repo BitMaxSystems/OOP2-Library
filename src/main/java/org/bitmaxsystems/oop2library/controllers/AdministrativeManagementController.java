@@ -16,10 +16,9 @@ import org.apache.logging.log4j.Logger;
 import org.bitmaxsystems.oop2library.models.users.User;
 import org.bitmaxsystems.oop2library.models.users.enums.UserRole;
 import org.bitmaxsystems.oop2library.repository.UserRepository;
-import org.bitmaxsystems.oop2library.util.UserManager;
 import org.bitmaxsystems.oop2library.view.View;
 
-import java.util.Date;
+import java.time.LocalDate;
 
 public class AdministrativeManagementController {
     @FXML
@@ -35,7 +34,7 @@ public class AdministrativeManagementController {
     @FXML
     private TableColumn<User, Integer> loyaltyPointsColumn;
     @FXML
-    private TableColumn<User, Date> dateOfApprovalColumn;
+    private TableColumn<User, LocalDate> dateOfApprovalColumn;
     @FXML
     private TableColumn<User,UserRole> userRoleColumn;
     @FXML

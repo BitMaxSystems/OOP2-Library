@@ -9,7 +9,7 @@ import org.hibernate.Session;
 import org.hibernate.Transaction;
 import org.springframework.security.crypto.bcrypt.BCrypt;
 
-import java.util.Date;
+import java.time.LocalDate;
 import java.util.List;
 
 public class HibernateInit {
@@ -23,7 +23,7 @@ public class HibernateInit {
             if (credentialsList.isEmpty())
             {
                 User user = new User.Builder("Admin","Admin",21,"+359888000001",UserRole.ADMINISTRATOR)
-                        .setDateOfApproval(new Date())
+                        .setDateOfApproval(LocalDate.now())
                         .build();
                 Credentials credentials = new Credentials("admin", BCrypt.hashpw("admin",BCrypt.gensalt()),user);
                 Transaction tx = session.beginTransaction();

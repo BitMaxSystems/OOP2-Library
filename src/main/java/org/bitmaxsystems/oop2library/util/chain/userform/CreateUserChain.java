@@ -9,7 +9,7 @@ import org.bitmaxsystems.oop2library.repository.UserRepository;
 import org.bitmaxsystems.oop2library.util.chain.userform.contract.IUserFormChain;
 import org.springframework.security.crypto.bcrypt.BCrypt;
 
-import java.util.Date;
+import java.time.LocalDate;
 
 public class CreateUserChain implements IUserFormChain {
 
@@ -64,7 +64,7 @@ public class CreateUserChain implements IUserFormChain {
 
         if (formData.getRole() != UserRole.UNAPPROVED_READER)
         {
-            userBuilder.setDateOfApproval(new Date());
+            userBuilder.setDateOfApproval(LocalDate.now());
         }
 
         user = userBuilder.build();
