@@ -8,11 +8,13 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.bitmaxsystems.oop2library.models.books.Book;
 import org.bitmaxsystems.oop2library.models.history.History;
 import org.bitmaxsystems.oop2library.models.history.LendStatusEnum;
 import org.bitmaxsystems.oop2library.models.users.User;
@@ -24,6 +26,7 @@ import org.bitmaxsystems.oop2library.view.View;
 
 import java.io.IOException;
 import java.time.LocalDate;
+import java.util.List;
 import java.util.Objects;
 
 public class LibraryHistoryController {
@@ -75,6 +78,22 @@ public class LibraryHistoryController {
 
 
     private User selectedUser;
+
+    private void loadUsers()
+    {
+        if(userChoiceBox.getItems().isEmpty())
+        {
+            userChoiceBox.setItems(FXCollections.observableArrayList(userRepository.searchByRole(UserRole.READER)));
+
+        }
+        else
+        {
+            User selectedUser = userChoiceBox.getValue();
+            List<User> refreshedList = userRepository.searchByRole(UserRole.READER);
+            userChoiceBox.getItems().setAll(refreshedList);
+            userChoiceBox.setValue(selectedUser);
+        }
+    }
 
     @FXML
     private void initialize() {
@@ -189,7 +208,9 @@ public class LibraryHistoryController {
                 )
         );
 
-        userChoiceBox.setItems(FXCollections.observableArrayList(userRepository.searchByRole(UserRole.READER)));
+        loadUsers();
+
+        tableView.setOnMouseClicked(this::onTableClick);
 
     }
 
@@ -202,7 +223,46 @@ public class LibraryHistoryController {
     public void onChangeUser()
     {
         this.selectedUser = userChoiceBox.getValue();
-        refreshTable();
+        if (Objects.nonNull(selectedUser))
+        {
+            refreshTable();
+        }
+    }
+
+    private void loadHistoryDetails(History history)
+    {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource(View.LIBRARY_HISTORY_DETAILS_VIEW.getPath()));
+            AnchorPane root = loader.load();
+
+            LibraryHistoryDetailsController controller = loader.getController();
+            controller.setHistory(history);
+
+            Stage stage = new Stage();
+            stage.setTitle(View.LIBRARY_HISTORY_DETAILS_VIEW.getTitle());
+            stage.initModality(Modality.APPLICATION_MODAL);
+            stage.setScene(new Scene(root));
+            stage.showAndWait();
+            tableView.getItems().clear();
+            loadUsers();
+            refreshTable();
+
+        } catch (Exception e) {
+            logger.error(e);
+            new Alert(Alert.AlertType.ERROR,"Unexpected error occurred. Try again").show();
+        }
+    }
+
+    private void onTableClick(MouseEvent event)
+    {
+        if (event.getClickCount() == 2)
+        {
+            History selectedHistory = tableView.getSelectionModel().getSelectedItem();
+            if (selectedHistory != null)
+            {
+                loadHistoryDetails(selectedHistory);
+            }
+        }
     }
 
     private void refreshTable() {

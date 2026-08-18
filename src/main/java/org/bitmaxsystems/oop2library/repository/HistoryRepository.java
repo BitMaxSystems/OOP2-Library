@@ -62,7 +62,7 @@ public class HistoryRepository {
             transaction = session.beginTransaction();
             session.merge(inventory);
             session.merge(user);
-            session.persist(history);
+            session.merge(history);
             transaction.commit();
         } catch (Exception e) {
             logger.error(e);

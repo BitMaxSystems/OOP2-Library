@@ -79,7 +79,7 @@ public class LibraryService {
         }
         else
         {
-            calculatedLoyaltyPoints = 5 - (Math.toIntExact(timeDiff) * 5);
+            calculatedLoyaltyPoints =  (Math.toIntExact(timeDiff) * 5);
         }
 
         user.updateLoyaltyPoints(calculatedLoyaltyPoints);

@@ -6,7 +6,6 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.Label;
 import javafx.stage.Stage;
-import org.bitmaxsystems.oop2library.exceptions.DataAlreadyExistException;
 import org.bitmaxsystems.oop2library.models.inventory.Inventory;
 import org.bitmaxsystems.oop2library.models.inventory.states.InventoryStateEnum;
 import org.bitmaxsystems.oop2library.models.users.User;
