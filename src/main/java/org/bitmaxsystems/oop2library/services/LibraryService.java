@@ -10,6 +10,7 @@ import org.bitmaxsystems.oop2library.models.inventory.Inventory;
 import org.bitmaxsystems.oop2library.models.inventory.states.InventoryStateEnum;
 import org.bitmaxsystems.oop2library.models.users.User;
 import org.bitmaxsystems.oop2library.repository.GenericRepository;
+import org.bitmaxsystems.oop2library.repository.HistoryRepository;
 import org.hibernate.Session;
 import org.hibernate.query.Query;
 
@@ -19,7 +20,7 @@ import java.util.List;
 
 public class LibraryService {
 
-    private GenericRepository<History> historyRepository = new GenericRepository<>(History.class);
+    private HistoryRepository historyRepository = HistoryRepository.getInstance();
     private static final Logger logger = LogManager.getLogger(LibraryService.class);
 
 
@@ -35,7 +36,7 @@ public class LibraryService {
 
         History history = new History.Builder(user, inventory).lendOutside().build();
 
-        historyRepository.save(history);
+        historyRepository.saveHistory(inventory,history);
 
         logger.info("Inventory book: {} - {} was successfully lent outside for user: {} {}", inventory.getId(), inventory.getBook().getTitle(), user.getFirstName(), user.getLastName());
     }
@@ -43,14 +44,20 @@ public class LibraryService {
     public void lendInside(User user, Inventory inventory)
     {
 
-        inventory.lendInside();
+        try {
 
-        History history = new History.Builder(user, inventory).lendInside().build();
 
-        historyRepository.save(history);
+            inventory.lendInside();
 
-        logger.info("Inventory book: {} - {} was successfully lent inside for user: {} {}", inventory.getId(), inventory.getBook().getTitle(), user.getFirstName(), user.getLastName());
+            History history = new History.Builder(user, inventory).lendInside().build();
 
+            historyRepository.saveHistory(inventory,history);
+
+            logger.info("Inventory book: {} - {} was successfully lent inside for user: {} {}", inventory.getId(), inventory.getBook().getTitle(), user.getFirstName(), user.getLastName());
+        } catch (Exception e) {
+            logger.error(e);
+            throw e;
+        }
     }
 
 
@@ -77,7 +84,7 @@ public class LibraryService {
 
         user.updateLoyaltyPoints(calculatedLoyaltyPoints);
 
-        historyRepository.update(history);
+        historyRepository.updateHistory(inventory,user,history);
 
         logger.info("Inventory book: {} - {} was successfully returned by user: {} {}", inventory.getId(), inventory.getBook().getTitle(), user.getFirstName(), user.getLastName());
     }

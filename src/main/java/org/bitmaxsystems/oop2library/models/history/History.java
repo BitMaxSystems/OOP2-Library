@@ -90,7 +90,7 @@ public class History {
                 return LendStatusEnum.RETURNED_OVERDUE;
             }
         }
-        else if (expectedReturnDate.isAfter(LocalDate.now()))
+        else if (expectedReturnDate.isBefore(LocalDate.now()))
         {
             return LendStatusEnum.OVERDUE;
         }

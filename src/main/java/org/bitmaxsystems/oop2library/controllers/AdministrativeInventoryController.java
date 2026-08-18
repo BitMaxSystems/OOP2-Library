@@ -77,7 +77,7 @@ public class AdministrativeInventoryController {
 
         statusColumn.setCellValueFactory(cellData ->
                 new SimpleStringProperty(
-                        cellData.getValue().getStatus().getStatusEnum().toString()
+                        cellData.getValue().getState().getStateEnum().toString()
                 )
         );
 
@@ -175,7 +175,7 @@ public class AdministrativeInventoryController {
                         .get(getIndex());
 
                 archiveButton.setDisable(
-                        inventory.isArchived() || !(inventory.getStatus() instanceof AvailableInventoryState)
+                        inventory.isArchived() || !(inventory.getState() instanceof AvailableInventoryState)
                 );
 
                 setGraphic(archiveButton);

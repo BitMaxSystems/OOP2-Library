@@ -101,6 +101,6 @@ public class AdministrativeHomeController extends BaseHomeController {
     @FXML
     public void onViewReaderLending()
     {
-        SceneManager.showView(View.LIBARRY_HISTORY_VIEW);
+        SceneManager.showView(View.LIBRARY_HISTORY_VIEW);
     }
 }

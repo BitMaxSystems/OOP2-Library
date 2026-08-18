@@ -19,7 +19,8 @@ public enum View {
     USER_DETAILS("user-details-view.fxml","User Details",472,665),
     USER_FORM_DETAILS_VIEW("user-form-details-view.fxml","User Form Details",600,721),
     USER_FORM_MANAGEMENT_VIEW("user-form-management-view.fxml","User Form Management",1207,414),
-    LIBARRY_HISTORY_VIEW("library-history-view.fxml","Library history",1346,493);
+    LIBRARY_HISTORY_VIEW("library-history-view.fxml","Library history",1346,493),
+    LIBRARY_HISTORY_CREATION_VIEW("library-history-creation-view.fxml","Lend book",467,595);
 
     private final String path;
     private final String title;

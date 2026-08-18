@@ -67,4 +67,9 @@ public class Book {
     public void setPublisher(Publisher publisher) {
         this.publisher = publisher;
     }
+
+    @Override
+    public String toString() {
+        return isbn+ " - "+title;
+    }
 }

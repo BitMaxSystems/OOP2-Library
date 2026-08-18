@@ -14,7 +14,7 @@ public class ArchiveInventoryCopyService {
             throw new IllegalArgumentException("Inventory copy cannot be null.");
         }
 
-        if (!(inventory.getStatus() instanceof AvailableInventoryState)) {
+        if (!(inventory.getState() instanceof AvailableInventoryState)) {
             throw new IllegalStateException("Only available books can be archived.");
         }
 

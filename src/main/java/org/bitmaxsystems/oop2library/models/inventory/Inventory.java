@@ -19,7 +19,7 @@ public class Inventory {
 
     @Convert(converter = BookStatusConverter.class)
     @Column(nullable = false)
-    private IInventoryState status;
+    private IInventoryState state;
 
     @Column(nullable = false)
     private boolean archived;
@@ -29,14 +29,14 @@ public class Inventory {
 
     public Inventory(Book book) {
         this.book = book;
-        this.status = new AvailableInventoryState(this);
+        this.state = new AvailableInventoryState(this);
         this.archived = false;
     }
 
     @PostLoad
     private void postLoad()
     {
-        this.status.setInventory(this);
+        this.state.setInventory(this);
     }
 
     public int getId() {
@@ -47,27 +47,27 @@ public class Inventory {
         return book;
     }
 
-    public IInventoryState getStatus() {
-        return status;
+    public IInventoryState getState() {
+        return state;
     }
 
-    public void setStatus(IInventoryState status) {
-        this.status = status;
+    public void setState(IInventoryState state) {
+        this.state = state;
     }
 
     public void lendInside()
     {
-        status.lendInside();
+        state.lendInside();
     }
 
     public void lendOutside()
     {
-        status.lendOutside();
+        state.lendOutside();
     }
 
     public void returnBook()
     {
-        status.returnBook();
+        state.returnBook();
     }
 
     public boolean isArchived() {
@@ -76,5 +76,10 @@ public class Inventory {
 
     public void setArchived(boolean archived) {
         this.archived = archived;
+    }
+
+    @Override
+    public String toString() {
+        return id + " - "+book.toString();
     }
 }

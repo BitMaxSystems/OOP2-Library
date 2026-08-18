@@ -1,30 +1,30 @@
 package org.bitmaxsystems.oop2library.controllers;
 
 import javafx.beans.property.SimpleBooleanProperty;
-import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Scene;
 import javafx.scene.control.*;
-import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.layout.AnchorPane;
+import javafx.stage.Modality;
+import javafx.stage.Stage;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.bitmaxsystems.oop2library.models.history.History;
 import org.bitmaxsystems.oop2library.models.history.LendStatusEnum;
-import org.bitmaxsystems.oop2library.models.inventory.Inventory;
-import org.bitmaxsystems.oop2library.models.inventory.states.AvailableInventoryState;
 import org.bitmaxsystems.oop2library.models.users.User;
 import org.bitmaxsystems.oop2library.models.users.enums.UserRole;
-import org.bitmaxsystems.oop2library.repository.GenericRepository;
 import org.bitmaxsystems.oop2library.repository.HistoryRepository;
 import org.bitmaxsystems.oop2library.repository.UserRepository;
 import org.bitmaxsystems.oop2library.view.SceneManager;
 import org.bitmaxsystems.oop2library.view.View;
 
+import java.io.IOException;
 import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.Date;
+import java.util.Objects;
 
 public class LibraryHistoryController {
     @FXML
@@ -66,13 +66,13 @@ public class LibraryHistoryController {
     @FXML
     private ChoiceBox<User> userChoiceBox;
 
-    private static final Logger logger =
-            LogManager.getLogger(LibraryHistoryController.class);
-
     private final HistoryRepository historyRepository =
             HistoryRepository.getInstance();
 
     private final UserRepository userRepository = UserRepository.getInstance();
+
+    private static final Logger logger = LogManager.getLogger(LibraryHistoryController.class);
+
 
     private User selectedUser;
 
@@ -208,9 +208,7 @@ public class LibraryHistoryController {
     private void refreshTable() {
         try {
             tableView.getItems().setAll(historyRepository.searchByUser(selectedUser));
-            logger.info("Loaded lend history for {} {}", selectedUser.getFirstName(), selectedUser.getLastName());
         } catch (Exception e) {
-            logger.error(e);
             new Alert(
                     Alert.AlertType.ERROR,
                     "Unexpected error occurred. Try again."
@@ -221,6 +219,34 @@ public class LibraryHistoryController {
     @FXML
     public void onCreateLendHistory()
     {
-        new Alert(Alert.AlertType.INFORMATION,"Placeholder").show();
+        try {
+            User selectedUser = userChoiceBox.getValue();
+
+            if (Objects.isNull(selectedUser))
+            {
+                throw new IllegalArgumentException("No user selected");
+            }
+
+            FXMLLoader loader = new FXMLLoader(getClass().getResource(View.LIBRARY_HISTORY_CREATION_VIEW.getPath()));
+            AnchorPane root = loader.load();
+
+            LibraryHistoryCreationController controller = loader.getController();
+            controller.setSelectedUser(selectedUser);
+
+            Stage stage = new Stage();
+            stage.setTitle(View.LIBRARY_HISTORY_CREATION_VIEW.getTitle());
+            stage.initModality(Modality.APPLICATION_MODAL);
+            stage.setScene(new Scene(root));
+            stage.showAndWait();
+            refreshTable();
+
+        } catch (IllegalArgumentException e) {
+            logger.error(e);
+            new Alert(Alert.AlertType.ERROR,e.getMessage()).show();
+        }
+        catch (IOException e) {
+            logger.error(e);
+            new Alert(Alert.AlertType.ERROR,"Unexpected error, try again!").show();
+        }
     }
 }
