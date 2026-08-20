@@ -11,6 +11,7 @@ import org.bitmaxsystems.oop2library.models.inventory.states.InventoryStateEnum;
 import org.bitmaxsystems.oop2library.models.users.User;
 import org.bitmaxsystems.oop2library.repository.InventoryRepository;
 import org.bitmaxsystems.oop2library.services.LibraryService;
+import org.bitmaxsystems.oop2library.services.inventoryService.InventoryService;
 
 import java.util.Objects;
 
@@ -48,13 +49,13 @@ public class LibraryHistoryCreationController {
     @FXML
     private ChoiceBox<Inventory> availableBooksChoiceBox;
 
-    private InventoryRepository inventoryRepository = InventoryRepository.getInstance();
+    private InventoryService inventoryService = new InventoryService();
     private LibraryService libraryService = new LibraryService();
 
     @FXML
     public void initialize()
     {
-        availableBooksChoiceBox.setItems(FXCollections.observableArrayList(inventoryRepository.getInventoryByState(InventoryStateEnum.AVAILABLE)));
+        availableBooksChoiceBox.setItems(FXCollections.observableArrayList(inventoryService.getAvailableBooks()));
         availableBooksChoiceBox.setOnAction(event -> {
             onSelectInventoryBook();
         });

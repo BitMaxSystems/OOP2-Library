@@ -33,7 +33,6 @@ public class HistoryRepository {
         try (Session session = HibernateUtil.getSessionFactory().openSession()) {
             Query<History> query = session.createQuery("FROM History WHERE user = :user", History.class);
             query.setParameter("user", user);
-            logger.info("Loaded lend history for {} {}", user.getFirstName(), user.getLastName());
             return query.list();
         } catch (Exception e) {
             logger.error(e);

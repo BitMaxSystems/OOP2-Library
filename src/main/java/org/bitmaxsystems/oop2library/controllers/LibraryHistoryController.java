@@ -21,6 +21,8 @@ import org.bitmaxsystems.oop2library.models.users.User;
 import org.bitmaxsystems.oop2library.models.users.enums.UserRole;
 import org.bitmaxsystems.oop2library.repository.HistoryRepository;
 import org.bitmaxsystems.oop2library.repository.UserRepository;
+import org.bitmaxsystems.oop2library.services.LibraryService;
+import org.bitmaxsystems.oop2library.services.UserService;
 import org.bitmaxsystems.oop2library.view.SceneManager;
 import org.bitmaxsystems.oop2library.view.View;
 
@@ -69,10 +71,9 @@ public class LibraryHistoryController {
     @FXML
     private ChoiceBox<User> userChoiceBox;
 
-    private final HistoryRepository historyRepository =
-            HistoryRepository.getInstance();
+    private final LibraryService libraryService = new LibraryService();
 
-    private final UserRepository userRepository = UserRepository.getInstance();
+    private final UserService userService = new UserService();
 
     private static final Logger logger = LogManager.getLogger(LibraryHistoryController.class);
 
@@ -83,13 +84,13 @@ public class LibraryHistoryController {
     {
         if(userChoiceBox.getItems().isEmpty())
         {
-            userChoiceBox.setItems(FXCollections.observableArrayList(userRepository.searchByRole(UserRole.READER)));
+            userChoiceBox.setItems(FXCollections.observableArrayList(userService.getAllApprovedReaders()));
 
         }
         else
         {
             User selectedUser = userChoiceBox.getValue();
-            List<User> refreshedList = userRepository.searchByRole(UserRole.READER);
+            List<User> refreshedList = userService.getAllApprovedReaders();
             userChoiceBox.getItems().setAll(refreshedList);
             userChoiceBox.setValue(selectedUser);
         }
@@ -267,7 +268,7 @@ public class LibraryHistoryController {
 
     private void refreshTable() {
         try {
-            tableView.getItems().setAll(historyRepository.searchByUser(selectedUser));
+            tableView.getItems().setAll(libraryService.getHistoryForUser(selectedUser));
         } catch (Exception e) {
             new Alert(
                     Alert.AlertType.ERROR,
