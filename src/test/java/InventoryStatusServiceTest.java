@@ -7,7 +7,7 @@ import org.bitmaxsystems.oop2library.models.inventory.states.AvailableInventoryS
 import org.bitmaxsystems.oop2library.models.inventory.states.LentInsideInventoryState;
 import org.bitmaxsystems.oop2library.models.inventory.states.LentOutsideInventoryState;
 import org.bitmaxsystems.oop2library.repository.GenericRepository;
-import org.bitmaxsystems.oop2library.util.service.inventoryService.InventoryStatusService;
+import org.bitmaxsystems.oop2library.services.inventoryService.InventoryService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -21,7 +21,7 @@ public class InventoryStatusServiceTest {
     private GenericRepository<Book> bookRepository;
     private GenericRepository<Inventory> inventoryRepository;
 
-    private InventoryStatusService inventoryStatusService;
+    private InventoryService inventoryService;
     private Inventory inventory;
 
     @BeforeEach
@@ -32,7 +32,7 @@ public class InventoryStatusServiceTest {
         bookRepository = new GenericRepository<>(Book.class);
         inventoryRepository = new GenericRepository<>(Inventory.class);
 
-        inventoryStatusService = new InventoryStatusService();
+        inventoryService = new InventoryService();
 
         String unique = String.valueOf(System.nanoTime());
 
@@ -60,54 +60,54 @@ public class InventoryStatusServiceTest {
 
     @Test
     void testLendInsidePersistence() {
-        assertDoesNotThrow(() -> inventoryStatusService.lendInside(inventory));
+        assertDoesNotThrow(() -> inventoryService.lendInside(inventory));
 
         Inventory persistedInventory = inventoryRepository.findById(inventory.getId());
 
         assertNotNull(persistedInventory);
-        assertInstanceOf(LentInsideInventoryState.class, persistedInventory.getStatus());
+        assertInstanceOf(LentInsideInventoryState.class, persistedInventory.getState());
     }
 
     @Test
     void testLendOutsidePersistence() {
-        assertDoesNotThrow(() -> inventoryStatusService.lendOutside(inventory));
+        assertDoesNotThrow(() -> inventoryService.lendOutside(inventory));
 
         Inventory persistedInventory = inventoryRepository.findById(inventory.getId());
 
         assertNotNull(persistedInventory);
-        assertInstanceOf(LentOutsideInventoryState.class, persistedInventory.getStatus());
+        assertInstanceOf(LentOutsideInventoryState.class, persistedInventory.getState());
     }
 
     @Test
     void testReturnFromLentInsidePersistence() {
-        inventoryStatusService.lendInside(inventory);
+        inventoryService.lendInside(inventory);
 
         Inventory lentInventory = inventoryRepository.findById(inventory.getId());
 
-        assertInstanceOf(LentInsideInventoryState.class, lentInventory.getStatus());
+        assertInstanceOf(LentInsideInventoryState.class, lentInventory.getState());
 
-        assertDoesNotThrow(() -> inventoryStatusService.returnBook(lentInventory));
+        assertDoesNotThrow(() -> inventoryService.returnBook(lentInventory));
 
         Inventory returnedInventory = inventoryRepository.findById(inventory.getId());
 
         assertNotNull(returnedInventory);
-        assertInstanceOf(AvailableInventoryState.class, returnedInventory.getStatus());
+        assertInstanceOf(AvailableInventoryState.class, returnedInventory.getState());
     }
 
     @Test
     void testReturnFromLentOutsidePersistence() {
-        inventoryStatusService.lendOutside(inventory);
+        inventoryService.lendOutside(inventory);
 
         Inventory lentInventory = inventoryRepository.findById(inventory.getId());
 
-        assertInstanceOf(LentOutsideInventoryState.class, lentInventory.getStatus());
+        assertInstanceOf(LentOutsideInventoryState.class, lentInventory.getState());
 
-        assertDoesNotThrow(() -> inventoryStatusService.returnBook(lentInventory));
+        assertDoesNotThrow(() -> inventoryService.returnBook(lentInventory));
 
         Inventory returnedInventory = inventoryRepository.findById(inventory.getId());
 
         assertNotNull(returnedInventory);
-        assertInstanceOf(AvailableInventoryState.class, returnedInventory.getStatus());
+        assertInstanceOf(AvailableInventoryState.class, returnedInventory.getState());
     }
 
     @Test
@@ -115,12 +115,12 @@ public class InventoryStatusServiceTest {
         inventory.setArchived(true);
         inventoryRepository.update(inventory);
 
-        assertDoesNotThrow(() -> inventoryStatusService.lendInside(inventory));
+        assertDoesNotThrow(() -> inventoryService.lendInside(inventory));
 
         Inventory persistedInventory = inventoryRepository.findById(inventory.getId());
 
         assertNotNull(persistedInventory);
-        assertInstanceOf(LentInsideInventoryState.class, persistedInventory.getStatus());
+        assertInstanceOf(LentInsideInventoryState.class, persistedInventory.getState());
         assertTrue(persistedInventory.isArchived());
     }
 
@@ -131,13 +131,13 @@ public class InventoryStatusServiceTest {
 
         assertThrowsExactly(
                 IllegalStateException.class,
-                () -> inventoryStatusService.lendOutside(inventory)
+                () -> inventoryService.lendOutside(inventory)
         );
 
         Inventory persistedInventory = inventoryRepository.findById(inventory.getId());
 
         assertNotNull(persistedInventory);
-        assertInstanceOf(AvailableInventoryState.class, persistedInventory.getStatus());
+        assertInstanceOf(AvailableInventoryState.class, persistedInventory.getState());
         assertTrue(persistedInventory.isArchived());
     }
 
@@ -146,31 +146,31 @@ public class InventoryStatusServiceTest {
         inventory.setArchived(true);
         inventoryRepository.update(inventory);
 
-        inventoryStatusService.lendInside(inventory);
+        inventoryService.lendInside(inventory);
 
         Inventory lentInventory = inventoryRepository.findById(inventory.getId());
 
         assertTrue(lentInventory.isArchived());
-        assertInstanceOf(LentInsideInventoryState.class, lentInventory.getStatus());
+        assertInstanceOf(LentInsideInventoryState.class, lentInventory.getState());
 
-        inventoryStatusService.returnBook(lentInventory);
+        inventoryService.returnBook(lentInventory);
 
         Inventory returnedInventory = inventoryRepository.findById(inventory.getId());
 
         assertTrue(returnedInventory.isArchived());
-        assertInstanceOf(AvailableInventoryState.class, returnedInventory.getStatus());
+        assertInstanceOf(AvailableInventoryState.class, returnedInventory.getState());
     }
 
     @Test
     void availableBookCannotBeReturned() {
         assertThrowsExactly(
                 IllegalStateException.class,
-                () -> inventoryStatusService.returnBook(inventory)
+                () -> inventoryService.returnBook(inventory)
         );
 
         Inventory persistedInventory = inventoryRepository.findById(inventory.getId());
 
         assertNotNull(persistedInventory);
-        assertInstanceOf(AvailableInventoryState.class, persistedInventory.getStatus());
+        assertInstanceOf(AvailableInventoryState.class, persistedInventory.getState());
     }
 }

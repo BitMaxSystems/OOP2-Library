@@ -3,8 +3,8 @@ import org.bitmaxsystems.oop2library.models.books.Author;
 import org.bitmaxsystems.oop2library.models.books.Genre;
 import org.bitmaxsystems.oop2library.models.books.Publisher;
 import org.bitmaxsystems.oop2library.models.dto.BookDataDTO;
-import org.bitmaxsystems.oop2library.util.contracts.IBookFormChain;
-import org.bitmaxsystems.oop2library.util.bookformchain.VerifyBookDataChain;
+import org.bitmaxsystems.oop2library.util.chain.book.contract.IBookFormChain;
+import org.bitmaxsystems.oop2library.util.chain.book.VerifyBookDataChain;
 import org.junit.jupiter.api.Test;
 
 import java.util.Arrays;

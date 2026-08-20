@@ -7,11 +7,11 @@ import org.bitmaxsystems.oop2library.models.books.Publisher;
 import org.bitmaxsystems.oop2library.models.dto.BookDataDTO;
 import org.bitmaxsystems.oop2library.models.inventory.Inventory;
 import org.bitmaxsystems.oop2library.repository.GenericRepository;
-import org.bitmaxsystems.oop2library.util.bookformchain.CreateBookChain;
-import org.bitmaxsystems.oop2library.util.bookformchain.UpdateBookChain;
-import org.bitmaxsystems.oop2library.util.contracts.IBookFormChain;
-import org.bitmaxsystems.oop2library.util.service.bookService.DeleteBookService;
-import org.bitmaxsystems.oop2library.util.service.inventoryService.CreateInventoryCopiesService;
+import org.bitmaxsystems.oop2library.util.chain.book.CreateBookChain;
+import org.bitmaxsystems.oop2library.util.chain.book.UpdateBookChain;
+import org.bitmaxsystems.oop2library.util.chain.book.contract.IBookFormChain;
+import org.bitmaxsystems.oop2library.services.bookService.DeleteBookService;
+import org.bitmaxsystems.oop2library.services.inventoryService.CreateInventoryCopiesService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 

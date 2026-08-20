@@ -65,4 +65,6 @@ public class InventoryRepository {
             return query.list();
         }
     }
+
+
 }

@@ -25,7 +25,7 @@ public class UserUpdateTest {
                 "Test",
                 "14",
                 "+359888263282",
-                "test")
+                "testUpdate")
                 .setNewPassword("TestTest!123","TestTest!123")
                 .build();
 

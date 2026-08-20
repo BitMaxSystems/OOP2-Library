@@ -31,10 +31,10 @@ public class InventoryStateTest {
 
     @Test
     void testDefaultInventoryState() {
-        assertInstanceOf(AvailableInventoryState.class, inventory.getStatus());
+        assertInstanceOf(AvailableInventoryState.class, inventory.getState());
         assertEquals(
                 InventoryStateEnum.AVAILABLE,
-                inventory.getStatus().getStatusEnum()
+                inventory.getState().getStateEnum()
         );
         assertFalse(inventory.isArchived());
     }
@@ -45,12 +45,12 @@ public class InventoryStateTest {
 
         assertInstanceOf(
                 LentInsideInventoryState.class,
-                inventory.getStatus()
+                inventory.getState()
         );
 
         assertEquals(
                 InventoryStateEnum.LENT_INSIDE,
-                inventory.getStatus().getStatusEnum()
+                inventory.getState().getStateEnum()
         );
     }
 
@@ -60,12 +60,12 @@ public class InventoryStateTest {
 
         assertInstanceOf(
                 LentOutsideInventoryState.class,
-                inventory.getStatus()
+                inventory.getState()
         );
 
         assertEquals(
                 InventoryStateEnum.LENT_OUTSIDE,
-                inventory.getStatus().getStatusEnum()
+                inventory.getState().getStateEnum()
         );
     }
 
@@ -85,7 +85,7 @@ public class InventoryStateTest {
 
         assertInstanceOf(
                 AvailableInventoryState.class,
-                inventory.getStatus()
+                inventory.getState()
         );
     }
 
@@ -97,7 +97,7 @@ public class InventoryStateTest {
 
         assertInstanceOf(
                 AvailableInventoryState.class,
-                inventory.getStatus()
+                inventory.getState()
         );
     }
 
@@ -149,7 +149,7 @@ public class InventoryStateTest {
 
         assertInstanceOf(
                 LentInsideInventoryState.class,
-                inventory.getStatus()
+                inventory.getState()
         );
 
         assertTrue(inventory.isArchived());
@@ -166,7 +166,7 @@ public class InventoryStateTest {
 
         assertInstanceOf(
                 AvailableInventoryState.class,
-                inventory.getStatus()
+                inventory.getState()
         );
     }
 
@@ -181,7 +181,7 @@ public class InventoryStateTest {
 
         assertInstanceOf(
                 AvailableInventoryState.class,
-                inventory.getStatus()
+                inventory.getState()
         );
     }
 
@@ -192,7 +192,7 @@ public class InventoryStateTest {
 
         assertEquals(
                 InventoryStateEnum.AVAILABLE,
-                state.getStatusEnum()
+                state.getStateEnum()
         );
 
         assertEquals("Available", state.toString());
@@ -205,7 +205,7 @@ public class InventoryStateTest {
 
         assertEquals(
                 InventoryStateEnum.LENT_INSIDE,
-                state.getStatusEnum()
+                state.getStateEnum()
         );
 
         assertEquals("Lent inside", state.toString());
@@ -218,7 +218,7 @@ public class InventoryStateTest {
 
         assertEquals(
                 InventoryStateEnum.LENT_OUTSIDE,
-                state.getStatusEnum()
+                state.getStateEnum()
         );
 
         assertEquals("Lent outside", state.toString());

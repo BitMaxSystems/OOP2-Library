@@ -5,9 +5,9 @@ import org.bitmaxsystems.oop2library.models.books.Publisher;
 import org.bitmaxsystems.oop2library.models.inventory.Inventory;
 import org.bitmaxsystems.oop2library.models.inventory.states.AvailableInventoryState;
 import org.bitmaxsystems.oop2library.repository.GenericRepository;
-import org.bitmaxsystems.oop2library.util.service.inventoryService.ArchiveInventoryCopyService;
-import org.bitmaxsystems.oop2library.util.service.inventoryService.CreateInventoryCopiesService;
-import org.bitmaxsystems.oop2library.util.service.inventoryService.DeleteInventoryCopyService;
+import org.bitmaxsystems.oop2library.services.inventoryService.ArchiveInventoryCopyService;
+import org.bitmaxsystems.oop2library.services.inventoryService.CreateInventoryCopiesService;
+import org.bitmaxsystems.oop2library.services.inventoryService.DeleteInventoryCopyService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -302,7 +302,7 @@ public class InventoryServiceTest {
         for (Inventory copy : copies) {
             assertInstanceOf(
                     AvailableInventoryState.class,
-                    copy.getStatus()
+                    copy.getState()
             );
 
             assertFalse(
@@ -357,7 +357,7 @@ public class InventoryServiceTest {
 
         assertInstanceOf(
                 AvailableInventoryState.class,
-                persistedCopy.getStatus()
+                persistedCopy.getState()
         );
     }
 

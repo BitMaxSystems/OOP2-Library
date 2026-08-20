@@ -53,7 +53,7 @@ public class UserFormTest {
                 "Test",
                 "14",
                 "+359888263282",
-                "test")
+                "testForm")
                 .setNewPassword("TestTest!123","TestTest!123")
                 .build();
 
@@ -83,7 +83,7 @@ public class UserFormTest {
                 "Test1",
                 "14",
                 "+359888263282",
-                "test1")
+                "testForm1")
                 .setNewPassword("TestTest!123","TestTest!123")
                 .setRole(UserRole.ADMINISTRATOR)
                 .build();
@@ -114,7 +114,7 @@ public class UserFormTest {
                 "Test2",
                 "14",
                 "+359888263282",
-                "test2")
+                "testForm2")
                 .setNewPassword("TestTest!123","TestTest!123")
                 .setRole(UserRole.LIBRARIAN)
                 .build();
@@ -152,7 +152,7 @@ public class UserFormTest {
                 "Test",
                 "14",
                 "+359888263282",
-                "test3")
+                "testForm3")
                 .setNewPassword("TestTest!123","TestTest!123")
                 .build();
 

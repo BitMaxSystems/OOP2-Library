@@ -20,7 +20,7 @@ public class UserDataValidationTest {
                 "Test",
                 "14",
                 "+359888263282",
-                "test")
+                "testValidation")
                 .setNewPassword("TestTest!123","TestTest!123")
                 .build();
 
@@ -36,7 +36,7 @@ public class UserDataValidationTest {
                 "123",
                 "14",
                 "+359888263282",
-                "test")
+                "testValidation")
                 .setNewPassword("TestTest!123","TestTest!123")
                 .build();
 
@@ -52,7 +52,7 @@ public class UserDataValidationTest {
                 "Test",
                 "das",
                 "+359888263282",
-                "test")
+                "testValidation")
                 .setNewPassword("TestTest!123","TestTest!123")
                 .build();
 
@@ -67,7 +67,7 @@ public class UserDataValidationTest {
                 "Test",
                 "-2",
                 "+359888263282",
-                "test")
+                "testValidation")
                 .setNewPassword("TestTest!123","TestTest!123")
                 .build();
 
@@ -82,7 +82,7 @@ public class UserDataValidationTest {
                 "Test",
                 "14",
                 "+359888263282",
-                "test")
+                "testValidation")
                 .setLoyaltyPoints("das")
                 .setNewPassword("TestTest!123","TestTest!123")
                 .build();
@@ -98,7 +98,7 @@ public class UserDataValidationTest {
                 "Test",
                 "14",
                 "+359888263282",
-                "test")
+                "testValidation")
                 .setLoyaltyPoints("-2")
                 .setNewPassword("TestTest!123","TestTest!123")
                 .build();
@@ -114,7 +114,7 @@ public class UserDataValidationTest {
                 "Test",
                 "14",
                 "+35988826asdasd",
-                "test")
+                "testValidation")
                 .setNewPassword("TestTest!123","TestTest!123")
                 .build();
 
@@ -129,7 +129,7 @@ public class UserDataValidationTest {
                 "Test",
                 "14",
                 "+359888263282",
-                "test no")
+                "testValidation no")
                 .setNewPassword("TestTest!123","TestTest!123")
                 .build();
 
@@ -144,7 +144,7 @@ public class UserDataValidationTest {
                 "Test",
                 "14",
                 "+359888263282",
-                "test")
+                "testValidation")
                 .setNewPassword("Test","TestTest!123")
                 .build();
 
@@ -159,7 +159,7 @@ public class UserDataValidationTest {
                 "Test",
                 "14",
                 "+359888263282",
-                "test")
+                "testValidation")
                 .setNewPassword("TestTest!123","TestTest!122")
                 .build();
 
@@ -175,7 +175,7 @@ public class UserDataValidationTest {
                 "Test",
                 "-14",
                 "+359888263282",
-                "test no")
+                "testValidation no")
                 .setNewPassword("TestTest!123","TestTest!122")
                 .build();
 
@@ -191,7 +191,7 @@ public class UserDataValidationTest {
                 "Test",
                 "14",
                 "+359888263282",
-                "test")
+                "testValidation")
                 .setNewPassword("TestTest!123","TestTest!123")
                 .build();
 
@@ -206,7 +206,7 @@ public class UserDataValidationTest {
                 "Test",
                 "14",
                 "+359888263282",
-                "test")
+                "testValidation")
                 .setLoyaltyPoints("74")
                 .setNewPassword("TestTest!123","TestTest!123")
                 .build();
