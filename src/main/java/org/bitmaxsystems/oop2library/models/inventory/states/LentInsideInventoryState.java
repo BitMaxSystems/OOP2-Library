@@ -20,7 +20,7 @@ public class LentInsideInventoryState implements IInventoryState {
     }
 
     @Override
-    public InventoryStateEnum getStatusEnum() {
+    public InventoryStateEnum getStateEnum() {
         return stateEnum;
     }
 
@@ -36,7 +36,7 @@ public class LentInsideInventoryState implements IInventoryState {
 
     @Override
     public void returnBook() {
-        inventory.setStatus(new AvailableInventoryState(inventory));
+        inventory.setState(new AvailableInventoryState(inventory));
     }
 
     @Override

@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ChoiceBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="595.0" prefWidth="467.0" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.bitmaxsystems.oop2library.controllers.LibraryHistoryCreationController">
+   <Label layoutX="115.0" layoutY="229.0" text="ISBN">
+      <font>
+         <Font size="15.0" />
+      </font>
+   </Label>
+   <Label layoutX="117.0" layoutY="268.0" text="Title">
+      <font>
+         <Font size="15.0" />
+      </font>
+   </Label>
+   <Label layoutX="109.0" layoutY="310.0" text="Author">
+      <font>
+         <Font size="15.0" />
+      </font>
+   </Label>
+   <Label layoutX="113.0" layoutY="356.0" text="Genre">
+      <font>
+         <Font size="15.0" />
+      </font>
+   </Label>
+   <Label layoutX="103.0" layoutY="403.0" text="Publisher">
+      <font>
+         <Font size="15.0" />
+      </font>
+   </Label>
+   <Button layoutX="267.0" layoutY="497.0" mnemonicParsing="false" onAction="#onLendInside" text="Lend Inside">
+      <font>
+         <Font size="15.0" />
+      </font>
+   </Button>
+   <Button layoutX="211.0" layoutY="539.0" mnemonicParsing="false" onAction="#onClose" text="Close">
+      <font>
+         <Font size="15.0" />
+      </font>
+   </Button>
+   <Label layoutX="103.0" layoutY="449.0" text="Archived">
+      <font>
+         <Font size="15.0" />
+      </font>
+   </Label>
+   <Label fx:id="archivedLabel" layoutX="225.0" layoutY="451.0" prefHeight="17.0" prefWidth="149.0">
+      <font>
+         <Font size="15.0" />
+      </font>
+   </Label>
+   <Label fx:id="publisherLabel" layoutX="225.0" layoutY="403.0" prefHeight="17.0" prefWidth="149.0">
+      <font>
+         <Font size="15.0" />
+      </font>
+   </Label>
+   <Label fx:id="genreLabel" layoutX="225.0" layoutY="356.0" prefHeight="17.0" prefWidth="149.0">
+      <font>
+         <Font size="15.0" />
+      </font>
+   </Label>
+   <Label fx:id="authorLabel" layoutX="225.0" layoutY="310.0" prefHeight="17.0" prefWidth="149.0">
+      <font>
+         <Font size="15.0" />
+      </font>
+   </Label>
+   <Label fx:id="titleLabel" layoutX="225.0" layoutY="268.0" prefHeight="17.0" prefWidth="149.0">
+      <font>
+         <Font size="15.0" />
+      </font>
+   </Label>
+   <Label fx:id="isbnLabel" layoutX="225.0" layoutY="229.0" prefHeight="17.0" prefWidth="149.0">
+      <font>
+         <Font size="15.0" />
+      </font>
+   </Label>
+   <Label layoutX="93.0" layoutY="180.0" text="Inventory ID">
+      <font>
+         <Font size="15.0" />
+      </font>
+   </Label>
+   <Label fx:id="inventoryIdLabel" layoutX="225.0" layoutY="180.0" prefHeight="17.0" prefWidth="149.0">
+      <font>
+         <Font size="15.0" />
+      </font>
+   </Label>
+   <Label layoutX="81.0" layoutY="136.0" text="Available books">
+      <font>
+         <Font size="15.0" />
+      </font>
+   </Label>
+   <ChoiceBox fx:id="availableBooksChoiceBox" layoutX="225.0" layoutY="134.0" prefWidth="150.0" />
+   <Label layoutX="88.0" layoutY="94.0" text="Loyalty Points">
+      <font>
+         <Font size="15.0" />
+      </font>
+   </Label>
+   <Label fx:id="loyaltyPointsLabel" layoutX="225.0" layoutY="94.0" prefHeight="17.0" prefWidth="149.0" text="/100">
+      <font>
+         <Font size="15.0" />
+      </font>
+   </Label>
+   <Label fx:id="headerLabel" alignment="CENTER" layoutX="65.0" layoutY="29.0" prefHeight="39.0" prefWidth="348.0" text="Lend book to: user" wrapText="true">
+      <font>
+         <Font size="27.0" />
+      </font>
+   </Label>
+   <Button layoutX="110.0" layoutY="497.0" mnemonicParsing="false" onAction="#onLendOutside" text="Lend Outside">
+      <font>
+         <Font size="15.0" />
+      </font>
+   </Button>
+</AnchorPane>

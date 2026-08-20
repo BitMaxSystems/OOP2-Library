@@ -6,9 +6,9 @@ import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.paint.Color;
 import org.bitmaxsystems.oop2library.models.dto.UserDataDTO;
-import org.bitmaxsystems.oop2library.util.contracts.IUserFormChain;
-import org.bitmaxsystems.oop2library.util.userformchain.CreateUserChain;
-import org.bitmaxsystems.oop2library.util.userformchain.VerifyUserDataChain;
+import org.bitmaxsystems.oop2library.util.chain.userform.contract.IUserFormChain;
+import org.bitmaxsystems.oop2library.util.chain.userform.CreateUserChain;
+import org.bitmaxsystems.oop2library.util.chain.userform.VerifyUserDataChain;
 
 public class BaseUserFormController {
     @FXML

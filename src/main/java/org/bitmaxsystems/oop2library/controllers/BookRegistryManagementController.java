@@ -11,10 +11,10 @@ import org.bitmaxsystems.oop2library.exceptions.ChildRecordExistException;
 import org.bitmaxsystems.oop2library.exceptions.DataValidationException;
 import org.bitmaxsystems.oop2library.models.books.Book;
 import org.bitmaxsystems.oop2library.models.dto.BookDataDTO;
-import org.bitmaxsystems.oop2library.util.bookformchain.UpdateBookChain;
-import org.bitmaxsystems.oop2library.util.bookformchain.VerifyBookDataChain;
-import org.bitmaxsystems.oop2library.util.contracts.IBookFormChain;
-import org.bitmaxsystems.oop2library.util.service.bookService.DeleteBookService;
+import org.bitmaxsystems.oop2library.util.chain.book.UpdateBookChain;
+import org.bitmaxsystems.oop2library.util.chain.book.VerifyBookDataChain;
+import org.bitmaxsystems.oop2library.util.chain.book.contract.IBookFormChain;
+import org.bitmaxsystems.oop2library.services.bookService.DeleteBookService;
 
 
 import java.util.Optional;

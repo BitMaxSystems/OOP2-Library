@@ -11,7 +11,7 @@ import org.bitmaxsystems.oop2library.exceptions.FormAlreadyApprovedException;
 import org.bitmaxsystems.oop2library.models.form.UserForm;
 import org.bitmaxsystems.oop2library.models.form.enums.FormStatus;
 import org.bitmaxsystems.oop2library.models.users.User;
-import org.bitmaxsystems.oop2library.util.service.UserFormService;
+import org.bitmaxsystems.oop2library.services.UserFormService;
 
 public class UserFromDetailsController {
     @FXML

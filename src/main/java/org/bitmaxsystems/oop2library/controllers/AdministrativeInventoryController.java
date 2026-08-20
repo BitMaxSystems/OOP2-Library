@@ -15,8 +15,8 @@ import org.apache.logging.log4j.Logger;
 import org.bitmaxsystems.oop2library.models.inventory.Inventory;
 import org.bitmaxsystems.oop2library.repository.GenericRepository;
 import org.bitmaxsystems.oop2library.models.inventory.states.AvailableInventoryState;
-import org.bitmaxsystems.oop2library.util.service.inventoryService.ArchiveInventoryCopyService;
-import org.bitmaxsystems.oop2library.util.service.inventoryService.DeleteInventoryCopyService;
+import org.bitmaxsystems.oop2library.services.inventoryService.ArchiveInventoryCopyService;
+import org.bitmaxsystems.oop2library.services.inventoryService.DeleteInventoryCopyService;
 import org.bitmaxsystems.oop2library.view.SceneManager;
 import org.bitmaxsystems.oop2library.view.View;
 
@@ -77,7 +77,7 @@ public class AdministrativeInventoryController {
 
         statusColumn.setCellValueFactory(cellData ->
                 new SimpleStringProperty(
-                        cellData.getValue().getStatus().getStatusEnum().toString()
+                        cellData.getValue().getState().getStateEnum().toString()
                 )
         );
 
@@ -175,7 +175,7 @@ public class AdministrativeInventoryController {
                         .get(getIndex());
 
                 archiveButton.setDisable(
-                        inventory.isArchived() || !(inventory.getStatus() instanceof AvailableInventoryState)
+                        inventory.isArchived() || !(inventory.getState() instanceof AvailableInventoryState)
                 );
 
                 setGraphic(archiveButton);
@@ -202,8 +202,15 @@ public class AdministrativeInventoryController {
 
                     confirmation.showAndWait().ifPresent(response -> {
                         if (response == ButtonType.OK) {
-                            deleteInventoryCopyService.delete(inventory);
-                            refreshTable();
+                            try {
+
+                                deleteInventoryCopyService.delete(inventory);
+
+                                new Alert(Alert.AlertType.INFORMATION, "Inventory copy successfully deleted").show();
+                                refreshTable();
+                            } catch (IllegalArgumentException e) {
+                                new Alert(Alert.AlertType.ERROR,e.getMessage()).show();
+                            }
                         }
                     });
                 });
