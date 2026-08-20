@@ -3,6 +3,8 @@ package org.bitmaxsystems.oop2library.models.history;
 import jakarta.persistence.*;
 import org.bitmaxsystems.oop2library.models.inventory.Inventory;
 import org.bitmaxsystems.oop2library.models.users.User;
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
 
 import java.time.LocalDate;
 import java.util.Objects;

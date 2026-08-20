@@ -3,8 +3,12 @@ package org.bitmaxsystems.oop2library.models.inventory;
 import jakarta.persistence.*;
 import org.bitmaxsystems.oop2library.config.BookStatusConverter;
 import org.bitmaxsystems.oop2library.models.books.Book;
+import org.bitmaxsystems.oop2library.models.history.History;
 import org.bitmaxsystems.oop2library.models.inventory.states.AvailableInventoryState;
 import org.bitmaxsystems.oop2library.models.inventory.states.IInventoryState;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Table(name = "inventory")
@@ -23,6 +27,9 @@ public class Inventory {
 
     @Column(nullable = false)
     private boolean archived;
+
+    @OneToMany(mappedBy = "inventory", cascade = CascadeType.REMOVE, orphanRemoval = true)
+    private List<History> history = new ArrayList<>();
 
     protected Inventory() {
     }

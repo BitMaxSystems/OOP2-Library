@@ -202,8 +202,15 @@ public class AdministrativeInventoryController {
 
                     confirmation.showAndWait().ifPresent(response -> {
                         if (response == ButtonType.OK) {
-                            deleteInventoryCopyService.delete(inventory);
-                            refreshTable();
+                            try {
+
+                                deleteInventoryCopyService.delete(inventory);
+
+                                new Alert(Alert.AlertType.INFORMATION, "Inventory copy successfully deleted").show();
+                                refreshTable();
+                            } catch (IllegalArgumentException e) {
+                                new Alert(Alert.AlertType.ERROR,e.getMessage()).show();
+                            }
                         }
                     });
                 });
