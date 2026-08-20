@@ -3,8 +3,12 @@ package org.bitmaxsystems.oop2library.models.inventory;
 import jakarta.persistence.*;
 import org.bitmaxsystems.oop2library.config.BookStatusConverter;
 import org.bitmaxsystems.oop2library.models.books.Book;
+import org.bitmaxsystems.oop2library.models.history.History;
 import org.bitmaxsystems.oop2library.models.inventory.states.AvailableInventoryState;
 import org.bitmaxsystems.oop2library.models.inventory.states.IInventoryState;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Table(name = "inventory")
@@ -19,24 +23,27 @@ public class Inventory {
 
     @Convert(converter = BookStatusConverter.class)
     @Column(nullable = false)
-    private IInventoryState status;
+    private IInventoryState state;
 
     @Column(nullable = false)
     private boolean archived;
+
+    @OneToMany(mappedBy = "inventory", cascade = CascadeType.REMOVE, orphanRemoval = true)
+    private List<History> history = new ArrayList<>();
 
     protected Inventory() {
     }
 
     public Inventory(Book book) {
         this.book = book;
-        this.status = new AvailableInventoryState(this);
+        this.state = new AvailableInventoryState(this);
         this.archived = false;
     }
 
     @PostLoad
     private void postLoad()
     {
-        this.status.setInventory(this);
+        this.state.setInventory(this);
     }
 
     public int getId() {
@@ -47,27 +54,27 @@ public class Inventory {
         return book;
     }
 
-    public IInventoryState getStatus() {
-        return status;
+    public IInventoryState getState() {
+        return state;
     }
 
-    public void setStatus(IInventoryState status) {
-        this.status = status;
+    public void setState(IInventoryState state) {
+        this.state = state;
     }
 
     public void lendInside()
     {
-        status.lendInside();
+        state.lendInside();
     }
 
     public void lendOutside()
     {
-        status.lendOutside();
+        state.lendOutside();
     }
 
     public void returnBook()
     {
-        status.returnBook();
+        state.returnBook();
     }
 
     public boolean isArchived() {
@@ -76,5 +83,10 @@ public class Inventory {
 
     public void setArchived(boolean archived) {
         this.archived = archived;
+    }
+
+    @Override
+    public String toString() {
+        return id + " - "+book.toString();
     }
 }

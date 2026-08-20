@@ -23,7 +23,7 @@ import org.bitmaxsystems.oop2library.repository.GenericRepository;
 import org.bitmaxsystems.oop2library.view.View;
 
 import java.io.IOException;
-import java.util.Date;
+import java.time.LocalDate;
 import java.util.List;
 
 public class UserFormManagementController {
@@ -32,7 +32,7 @@ public class UserFormManagementController {
     @FXML
     private TableView<UserForm> tableView;
     @FXML
-    private TableColumn<UserForm, Date> submissionDateColumn;
+    private TableColumn<UserForm, LocalDate> submissionDateColumn;
     @FXML
     private TableColumn<UserForm, FormStatus> formStatusColumn;
     @FXML
@@ -48,7 +48,7 @@ public class UserFormManagementController {
     @FXML
     private TableColumn<UserForm,Integer> loyaltyPointsColumn;
     @FXML
-    private TableColumn<UserForm,Date> dateOfApprovalColumn;
+    private TableColumn<UserForm,LocalDate> dateOfApprovalColumn;
     @FXML
     private TableColumn<UserForm, UserRole> userRoleColumn;
 

@@ -5,7 +5,7 @@ import org.bitmaxsystems.oop2library.models.auth.Credentials;
 import org.bitmaxsystems.oop2library.models.form.UserForm;
 import org.bitmaxsystems.oop2library.models.users.enums.UserRole;
 
-import java.util.Date;
+import java.time.LocalDate;
 import java.util.Objects;
 import java.util.UUID;
 
@@ -21,7 +21,7 @@ public class User {
     private int age;
     private String phone;
     private int loyaltyPoints = 50;
-    private Date dateOfApproval;
+    private LocalDate dateOfApproval;
     @Enumerated
     private UserRole role;
     @OneToOne(mappedBy = "user", cascade = CascadeType.ALL)
@@ -38,7 +38,7 @@ public class User {
         private int age;
         private String phone;
         private UserRole role;
-        private Date dateOfApproval;
+        private LocalDate dateOfApproval;
 
 
         public Builder(String firstName, String lastName, int age ,String phone, UserRole role)
@@ -50,7 +50,7 @@ public class User {
             this.role = role;
         }
 
-        public Builder setDateOfApproval (Date dateOfApproval)
+        public Builder setDateOfApproval (LocalDate dateOfApproval)
         {
             this.dateOfApproval = dateOfApproval;
             return this;
@@ -64,7 +64,7 @@ public class User {
         protected User() {
         }
 
-        private User (String firstName, String lastName, int age, String phone, Date dateOfApproval ,UserRole role)
+        private User (String firstName, String lastName, int age, String phone, LocalDate dateOfApproval ,UserRole role)
         {
             this.firstName = firstName;
             this.lastName = lastName;
@@ -98,7 +98,7 @@ public class User {
         return phone;
     }
 
-    public Date getDateOfApproval() {
+    public LocalDate getDateOfApproval() {
         return dateOfApproval;
     }
 
@@ -139,6 +139,15 @@ public class User {
     }
 
     public void updateLoyaltyPoints(int loyaltyPoints) {
+
+        if (loyaltyPoints > 100-this.loyaltyPoints)
+        {
+            loyaltyPoints = 100-this.loyaltyPoints;
+        }
+        else if (loyaltyPoints < -this.loyaltyPoints)
+        {
+            loyaltyPoints = -this.loyaltyPoints;
+        }
         this.loyaltyPoints += loyaltyPoints;
     }
 
@@ -156,6 +165,11 @@ public class User {
     public void approve()
     {
         this.role = UserRole.READER;
-        this.dateOfApproval = new Date();
+        this.dateOfApproval = LocalDate.now();
+    }
+
+    @Override
+    public String toString() {
+        return this.firstName + " " + this.lastName + " - " + this.loyaltyPoints+"/100";
     }
 }

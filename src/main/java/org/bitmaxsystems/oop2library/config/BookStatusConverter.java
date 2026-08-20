@@ -5,12 +5,12 @@ import jakarta.persistence.Converter;
 import org.bitmaxsystems.oop2library.models.inventory.states.*;
 
 
-@Converter
+@Converter(autoApply = true)
 public class BookStatusConverter implements AttributeConverter<IInventoryState, InventoryStateEnum> {
 
     @Override
-    public InventoryStateEnum convertToDatabaseColumn(IInventoryState status) {
-        return status.getStatusEnum();
+    public InventoryStateEnum convertToDatabaseColumn(IInventoryState state) {
+        return state.getStateEnum();
     }
 
     @Override

@@ -5,11 +5,11 @@ import org.bitmaxsystems.oop2library.models.form.UserForm;
 import org.bitmaxsystems.oop2library.models.users.User;
 import org.bitmaxsystems.oop2library.models.users.enums.UserRole;
 import org.bitmaxsystems.oop2library.repository.GenericRepository;
-import org.bitmaxsystems.oop2library.util.service.UserFormService;
-import org.bitmaxsystems.oop2library.util.contracts.IUserFormChain;
-import org.bitmaxsystems.oop2library.util.userformchain.CreateUserChain;
-import org.bitmaxsystems.oop2library.util.userformchain.SaveFormChain;
-import org.bitmaxsystems.oop2library.util.userformchain.VerifyUserDataChain;
+import org.bitmaxsystems.oop2library.services.UserFormService;
+import org.bitmaxsystems.oop2library.util.chain.userform.contract.IUserFormChain;
+import org.bitmaxsystems.oop2library.util.chain.userform.CreateUserChain;
+import org.bitmaxsystems.oop2library.util.chain.userform.SaveFormChain;
+import org.bitmaxsystems.oop2library.util.chain.userform.VerifyUserDataChain;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 

@@ -5,7 +5,7 @@ import org.bitmaxsystems.oop2library.models.inventory.Inventory;
 
 public interface IInventoryState {
 
-    InventoryStateEnum getStatusEnum();
+    InventoryStateEnum getStateEnum();
 
     void lendInside();
 

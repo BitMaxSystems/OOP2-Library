@@ -20,13 +20,13 @@ public class AvailableInventoryState implements IInventoryState {
     }
 
     @Override
-    public InventoryStateEnum getStatusEnum() {
+    public InventoryStateEnum getStateEnum() {
         return stateEnum;
     }
 
     @Override
     public void lendInside() {
-         inventory.setStatus(new LentInsideInventoryState(inventory));
+         inventory.setState(new LentInsideInventoryState(inventory));
     }
 
     @Override
@@ -35,7 +35,7 @@ public class AvailableInventoryState implements IInventoryState {
             throw new IllegalStateException("Archived books cannot be lent outside.");
         }
 
-        inventory.setStatus(new LentOutsideInventoryState(inventory));
+        inventory.setState(new LentOutsideInventoryState(inventory));
     }
 
     @Override
