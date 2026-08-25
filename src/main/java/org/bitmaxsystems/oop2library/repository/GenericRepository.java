@@ -22,10 +22,18 @@ public class GenericRepository<T> {
         Transaction transaction = null;
         try (Session session = HibernateUtil.getSessionFactory().openSession()) {
             transaction = session.beginTransaction();
+
             session.persist(entity);
+
             transaction.commit();
+
+            logger.info("Saved {}", type.getSimpleName());
         } catch (Exception e) {
-            if (transaction != null) transaction.rollback();
+            if (transaction != null) {
+                transaction.rollback();
+            }
+
+            logger.error("Failed to save {}", type.getSimpleName(), e);
             throw e;
         }
     }
@@ -55,11 +63,18 @@ public class GenericRepository<T> {
         Transaction transaction = null;
         try (Session session = HibernateUtil.getSessionFactory().openSession()) {
             transaction = session.beginTransaction();
-            session.merge(entity);
-            transaction.commit();
-        } catch (Exception e) {
-            if (transaction != null) transaction.rollback();
 
+            session.merge(entity);
+
+            transaction.commit();
+
+            logger.info("Updated {}", type.getSimpleName());
+        } catch (Exception e) {
+            if (transaction != null) {
+                transaction.rollback();
+            }
+
+            logger.error("Failed to update {}", type.getSimpleName(), e);
             throw e;
         }
     }
@@ -67,14 +82,32 @@ public class GenericRepository<T> {
 
     public T findById(Object id) {
         try (Session session = HibernateUtil.getSessionFactory().openSession()) {
-            return session.find(type, id);
+            T result = session.find(type, id);
+
+            if (result != null) {
+                logger.info("Found {} with id {}", type.getSimpleName(), id);
+            } else {
+                logger.info("{} with id {} was not found", type.getSimpleName(), id);
+            }
+
+            return result;
+        } catch (Exception e) {
+            logger.error("Failed to find {} with id {}", type.getSimpleName(), id, e);
+            throw e;
         }
     }
 
     public List<T> findAll() {
         try (Session session = HibernateUtil.getSessionFactory().openSession()) {
             Query<T> query = session.createQuery("from " + type.getName(), type);
-            return query.list();
+            List<T> result = query.list();
+
+            logger.info("Loaded {} records from {}",  result.size(), type.getSimpleName());
+
+            return result;
+        } catch (Exception e) {
+            logger.error("Failed to load {}", type.getSimpleName(), e);
+            throw e;
         }
     }
 
@@ -82,10 +115,18 @@ public class GenericRepository<T> {
         Transaction transaction = null;
         try (Session session = HibernateUtil.getSessionFactory().openSession()) {
             transaction = session.beginTransaction();
-            session.remove(entity);
+
+            session.remove(session.contains(entity) ? entity : session.merge(entity));
+
             transaction.commit();
+
+            logger.info("Deleted {}", type.getSimpleName());
         } catch (Exception e) {
-            if (transaction != null) transaction.rollback();
+            if (transaction != null) {
+                transaction.rollback();
+            }
+
+            logger.error("Failed to delete {}", type.getSimpleName(), e);
             throw e;
         }
     }

@@ -2,15 +2,14 @@ import org.bitmaxsystems.oop2library.models.dto.UserDataDTO;
 import org.bitmaxsystems.oop2library.models.users.User;
 import org.bitmaxsystems.oop2library.models.users.enums.UserRole;
 import org.bitmaxsystems.oop2library.repository.GenericRepository;
-import org.bitmaxsystems.oop2library.util.chain.userform.contract.IUserFormChain;
 import org.bitmaxsystems.oop2library.util.chain.userform.CreateUserChain;
 import org.bitmaxsystems.oop2library.util.chain.userform.UpdatePasswordChain;
 import org.bitmaxsystems.oop2library.util.chain.userform.UpdateUserChain;
+import org.bitmaxsystems.oop2library.util.chain.userform.contract.IUserFormChain;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.security.crypto.bcrypt.BCrypt;
-
 
 import static org.junit.jupiter.api.Assertions.*;
 

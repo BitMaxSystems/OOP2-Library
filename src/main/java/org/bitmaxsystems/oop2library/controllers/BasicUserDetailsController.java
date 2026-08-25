@@ -12,10 +12,10 @@ import org.bitmaxsystems.oop2library.models.users.User;
 import org.bitmaxsystems.oop2library.models.users.enums.UserRole;
 import org.bitmaxsystems.oop2library.services.DeleteUserService;
 import org.bitmaxsystems.oop2library.util.UserManager;
-import org.bitmaxsystems.oop2library.util.chain.userform.contract.IUserFormChain;
 import org.bitmaxsystems.oop2library.util.chain.userform.UpdatePasswordChain;
 import org.bitmaxsystems.oop2library.util.chain.userform.UpdateUserChain;
 import org.bitmaxsystems.oop2library.util.chain.userform.VerifyUserDataChain;
+import org.bitmaxsystems.oop2library.util.chain.userform.contract.IUserFormChain;
 
 import java.util.Optional;
 

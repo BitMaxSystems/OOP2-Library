@@ -2,13 +2,11 @@ package org.bitmaxsystems.oop2library.repository;
 
 import org.bitmaxsystems.oop2library.config.HibernateUtil;
 import org.bitmaxsystems.oop2library.models.auth.Credentials;
-import org.bitmaxsystems.oop2library.models.dto.UserDataDTO;
 import org.bitmaxsystems.oop2library.models.users.User;
 import org.bitmaxsystems.oop2library.models.users.enums.UserRole;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 import org.hibernate.query.Query;
-import org.springframework.security.crypto.bcrypt.BCrypt;
 
 import java.util.List;
 

@@ -1,6 +1,8 @@
 package org.bitmaxsystems.oop2library.repository;
 
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.bitmaxsystems.oop2library.config.HibernateUtil;
 import org.bitmaxsystems.oop2library.models.books.Book;
 import org.bitmaxsystems.oop2library.models.inventory.Inventory;
@@ -12,6 +14,7 @@ import java.util.List;
 
 public class InventoryRepository {
     private static InventoryRepository repository;
+    private static final Logger logger = LogManager.getLogger(InventoryRepository.class);
 
     private InventoryRepository()
     {}
@@ -37,7 +40,14 @@ public class InventoryRepository {
 
             query.setParameter("book", book);
 
-            return query.getSingleResult();
+            long count = query.getSingleResult();
+
+            logger.info("Found {} inventory copies for book with ISBN {}", count, book.getIsbn());
+
+            return count;
+        } catch (Exception e) {
+            logger.error("Failed to count inventory copies for book with ISBN {}", book.getIsbn(), e);
+            throw e;
         }
     }
 
@@ -62,7 +72,14 @@ public class InventoryRepository {
 
             query.setParameter("state", convertEnumToState(stateEnum));
 
-            return query.list();
+            List<Inventory> inventory = query.list();
+
+            logger.info("Loaded {} inventory copies with state {}", inventory.size(), stateEnum);
+
+            return inventory;
+        } catch (Exception e) {
+            logger.error("Failed to load inventory copies with state {}", stateEnum, e);
+            throw e;
         }
     }
 }

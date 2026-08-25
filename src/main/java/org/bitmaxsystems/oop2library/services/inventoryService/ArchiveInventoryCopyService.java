@@ -1,13 +1,19 @@
 package org.bitmaxsystems.oop2library.services.inventoryService;
 
 import org.bitmaxsystems.oop2library.models.inventory.Inventory;
-import org.bitmaxsystems.oop2library.repository.GenericRepository;
 import org.bitmaxsystems.oop2library.models.inventory.states.AvailableInventoryState;
+import org.bitmaxsystems.oop2library.models.notifications.Notification;
+import org.bitmaxsystems.oop2library.models.notifications.NotificationAudience;
+import org.bitmaxsystems.oop2library.models.notifications.NotificationType;
+import org.bitmaxsystems.oop2library.repository.GenericRepository;
+import org.bitmaxsystems.oop2library.repository.NotificationRepository;
 
 public class ArchiveInventoryCopyService {
 
     private final GenericRepository<Inventory> inventoryRepository =
             new GenericRepository<>(Inventory.class);
+
+    private final NotificationRepository notificationRepository = NotificationRepository.getInstance();
 
     public void archive(Inventory inventory) {
         if (inventory == null) {
@@ -19,12 +25,21 @@ public class ArchiveInventoryCopyService {
         }
 
         if (inventory.isArchived()) {
-            throw new IllegalStateException(
-                    "Book is already archived."
-            );
+            throw new IllegalStateException("Book is already archived.");
         }
 
         inventory.setArchived(true);
         inventoryRepository.update(inventory);
+
+        Notification notification = new Notification(
+                "Inventory copy archived",
+                "Inventory copy #" + inventory.getId()
+                        + " of " + inventory.getBook().getTitle()
+                        + " was archived.",
+                NotificationType.INVENTORY_UPDATED,
+                NotificationAudience.ADMIN
+        );
+
+        notificationRepository.save(notification);
     }
 }

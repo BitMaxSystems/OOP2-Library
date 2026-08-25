@@ -4,12 +4,12 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import org.bitmaxsystems.oop2library.exceptions.DataValidationException;
 import org.bitmaxsystems.oop2library.exceptions.DataAlreadyExistException;
-import org.bitmaxsystems.oop2library.util.chain.userform.contract.IUserFormChain;
+import org.bitmaxsystems.oop2library.exceptions.DataValidationException;
 import org.bitmaxsystems.oop2library.util.chain.userform.CreateUserChain;
 import org.bitmaxsystems.oop2library.util.chain.userform.SaveFormChain;
 import org.bitmaxsystems.oop2library.util.chain.userform.VerifyUserDataChain;
+import org.bitmaxsystems.oop2library.util.chain.userform.contract.IUserFormChain;
 import org.bitmaxsystems.oop2library.view.SceneManager;
 import org.bitmaxsystems.oop2library.view.View;
 

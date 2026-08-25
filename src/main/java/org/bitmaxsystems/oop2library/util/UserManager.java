@@ -6,7 +6,6 @@ import org.bitmaxsystems.oop2library.exceptions.DataValidationException;
 import org.bitmaxsystems.oop2library.models.auth.Credentials;
 import org.bitmaxsystems.oop2library.models.users.User;
 import org.bitmaxsystems.oop2library.repository.AuthorisationRepository;
-import org.bitmaxsystems.oop2library.repository.GenericRepository;
 
 
 public class UserManager {
