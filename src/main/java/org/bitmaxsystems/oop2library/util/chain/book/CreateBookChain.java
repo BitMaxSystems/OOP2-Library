@@ -44,7 +44,7 @@ public class CreateBookChain implements IBookFormChain {
                 "Book created",
                 newBook.getTitle() + " was added to the book registry.",
                 NotificationType.BOOK_CREATED,
-                NotificationAudience.ADMIN
+                NotificationAudience.STAFF
         );
 
         notificationRepository.save(notification);

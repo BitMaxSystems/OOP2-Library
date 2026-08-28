@@ -49,7 +49,7 @@ public class DeleteBookService {
                     title + " with ISBN " + isbn
                             + " was deleted from the book registry.",
                     NotificationType.BOOK_DELETED,
-                    NotificationAudience.ADMIN
+                    NotificationAudience.STAFF
             );
 
             notificationRepository.save(notification);

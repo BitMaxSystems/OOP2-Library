@@ -29,6 +29,8 @@ public class ArchiveInventoryCopyService {
         }
 
         inventory.setArchived(true);
+        inventory.setNeedsArchiving(false);
+
         inventoryRepository.update(inventory);
 
         Notification notification = new Notification(
@@ -37,7 +39,7 @@ public class ArchiveInventoryCopyService {
                         + " of " + inventory.getBook().getTitle()
                         + " was archived.",
                 NotificationType.INVENTORY_UPDATED,
-                NotificationAudience.ADMIN
+                NotificationAudience.STAFF
         );
 
         notificationRepository.save(notification);

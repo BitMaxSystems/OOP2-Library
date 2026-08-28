@@ -40,7 +40,7 @@ public class CreateInventoryCopiesService {
                 quantity + " copies of " + book.getTitle()
                         + " were added to the inventory.",
                 NotificationType.INVENTORY_UPDATED,
-                NotificationAudience.ADMIN
+                NotificationAudience.STAFF
         );
 
         notificationRepository.save(notification);

@@ -95,7 +95,7 @@ public class LibraryService {
         }
     }
 
-    public void returnBook(History history) {
+    public void returnBook(History history, Boolean needsArchiving) {
         long timeDiff;
         int calculatedLoyaltyPoints;
         User user = history.getUser();
@@ -103,6 +103,24 @@ public class LibraryService {
 
         history.setActualReturnDate(LocalDate.now());
         inventory.returnBook();
+
+        if (needsArchiving != null) {
+            inventory.setNeedsArchiving(needsArchiving);
+
+            if (needsArchiving) {
+                logger.info(
+                        "Inventory copy {} of book '{}' was marked as needing archiving after return",
+                        inventory.getId(),
+                        inventory.getBook().getTitle()
+                );
+            } else {
+                logger.info(
+                        "Inventory copy {} of book '{}' was checked and does not need archiving after return",
+                        inventory.getId(),
+                        inventory.getBook().getTitle()
+                );
+            }
+        }
 
         timeDiff = ChronoUnit.DAYS.between(
                 history.getActualReturnDate(),
@@ -131,6 +149,13 @@ public class LibraryService {
 
         notificationRepository.save(notification);
 
+        if (needsArchiving != null) {
+            Notification archiveNotification = getArchiveNotification(needsArchiving, inventory);
+
+            notificationRepository.save(archiveNotification);
+        }
+
+
         logger.info(
                 "Inventory book: {} - {} was successfully returned by user: {} {}",
                 inventory.getId(),
@@ -138,5 +163,30 @@ public class LibraryService {
                 user.getFirstName(),
                 user.getLastName()
         );
+    }
+
+    private static Notification getArchiveNotification(Boolean needsArchiving, Inventory inventory) {
+        Notification archiveNotification;
+
+        if (needsArchiving) {
+            archiveNotification = new Notification(
+                    "Book needs archiving",
+                    "Inventory copy #" + inventory.getId()
+                            + " of " + inventory.getBook().getTitle()
+                            + " was marked for archiving after return.",
+                    NotificationType.INVENTORY_UPDATED,
+                    NotificationAudience.STAFF
+            );
+        } else {
+            archiveNotification = new Notification(
+                    "Book does not need archiving",
+                    "Inventory copy #" + inventory.getId()
+                            + " of " + inventory.getBook().getTitle()
+                            + " does not need archiving after return.",
+                    NotificationType.INVENTORY_UPDATED,
+                    NotificationAudience.STAFF
+            );
+        }
+        return archiveNotification;
     }
 }

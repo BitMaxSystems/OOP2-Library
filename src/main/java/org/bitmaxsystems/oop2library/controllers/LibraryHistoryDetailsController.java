@@ -1,15 +1,15 @@
 package org.bitmaxsystems.oop2library.controllers;
 
 import javafx.fxml.FXML;
-import javafx.scene.control.Alert;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
+import javafx.scene.control.*;
 import javafx.stage.Stage;
 import org.bitmaxsystems.oop2library.models.history.History;
 import org.bitmaxsystems.oop2library.models.history.LendStatusEnum;
+import org.bitmaxsystems.oop2library.models.inventory.Inventory;
 import org.bitmaxsystems.oop2library.services.LibraryService;
 
 import java.util.Objects;
+import java.util.Optional;
 
 public class LibraryHistoryDetailsController {
     private History history;
@@ -95,22 +95,69 @@ public class LibraryHistoryDetailsController {
     }
 
     @FXML
-    public void onReturn()
-    {
-        try{
-            libraryService.returnBook(history);
-            new Alert(Alert.AlertType.INFORMATION
-                    ,"Book was successfully returned").show();
+    public void onReturn() {
+
+        Inventory inventory = history.getInventory();
+
+        if (inventory.isArchived()) {
+            try {
+                libraryService.returnBook(history, null);
+
+                new Alert(
+                        Alert.AlertType.INFORMATION,
+                        "Book was successfully returned"
+                ).show();
+            } catch (IllegalStateException e) {
+                new Alert(Alert.AlertType.ERROR, e.getMessage()).show();
+            } catch (Exception e) {
+                new Alert(
+                        Alert.AlertType.ERROR,
+                        "Unexpected error occurred. Try again"
+                ).show();
+            } finally {
+                onClose();
+            }
+
+            return;
         }
-        catch (IllegalStateException e)
-        {
-            new Alert(Alert.AlertType.ERROR,e.getMessage()).show();
+
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+        alert.setTitle("Return book");
+        alert.setHeaderText("Does this book need to be archived?");
+        alert.setContentText("Select whether the returned copy should be marked for archiving.");
+
+        ButtonType yesButton = new ButtonType("Yes");
+        ButtonType noButton = new ButtonType("No");
+        ButtonType cancelButton = new ButtonType(
+                "Cancel",
+                ButtonBar.ButtonData.CANCEL_CLOSE
+        );
+
+        alert.getButtonTypes().setAll(yesButton, noButton, cancelButton);
+
+        Optional<ButtonType> result = alert.showAndWait();
+
+        if (result.isEmpty() || result.get() == cancelButton) {
+            return;
         }
-        catch (Exception e)
-        {
-            new Alert(Alert.AlertType.ERROR,"Unexpected error occurred. Try again").show();
-        }
-        finally {
+
+        boolean needsArchiving = result.get() == yesButton;
+
+        try {
+            libraryService.returnBook(history, needsArchiving);
+
+            new Alert(
+                    Alert.AlertType.INFORMATION,
+                    "Book was successfully returned"
+            ).show();
+        } catch (IllegalStateException e) {
+            new Alert(Alert.AlertType.ERROR, e.getMessage()).show();
+        } catch (Exception e) {
+            new Alert(
+                    Alert.AlertType.ERROR,
+                    "Unexpected error occurred. Try again"
+            ).show();
+        } finally {
             onClose();
         }
     }

@@ -34,7 +34,7 @@ public class UpdateBookChain implements IBookFormChain {
                 "Book updated",
                 selectedBook.getTitle() + " was updated in the book registry.",
                 NotificationType.BOOK_UPDATED,
-                NotificationAudience.ADMIN
+                NotificationAudience.STAFF
         );
 
         notificationRepository.save(notification);

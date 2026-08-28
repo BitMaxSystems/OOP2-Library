@@ -24,6 +24,9 @@ public class Inventory {
     @Column(nullable = false)
     private boolean archived;
 
+    @Column(nullable = false)
+    private boolean needsArchiving;
+
     protected Inventory() {
     }
 
@@ -31,6 +34,7 @@ public class Inventory {
         this.book = book;
         this.state = new AvailableInventoryState(this);
         this.archived = false;
+        this.needsArchiving = false;
     }
 
     @PostLoad
@@ -76,6 +80,14 @@ public class Inventory {
 
     public void setArchived(boolean archived) {
         this.archived = archived;
+    }
+
+    public boolean isNeedsArchiving() {
+        return needsArchiving;
+    }
+
+    public void setNeedsArchiving(boolean needsArchiving) {
+        this.needsArchiving = needsArchiving;
     }
 
     @Override

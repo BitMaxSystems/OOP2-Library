@@ -30,7 +30,7 @@ public class DeleteInventoryCopyService {
                         + " of " + bookTitle
                         + " was deleted.",
                 NotificationType.INVENTORY_UPDATED,
-                NotificationAudience.ADMIN
+                NotificationAudience.STAFF
         );
 
         notificationRepository.save(notification);
