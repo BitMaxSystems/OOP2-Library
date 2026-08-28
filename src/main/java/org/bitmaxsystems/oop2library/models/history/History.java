@@ -127,4 +127,8 @@ public class History {
     public void setActualReturnDate(LocalDate actualReturnDate) {
         this.actualReturnDate = actualReturnDate;
     }
+
+    public void setExpectedReturnDate(LocalDate expectedReturnDate) {
+        this.expectedReturnDate = expectedReturnDate;
+    }
 }

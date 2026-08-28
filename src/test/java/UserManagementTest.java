@@ -26,7 +26,7 @@ public class UserManagementTest {
     @Test
     void userNotFoundException()
     {
-        String username = "test";
+        String username = "testManagement";
         String password = "admin";
 
         DataValidationException exception =  assertThrowsExactly(DataValidationException.class,
