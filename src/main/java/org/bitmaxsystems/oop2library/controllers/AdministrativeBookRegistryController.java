@@ -1,7 +1,5 @@
 package org.bitmaxsystems.oop2library.controllers;
 
-import javafx.beans.property.SimpleObjectProperty;
-import javafx.beans.property.SimpleStringProperty;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -16,9 +14,9 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.bitmaxsystems.oop2library.models.books.Author;
 import org.bitmaxsystems.oop2library.models.books.Book;
+import org.bitmaxsystems.oop2library.models.books.Genre;
 import org.bitmaxsystems.oop2library.models.books.Publisher;
 import org.bitmaxsystems.oop2library.models.dto.BookParameterTypeDTO;
-import org.bitmaxsystems.oop2library.models.users.User;
 import org.bitmaxsystems.oop2library.repository.GenericRepository;
 import org.bitmaxsystems.oop2library.util.factory.AuthorFactory;
 import org.bitmaxsystems.oop2library.util.factory.GenreFactory;
@@ -26,7 +24,6 @@ import org.bitmaxsystems.oop2library.util.factory.PublisherFactory;
 import org.bitmaxsystems.oop2library.util.factory.contract.BookParameterAbstractFactory;
 import org.bitmaxsystems.oop2library.view.SceneManager;
 import org.bitmaxsystems.oop2library.view.View;
-import org.bitmaxsystems.oop2library.models.books.Genre;
 
 import java.io.IOException;
 

@@ -23,22 +23,38 @@ public class AdministrativeHomeController extends BaseHomeController {
     private Button viewLibrarianButton;
     private static final Logger logger = LogManager.getLogger(AdministrativeHomeController.class);
 
-
     @Override
-    protected void initialize()
-    {
+    protected void initialize() {
         super.initialize();
-        if (manager.getLoggedUser().getRole() == UserRole.LIBRARIAN)
-        {
+        if (manager.getLoggedUser().getRole() == UserRole.LIBRARIAN) {
             viewAdminButton.setVisible(false);
             viewLibrarianButton.setVisible(false);
         }
     }
 
-    private void loadAdministrativeManagementDialog(UserRole role)
-    {
+    @Override
+    protected void refreshNotifications() {
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource(View.ADMINISTRATIVE_MANAGEMENT_VIEW.getPath()));
+            if (manager.getLoggedUser().getRole() == UserRole.ADMINISTRATOR) {
+                notificationListView.getItems().setAll(
+                        notificationService.getAdminNotifications()
+                );
+            } else if (manager.getLoggedUser().getRole() == UserRole.LIBRARIAN) {
+                notificationListView.getItems().setAll(
+                        notificationService.getLibrarianNotifications()
+                );
+            }
+        } catch (Exception e) {
+            logger.error("Failed to load administrative notifications", e);
+        }
+    }
+
+    private void loadAdministrativeManagementDialog(UserRole role) {
+        try {
+            FXMLLoader loader = new FXMLLoader(
+                    getClass().getResource(View.ADMINISTRATIVE_MANAGEMENT_VIEW.getPath())
+            );
+
             AnchorPane root = loader.load();
 
             AdministrativeManagementController controller = loader.getController();
@@ -52,14 +68,19 @@ public class AdministrativeHomeController extends BaseHomeController {
 
         } catch (IOException e) {
             logger.error(e);
-            new Alert(Alert.AlertType.ERROR,"Unexpected error, try again!").show();
+            new Alert(
+                    Alert.AlertType.ERROR,
+                    "Unexpected error, try again!"
+            ).show();
         }
     }
 
-    private void loadManagementDialog(View view)
-    {
+    private void loadManagementDialog(View view) {
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource(view.getPath()));
+            FXMLLoader loader = new FXMLLoader(
+                    getClass().getResource(view.getPath())
+            );
+
             AnchorPane root = loader.load();
 
             Stage stage = new Stage();
@@ -70,37 +91,35 @@ public class AdministrativeHomeController extends BaseHomeController {
 
         } catch (IOException e) {
             logger.error(e);
-            new Alert(Alert.AlertType.ERROR,"Unexpected error, try again!").show();
+            new Alert(
+                    Alert.AlertType.ERROR,
+                    "Unexpected error, try again!"
+            ).show();
         }
     }
 
     @FXML
-    public void onViewAdmin()
-    {
+    public void onViewAdmin() {
         loadAdministrativeManagementDialog(UserRole.ADMINISTRATOR);
     }
 
     @FXML
-    public void onViewLibrarian()
-    {
+    public void onViewLibrarian() {
         loadAdministrativeManagementDialog(UserRole.LIBRARIAN);
     }
 
     @FXML
-    public void onViewUserForm()
-    {
+    public void onViewUserForm() {
         loadManagementDialog(View.USER_FORM_MANAGEMENT_VIEW);
     }
 
     @FXML
-    public void onViewInventory()
-    {
+    public void onViewInventory() {
         SceneManager.showView(View.ADMINISTRATIVE_INVENTORY_VIEW);
     }
 
     @FXML
-    public void onViewReaderLending()
-    {
+    public void onViewReaderLending() {
         SceneManager.showView(View.LIBRARY_HISTORY_VIEW);
     }
 }

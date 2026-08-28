@@ -4,11 +4,11 @@ import org.bitmaxsystems.oop2library.models.books.Genre;
 import org.bitmaxsystems.oop2library.models.books.Publisher;
 import org.bitmaxsystems.oop2library.models.dto.BookParameterTypeDTO;
 import org.bitmaxsystems.oop2library.repository.GenericRepository;
+import org.bitmaxsystems.oop2library.services.BookParameterService;
 import org.bitmaxsystems.oop2library.util.factory.AuthorFactory;
 import org.bitmaxsystems.oop2library.util.factory.GenreFactory;
 import org.bitmaxsystems.oop2library.util.factory.PublisherFactory;
 import org.bitmaxsystems.oop2library.util.factory.contract.BookParameterAbstractFactory;
-import org.bitmaxsystems.oop2library.services.BookParameterService;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;

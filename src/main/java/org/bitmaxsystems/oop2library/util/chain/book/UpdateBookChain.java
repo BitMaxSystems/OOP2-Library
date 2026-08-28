@@ -2,12 +2,17 @@ package org.bitmaxsystems.oop2library.util.chain.book;
 
 import org.bitmaxsystems.oop2library.models.books.Book;
 import org.bitmaxsystems.oop2library.models.dto.BookDataDTO;
+import org.bitmaxsystems.oop2library.models.notifications.Notification;
+import org.bitmaxsystems.oop2library.models.notifications.NotificationAudience;
+import org.bitmaxsystems.oop2library.models.notifications.NotificationType;
 import org.bitmaxsystems.oop2library.repository.GenericRepository;
+import org.bitmaxsystems.oop2library.repository.NotificationRepository;
 import org.bitmaxsystems.oop2library.util.chain.book.contract.IBookFormChain;
 
 public class UpdateBookChain implements IBookFormChain {
     private IBookFormChain nextChain;
-    private GenericRepository<Book> bookGenericRepository = new GenericRepository<>(Book.class);
+    private final GenericRepository<Book> bookGenericRepository = new GenericRepository<>(Book.class);
+    private final NotificationRepository notificationRepository = NotificationRepository.getInstance();
 
     @Override
     public void setNextChain(IBookFormChain chain) {
@@ -16,7 +21,6 @@ public class UpdateBookChain implements IBookFormChain {
 
     @Override
     public void execute(BookDataDTO bookDataDTO) throws Exception {
-
         Book selectedBook = bookDataDTO.getBook();
 
         selectedBook.setTitle(bookDataDTO.getTitle());
@@ -24,11 +28,18 @@ public class UpdateBookChain implements IBookFormChain {
         selectedBook.setGenre(bookDataDTO.getGenre());
         selectedBook.setPublisher(bookDataDTO.getPublisher());
 
-
         bookGenericRepository.update(selectedBook);
 
-        if (nextChain != null)
-        {
+        Notification notification = new Notification(
+                "Book updated",
+                selectedBook.getTitle() + " was updated in the book registry.",
+                NotificationType.BOOK_UPDATED,
+                NotificationAudience.STAFF
+        );
+
+        notificationRepository.save(notification);
+
+        if (nextChain != null) {
             nextChain.execute(bookDataDTO);
         }
     }
