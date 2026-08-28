@@ -1,9 +1,13 @@
 package org.bitmaxsystems.oop2library.services.inventoryService;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+import org.bitmaxsystems.oop2library.controllers.AdministrativeInventoryController;
 import org.bitmaxsystems.oop2library.models.inventory.Inventory;
 import org.bitmaxsystems.oop2library.models.notifications.Notification;
 import org.bitmaxsystems.oop2library.models.notifications.NotificationAudience;
 import org.bitmaxsystems.oop2library.models.notifications.NotificationType;
+import org.bitmaxsystems.oop2library.models.inventory.states.InventoryStateEnum;
 import org.bitmaxsystems.oop2library.repository.GenericRepository;
 import org.bitmaxsystems.oop2library.repository.NotificationRepository;
 
@@ -13,26 +17,48 @@ public class DeleteInventoryCopyService {
             new GenericRepository<>(Inventory.class);
 
     private final NotificationRepository notificationRepository = NotificationRepository.getInstance();
+    private static final Logger logger =
+            LogManager.getLogger(DeleteInventoryCopyService.class);
 
     public void delete(Inventory inventory) {
-        if (inventory == null) {
-            throw new IllegalArgumentException("Inventory copy cannot be null.");
-        }
 
-        int inventoryId = inventory.getId();
-        String bookTitle = inventory.getBook().getTitle();
+      try {
+              if (inventory == null) {
+                  throw new IllegalArgumentException(
+                          "Inventory copy cannot be null."
+                  );
+              }
 
-        inventoryRepository.delete(inventory);
+              if (inventory.getState().getStateEnum()
+                      != InventoryStateEnum.AVAILABLE) {
+                  throw new IllegalArgumentException(
+                          "Inventory must be available before deletion"
+                  );
+              }
 
-        Notification notification = new Notification(
-                "Inventory copy deleted",
-                "Inventory copy #" + inventoryId
-                        + " of " + bookTitle
-                        + " was deleted.",
-                NotificationType.INVENTORY_UPDATED,
-                NotificationAudience.STAFF
-        );
+              int inventoryId = inventory.getId();
+              String bookTitle = inventory.getBook().getTitle();
 
-        notificationRepository.save(notification);
+              inventoryRepository.delete(inventory);
+
+              Notification notification = new Notification(
+                      "Inventory copy deleted",
+                      "Inventory copy #" + inventoryId
+                              + " of " + bookTitle
+                              + " was deleted.",
+                      NotificationType.INVENTORY_UPDATED,
+                      NotificationAudience.STAFF
+              );
+
+              notificationRepository.save(notification);
+
+              logger.info(
+                      "Inventory copy {} of book '{}' successfully deleted",
+                      inventoryId,
+                      bookTitle
+              );
+          } catch (Exception e) {
+              logger.error(e);
+              throw e;
     }
 }

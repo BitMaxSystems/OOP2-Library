@@ -21,6 +21,23 @@ public class LibraryService {
 
     private static final Logger logger = LogManager.getLogger(LibraryService.class);
 
+    public List<History> getHistoryForUser(User user) {
+        try {
+            List<History> historyList = historyRepository.searchByUser(user);
+
+            logger.info(
+                    "Loaded lend history for {} {}",
+                    user.getFirstName(),
+                    user.getLastName()
+            );
+
+            return historyList;
+        } catch (Exception e) {
+            logger.error(e);
+            throw e;
+        }
+    }
+
     public void lendOutside(User user, Inventory inventory) {
         if (user.getLoyaltyPoints() < 30) {
             throw new IllegalStateException(
