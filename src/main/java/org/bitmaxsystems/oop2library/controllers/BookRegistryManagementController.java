@@ -11,6 +11,7 @@ import org.bitmaxsystems.oop2library.exceptions.ChildRecordExistException;
 import org.bitmaxsystems.oop2library.exceptions.DataValidationException;
 import org.bitmaxsystems.oop2library.models.books.Book;
 import org.bitmaxsystems.oop2library.models.dto.BookDataDTO;
+import org.bitmaxsystems.oop2library.services.BookService;
 import org.bitmaxsystems.oop2library.services.bookService.DeleteBookService;
 import org.bitmaxsystems.oop2library.util.chain.book.UpdateBookChain;
 import org.bitmaxsystems.oop2library.util.chain.book.VerifyBookDataChain;
@@ -45,11 +46,6 @@ public class BookRegistryManagementController extends BaseBookRegistryFormContro
 
     @FXML
     private void onUpdate() {
-        IBookFormChain verifyData = new VerifyBookDataChain();
-        IBookFormChain updateBook = new UpdateBookChain();
-
-        verifyData.setNextChain(updateBook);
-
         BookDataDTO bookDataDTO = new BookDataDTO.Builder(isbnLabel.getText().strip(),
                 titleField.getText().strip(),
                 genreChoiceBox.getValue(),
@@ -57,17 +53,19 @@ public class BookRegistryManagementController extends BaseBookRegistryFormContro
                 publisherChoiceBox.getValue()).setBook(book).build();
 
         resetErrorLabel();
+
         try {
-            verifyData.execute(bookDataDTO);
+            bookService.updateBook(bookDataDTO);
             new Alert(Alert.AlertType.INFORMATION, "Book is updated!").show();
-            logger.info("Book is updated!");
             onClose();
+
         } catch (DataValidationException e) {
-            logger.error("Invalid data inputted");
             new Alert(Alert.AlertType.ERROR, "Invalid data found").show();
             setErrors(e.getMessage());
-        } catch (Exception e) {
-            logger.error(e);
+        } catch (ChildRecordExistException e) {
+            new Alert(Alert.AlertType.ERROR, e.getMessage()).show();
+        }
+        catch (Exception e) {
             new Alert(Alert.AlertType.ERROR, "Unexpected error occurred, try again.").show();
         }
 

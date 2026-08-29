@@ -1,14 +1,15 @@
 package org.bitmaxsystems.oop2library.controllers;
 
 import javafx.fxml.FXML;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.paint.Color;
+import org.bitmaxsystems.oop2library.exceptions.DataAlreadyExistException;
+import org.bitmaxsystems.oop2library.exceptions.DataValidationException;
 import org.bitmaxsystems.oop2library.models.dto.UserDataDTO;
-import org.bitmaxsystems.oop2library.util.chain.userform.CreateUserChain;
-import org.bitmaxsystems.oop2library.util.chain.userform.VerifyUserDataChain;
-import org.bitmaxsystems.oop2library.util.chain.userform.contract.IUserFormChain;
+import org.bitmaxsystems.oop2library.services.UserFormService;
 
 public class BaseUserFormController {
     @FXML
@@ -28,6 +29,7 @@ public class BaseUserFormController {
     @FXML
     private PasswordField repeatPasswordField;
 
+    protected UserFormService userService = new UserFormService();
 
     private void resetErrorLabel()
     {
@@ -61,27 +63,39 @@ public class BaseUserFormController {
                 .setNewPassword(passwordField.getText().strip(),repeatPasswordField.getText().strip());
     }
 
-    protected IUserFormChain setUpChain()
+    protected void setUpChain()
     {
-        IUserFormChain verifyData = new VerifyUserDataChain();
-        IUserFormChain createUser = new CreateUserChain();
-
-        verifyData.setNextChain(createUser);
-
-        return verifyData;
+        userService.setUpChain(null);
     }
 
+    protected boolean submitForm()
+    {
+        boolean isSuccessful = false;
+        try {
+            resetErrorLabel();
 
-    @FXML
-    public void onSubmit() throws Exception {
-        resetErrorLabel();
+            setUpChain();
 
-        IUserFormChain userCreationChain = setUpChain();
+            UserDataDTO formData = generateDTO()
+                    .build();
 
-        UserDataDTO formData = generateDTO()
-                .build();
+            userService.executeChain(formData);
+            isSuccessful = true;
+        }
+        catch (DataValidationException e) {
+            new Alert(Alert.AlertType.ERROR, "Invalid data found").show();
+            setErrors(e.getMessage());
+        } catch (DataAlreadyExistException e) {
+            new Alert(Alert.AlertType.ERROR, "User with this username already exists").show();
+            setErrors(e.getMessage());
+        } catch (NumberFormatException e) {
+            new Alert(Alert.AlertType.ERROR, e.getMessage()).show();
+        } catch (Exception e) {
+            new Alert(Alert.AlertType.ERROR, "Unexpected error occurred, try again.").show();
+        }
 
+        return isSuccessful;
 
-        userCreationChain.execute(formData);
     }
+
 }

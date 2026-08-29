@@ -1,5 +1,8 @@
 package org.bitmaxsystems.oop2library.services;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+import org.bitmaxsystems.oop2library.controllers.BaseHomeController;
 import org.bitmaxsystems.oop2library.models.dto.NotificationDTO;
 import org.bitmaxsystems.oop2library.models.history.History;
 import org.bitmaxsystems.oop2library.models.history.LendStatusEnum;
@@ -19,11 +22,16 @@ public class NotificationService {
 
     private final HistoryRepository historyRepository = HistoryRepository.getInstance();
     private final NotificationRepository notificationRepository = NotificationRepository.getInstance();
+    private static final Logger logger = LogManager.getLogger(NotificationService.class);
 
     public List<NotificationDTO> getUserNotifications(User user) {
+        try{
         List<History> activeHistory = historyRepository.getActiveHistoryByUser(user);
 
-        return createLendingNotifications(activeHistory, false);
+        return createLendingNotifications(activeHistory, false);} catch (Exception e) {
+            logger.error("Failed to load notifications", e);
+            throw e;
+        }
     }
 
     public List<NotificationDTO> getLibrarianNotifications() {

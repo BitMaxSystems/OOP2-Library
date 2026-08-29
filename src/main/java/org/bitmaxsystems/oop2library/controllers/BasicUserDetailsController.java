@@ -11,11 +11,13 @@ import org.bitmaxsystems.oop2library.models.dto.UserDataDTO;
 import org.bitmaxsystems.oop2library.models.users.User;
 import org.bitmaxsystems.oop2library.models.users.enums.UserRole;
 import org.bitmaxsystems.oop2library.services.DeleteUserService;
+import org.bitmaxsystems.oop2library.services.UserService;
 import org.bitmaxsystems.oop2library.util.UserManager;
 import org.bitmaxsystems.oop2library.util.chain.userform.UpdatePasswordChain;
 import org.bitmaxsystems.oop2library.util.chain.userform.UpdateUserChain;
 import org.bitmaxsystems.oop2library.util.chain.userform.VerifyUserDataChain;
 import org.bitmaxsystems.oop2library.util.chain.userform.contract.IUserFormChain;
+import org.hibernate.dialect.function.UnnestSetReturningFunctionTypeResolver;
 
 import java.util.Optional;
 
@@ -37,6 +39,7 @@ public class BasicUserDetailsController {
     private static final Logger logger = LogManager.getLogger(BasicUserDetailsController.class);
     private UserManager manager = UserManager.getInstance();
     private User user;
+    private UserService userService = new UserService();
 
     @FXML
     private void initialize()
@@ -86,33 +89,19 @@ public class BasicUserDetailsController {
     @FXML
     protected void onUpdate()
     {
-        IUserFormChain verifyUser = new VerifyUserDataChain();
-        IUserFormChain updateUser = new UpdateUserChain();
-        IUserFormChain updatePassword = new UpdatePasswordChain();
-
-        verifyUser.setNextChain(updateUser);
-        updateUser.setNextChain(updatePassword);
 
         UserDataDTO.Builder formDTOBuilder = generateDTO();
-
         try {
-            verifyUser.execute(formDTOBuilder.build());
+            userService.updateUser(formDTOBuilder.build());
             new Alert(Alert.AlertType.INFORMATION,"User Data is updated").show();
-            logger.info("User data successfully submitted!");
 
         }
-        catch (DataValidationException e)
+        catch (DataValidationException | NumberFormatException e)
         {
-            logger.error("Invalid data inputted");
             new Alert(Alert.AlertType.ERROR,e.getMessage()).show();
-        }
-        catch (NumberFormatException e) {
-            logger.error(e);
-            new Alert(Alert.AlertType.ERROR, e.getMessage()).show();
         }
         catch (Exception e)
         {
-            logger.error(e);
             new Alert(Alert.AlertType.ERROR,"Unexpected error occurred, try again.").show();
         }
     }

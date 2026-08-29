@@ -18,6 +18,7 @@ import org.bitmaxsystems.oop2library.models.books.Genre;
 import org.bitmaxsystems.oop2library.models.books.Publisher;
 import org.bitmaxsystems.oop2library.models.dto.BookParameterTypeDTO;
 import org.bitmaxsystems.oop2library.repository.GenericRepository;
+import org.bitmaxsystems.oop2library.services.BookService;
 import org.bitmaxsystems.oop2library.util.factory.AuthorFactory;
 import org.bitmaxsystems.oop2library.util.factory.GenreFactory;
 import org.bitmaxsystems.oop2library.util.factory.PublisherFactory;
@@ -42,7 +43,7 @@ public class AdministrativeBookRegistryController {
     public TableColumn<Book,String> publisherColumn;
 
     private static final Logger logger = LogManager.getLogger(AdministrativeBookRegistryController.class);
-    private GenericRepository<Book> bookGenericRepository = new GenericRepository<>(Book.class);
+    private BookService bookService = new BookService();
 
 
     @FXML
@@ -62,7 +63,7 @@ public class AdministrativeBookRegistryController {
     {
         try
         {
-            tableView.getItems().setAll(bookGenericRepository.findAll());
+            tableView.getItems().setAll(bookService.getAllBooks());
         }
         catch (Exception e) {
             logger.error(e);

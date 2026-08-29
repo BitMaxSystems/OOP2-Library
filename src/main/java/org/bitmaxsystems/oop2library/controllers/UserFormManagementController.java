@@ -19,7 +19,7 @@ import org.bitmaxsystems.oop2library.models.form.UserForm;
 import org.bitmaxsystems.oop2library.models.form.enums.FormStatus;
 import org.bitmaxsystems.oop2library.models.users.User;
 import org.bitmaxsystems.oop2library.models.users.enums.UserRole;
-import org.bitmaxsystems.oop2library.repository.GenericRepository;
+import org.bitmaxsystems.oop2library.services.UserFormService;
 import org.bitmaxsystems.oop2library.view.View;
 
 import java.io.IOException;
@@ -52,7 +52,7 @@ public class UserFormManagementController {
     @FXML
     private TableColumn<UserForm, UserRole> userRoleColumn;
 
-    private GenericRepository<UserForm> userFormGenericRepository = new GenericRepository<>(UserForm.class);
+    private UserFormService userFormService = new UserFormService();
 
     private static final Logger logger = LogManager.getLogger(UserFormManagementController.class);
 
@@ -130,7 +130,7 @@ public class UserFormManagementController {
     private void refreshTable()
     {
         try {
-            List<UserForm> userFormsList = userFormGenericRepository.findAll();
+            List<UserForm> userFormsList = userFormService.getAllUserForms();
             int pendingCount = Math.toIntExact(userFormsList.
                     stream()
                     .filter(uf -> uf.getStatus() == FormStatus.PENDING).count());
@@ -144,7 +144,6 @@ public class UserFormManagementController {
             tableView.getItems().setAll(userFormsList);
         }
         catch (Exception e) {
-            logger.error(e);
             new Alert(Alert.AlertType.ERROR,"Unexpected error occurred. Try again").show();
         }
     }

@@ -36,8 +36,9 @@ public class UserFromDetailsController {
     private Label formStatusLabel;
     @FXML
     private Button approvalButton;
+    private UserFormService userFormService = new UserFormService();
     private UserForm form;
-    private static final Logger logger = LogManager.getLogger(UserFromDetailsController.class);
+
 
     public void setUserForm(UserForm form)
     {
@@ -76,20 +77,16 @@ public class UserFromDetailsController {
     @FXML
     public void onApprove()
     {
-        UserFormService userFormService = new UserFormService();
 
         try {
             userFormService.approveUser(form);
             User user = form.getUser();
             resetControls();
-            logger.info("{} {} successfully approved", user.getFirstName(), user.getLastName());
             new Alert(Alert.AlertType.INFORMATION,user.getFirstName() +" "+user.getLastName()+" successfully approved")
                     .show();
         } catch (FormAlreadyApprovedException e) {
-            logger.error(e);
             new Alert(Alert.AlertType.ERROR,e.getMessage()).show();
         } catch (Exception e) {
-            logger.error(e);
             new Alert(Alert.AlertType.ERROR,"Unexpected error occurred. Try again.").show();
         }
     }

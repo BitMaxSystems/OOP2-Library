@@ -44,6 +44,7 @@ public class UserManager {
     }
     public void logoff()
     {
+        logger.info("User logged out");
         loggedUser = null;
     }
 

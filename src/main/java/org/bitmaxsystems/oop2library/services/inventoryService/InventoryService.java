@@ -31,6 +31,11 @@ public class InventoryService {
         }
     }
 
+    public List<Inventory> getAllInventoryCopies()
+    {
+        return inventoryGenericRepository.findAll();
+    }
+
     public void lendInside(Inventory inventory) {
         inventory.lendInside();
 

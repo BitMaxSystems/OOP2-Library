@@ -17,6 +17,7 @@ import org.apache.logging.log4j.Logger;
 import org.bitmaxsystems.oop2library.models.books.IBookParameter;
 import org.bitmaxsystems.oop2library.models.dto.BookParameterTypeDTO;
 import org.bitmaxsystems.oop2library.repository.GenericRepository;
+import org.bitmaxsystems.oop2library.services.BookParameterService;
 import org.bitmaxsystems.oop2library.view.View;
 
 import java.io.IOException;
@@ -28,14 +29,13 @@ public class BookParameterManagementController<T> {
     private TableColumn<T,String> parameterValueColumn;
     @FXML
     private Button createParameterButton;
-    private GenericRepository<T> genericRepository;
     private static final Logger logger = LogManager.getLogger(BookParameterManagementController.class);
     private BookParameterTypeDTO<T> bookParameterTypeDTO;
+    private BookParameterService bookParameterService = new BookParameterService();
 
     public void setBookParameter(BookParameterTypeDTO<T> bookParameterTypeDTO)
     {
         this.bookParameterTypeDTO = bookParameterTypeDTO;
-        genericRepository = new GenericRepository<>(bookParameterTypeDTO.gettClass());
         parameterValueColumn.setCellValueFactory(new PropertyValueFactory<>("name"));
         createParameterButton.setText("Create "+bookParameterTypeDTO.gettClass().getSimpleName());
         parameterValueColumn.setText(bookParameterTypeDTO.gettClass().getSimpleName());
@@ -57,10 +57,9 @@ public class BookParameterManagementController<T> {
     {
         try
         {
-            tableView.getItems().setAll(genericRepository.findAll());
+            tableView.getItems().setAll(bookParameterService.findAllParameterRecords(bookParameterTypeDTO.gettClass()));
         }
         catch (Exception e) {
-            logger.error(e);
             new Alert(Alert.AlertType.ERROR,"Unexpected error occurred. Try again.").show();
         }
     }

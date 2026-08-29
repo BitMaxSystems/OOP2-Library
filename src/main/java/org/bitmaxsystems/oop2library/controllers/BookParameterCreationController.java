@@ -18,7 +18,7 @@ public class BookParameterCreationController<T> {
     @FXML
     private Label parameterLabel;
     private BookParameterTypeDTO<T> bookParameterTypeDTO;
-    private static final Logger logger = LogManager.getLogger(BookParameterCreationController.class);
+    private BookParameterService bookParameterService = new BookParameterService();
 
     public void setBookParameter(BookParameterTypeDTO<T> bookParameterTypeDTO)
     {
@@ -29,23 +29,19 @@ public class BookParameterCreationController<T> {
     @FXML
     public void onCreate()
     {
-        BookParameterService bookParameterService = new BookParameterService();
         bookParameterTypeDTO.getFactory().setParameter(parameterField.getText());
         try {
             bookParameterService.create(bookParameterTypeDTO);
-            logger.info("{} parameter successfully created", bookParameterTypeDTO.gettClass().getSimpleName());
             new Alert(Alert.AlertType.INFORMATION
                     ,bookParameterTypeDTO.gettClass().getSimpleName()+" parameter successfully created").show();
             onClose();
         }
         catch (DataAlreadyExistException e)
         {
-            logger.error(e);
             new Alert(Alert.AlertType.ERROR,e.getMessage()).show();
         }
         catch (Exception e)
         {
-            logger.error(e);
             new Alert(Alert.AlertType.ERROR,"Unexpected error occurred. Try again").show();
         }
     }
