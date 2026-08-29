@@ -50,11 +50,16 @@ public class GenericRepository<T> {
 
             transaction.commit();
         } catch (Exception e) {
-            if (transaction != null) {
-                transaction.rollback();
+            if (transaction != null && transaction.isActive()) {
+                try {
+                    transaction.rollback();
+                } catch (Exception rollbackException) {
+                    logger.error("Failed to rollback transaction", rollbackException);
+                }
             }
 
-            logger.error(e);
+            logger.error("Failed to save entities", e);
+            throw e;
         }
     }
 
