@@ -2,6 +2,8 @@ package org.bitmaxsystems.oop2library.models.auth;
 
 import jakarta.persistence.*;
 import org.bitmaxsystems.oop2library.models.users.User;
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
 import org.springframework.security.crypto.bcrypt.BCrypt;
 
 import java.util.UUID;
@@ -17,6 +19,7 @@ public class Credentials {
     private String password;
     @OneToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "user_id")
+    @OnDelete(action = OnDeleteAction.CASCADE)
     private User user;
 
 
