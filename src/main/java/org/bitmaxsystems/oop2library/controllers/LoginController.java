@@ -52,7 +52,6 @@ public class LoginController {
         } catch (Exception e) {
             logger.error(e);
             new Alert(Alert.AlertType.ERROR,"Unexpected error occurred, try again.").show();
-            throw new RuntimeException(e);
         }
         finally {
             usernameField.clear();

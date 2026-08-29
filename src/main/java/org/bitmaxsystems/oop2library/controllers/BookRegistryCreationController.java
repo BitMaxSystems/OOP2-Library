@@ -17,16 +17,9 @@ public class BookRegistryCreationController extends BaseBookRegistryFormControll
     @FXML
     private TextField isbnField;
 
-    private static final Logger logger = LogManager.getLogger(BookRegistryCreationController.class);
-
-
     @FXML
     public void onCreate()
     {
-        IBookFormChain verifyData = new VerifyBookDataChain();
-        IBookFormChain createBook = new CreateBookChain();
-
-        verifyData.setNextChain(createBook);
 
         BookDataDTO bookDataDTO = new BookDataDTO.Builder(isbnField.getText().strip(),
                 titleField.getText().strip(),
@@ -37,22 +30,18 @@ public class BookRegistryCreationController extends BaseBookRegistryFormControll
         resetErrorLabel();
         try
         {
-            verifyData.execute(bookDataDTO);
+            bookService.createBook(bookDataDTO);
             new Alert(Alert.AlertType.INFORMATION, "Book is created!").show();
-            logger.info("Book is created!");
             onClose();
         }
         catch (DataValidationException e) {
-            logger.error("Invalid data inputted");
             new Alert(Alert.AlertType.ERROR, "Invalid data found").show();
             setErrors(e.getMessage());
 
         } catch (DataAlreadyExistException e) {
-            logger.error("Book with this ISBN already exists");
             new Alert(Alert.AlertType.ERROR, "Book with this ISBN already exists").show();
             setErrors(e.getMessage());
         } catch (Exception e) {
-            logger.error(e);
             new Alert(Alert.AlertType.ERROR, "Unexpected error occurred, try again.").show();
         }
 

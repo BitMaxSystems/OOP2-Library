@@ -19,7 +19,7 @@ public class BookParameterDetailsController<T> {
     @FXML
     private Label parameterLabel;
     private BookParameterTypeDTO<T> bookParameterTypeDTO;
-    private static final Logger logger = LogManager.getLogger(BookParameterDetailsController.class);
+    private BookParameterService bookParameterService = new BookParameterService();
 
     public void setBookParameter(BookParameterTypeDTO<T> bookParameterTypeDTO)
     {
@@ -31,16 +31,16 @@ public class BookParameterDetailsController<T> {
     @FXML
     public void onUpdate()
     {
-        BookParameterService bookParameterService = new BookParameterService();
         IBookParameter parameter = bookParameterTypeDTO.getParameter();
         parameter.setName(parameterField.getText());
         try {
             bookParameterService.update(parameter);
-            logger.info("{} successfully updated!",bookParameterTypeDTO.gettClass().getSimpleName());
             new Alert(Alert.AlertType.INFORMATION,
                     bookParameterTypeDTO.gettClass().getSimpleName()+" successfully updated!").show();
-        } catch (Exception e) {
-            logger.error(e);
+        } catch (ChildRecordExistException e) {
+            new Alert(Alert.AlertType.ERROR,e.getMessage()).show();
+        }
+        catch (Exception e) {
             new Alert(Alert.AlertType.ERROR,"Unexpected error occurred. Try again").show();
         }
     }
@@ -52,18 +52,15 @@ public class BookParameterDetailsController<T> {
 
         try {
             bookParameterService.delete(bookParameterTypeDTO);
-            logger.info("{} successfully deleted!",bookParameterTypeDTO.gettClass().getSimpleName());
             new Alert(Alert.AlertType.INFORMATION,
                     bookParameterTypeDTO.gettClass().getSimpleName()+" successfully deleted!").show();
+            onClose();
         }
         catch (ChildRecordExistException e)
         {
-            logger.error(e);
             new Alert(Alert.AlertType.ERROR, e.getMessage()).show();
-            onClose();
         }
         catch (Exception e) {
-            logger.error(e);
             new Alert(Alert.AlertType.ERROR,"Unexpected error occurred. Try again").show();
         }
     }

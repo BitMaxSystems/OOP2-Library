@@ -28,30 +28,13 @@ public class AdministrativeFormController extends BaseUserFormController{
         return super.generateDTO().setRole(role);
     }
 
-    @Override
+    @FXML
     public void onSubmit() {
-        try
+        if (submitForm())
         {
-            super.onSubmit();
             new Alert(Alert.AlertType.INFORMATION, role.toString()+" is successfully created!").show();
             logger.info("{} successfully created!", role.toString());
             ((Stage) headerLabel.getScene().getWindow()).close();
-        }
-        catch (DataValidationException e) {
-            logger.error("Invalid data inputted");
-            new Alert(Alert.AlertType.ERROR, "Invalid data found").show();
-            super.setErrors(e.getMessage());
-
-        } catch (DataAlreadyExistException e) {
-            logger.error("User with this username already exists");
-            new Alert(Alert.AlertType.ERROR, "User with this username already exists").show();
-            super.setErrors(e.getMessage());
-        } catch (NumberFormatException e) {
-            logger.error(e);
-            new Alert(Alert.AlertType.ERROR, e.getMessage()).show();
-        } catch (Exception e) {
-            logger.error(e);
-            new Alert(Alert.AlertType.ERROR, "Unexpected error occurred, try again.").show();
         }
     }
 }

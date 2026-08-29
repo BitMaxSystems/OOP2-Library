@@ -2,10 +2,14 @@ package org.bitmaxsystems.oop2library.services;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import org.bitmaxsystems.oop2library.controllers.LibraryHistoryController;
+import org.bitmaxsystems.oop2library.models.dto.UserDataDTO;
 import org.bitmaxsystems.oop2library.models.users.User;
 import org.bitmaxsystems.oop2library.models.users.enums.UserRole;
 import org.bitmaxsystems.oop2library.repository.UserRepository;
+import org.bitmaxsystems.oop2library.util.chain.userform.UpdatePasswordChain;
+import org.bitmaxsystems.oop2library.util.chain.userform.UpdateUserChain;
+import org.bitmaxsystems.oop2library.util.chain.userform.VerifyUserDataChain;
+import org.bitmaxsystems.oop2library.util.chain.userform.contract.IUserFormChain;
 
 import java.util.List;
 
@@ -14,6 +18,18 @@ public class UserService {
     private static final Logger logger = LogManager.getLogger(UserService.class);
 
 
+
+    public List<User> getUsersByRole(UserRole role)
+    {
+        try
+        {
+          return userRepository.searchByRole(role);
+        }
+        catch (Exception e) {
+            logger.error(e);
+            throw e;
+        }
+    }
 
     public List<User> getAllApprovedReaders()
     {
@@ -26,5 +42,27 @@ public class UserService {
             logger.error(e);
             throw new RuntimeException(e);
         }
+    }
+
+    public void updateUser(UserDataDTO form) throws Exception {
+        IUserFormChain verifyUser = new VerifyUserDataChain();
+        IUserFormChain updateUser = new UpdateUserChain();
+        IUserFormChain updatePassword = new UpdatePasswordChain();
+
+        verifyUser.setNextChain(updateUser);
+        updateUser.setNextChain(updatePassword);
+
+
+        try {
+            verifyUser.execute(form);
+            logger.info("User data successfully submitted!");
+
+        }
+        catch (Exception e)
+        {
+            logger.error(e);
+            throw e;
+        }
+
     }
 }

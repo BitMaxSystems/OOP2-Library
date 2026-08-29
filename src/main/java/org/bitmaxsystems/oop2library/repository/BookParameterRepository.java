@@ -1,13 +1,18 @@
 package org.bitmaxsystems.oop2library.repository;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.bitmaxsystems.oop2library.config.HibernateUtil;
-import org.bitmaxsystems.oop2library.models.books.Book;
 import org.bitmaxsystems.oop2library.models.books.IBookParameter;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 import org.hibernate.query.Query;
 
+import java.util.List;
+
 public class BookParameterRepository {
+
+    private static final Logger logger = LogManager.getLogger(BookParameterRepository.class);
 
     private static  BookParameterRepository repository = null;
     private BookParameterRepository()
@@ -21,6 +26,21 @@ public class BookParameterRepository {
         return repository;
     }
 
+    public <T> List<T> findAllParameterRecords(Class<T> tClass)
+    {
+        try (Session session = HibernateUtil.getSessionFactory().openSession()) {
+            Query<T> query = session.createQuery("from " + tClass.getName(), tClass);
+            List<T> result = query.list();
+
+            logger.info("Loaded {} records from {}",  result.size(), tClass.getSimpleName());
+
+            return result;
+        } catch (Exception e) {
+            logger.error("Failed to load {}", tClass.getSimpleName(), e);
+            throw e;
+        }
+    }
+
     public int checkIfParameterExists(String parameterTable, String parameterName)
     {
         try(Session session = HibernateUtil.getSessionFactory().openSession()) {
@@ -30,17 +50,28 @@ public class BookParameterRepository {
         }
     }
 
-    public int checkIfBooksWithParametersExist(String parameterTable, IBookParameter parameter)
-    {
-        try(Session session = HibernateUtil.getSessionFactory().openSession()) {
-            Query<Long> query = session.createQuery(
-                    "SELECT COUNT(*) FROM "+ Book.class.getSimpleName() +" where "+parameterTable+"=:id"
-                    ,Long.class);
+    public long checkCountOfBookWithParameter(IBookParameter parameter) {
+        try (Session session =
+                     HibernateUtil.getSessionFactory().openSession()) {
 
-            query.setParameter("id",parameter);
-            return Math.toIntExact(query.getResultCount());
+            Query<Long> query = session.createQuery(
+                    "SELECT COUNT(b) FROM Book b WHERE b."+parameter.getClass().getSimpleName().toLowerCase()+" = :parameter",
+                    Long.class
+            );
+
+            query.setParameter("parameter", parameter);
+
+            long count = query.getSingleResult();
+
+            logger.info("Found {}books with {} : {}", count, parameter.getClass().getSimpleName(), parameter.getName());
+
+            return count;
+        } catch (Exception e) {
+            logger.error(e);
+            throw e;
         }
     }
+
 
     public void saveParameter(IBookParameter parameter)
     {
@@ -50,6 +81,7 @@ public class BookParameterRepository {
             session.persist(parameter);
             transaction.commit();
         }
+        logger.info("Parameter saved");
     }
 
     public void updateParameter(IBookParameter parameter)
@@ -61,6 +93,9 @@ public class BookParameterRepository {
             transaction.commit();
         }
 
+        logger.info("Parameter updated");
+
+
     }
 
     public void deleteParameter(IBookParameter parameter)
@@ -71,6 +106,9 @@ public class BookParameterRepository {
             session.remove(parameter);
             transaction.commit();
         }
+
+        logger.info("Parameter deleted");
+
     }
 
 

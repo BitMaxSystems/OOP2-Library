@@ -17,6 +17,7 @@ import org.bitmaxsystems.oop2library.models.inventory.states.AvailableInventoryS
 import org.bitmaxsystems.oop2library.repository.GenericRepository;
 import org.bitmaxsystems.oop2library.services.inventoryService.ArchiveInventoryCopyService;
 import org.bitmaxsystems.oop2library.services.inventoryService.DeleteInventoryCopyService;
+import org.bitmaxsystems.oop2library.services.inventoryService.InventoryService;
 import org.bitmaxsystems.oop2library.view.SceneManager;
 import org.bitmaxsystems.oop2library.view.View;
 
@@ -60,14 +61,14 @@ public class AdministrativeInventoryController {
     private static final Logger logger =
             LogManager.getLogger(AdministrativeInventoryController.class);
 
-    private final GenericRepository<Inventory> inventoryRepository =
-            new GenericRepository<>(Inventory.class);
 
     private final ArchiveInventoryCopyService archiveInventoryCopyService =
             new ArchiveInventoryCopyService();
 
     private final DeleteInventoryCopyService deleteInventoryCopyService =
             new DeleteInventoryCopyService();
+
+    private final InventoryService inventoryService = new InventoryService();
 
     @FXML
     private void initialize() {
@@ -233,7 +234,7 @@ public class AdministrativeInventoryController {
 
     private void refreshTable() {
         try {
-            tableView.getItems().setAll(inventoryRepository.findAll());
+            tableView.getItems().setAll(inventoryService.getAllInventoryCopies());
         } catch (Exception e) {
             logger.error(e);
             new Alert(

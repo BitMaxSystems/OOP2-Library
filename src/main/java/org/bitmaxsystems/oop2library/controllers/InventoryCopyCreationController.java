@@ -8,6 +8,7 @@ import javafx.stage.Stage;
 import javafx.util.StringConverter;
 import org.bitmaxsystems.oop2library.models.books.Book;
 import org.bitmaxsystems.oop2library.repository.GenericRepository;
+import org.bitmaxsystems.oop2library.services.BookService;
 import org.bitmaxsystems.oop2library.services.inventoryService.CreateInventoryCopiesService;
 
 public class InventoryCopyCreationController {
@@ -21,12 +22,13 @@ public class InventoryCopyCreationController {
     private final GenericRepository<Book> bookRepository =
             new GenericRepository<>(Book.class);
 
+    private final BookService bookService = new BookService();
     private final CreateInventoryCopiesService createInventoryCopiesService =
             new CreateInventoryCopiesService();
 
     @FXML
     private void initialize() {
-        bookComboBox.getItems().setAll(bookRepository.findAll());
+        bookComboBox.getItems().setAll(bookService.getAllBooks());
 
         bookComboBox.setConverter(new StringConverter<>() {
             @Override

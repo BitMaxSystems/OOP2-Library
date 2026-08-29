@@ -81,7 +81,7 @@ public class BaseHomeController {
                     notificationService.getUserNotifications(user)
             );
         } catch (Exception e) {
-            logger.error("Failed to load notifications", e);
+            new Alert(Alert.AlertType.ERROR,"Unexpected error when refreshing notifications!").show();
         }
     }
 
@@ -117,7 +117,6 @@ public class BaseHomeController {
 
     @FXML
     private void onLogout() {
-        logger.info("User logged out");
         UserManager.getInstance().logoff();
         SceneManager.showView(View.LOGIN);
     }

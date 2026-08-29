@@ -16,6 +16,7 @@ import org.apache.logging.log4j.Logger;
 import org.bitmaxsystems.oop2library.models.users.User;
 import org.bitmaxsystems.oop2library.models.users.enums.UserRole;
 import org.bitmaxsystems.oop2library.repository.UserRepository;
+import org.bitmaxsystems.oop2library.services.UserService;
 import org.bitmaxsystems.oop2library.view.View;
 
 import java.time.LocalDate;
@@ -39,7 +40,7 @@ public class AdministrativeManagementController {
     private TableColumn<User,UserRole> userRoleColumn;
     @FXML
     private Button createButton;
-    private UserRepository userRepository = UserRepository.getInstance();
+    private UserService userService = new UserService();
     private UserRole role;
 
     private static final Logger logger = LogManager.getLogger(AdministrativeManagementController.class);
@@ -128,7 +129,7 @@ public class AdministrativeManagementController {
     {
         try
         {
-            tableView.getItems().setAll(userRepository.searchByRole(role));
+            tableView.getItems().setAll(userService.getUsersByRole(role));
         }
         catch (Exception e) {
             logger.error(e);
