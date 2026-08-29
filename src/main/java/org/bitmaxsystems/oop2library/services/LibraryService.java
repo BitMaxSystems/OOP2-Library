@@ -39,6 +39,23 @@ public class LibraryService {
         }
     }
 
+    public List<History> getActiveHistoryForUser(User user) {
+        try {
+            List<History> historyList = historyRepository.getActiveHistoryByUser(user);
+
+            logger.info(
+                    "Loaded lend books for {} {}",
+                    user.getFirstName(),
+                    user.getLastName()
+            );
+
+            return historyList;
+        } catch (Exception e) {
+            logger.error(e);
+            throw e;
+        }
+    }
+
     public void lendOutside(User user, Inventory inventory) {
         if (user.getLoyaltyPoints() < 30) {
             throw new IllegalStateException(

@@ -15,7 +15,6 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.bitmaxsystems.oop2library.models.users.User;
 import org.bitmaxsystems.oop2library.models.users.enums.UserRole;
-import org.bitmaxsystems.oop2library.repository.UserRepository;
 import org.bitmaxsystems.oop2library.services.UserService;
 import org.bitmaxsystems.oop2library.view.View;
 
@@ -64,14 +63,14 @@ public class AdministrativeManagementController {
     public void onCreate()
     {
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource(View.NEW_ADMINISTRATION_USER_FORM.getPath()));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource(View.NEW_ADMINISTRATION_USER_FORM_VIEW.getPath()));
             AnchorPane root = loader.load();
 
             AdministrativeFormController controller = loader.getController();
             controller.setRole(role);
 
             Stage stage = new Stage();
-            stage.setTitle(View.NEW_ADMINISTRATION_USER_FORM.getTitle());
+            stage.setTitle(View.NEW_ADMINISTRATION_USER_FORM_VIEW.getTitle());
             stage.initModality(Modality.APPLICATION_MODAL);
             stage.setScene(new Scene(root));
             stage.showAndWait();
@@ -99,14 +98,14 @@ public class AdministrativeManagementController {
     private void loadUserDetails(User user)
     {
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource(View.BASIC_USER_DETAILS.getPath()));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource(View.BASIC_USER_DETAILS_VIEW.getPath()));
             AnchorPane root = loader.load();
 
             BasicUserDetailsController controller = loader.getController();
             controller.setUser(user);
 
             Stage stage = new Stage();
-            stage.setTitle(View.BASIC_USER_DETAILS.getTitle());
+            stage.setTitle(View.BASIC_USER_DETAILS_VIEW.getTitle());
             stage.initModality(Modality.APPLICATION_MODAL);
             stage.setScene(new Scene(root));
             stage.showAndWait();

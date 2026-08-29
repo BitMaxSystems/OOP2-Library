@@ -35,6 +35,16 @@ public class UserRepository {
         }
     }
 
+    public List<User> searchByRoles(List<UserRole> roles)
+    {
+        try (Session session = HibernateUtil.getSessionFactory().openSession())
+        {
+            Query<User> query = session.createQuery("FROM User WHERE role IN (:roles)", User.class);
+            query.setParameter("roles",roles);
+            return query.list();
+        }
+    }
+
     public int countExistingUsersByUsername (String username)
     {
         try (Session session = HibernateUtil.getSessionFactory().openSession())

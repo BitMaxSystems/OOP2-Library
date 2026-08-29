@@ -18,6 +18,7 @@ public class History {
 
     @ManyToOne(cascade = CascadeType.MERGE)
     @JoinColumn(name = "user_id")
+    @OnDelete(action = OnDeleteAction.CASCADE)
     private User user;
 
     @ManyToOne(cascade = CascadeType.MERGE)
