@@ -167,7 +167,7 @@ public class LibraryServiceTest {
             historyRecord = query.getSingleResult();
         }
 
-        libraryService.returnBook(historyRecord);
+        libraryService.returnBook(historyRecord,false);
 
         availableInventory = inventoryRepository.findById(availableInventory.getId());
         normalReader = userRepository.findById(normalReader.getId());
@@ -209,7 +209,7 @@ public class LibraryServiceTest {
             historyRecord = query.getSingleResult();
         }
 
-        libraryService.returnBook(historyRecord);
+        libraryService.returnBook(historyRecord,false);
 
         availableInventory = inventoryRepository.findById(availableInventory.getId());
         normalReader = userRepository.findById(normalReader.getId());
@@ -296,7 +296,7 @@ public class LibraryServiceTest {
 
         historyRecord = historyRepository.findById(historyRecord.getId());
 
-        libraryService.returnBook(historyRecord);
+        libraryService.returnBook(historyRecord,false);
 
         availableInventory = inventoryRepository.findById(availableInventory.getId());
         normalReader = userRepository.findById(normalReader.getId());
@@ -359,7 +359,7 @@ public class LibraryServiceTest {
         historyRepository.save(history);
 
         IllegalStateException exception =
-                assertThrowsExactly(IllegalStateException.class,() ->libraryService.returnBook(history));
+                assertThrowsExactly(IllegalStateException.class,() ->libraryService.returnBook(history,false));
         assertEquals("Book is already available",exception.getMessage());
 
 
