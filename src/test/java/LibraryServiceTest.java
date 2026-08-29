@@ -11,7 +11,7 @@ import org.bitmaxsystems.oop2library.models.users.User;
 import org.bitmaxsystems.oop2library.models.users.enums.UserRole;
 import org.bitmaxsystems.oop2library.repository.GenericRepository;
 import org.bitmaxsystems.oop2library.services.LibraryService;
-import org.bitmaxsystems.oop2library.services.inventoryService.InventoryService;
+import org.bitmaxsystems.oop2library.services.InventoryService;
 import org.hibernate.Session;
 import org.hibernate.query.Query;
 import org.junit.jupiter.api.BeforeEach;

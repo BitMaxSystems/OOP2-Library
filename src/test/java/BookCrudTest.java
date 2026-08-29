@@ -7,11 +7,11 @@ import org.bitmaxsystems.oop2library.models.books.Publisher;
 import org.bitmaxsystems.oop2library.models.dto.BookDataDTO;
 import org.bitmaxsystems.oop2library.models.inventory.Inventory;
 import org.bitmaxsystems.oop2library.repository.GenericRepository;
+import org.bitmaxsystems.oop2library.services.BookService;
+import org.bitmaxsystems.oop2library.services.InventoryService;
 import org.bitmaxsystems.oop2library.util.chain.book.CreateBookChain;
 import org.bitmaxsystems.oop2library.util.chain.book.UpdateBookChain;
 import org.bitmaxsystems.oop2library.util.chain.book.contract.IBookFormChain;
-import org.bitmaxsystems.oop2library.services.bookService.DeleteBookService;
-import org.bitmaxsystems.oop2library.services.inventoryService.CreateInventoryCopiesService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -25,8 +25,8 @@ public class BookCrudTest {
     private GenericRepository<Publisher> publisherRepository;
     private GenericRepository<Inventory> inventoryRepository;
 
-    private CreateInventoryCopiesService createInventoryCopiesService;
-    private DeleteBookService deleteBookService;
+    private InventoryService inventoryService;
+    private BookService bookService;
 
     private Author author;
     private Genre genre;
@@ -42,11 +42,11 @@ public class BookCrudTest {
         publisherRepository = new GenericRepository<>(Publisher.class);
         inventoryRepository = new GenericRepository<>(Inventory.class);
 
-        createInventoryCopiesService =
-                new CreateInventoryCopiesService();
+        inventoryService =
+                new InventoryService();
 
-        deleteBookService =
-                new DeleteBookService();
+        bookService =
+                new BookService();
 
         String unique =
                 String.valueOf(System.nanoTime());
@@ -453,7 +453,7 @@ public class BookCrudTest {
         );
 
         assertDoesNotThrow(
-                () -> deleteBookService
+                () -> bookService
                         .deleteBook(book)
         );
 
@@ -471,7 +471,7 @@ public class BookCrudTest {
         Book book =
                 createPersistedBook();
 
-        createInventoryCopiesService
+        inventoryService
                 .createCopies(
                         book,
                         2
@@ -480,7 +480,7 @@ public class BookCrudTest {
         ChildRecordExistException exception =
                 assertThrowsExactly(
                         ChildRecordExistException.class,
-                        () -> deleteBookService
+                        () -> bookService
                                 .deleteBook(book)
                 );
 

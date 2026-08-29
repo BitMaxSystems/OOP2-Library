@@ -9,7 +9,7 @@ import javafx.util.StringConverter;
 import org.bitmaxsystems.oop2library.models.books.Book;
 import org.bitmaxsystems.oop2library.repository.GenericRepository;
 import org.bitmaxsystems.oop2library.services.BookService;
-import org.bitmaxsystems.oop2library.services.inventoryService.CreateInventoryCopiesService;
+import org.bitmaxsystems.oop2library.services.InventoryService;
 
 public class InventoryCopyCreationController {
 
@@ -23,8 +23,8 @@ public class InventoryCopyCreationController {
             new GenericRepository<>(Book.class);
 
     private final BookService bookService = new BookService();
-    private final CreateInventoryCopiesService createInventoryCopiesService =
-            new CreateInventoryCopiesService();
+    private final InventoryService inventoryService =
+            new InventoryService();
 
     @FXML
     private void initialize() {
@@ -65,7 +65,7 @@ public class InventoryCopyCreationController {
 
         int quantity = quantitySpinner.getValue();
 
-        createInventoryCopiesService.createCopies(
+        inventoryService.createCopies(
                 selectedBook,
                 quantity
         );

@@ -11,11 +11,6 @@ import org.bitmaxsystems.oop2library.exceptions.ChildRecordExistException;
 import org.bitmaxsystems.oop2library.exceptions.DataValidationException;
 import org.bitmaxsystems.oop2library.models.books.Book;
 import org.bitmaxsystems.oop2library.models.dto.BookDataDTO;
-import org.bitmaxsystems.oop2library.services.BookService;
-import org.bitmaxsystems.oop2library.services.bookService.DeleteBookService;
-import org.bitmaxsystems.oop2library.util.chain.book.UpdateBookChain;
-import org.bitmaxsystems.oop2library.util.chain.book.VerifyBookDataChain;
-import org.bitmaxsystems.oop2library.util.chain.book.contract.IBookFormChain;
 
 import java.util.Optional;
 
@@ -81,21 +76,17 @@ public class BookRegistryManagementController extends BaseBookRegistryFormContro
                 .showAndWait();
 
         if (alertResult.isPresent() && alertResult.get() == ButtonType.YES) {
-            DeleteBookService deleteBookService = new DeleteBookService();
 
             try {
-                deleteBookService.deleteBook(book);
+                bookService.deleteBook(book);
 
                 new Alert(Alert.AlertType.INFORMATION, bookTitle + " successfully deleted!").show();
 
-                logger.info("{} successfully deleted!", bookTitle);
                 onClose();
             } catch (ChildRecordExistException e) {
-                logger.error(e);
                 new Alert(Alert.AlertType.ERROR,e.getMessage()).show();
             }
             catch (Exception e) {
-                logger.error(e);
                 new Alert(Alert.AlertType.ERROR, "Unexpected error occurred, try again.").show();
             }
         }

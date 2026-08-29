@@ -5,9 +5,7 @@ import org.bitmaxsystems.oop2library.models.books.Publisher;
 import org.bitmaxsystems.oop2library.models.inventory.Inventory;
 import org.bitmaxsystems.oop2library.models.inventory.states.AvailableInventoryState;
 import org.bitmaxsystems.oop2library.repository.GenericRepository;
-import org.bitmaxsystems.oop2library.services.inventoryService.ArchiveInventoryCopyService;
-import org.bitmaxsystems.oop2library.services.inventoryService.CreateInventoryCopiesService;
-import org.bitmaxsystems.oop2library.services.inventoryService.DeleteInventoryCopyService;
+import org.bitmaxsystems.oop2library.services.InventoryService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -15,9 +13,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 public class InventoryServiceTest {
 
-    private CreateInventoryCopiesService createInventoryCopiesService;
-    private ArchiveInventoryCopyService archiveInventoryCopyService;
-    private DeleteInventoryCopyService deleteInventoryCopyService;
+    private InventoryService inventoryService;
 
     private GenericRepository<Author> authorRepository;
     private GenericRepository<Genre> genreRepository;
@@ -34,15 +30,8 @@ public class InventoryServiceTest {
 
     @BeforeEach
     void setup() {
-        createInventoryCopiesService =
-                new CreateInventoryCopiesService();
-
-        archiveInventoryCopyService =
-                new ArchiveInventoryCopyService();
-
-        deleteInventoryCopyService =
-                new DeleteInventoryCopyService();
-
+        inventoryService = new InventoryService();
+        
         authorRepository =
                 new GenericRepository<>(Author.class);
 
@@ -107,7 +96,7 @@ public class InventoryServiceTest {
         IllegalArgumentException exception =
                 assertThrowsExactly(
                         IllegalArgumentException.class,
-                        () -> createInventoryCopiesService
+                        () -> inventoryService
                                 .createCopies(null, 1)
                 );
 
@@ -122,7 +111,7 @@ public class InventoryServiceTest {
         IllegalArgumentException exception =
                 assertThrowsExactly(
                         IllegalArgumentException.class,
-                        () -> createInventoryCopiesService
+                        () -> inventoryService
                                 .createCopies(
                                         inventory.getBook(),
                                         0
@@ -140,7 +129,7 @@ public class InventoryServiceTest {
         IllegalArgumentException exception =
                 assertThrowsExactly(
                         IllegalArgumentException.class,
-                        () -> createInventoryCopiesService
+                        () -> inventoryService
                                 .createCopies(
                                         inventory.getBook(),
                                         -5
@@ -158,7 +147,7 @@ public class InventoryServiceTest {
         IllegalArgumentException exception =
                 assertThrowsExactly(
                         IllegalArgumentException.class,
-                        () -> archiveInventoryCopyService
+                        () -> inventoryService
                                 .archive(null)
                 );
 
@@ -175,7 +164,7 @@ public class InventoryServiceTest {
         IllegalStateException exception =
                 assertThrowsExactly(
                         IllegalStateException.class,
-                        () -> archiveInventoryCopyService
+                        () -> inventoryService
                                 .archive(inventory)
                 );
 
@@ -194,7 +183,7 @@ public class InventoryServiceTest {
         IllegalStateException exception =
                 assertThrowsExactly(
                         IllegalStateException.class,
-                        () -> archiveInventoryCopyService
+                        () -> inventoryService
                                 .archive(inventory)
                 );
 
@@ -213,7 +202,7 @@ public class InventoryServiceTest {
         IllegalStateException exception =
                 assertThrowsExactly(
                         IllegalStateException.class,
-                        () -> archiveInventoryCopyService
+                        () -> inventoryService
                                 .archive(inventory)
                 );
 
@@ -230,7 +219,7 @@ public class InventoryServiceTest {
         IllegalArgumentException exception =
                 assertThrowsExactly(
                         IllegalArgumentException.class,
-                        () -> deleteInventoryCopyService
+                        () -> inventoryService
                                 .delete(null)
                 );
 
@@ -245,7 +234,7 @@ public class InventoryServiceTest {
         createPersistedTestBook();
 
         assertDoesNotThrow(
-                () -> createInventoryCopiesService
+                () -> inventoryService
                         .createCopies(
                                 persistedBook,
                                 1
@@ -275,7 +264,7 @@ public class InventoryServiceTest {
         createPersistedTestBook();
 
         assertDoesNotThrow(
-                () -> createInventoryCopiesService
+                () -> inventoryService
                         .createCopies(
                                 persistedBook,
                                 3
@@ -315,7 +304,7 @@ public class InventoryServiceTest {
     void archiveAvailableInventoryCopy() {
         createPersistedTestBook();
 
-        createInventoryCopiesService.createCopies(
+        inventoryService.createCopies(
                 persistedBook,
                 1
         );
@@ -338,7 +327,7 @@ public class InventoryServiceTest {
         );
 
         assertDoesNotThrow(
-                () -> archiveInventoryCopyService
+                () -> inventoryService
                         .archive(copy)
         );
 
@@ -365,7 +354,7 @@ public class InventoryServiceTest {
     void deleteInventoryCopy() {
         createPersistedTestBook();
 
-        createInventoryCopiesService.createCopies(
+        inventoryService.createCopies(
                 persistedBook,
                 1
         );
@@ -393,7 +382,7 @@ public class InventoryServiceTest {
         );
 
         assertDoesNotThrow(
-                () -> deleteInventoryCopyService
+                () -> inventoryService
                         .delete(copy)
         );
 
