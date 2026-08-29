@@ -9,5 +9,6 @@ public enum NotificationType {
     INVENTORY_UPDATED,
     USER_UPDATED,
     BOOK_LENT,
-    BOOK_RETURNED
+    BOOK_RETURNED,
+    NEW_USER_FORM
 }

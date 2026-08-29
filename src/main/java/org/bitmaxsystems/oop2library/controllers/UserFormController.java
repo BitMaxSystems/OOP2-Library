@@ -5,6 +5,7 @@ import javafx.scene.control.Alert;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.bitmaxsystems.oop2library.util.chain.userform.SaveFormChain;
+import org.bitmaxsystems.oop2library.util.chain.userform.SendFormNotificationChain;
 import org.bitmaxsystems.oop2library.util.chain.userform.contract.IUserFormChain;
 import org.bitmaxsystems.oop2library.view.SceneManager;
 import org.bitmaxsystems.oop2library.view.View;
@@ -22,6 +23,9 @@ public class UserFormController extends BaseUserFormController{
     protected void setUpChain() {
 
         IUserFormChain saveForm = new SaveFormChain();
+        IUserFormChain sendNotification = new SendFormNotificationChain();
+
+        saveForm.setNextChain(sendNotification);
         userService.setUpChain(saveForm);
 
     }
