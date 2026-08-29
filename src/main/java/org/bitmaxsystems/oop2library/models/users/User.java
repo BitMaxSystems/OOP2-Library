@@ -24,9 +24,9 @@ public class User {
     private LocalDate dateOfApproval;
     @Enumerated
     private UserRole role;
-    @OneToOne(mappedBy = "user", cascade = CascadeType.ALL,orphanRemoval = true)
+    @OneToOne(mappedBy = "user", cascade = CascadeType.ALL)
     private Credentials credentials;
-    @OneToOne(mappedBy = "user", cascade = CascadeType.ALL,orphanRemoval = true)
+    @OneToOne(mappedBy = "user", cascade = CascadeType.ALL)
     private UserForm form;
 
 

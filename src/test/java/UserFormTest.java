@@ -8,6 +8,7 @@ import org.bitmaxsystems.oop2library.repository.GenericRepository;
 import org.bitmaxsystems.oop2library.services.UserFormService;
 import org.bitmaxsystems.oop2library.util.chain.userform.CreateUserChain;
 import org.bitmaxsystems.oop2library.util.chain.userform.SaveFormChain;
+import org.bitmaxsystems.oop2library.util.chain.userform.SendFormNotificationChain;
 import org.bitmaxsystems.oop2library.util.chain.userform.VerifyUserDataChain;
 import org.bitmaxsystems.oop2library.util.chain.userform.contract.IUserFormChain;
 import org.junit.jupiter.api.BeforeAll;
@@ -144,9 +145,11 @@ public class UserFormTest {
         IUserFormChain verifyDataChain = new VerifyUserDataChain();
         IUserFormChain createUserChain = new CreateUserChain();
         IUserFormChain saveFormChain = new SaveFormChain();
+        IUserFormChain sendNotification = new SendFormNotificationChain();
 
         verifyDataChain.setNextChain(createUserChain);
         createUserChain.setNextChain(saveFormChain);
+        saveFormChain.setNextChain(sendNotification);
 
         UserDataDTO formDTO = new UserDataDTO.Builder("Test",
                 "Test",
@@ -170,9 +173,12 @@ public class UserFormTest {
         IUserFormChain verifyDataChain = new VerifyUserDataChain();
         IUserFormChain createUserChain = new CreateUserChain();
         IUserFormChain saveFormChain = new SaveFormChain();
+        IUserFormChain sendNotification = new SendFormNotificationChain();
+
 
         verifyDataChain.setNextChain(createUserChain);
         createUserChain.setNextChain(saveFormChain);
+        saveFormChain.setNextChain(sendNotification);
 
         UserDataDTO formDTO = new UserDataDTO.Builder("Form",
                 "Test",
