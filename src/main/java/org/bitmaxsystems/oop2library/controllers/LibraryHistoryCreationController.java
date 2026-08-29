@@ -7,11 +7,9 @@ import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.Label;
 import javafx.stage.Stage;
 import org.bitmaxsystems.oop2library.models.inventory.Inventory;
-import org.bitmaxsystems.oop2library.models.inventory.states.InventoryStateEnum;
 import org.bitmaxsystems.oop2library.models.users.User;
-import org.bitmaxsystems.oop2library.repository.InventoryRepository;
 import org.bitmaxsystems.oop2library.services.LibraryService;
-import org.bitmaxsystems.oop2library.services.inventoryService.InventoryService;
+import org.bitmaxsystems.oop2library.services.InventoryService;
 
 import java.util.Objects;
 

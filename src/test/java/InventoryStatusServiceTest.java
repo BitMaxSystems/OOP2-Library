@@ -7,7 +7,7 @@ import org.bitmaxsystems.oop2library.models.inventory.states.AvailableInventoryS
 import org.bitmaxsystems.oop2library.models.inventory.states.LentInsideInventoryState;
 import org.bitmaxsystems.oop2library.models.inventory.states.LentOutsideInventoryState;
 import org.bitmaxsystems.oop2library.repository.GenericRepository;
-import org.bitmaxsystems.oop2library.services.inventoryService.InventoryService;
+import org.bitmaxsystems.oop2library.services.InventoryService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 

@@ -3,8 +3,13 @@ package org.bitmaxsystems.oop2library.services;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.bitmaxsystems.oop2library.models.dto.UserDataDTO;
+import org.bitmaxsystems.oop2library.models.notifications.Notification;
+import org.bitmaxsystems.oop2library.models.notifications.NotificationAudience;
+import org.bitmaxsystems.oop2library.models.notifications.NotificationType;
 import org.bitmaxsystems.oop2library.models.users.User;
 import org.bitmaxsystems.oop2library.models.users.enums.UserRole;
+import org.bitmaxsystems.oop2library.repository.GenericRepository;
+import org.bitmaxsystems.oop2library.repository.NotificationRepository;
 import org.bitmaxsystems.oop2library.repository.UserRepository;
 import org.bitmaxsystems.oop2library.util.chain.userform.UpdatePasswordChain;
 import org.bitmaxsystems.oop2library.util.chain.userform.UpdateUserChain;
@@ -16,8 +21,8 @@ import java.util.List;
 public class UserService {
     private final UserRepository userRepository = UserRepository.getInstance();
     private static final Logger logger = LogManager.getLogger(UserService.class);
-
-
+    private final GenericRepository<User> userGenericRepository = new GenericRepository<>(User.class);
+    private final NotificationRepository notificationRepository = NotificationRepository.getInstance();
 
     public List<User> getUsersByRole(UserRole role)
     {
@@ -64,5 +69,20 @@ public class UserService {
             throw e;
         }
 
+    }
+
+    public void deleteUser(User user) {
+        String userName = user.getFirstName() + " " + user.getLastName();
+
+        userGenericRepository.delete(user);
+
+        Notification notification = new Notification(
+                "User deleted",
+                userName + " was deleted.",
+                NotificationType.USER_UPDATED,
+                NotificationAudience.ADMIN
+        );
+
+        notificationRepository.save(notification);
     }
 }

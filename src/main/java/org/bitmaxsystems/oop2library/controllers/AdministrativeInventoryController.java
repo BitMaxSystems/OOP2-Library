@@ -14,10 +14,7 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.bitmaxsystems.oop2library.models.inventory.Inventory;
 import org.bitmaxsystems.oop2library.models.inventory.states.AvailableInventoryState;
-import org.bitmaxsystems.oop2library.repository.GenericRepository;
-import org.bitmaxsystems.oop2library.services.inventoryService.ArchiveInventoryCopyService;
-import org.bitmaxsystems.oop2library.services.inventoryService.DeleteInventoryCopyService;
-import org.bitmaxsystems.oop2library.services.inventoryService.InventoryService;
+import org.bitmaxsystems.oop2library.services.InventoryService;
 import org.bitmaxsystems.oop2library.view.SceneManager;
 import org.bitmaxsystems.oop2library.view.View;
 
@@ -60,13 +57,6 @@ public class AdministrativeInventoryController {
 
     private static final Logger logger =
             LogManager.getLogger(AdministrativeInventoryController.class);
-
-
-    private final ArchiveInventoryCopyService archiveInventoryCopyService =
-            new ArchiveInventoryCopyService();
-
-    private final DeleteInventoryCopyService deleteInventoryCopyService =
-            new DeleteInventoryCopyService();
 
     private final InventoryService inventoryService = new InventoryService();
 
@@ -150,7 +140,7 @@ public class AdministrativeInventoryController {
                             .get(getIndex());
 
                     try {
-                        archiveInventoryCopyService.archive(inventory);
+                        inventoryService.archive(inventory);
                         refreshTable();
                     } catch (IllegalStateException e) {
                         new Alert(
@@ -205,7 +195,7 @@ public class AdministrativeInventoryController {
                         if (response == ButtonType.OK) {
                             try {
 
-                                deleteInventoryCopyService.delete(inventory);
+                                inventoryService.delete(inventory);
 
                                 new Alert(Alert.AlertType.INFORMATION, "Inventory copy successfully deleted").show();
                                 refreshTable();

@@ -9,7 +9,6 @@ import org.bitmaxsystems.oop2library.models.notifications.NotificationType;
 import org.bitmaxsystems.oop2library.repository.GenericRepository;
 import org.bitmaxsystems.oop2library.repository.InventoryRepository;
 import org.bitmaxsystems.oop2library.repository.NotificationRepository;
-import org.bitmaxsystems.oop2library.services.inventoryService.InventoryService;
 import org.bitmaxsystems.oop2library.util.chain.book.contract.IBookFormChain;
 
 public class UpdateBookChain implements IBookFormChain {
