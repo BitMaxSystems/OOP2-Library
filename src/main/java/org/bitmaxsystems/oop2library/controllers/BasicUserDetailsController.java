@@ -6,6 +6,7 @@ import javafx.scene.control.*;
 import javafx.stage.Stage;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.bitmaxsystems.oop2library.exceptions.ChildRecordExistException;
 import org.bitmaxsystems.oop2library.exceptions.DataValidationException;
 import org.bitmaxsystems.oop2library.models.dto.UserDataDTO;
 import org.bitmaxsystems.oop2library.models.users.User;
@@ -32,11 +33,11 @@ public class BasicUserDetailsController {
     private TextField loyaltyPointsField;
     private static final Logger logger = LogManager.getLogger(BasicUserDetailsController.class);
     private UserManager manager = UserManager.getInstance();
-    private User user;
+    protected User user;
     private UserService userService = new UserService();
 
     @FXML
-    private void initialize()
+    protected void initialize()
     {
         userRoleChoiceBox.setItems(FXCollections.observableArrayList(UserRole.values()));
     }
@@ -121,13 +122,14 @@ public class BasicUserDetailsController {
 
                 try
                 {
-
                     userService.deleteUser(user);
                     new Alert(Alert.AlertType.INFORMATION,userFullName+" successfully deleted!").show();
-                    logger.info("{} successfully deleted!", userFullName);
                     onClose();
-                } catch (Exception e) {
-                    logger.error(e);
+                }
+                catch (ChildRecordExistException e) {
+                    new Alert(Alert.AlertType.ERROR,e.getMessage()).show();
+                }
+                catch (Exception e) {
                     new Alert(Alert.AlertType.ERROR,"Unexpected error occurred, try again.").show();
                 }
 

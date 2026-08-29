@@ -16,7 +16,7 @@ public class UserFormController extends BaseUserFormController{
     @FXML
     public void onLoginRedirect()
     {
-        SceneManager.showView(View.LOGIN);
+        SceneManager.showView(View.LOGIN_VIEW);
     }
 
     @Override
@@ -36,7 +36,7 @@ public class UserFormController extends BaseUserFormController{
         {
             new Alert(Alert.AlertType.INFORMATION, "Form is submitted!").show();
             logger.info("Form successfully submitted!");
-            SceneManager.showView(View.LOGIN);
+            SceneManager.showView(View.LOGIN_VIEW);
         }
     }
 }

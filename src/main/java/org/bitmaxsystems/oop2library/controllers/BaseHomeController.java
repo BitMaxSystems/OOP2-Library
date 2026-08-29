@@ -89,7 +89,7 @@ public class BaseHomeController {
     public void onUserDetails() {
         try {
             FXMLLoader loader = new FXMLLoader(
-                    getClass().getResource(View.USER_DETAILS.getPath())
+                    getClass().getResource(View.USER_DETAILS_VIEW.getPath())
             );
 
             AnchorPane root = loader.load();
@@ -98,7 +98,7 @@ public class BaseHomeController {
             controller.setUser(UserManager.getInstance().getLoggedUser());
 
             Stage stage = new Stage();
-            stage.setTitle(View.USER_DETAILS.getTitle());
+            stage.setTitle(View.USER_DETAILS_VIEW.getTitle());
             stage.initModality(Modality.APPLICATION_MODAL);
             stage.setScene(new Scene(root));
             stage.showAndWait();
@@ -118,6 +118,6 @@ public class BaseHomeController {
     @FXML
     private void onLogout() {
         UserManager.getInstance().logoff();
-        SceneManager.showView(View.LOGIN);
+        SceneManager.showView(View.LOGIN_VIEW);
     }
 }

@@ -29,19 +29,22 @@ public class LoginController {
         try {
             UserManager manager = UserManager.getInstance();
             manager.login(username,password);
-            new Alert(Alert.AlertType.INFORMATION, "Hello, " + username).show();
             UserRole role = manager.getLoggedUser().getRole();
             if (role == UserRole.READER)
             {
                 SceneManager.showView(View.BASE_HOME_VIEW);
+                new Alert(Alert.AlertType.INFORMATION, "Hello, " + username).show();
+
             }
             else if (role == UserRole.ADMINISTRATOR || role == UserRole.LIBRARIAN)
             {
                 SceneManager.showView(View.ADMINISTRATIVE_HOME_VIEW);
+                new Alert(Alert.AlertType.INFORMATION, "Hello, " + username).show();
+
             }
             else
             {
-                SceneManager.showView(View.BASE_HOME_VIEW);
+                new Alert(Alert.AlertType.ERROR, "Access denied. The reader is not approved").show();
             }
 
         }
@@ -62,6 +65,6 @@ public class LoginController {
     @FXML
     public void onNewUserRedirect()
     {
-        SceneManager.showView(View.NEW_USER_FORM);
+        SceneManager.showView(View.NEW_USER_FORM_VIEW);
     }
 }

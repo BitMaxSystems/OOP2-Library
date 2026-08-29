@@ -2,13 +2,16 @@ package org.bitmaxsystems.oop2library.services;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.bitmaxsystems.oop2library.exceptions.ChildRecordExistException;
 import org.bitmaxsystems.oop2library.models.dto.UserDataDTO;
+import org.bitmaxsystems.oop2library.models.history.History;
 import org.bitmaxsystems.oop2library.models.notifications.Notification;
 import org.bitmaxsystems.oop2library.models.notifications.NotificationAudience;
 import org.bitmaxsystems.oop2library.models.notifications.NotificationType;
 import org.bitmaxsystems.oop2library.models.users.User;
 import org.bitmaxsystems.oop2library.models.users.enums.UserRole;
 import org.bitmaxsystems.oop2library.repository.GenericRepository;
+import org.bitmaxsystems.oop2library.repository.HistoryRepository;
 import org.bitmaxsystems.oop2library.repository.NotificationRepository;
 import org.bitmaxsystems.oop2library.repository.UserRepository;
 import org.bitmaxsystems.oop2library.util.chain.userform.UpdatePasswordChain;
@@ -23,6 +26,7 @@ public class UserService {
     private static final Logger logger = LogManager.getLogger(UserService.class);
     private final GenericRepository<User> userGenericRepository = new GenericRepository<>(User.class);
     private final NotificationRepository notificationRepository = NotificationRepository.getInstance();
+    private final HistoryRepository historyRepository = HistoryRepository.getInstance();
 
     public List<User> getUsersByRole(UserRole role)
     {
@@ -45,7 +49,20 @@ public class UserService {
             return readersList;
         } catch (Exception e) {
             logger.error(e);
-            throw new RuntimeException(e);
+            throw e;
+        }
+    }
+
+    public List<User> getUsersByRoles(List<UserRole> roles)
+    {
+        try {
+
+            List<User> readersList = userRepository.searchByRoles(roles);
+            logger.info("Loaded all users");
+            return readersList;
+        } catch (Exception e) {
+            logger.error(e);
+            throw e;
         }
     }
 
@@ -72,17 +89,35 @@ public class UserService {
     }
 
     public void deleteUser(User user) {
-        String userName = user.getFirstName() + " " + user.getLastName();
 
-        userGenericRepository.delete(user);
+        try {
 
-        Notification notification = new Notification(
-                "User deleted",
-                userName + " was deleted.",
-                NotificationType.USER_UPDATED,
-                NotificationAudience.ADMIN
-        );
+            List<History> activeRecords = historyRepository.getActiveHistoryByUser(user);
 
-        notificationRepository.save(notification);
+            if ((long) activeRecords.size() >0)
+            {
+                throw new ChildRecordExistException("The user has lend books, that are not returned!");
+            }
+
+            String userName = user.getFirstName() + " " + user.getLastName();
+
+            userGenericRepository.delete(user);
+
+            logger.info("{} successfully deleted!", userName);
+
+
+            Notification notification = new Notification(
+                    "User deleted",
+                    userName + " was deleted.",
+                    NotificationType.USER_UPDATED,
+                    NotificationAudience.ADMIN
+            );
+
+            notificationRepository.save(notification);
+
+        } catch (Exception e) {
+            logger.error(e);
+            throw e;
+        }
     }
 }

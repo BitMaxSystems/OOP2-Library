@@ -19,7 +19,7 @@ public class MainApplication extends Application {
         {
             HibernateInit.initializeIfEmpty();
             SceneManager.setPrimaryStage(stage);
-            SceneManager.showView(View.LOGIN);
+            SceneManager.showView(View.LOGIN_VIEW);
         } catch (Exception e) {
             logger.error(e);
             throw new RuntimeException(e);

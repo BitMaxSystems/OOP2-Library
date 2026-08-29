@@ -3,9 +3,11 @@ package org.bitmaxsystems.oop2library.models.users;
 import jakarta.persistence.*;
 import org.bitmaxsystems.oop2library.models.auth.Credentials;
 import org.bitmaxsystems.oop2library.models.form.UserForm;
+import org.bitmaxsystems.oop2library.models.history.History;
 import org.bitmaxsystems.oop2library.models.users.enums.UserRole;
 
 import java.time.LocalDate;
+import java.util.List;
 import java.util.Objects;
 import java.util.UUID;
 
@@ -28,6 +30,8 @@ public class User {
     private Credentials credentials;
     @OneToOne(mappedBy = "user", cascade = CascadeType.ALL)
     private UserForm form;
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
+    private List<History> history;
 
 
 

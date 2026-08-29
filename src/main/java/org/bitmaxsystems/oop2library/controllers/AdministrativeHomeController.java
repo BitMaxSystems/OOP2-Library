@@ -87,17 +87,18 @@ public class AdministrativeHomeController extends BaseHomeController {
         loadAdministrativeManagementDialog(UserRole.LIBRARIAN);
     }
 
-    @FXML
-    public void onViewUserForm() {
+
+    private void loadManagementDialog(View view)
+    {
         try {
             FXMLLoader loader = new FXMLLoader(
-                    getClass().getResource(View.USER_FORM_MANAGEMENT_VIEW.getPath())
+                    getClass().getResource(view.getPath())
             );
 
             AnchorPane root = loader.load();
 
             Stage stage = new Stage();
-            stage.setTitle(View.USER_FORM_MANAGEMENT_VIEW.getTitle());
+            stage.setTitle(view.getTitle());
             stage.initModality(Modality.APPLICATION_MODAL);
             stage.setScene(new Scene(root));
             stage.showAndWait();
@@ -109,6 +110,17 @@ public class AdministrativeHomeController extends BaseHomeController {
                     "Unexpected error, try again!"
             ).show();
         }
+    }
+
+    @FXML
+    public void onViewUserForm() {
+        loadManagementDialog(View.USER_FORM_MANAGEMENT_VIEW);
+    }
+
+
+    @FXML
+    public void onViewReaders() {
+        loadManagementDialog(View.READER_MANAGEMENT_VIEW);
     }
 
     @FXML
