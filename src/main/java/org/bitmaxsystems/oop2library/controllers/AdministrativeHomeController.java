@@ -88,39 +88,17 @@ public class AdministrativeHomeController extends BaseHomeController {
     }
 
 
-    private void loadManagementDialog(View view)
-    {
-        try {
-            FXMLLoader loader = new FXMLLoader(
-                    getClass().getResource(view.getPath())
-            );
-
-            AnchorPane root = loader.load();
-
-            Stage stage = new Stage();
-            stage.setTitle(view.getTitle());
-            stage.initModality(Modality.APPLICATION_MODAL);
-            stage.setScene(new Scene(root));
-            stage.showAndWait();
-
-        } catch (IOException e) {
-            logger.error(e);
-            new Alert(
-                    Alert.AlertType.ERROR,
-                    "Unexpected error, try again!"
-            ).show();
-        }
-    }
-
     @FXML
     public void onViewUserForm() {
-        loadManagementDialog(View.USER_FORM_MANAGEMENT_VIEW);
+
+        SceneManager.showView(View.USER_FORM_MANAGEMENT_VIEW);
+
     }
 
 
     @FXML
     public void onViewReaders() {
-        loadManagementDialog(View.READER_MANAGEMENT_VIEW);
+        SceneManager.showView(View.READER_MANAGEMENT_VIEW);
     }
 
     @FXML

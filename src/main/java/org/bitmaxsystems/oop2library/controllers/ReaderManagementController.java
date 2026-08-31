@@ -16,6 +16,7 @@ import org.bitmaxsystems.oop2library.models.form.UserForm;
 import org.bitmaxsystems.oop2library.models.users.User;
 import org.bitmaxsystems.oop2library.models.users.enums.UserRole;
 import org.bitmaxsystems.oop2library.services.UserService;
+import org.bitmaxsystems.oop2library.view.SceneManager;
 import org.bitmaxsystems.oop2library.view.View;
 
 import java.io.IOException;
@@ -108,5 +109,11 @@ public class ReaderManagementController {
         catch (Exception e) {
             new Alert(Alert.AlertType.ERROR,"Unexpected error occurred. Try again").show();
         }
+    }
+
+    @FXML
+    public void onBack()
+    {
+        SceneManager.showView(View.ADMINISTRATIVE_HOME_VIEW);
     }
 }

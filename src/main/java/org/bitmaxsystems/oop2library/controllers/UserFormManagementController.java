@@ -20,6 +20,7 @@ import org.bitmaxsystems.oop2library.models.form.enums.FormStatus;
 import org.bitmaxsystems.oop2library.models.users.User;
 import org.bitmaxsystems.oop2library.models.users.enums.UserRole;
 import org.bitmaxsystems.oop2library.services.UserFormService;
+import org.bitmaxsystems.oop2library.view.SceneManager;
 import org.bitmaxsystems.oop2library.view.View;
 
 import java.io.IOException;
@@ -146,5 +147,11 @@ public class UserFormManagementController {
         catch (Exception e) {
             new Alert(Alert.AlertType.ERROR,"Unexpected error occurred. Try again").show();
         }
+    }
+
+    @FXML
+    public void onBack()
+    {
+        SceneManager.showView(View.ADMINISTRATIVE_HOME_VIEW);
     }
 }
